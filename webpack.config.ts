@@ -5,13 +5,11 @@ import devConfig from './src/webpack/webpack.dev'
 import prodConfig from './src/webpack/webpack.prod'
 
 interface EnvironmentVariables {
-  mode: string
+  mode: 'development' | 'production'
 }
 
 const webpackConfig = (env: EnvironmentVariables) => {
   switch (env.mode) {
-    case 'cy-dev':
-      return merge(commonConfig, devConfig)
     case 'development':
       return merge(commonConfig, devConfig)
     case 'production':

@@ -23,7 +23,7 @@
     "test:clean": "jest --clearCache",
     "test:coverage": "jest --coverage --detectOpenHandles",
     "cy:start": "npm start & wait-on http://localhost:8000 && npm run cy:run",
-    "cy:run": "cypress run --browser electron",
+    "cy": "cross-env NODE_ENV=cy cypress run --browser electron",
     "cy:open": "cypress open",
     "eslint": "eslint src/main/**/* --fix",
     "eslint:cy": "eslint cypress/**/* --fix",

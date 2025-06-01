@@ -31,6 +31,7 @@ const App: FC = () => {
 }*/
 
 const App: FC = () => {
+  //console.log({ env: process.env.NODE_ENV })
   return (
     <Provider store={store}>
       <div>Welcome to the React App</div>

@@ -1,5 +1,4 @@
 import path from 'path'
-import * as process from 'node:process'
 
 export const ROOT_DIR = path.join(__dirname, '..', '..', '..')
 

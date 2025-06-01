@@ -1,5 +1,4 @@
 import React, { FC, useState } from 'react'
-import { Paths } from '@routes'
 import { useLocation } from 'react-router-dom'
 
 const Login: FC = () => {
