@@ -1,0 +1,77 @@
+#====== the correct order to mock a module it's the following ======#
+
+import React from 'react'
+import { render, screen } from '@testing-library/react'
+import MyComponent from '../src/components/MyComponent'
+
+// Step 1: Mock the module first
+jest.mock('@hooks/use-typed-selector', () => ({
+  __esModule: true,
+  default: jest.fn(),
+}))
+
+// Step 2: Import the mock helper AFTER jest.mock
+import { mockUseTypedSelector } from '../test-utils/mocks'
+
+#====== when it's not a default export in the file, you can mock it like this ======#
+
+jest.mock('@actions-creators/authentication/authenticationAC', () => ({
+  __esModule: true,
+  login: jest.fn(),
+}))
+
+#===== why is required the 'default' or '__esModule: true' ====#
+
+When to use require('module').default?
+Always use .default when requiring an ES module that has a default export.
+ex: if you are writing modern javascript you maybe will have something like this at the end of the file
+
+export default Utils
+
+Using ESM (ECMAScript Module) syntax: import Utils from '@utils'
+Using CommonJS syntax: const utils = require('@utils').default
+
+The ESM (ECMAScript Module) syntax:
+Static import: resolved at the top level of the module before execution.
+Enables tree shaking in bundlers (removes unused exports).
+Cannot be used dynamically or inside functions/blocks.
+Preferred in most modern codebases (especially TypeScript/React projects).
+
+The CommonJS syntax:
+Dynamic import: resolved at runtime, can be used conditionally or inside functions.
+Common in legacy Node.js or Jest tests.
+Required when mocking with jest.requireActual, require inside a function, or working around circular imports.
+
+This is especially important when using require() in Jest mocks or TypeScript, where __esModule: true is set.
+
+| Use Case                         | Use `import` | Use `require()` |
+| -------------------------------- | ------------ | --------------- |
+| Regular app code                 | ✅            | 🚫              |
+| Top-level imports                | ✅            | 🚫              |
+| Jest + mocked modules            | 🚫           | ✅               |
+| Dynamic conditional loading      | 🚫           | ✅               |
+| Need to re-require after mocking | 🚫           | ✅               |
+
+🔍 require() is runtime-only
+The require() function is part of CommonJS and is executed at runtime.
+
+🔍 import type is compile-time-only
+The import type syntax is TypeScript-only, used purely at compile time to import types (which are erased in JavaScript).
+
+✅ Correct pattern if you need both:
+   // For types (compile-time)
+   import type { TypedUseSelectorHook } from 'react-redux'
+   import type { AppReducerState } from '@reducers/app/app.reducer.types'
+
+   // For values (runtime)
+   const useTypedSelector = require('@hooks/use-typed-selector').default
+
+#===== how to create a custom setup.test.ts for mocking hooks ====#
+🛠 If you want to avoid repeating jest.mock(...) in every test:
+You can move it into a setupTests.ts or beforeEach in a test file, if all tests need the mock.
+
+=> tests/utils/hooks-setup/index.ts
+
+Then in jest.config.js:
+
+setupFilesAfterEnv: ['<rootDir>/tests/utils/hooks-setup/index.ts']

@@ -1,0 +1,6 @@
+# check: https://github.com/browserslist/browserslist#readme
+# Browsers that we support
+> 0.5%
+last 2 versions
+not dead
+IE 11

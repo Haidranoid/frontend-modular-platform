@@ -1,0 +1,46 @@
+{
+  "extends": "./tsconfig.base.json",
+  "ts-node": {
+    "esm": false,
+    "compilerOptions": {
+      "module": "CommonJS",
+      "moduleResolution": "node"
+    }
+  },
+  "compilerOptions": {
+    "types": [
+      "@testing-library/jest-dom",
+      "jest"
+    ],
+    "typeRoots": [
+      "./src/@types",
+      "node_modules/@types"
+    ]
+  },
+  "include": [
+    "src",
+    "webpack.config.ts",
+    "jest.config.ts",
+    "jest.setup.ts",
+  ],
+  "exclude": [
+    "cypress.config.ts",
+    "cypress",
+    "node_modules",
+    "dist",
+    "build",
+    "server",
+    "coverage",
+    "public",
+    ".idea",
+    "src/main/experimental" // temporal
+  ],
+}
+
+/*"ts-node": {
+    "esm": true,
+    "compilerOptions": {
+      "module": "ESNext",
+      "moduleResolution": "NodeNext"
+    }
+  },*/

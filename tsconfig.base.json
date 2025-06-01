@@ -1,0 +1,77 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.json" },
+    { "path": "./tsconfig.cypress.json" }
+  ],
+  "compilerOptions": {
+    /* Language and environment */
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
+
+    /* Interop and JS support */
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "allowJs": true,
+    "checkJs": true,
+
+    /* Type checking */
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noImplicitReturns": false,
+    "noImplicitAny": false,
+
+    /* Source and Output */
+    //"incremental": true,
+    "declaration": false,
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Project structure */
+    "baseUrl": "./",
+    "paths": {
+      "@assets/*": ["src/assets/*"],
+      "@config/*": ["src/config/*"],
+      "@test/*": ["src/test/*"],
+      "@webpack/*": ["src/webpack/*"],
+      "@components": ["src/main/components/index.ts"],
+      "@constants": ["src/main/constants/index.ts"],
+      "@containers/*": ["src/main/containers/*"],
+      "@experimental/*": ["src/main/experimental/*"],
+      "@history": ["src/main/history/index.ts"],
+      "@lib/*": ["src/main/lib/*"],
+      "@routes": ["src/main/routes/index.ts"],
+      "@actions": ["src/main/state/actions/index.ts"],
+      "@actions-creators": ["src/main/state/actions-creators/index.ts"],
+      "@hooks": ["src/main/state/hooks/index.ts"],
+      "@interfaces": ["src/main/state/interfaces/index.ts"],
+      "@reducers": ["src/main/state/reducers/index.ts"],
+      "@selectors": ["src/main/state/selectors/index.ts"],
+      "@store": ["src/main/state/store/index.ts"],
+      "@styles/*": ["src/main/styles/*"],
+      "@utils": ["src/main/utils/index.ts"],
+      "@validators": ["src/main/validators/index.ts"],
+    },
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    "server",
+    "coverage",
+    "public",
+    ".idea",
+  ]
+}

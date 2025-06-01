@@ -1,0 +1,70 @@
+# Node modules
+node_modules/
+
+# Build output
+dist/
+
+# server
+server/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+jspm_packages/
+
+# IDE-specific files (WebStorm/IntelliJ)
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Coverage directory used by testing tools
+coverage/
+
+# Production environment variables
+#.env
+.env.local
+.env.development
+.env.production
+#.env.*.local
+#.env.development.local
+#.env.test.local
+#.env.production.local
+
+# Mac system files
+.DS_Store
+
+# Optional: VSCode settings if working cross-editor
+.vscode/
+
+# Optional: ESLint cache
+.eslintcache
+
+# Optional: Storybook static build
+storybook-static/
+
+# Optional: Parcel cache
+.cache/
+
+# Optional: Next.js (if used)
+.next/
+
+# Optional: Remix (if used)
+.build/
+
+# Optional: Turborepo (if monorepo)
+turbo/
+
+# Optional: pnpm
+.pnpm-debug.log
+
+# Optional: Yarn Plug'n'Play
+.pnp.*
+# Local Netlify folder
+.netlify
