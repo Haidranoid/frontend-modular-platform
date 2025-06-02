@@ -39,6 +39,5 @@ const authSlice = createBaseSlice({
   },
 })
 
-console.log(authSlice.getInitialState())
-export const { login } = authSlice.actions
+export const { login, logout, resetState } = authSlice.actions
 export default authSlice.reducer

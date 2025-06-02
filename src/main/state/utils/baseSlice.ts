@@ -4,6 +4,7 @@ import {
   Slice,
   SliceCaseReducers,
   ActionReducerMapBuilder,
+  CaseReducer,
 } from '@reduxjs/toolkit'
 import { commonPendingMatcher, commonRejectedMatcher } from './asyncMatchers'
 
@@ -25,7 +26,12 @@ export function createBaseSlice<
   initialState: S
   reducers: CR
   extraReducers?: (builder: ActionReducerMapBuilder<S & BaseState>) => void
-}): Slice<S & BaseState, CR> {
+}): Slice<
+  S & BaseState,
+  CR & {
+    resetState: CaseReducer<S & BaseState>
+  }
+> {
   return createSlice({
     name: options.name,
     initialState: {
@@ -33,7 +39,15 @@ export function createBaseSlice<
       ...initialBaseState,
     },
     // @ts-ignore
-    reducers: options.reducers,
+    reducers: {
+      ...options.reducers,
+      resetState: () => {
+        return {
+          ...options.initialState,
+          ...initialBaseState,
+        }
+      },
+    },
     extraReducers: (builder) => {
       options.extraReducers?.(builder)
       builder.addMatcher(commonPendingMatcher, (state) => {
