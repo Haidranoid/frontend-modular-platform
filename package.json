@@ -41,7 +41,6 @@
     "@eslint/json": "^0.12.0",
     "@jest/globals": "^29.7.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.6.0",
-    "@redux-devtools/extension": "^3.3.0",
     "@testing-library/cypress": "^10.0.3",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
@@ -122,7 +121,6 @@
     "@reduxjs/toolkit": "^2.8.2",
     "axios": "^1.9.0",
     "clsx": "^2.1.1",
-    "immer": "^10.1.1",
     "lodash": "^4.17.21",
     "query-string": "^9.2.0",
     "react": "^19.1.0",
@@ -131,7 +129,6 @@
     "react-redux": "^9.2.0",
     "react-router": "^7.6.1",
     "redux": "^5.0.1",
-    "redux-thunk": "^3.1.0",
     "regenerator-runtime": "^0.14.1",
     "reselect": "^5.1.1",
     "styled-components": "^6.1.18"

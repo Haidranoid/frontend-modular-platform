@@ -1,4 +1,4 @@
-import { GenerateAllowedRoles, IsRoleAllowed } from './index.types'
+import { GenerateAllowedRoles, IsRoleAllowed } from './authUtils.types'
 import { Roles } from '@constants'
 
 export const generateAllowedRoles: GenerateAllowedRoles = (allowedRoles) => {

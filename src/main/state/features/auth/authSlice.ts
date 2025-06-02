@@ -1,6 +1,6 @@
 // features/auth/authSlice.ts
 import { PayloadAction } from '@reduxjs/toolkit'
-import { createBaseSlice, BaseState } from '../../utils/baseSlice'
+import { BaseState, createBaseSlice } from '@utils'
 import { fetchUser } from './authThunks'
 
 interface AuthState extends BaseState {
@@ -8,7 +8,7 @@ interface AuthState extends BaseState {
   user: string | null
 }
 
-const initialState: AuthState = {
+export const initialAuthState: AuthState = {
   loading: false,
   error: null,
   isAuthenticated: false,
@@ -29,7 +29,7 @@ const authReducers = {
 
 const authSlice = createBaseSlice({
   name: 'auth',
-  initialState,
+  initialState: initialAuthState,
   reducers: authReducers,
   extraReducers: (builder) => {
     builder.addCase(fetchUser.fulfilled, (state, action) => {
@@ -39,5 +39,7 @@ const authSlice = createBaseSlice({
   },
 })
 
-export const { login, logout, resetState } = authSlice.actions
-export default authSlice.reducer
+const authActions = authSlice.actions
+const authReducer = authSlice.reducer
+
+export { authActions, authReducer }

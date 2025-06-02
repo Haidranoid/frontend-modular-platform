@@ -4,7 +4,7 @@ interface NavigationMenuProps {
   children: ReactNode
 }
 
-const NavigationMenu: FC<NavigationMenuProps> = ({ children }) => {
+const NavigationLayout: FC<NavigationMenuProps> = ({ children }) => {
   return (
     <div>
       <div tabIndex={-1}>{children}</div>
@@ -12,4 +12,4 @@ const NavigationMenu: FC<NavigationMenuProps> = ({ children }) => {
   )
 }
 
-export default NavigationMenu
+export default NavigationLayout

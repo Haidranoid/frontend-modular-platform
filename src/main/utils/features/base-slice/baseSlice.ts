@@ -6,7 +6,10 @@ import {
   ActionReducerMapBuilder,
   CaseReducer,
 } from '@reduxjs/toolkit'
-import { commonPendingMatcher, commonRejectedMatcher } from './asyncMatchers'
+import {
+  commonPendingMatcher,
+  commonRejectedMatcher,
+} from '../async-matchers/asyncMatchersUtils'
 
 export interface BaseState {
   loading: boolean

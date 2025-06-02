@@ -1,11 +1,7 @@
 import { produce } from 'immer'
 import { GlobalReducerState } from '../interfaces/global.reducer.types'
 import { GlobalActions, GlobalActionTypes } from '@actions'
-
-export const initialGlobalState: GlobalReducerState = {
-  loading: false,
-  error: null,
-}
+import { initialGlobalState } from '../../initialStates/globals'
 
 export const globalReducer = produce(
   (state: GlobalReducerState, action: GlobalActions) => {

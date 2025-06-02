@@ -1,13 +1,7 @@
 import { produce } from 'immer'
 import { UsersReducerState } from '../interfaces/users.reducer.types'
 import { UsersActions, UsersActionTypes } from '@actions'
-
-export const initialUsersReducerState: UsersReducerState = {
-  user: null,
-  users: [],
-  loading: false,
-  error: null,
-}
+import { initialUsersReducerState } from '../../initialStates/users'
 
 export const usersReducer = produce((state: UsersReducerState, action: UsersActions) => {
   switch (action.type) {

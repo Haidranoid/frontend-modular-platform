@@ -1,4 +1,4 @@
-import authenticationReducer, { initialAuthState } from './authentication.reducer'
+import authenticationReducer, { initialAuthState } from './auth.reducer'
 import { AuthenticationTypes } from '@actions'
 import { AuthenticationReducerState } from '../interfaces/authentication.reducer.types'
 import { mockAdminUser } from '@test/mocks/authentication/authenticationMocks'

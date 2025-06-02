@@ -1,14 +1,9 @@
 import { produce } from 'immer'
 import { AuthenticationActions, AuthenticationActionTypes } from '@actions'
 import { AuthenticationReducerState } from '../interfaces/authentication.reducer.types'
+import { initialAuthState } from '../../initialStates/auth'
 
-export const initialAuthState: AuthenticationReducerState = {
-  user: null,
-  loading: false,
-  error: null,
-}
-
-export const authenticationReducer = produce(
+export const authReducer = produce(
   (state: AuthenticationReducerState, action: AuthenticationActions) => {
     switch (action.type) {
       /* --------------------------------- ME --------------------------------- */

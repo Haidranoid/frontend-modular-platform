@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Provider } from 'react-redux'
 import { RouterProvider } from 'react-router'
-import store from '@store'
+import store from '@store/index'
 import router from '@router'
 /*
 import { Router, Switch } from 'react-router-dom'
