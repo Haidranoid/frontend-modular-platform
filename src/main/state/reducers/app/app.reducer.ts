@@ -1,12 +1,6 @@
 import { combineReducers } from 'redux'
-import authenticationReducer from '../authentication/authentication.reducer'
-import usersReducer from '../users/users.reducer'
-import globalReducer from '../global/global.reducer'
+import authReducer from '../../features/auth/authSlice'
 
-const appReducer = combineReducers({
-  auth: authenticationReducer,
-  users: usersReducer,
-  global: globalReducer,
+export const appReducer = combineReducers({
+  auth: authReducer,
 })
-
-export default appReducer

@@ -1,8 +1,6 @@
-const env = process.env.NODE_ENV
-const host = window.location.hostname
-const devUrl = `http://${host}:8080`
-const prodUrl = process.env.BASE_URL || `http://${host}:8080`
-const baseUrl = env === 'development' ? devUrl : prodUrl
+import { getBaseUrl } from '@utils'
+
+const baseUrl = getBaseUrl()
 
 const Endpoints = {
   ROOT: `${baseUrl}/`,

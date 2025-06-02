@@ -8,7 +8,7 @@ export const initialAuthState: AuthenticationReducerState = {
   error: null,
 }
 
-const authenticationReducer = produce(
+export const authenticationReducer = produce(
   (state: AuthenticationReducerState, action: AuthenticationActions) => {
     switch (action.type) {
       /* --------------------------------- ME --------------------------------- */
@@ -71,5 +71,3 @@ const authenticationReducer = produce(
   },
   initialAuthState,
 )
-
-export default authenticationReducer

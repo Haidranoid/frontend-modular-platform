@@ -12,7 +12,7 @@ import Loading from '../../main/components/loading/Loading'
 import ThemeProvider from '../../main/styles/theme/ThemeProvider'
 import CacheProvider from '../../main/styles/cache/CacheProvider'
 import { AppReducerState } from '@state/app/reducers/app.reducer.types'
-import { initialRootState as defaultInitialState } from '../../main/state/store'
+import { initialRootState as defaultInitialState } from '../../main/state/store/old'
 import rootReducer from '@state/root-reducer/root.reducer'
 import { Switch } from 'react-router-dom'
 //import configureStore, { MockStoreEnhanced } from 'redux-mock-store'
@@ -77,7 +77,10 @@ type RenderWithProvidersType = (
   customRenderOptions?: CustomRenderOptions,
 ) => ExtendedRenderResult
 
-const renderWithProviders: RenderWithProvidersType = (ui, customRenderOptions: CustomRenderOptions = {}) => {
+const renderWithProviders: RenderWithProvidersType = (
+  ui,
+  customRenderOptions: CustomRenderOptions = {},
+) => {
   const {
     initialState = defaultInitialState,
     storeOverride,
@@ -87,8 +90,10 @@ const renderWithProviders: RenderWithProvidersType = (ui, customRenderOptions: C
     ...renderOptions
   } = customRenderOptions
 
-  const store = storeOverride ?? createStore(rootReducer, initialState, applyMiddleware(thunk))
-  const memoryHistory = history ?? createMemoryHistory({ initialEntries: routerProps.initialEntries })
+  const store =
+    storeOverride ?? createStore(rootReducer, initialState, applyMiddleware(thunk))
+  const memoryHistory =
+    history ?? createMemoryHistory({ initialEntries: routerProps.initialEntries })
 
   const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const {

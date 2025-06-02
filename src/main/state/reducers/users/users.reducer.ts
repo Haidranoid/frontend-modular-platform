@@ -9,7 +9,7 @@ export const initialUsersReducerState: UsersReducerState = {
   error: null,
 }
 
-const usersReducer = produce((state: UsersReducerState, action: UsersActions) => {
+export const usersReducer = produce((state: UsersReducerState, action: UsersActions) => {
   switch (action.type) {
     /* --------------------------------- Get All Users --------------------------------- */
     case UsersActionTypes.GET_ALL_USERS_STARTED:
@@ -106,5 +106,3 @@ const usersReducer = produce((state: UsersReducerState, action: UsersActions) =>
       break
   }
 }, initialUsersReducerState)
-
-export default usersReducer

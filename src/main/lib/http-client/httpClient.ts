@@ -1,7 +1,7 @@
 import { default as axios, AxiosResponse } from 'axios'
 import qs from 'query-string'
 import HttpMethods from './HttpMethods'
-import getBrowserFingerprint from '../security-service/getBrowserFingerprint'
+import browserSecurityService from '../security-service/SecurityService'
 import AuthenticationService from '../auth-service/AuthenticationService'
 import {
   GenerateQueryParams,
@@ -65,7 +65,7 @@ const axiosConfigurationBuilder: AxiosConfigurationBuilder = (
 ) => {
   // default headers
   const defaultHeaders: DefaultAxiosHeaders = {
-    'Device-Id': `${getBrowserFingerprint()}`,
+    'Device-Id': `${browserSecurityService.getBrowserFingerprint()}`,
     'Access-Control-Allow-Origin': '*',
   }
 

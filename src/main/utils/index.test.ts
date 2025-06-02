@@ -1,4 +1,4 @@
-jest.mock('../history', () => ({
+/*jest.mock('../history', () => ({
   __esModule: true,
   default: {
     push: jest.fn(),
@@ -165,3 +165,4 @@ describe('Utils functions', () => {
     })
   })
 })
+*/

@@ -1,32 +1,8 @@
-import { applyMiddleware, legacy_createStore as createStore, Middleware } from 'redux'
-import { composeWithDevTools } from '@redux-devtools/extension'
-import { createLogger } from 'redux-logger'
+import { configureStore } from '@reduxjs/toolkit'
+import { appReducer } from '../reducers/app/app.reducer'
 
-import { AppReducerState } from '../reducers/interfaces/app.reducer.types'
-import rootReducer, { initialRootState } from '../reducers/root/root.reducer'
-import { GlobalActionTypes } from '@actions'
-
-const logger = createLogger({
-  collapsed: false,
-  predicate: (_getState, _action) => !!window['Cypress'], // only log in cypress
-  stateTransformer: (state) => JSON.parse(JSON.stringify(state)),
-  actionTransformer: (action) => JSON.parse(JSON.stringify(action)),
+const store = configureStore({
+  reducer: appReducer,
 })
 
-const _typedLogger = logger as Middleware<AppReducerState>
-
-const configureAppStore = (preloadedState: AppReducerState = initialRootState) => {
-  return createStore(
-    rootReducer,
-    preloadedState,
-    composeWithDevTools(applyMiddleware()),
-    //composeWithDevTools(applyMiddleware(thunk, typedLogger)),
-    //composeWithDevTools(applyMiddleware(thunk.withExtraArgument(httpClient))),
-  )
-}
-
-const index = configureAppStore()
-const resetState = () => index.dispatch({ type: GlobalActionTypes.RESET_APP })
-
-export { initialRootState, configureAppStore, resetState }
-export default index
+export default store

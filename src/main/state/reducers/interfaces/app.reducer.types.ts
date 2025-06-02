@@ -1,4 +1,4 @@
-import appReducer from '../app/app.reducer'
+import { appReducer } from '../app/app.reducer'
 
 export interface BaseReducerState {
   loading: boolean

@@ -1,7 +1,7 @@
 import { selectCurrentUser, selectIsAuthenticated, selectAuthStatus } from './index'
 import { mockAdminUser } from '@test/mocks/authentication/authenticationMocks'
 import { AppReducerState } from '@reducers/interfaces/app.reducer.types'
-import { initialRootState } from '@store'
+import { initialRootState } from '../../store/old'
 
 describe('Authentication Selectors', () => {
   const mockState: AppReducerState = initialRootState

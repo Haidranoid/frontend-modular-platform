@@ -10,10 +10,8 @@ import nodePolyfillPlugin from './plugins/NodePolyfillPlugin'
 import MiniCssExtractPlugin, {
   miniCssExtractPlugin,
 } from './plugins/MiniCssExtractPlugin'
-import { ROOT_DIR, IS_DEV } from './constants'
-import { reactRefreshBabelPath } from './plugins/ReactRefreshWebpackPlugin'
+import { ROOT_DIR } from './constants'
 
-const babelPlugins = IS_DEV ? [reactRefreshBabelPath] : []
 const commonConfig: WebpackConfiguration = {
   target: ['web', 'es5'],
   entry: [
@@ -31,7 +29,7 @@ const commonConfig: WebpackConfiguration = {
           options: {
             babelrc: true,
             cacheDirectory: true,
-            plugins: babelPlugins,
+            plugins: [],
           },
         },
       },

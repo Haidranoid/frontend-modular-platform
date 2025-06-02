@@ -5,7 +5,7 @@ import {
   mockStudentUser,
 } from '@test/mocks/users/usersMocks'
 import { AppReducerState } from '@reducers/interfaces/app.reducer.types'
-import { initialRootState } from '@store'
+import { initialRootState } from '../../store/old'
 
 describe('Users Selectors', () => {
   const mockState: AppReducerState = initialRootState
