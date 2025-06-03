@@ -9,7 +9,7 @@ import {
   EndpointBuilder,
   DefaultAxiosHeaders,
   AxiosConfigurationBuilder,
-  ClientParamsProperties,
+  params,
 } from './httpClient.types'
 
 /**
@@ -103,11 +103,11 @@ const axiosConfigurationBuilder: AxiosConfigurationBuilder = (
 // default configuration
 const Axios = axios.create()
 
-const httpClient = async <
-  B extends object | FormData | undefined = undefined,
-  R extends object | undefined = undefined,
->(
-  params: ClientParamsProperties<B>,
+type Response = object
+type Body = object | FormData
+
+const httpClient = async <R extends Response = Response, B extends Body = {}>(
+  params: params<B>,
 ): Promise<AxiosResponse<R>> => {
   const {
     endpoint,

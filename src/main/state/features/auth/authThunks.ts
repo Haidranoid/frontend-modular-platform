@@ -1,18 +1,18 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { User } from '../../actions/interfaces/authentication.types'
+import { User } from '@types'
 import Endpoints from '@lib/http-client/Endpoints'
 import HttpMethods from '@lib/http-client/HttpMethods'
-import { getErrorMessage } from '@utils'
 import httpClient from '@lib/http-client/httpClient'
+import { getErrorMessage } from '@utils'
 
 export const me = createAsyncThunk<User>('auth/me', async (_, { rejectWithValue }) => {
   try {
-    const { data } = await httpClient({
+    const { data } = await httpClient<User>({
       endpoint: Endpoints.ME,
       method: HttpMethods.GET,
     })
 
-    return data as unknown as User
+    return data
   } catch (e: unknown) {
     return rejectWithValue(getErrorMessage(e))
   } finally {

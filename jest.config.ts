@@ -44,6 +44,7 @@ const config: Config = {
     '^@features/(.*)$': '<rootDir>/src/main/features/$1',
     '^@hooks$': '<rootDir>/src/main/state/hooks/index.ts',
     '^@store$': '<rootDir>/src/main/state/store/index.ts',
+    '^@types$': '<rootDir>/src/main/state/types/index.ts',
     '^@styles/(.*)$': '<rootDir>/src/main/styles/$1',
     '^@utils$': '<rootDir>/src/main/utils/index.ts',
   },

@@ -42,7 +42,7 @@ type AxiosConfigurationBuilder = (
   axiosConfig: AxiosRequestConfig,
 ) => AxiosRequestConfig
 
-interface ClientParamsProperties<B> {
+interface params<B> {
   endpoint: string
   method: HttpMethods
   body?: B
@@ -69,7 +69,7 @@ interface ClientParamsProperties<B> {
 type HttpClient<
   B extends object | FormData = NonNullable<unknown>,
   R extends object = NonNullable<unknown>,
-> = (clientParams: ClientParamsProperties<B>) => Promise<AxiosResponse<R>>
+> = (params: params<B>) => Promise<AxiosResponse<R>>
 */
 
 export type {
@@ -79,5 +79,5 @@ export type {
   ContentType,
   DefaultAxiosHeaders,
   AxiosConfigurationBuilder,
-  ClientParamsProperties,
+  params,
 }

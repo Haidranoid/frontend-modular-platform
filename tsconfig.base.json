@@ -56,6 +56,7 @@
       "@features/*": ["src/main/state/features/*"],
       "@hooks": ["src/main/state/hooks/index.ts"],
       "@store": ["src/main/state/store/index.ts"],
+      "@types": ["src/main/state/types/index.ts"],
       "@styles/*": ["src/main/styles/*"],
       "@utils": ["src/main/utils/index.ts"],
     },

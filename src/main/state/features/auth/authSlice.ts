@@ -1,9 +1,10 @@
 // features/auth/authSlice.ts
 import { PayloadAction } from '@reduxjs/toolkit'
 import { createBaseSlice } from '@utils'
-import { me } from './authThunks'
-import { User } from '../../actions/interfaces/authentication.types'
 import { Roles } from '@constants'
+import { me } from './authThunks'
+import { User } from '@types'
+import AuthTypes from './authTypes'
 
 interface AuthState {
   isAuthenticated: boolean
@@ -26,7 +27,7 @@ const authSlice = createBaseSlice({
   name: 'auth',
   initialState: initialAuthState,
   reducers: {
-    login(state, action: PayloadAction<User>) {
+    loginSuccess(state, action: PayloadAction<User>) {
       state.isAuthenticated = true
       state.user = action.payload
     },

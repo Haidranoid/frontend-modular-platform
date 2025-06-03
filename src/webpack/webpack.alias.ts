@@ -16,6 +16,7 @@ const webpackAlias = {
   '@features': path.resolve(ROOT_DIR, 'src/main/features/'),
   '@hooks': path.resolve(ROOT_DIR, 'src/main/state/hooks/'),
   '@store': path.resolve(ROOT_DIR, 'src/main/state/store/'),
+  '@types': path.resolve(ROOT_DIR, 'src/main/state/types/'),
   '@styles': path.resolve(ROOT_DIR, 'src/main/styles/'),
   '@utils': path.resolve(ROOT_DIR, 'src/main/utils/'),
 }

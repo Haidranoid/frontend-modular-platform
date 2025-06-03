@@ -1,8 +1,8 @@
-import AuthenticationActionTypes from './authentication/AuthenticationActionTypes'
+import AuthenticationActionTypes from './auth/AuthenticationActionTypes'
 import GlobalActionTypes from './global/GlobalActionTypes'
 import UsersActionTypes from './users/UsersActionTypes'
 
-import AuthenticationActions from './authentication/AuthenticationActions'
+import AuthenticationActions from './auth/AuthenticationActions'
 import GlobalActions from './global/GlobalActions'
 import UsersActions from './users/UsersActions'
 

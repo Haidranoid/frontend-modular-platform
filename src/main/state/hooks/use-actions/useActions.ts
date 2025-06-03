@@ -1,8 +1,8 @@
 import { useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { AppDispatch } from '../../store/index'
+import { AppDispatch } from '@store'
 
-import * as authAC from '../../features/auth/authThunks'
+import * as authAC from '@features/auth/authThunks'
 
 const allActions = {
   ...authAC,
