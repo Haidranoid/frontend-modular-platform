@@ -21,38 +21,41 @@ export const initialBaseState: BaseState = {
   error: null,
 }
 
-export function createBaseSlice<
-  S extends object,
-  CR extends SliceCaseReducers<S & BaseState>,
->(options: {
+interface ResetState<S> {
+  resetState: CaseReducer<S>
+}
+
+interface Options<S, CR extends SliceCaseReducers<S & BaseState>> {
   name: string
   initialState: S
   reducers: CR
-  extraReducers?: (builder: ActionReducerMapBuilder<S & BaseState>) => void
-}): Slice<
-  S & BaseState,
-  CR & {
-    resetState: CaseReducer<S & BaseState>
-  }
-> {
+  extraReducers: (builder: ActionReducerMapBuilder<S & BaseState>) => void
+}
+
+type CreatBaseSlice = <S, CR extends SliceCaseReducers<S & BaseState>>(
+  options: Options<S, CR>,
+) => Slice<S & BaseState, CR & ResetState<S & BaseState>>
+
+export const createBaseSlice: CreatBaseSlice = (options) => {
+  const { name, initialState, reducers, extraReducers } = options
   return createSlice({
-    name: options.name,
+    name,
     initialState: {
-      ...options.initialState,
+      ...initialState,
       ...initialBaseState,
     },
     // @ts-ignore
     reducers: {
-      ...options.reducers,
+      ...reducers,
       resetState: () => {
         return {
-          ...options.initialState,
+          ...initialState,
           ...initialBaseState,
         }
       },
     },
     extraReducers: (builder) => {
-      options.extraReducers?.(builder)
+      extraReducers?.(builder)
       builder.addMatcher(commonPendingMatcher, (state) => {
         state.loading = true
         state.error = null

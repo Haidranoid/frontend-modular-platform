@@ -17,7 +17,6 @@ const prodConfig: WebpackConfiguration & DevServerConfiguration = {
     path: path.resolve(ROOT_DIR, 'dist'),
     publicPath: '/',
   },
-  plugins: [cleanWebpackPlugin],
   optimization: {
     minimize: true,
     minimizer: [terserPlugin, cssMinimizerPlugin],
@@ -35,6 +34,7 @@ const prodConfig: WebpackConfiguration & DevServerConfiguration = {
       },
     },
   },
+  plugins: [cleanWebpackPlugin],
   /*optimization: {
     minimize: true,
     minimizer: [terserPlugin, cssMinimizerPlugin],

@@ -17,8 +17,8 @@ export default defineConfig({
     specPattern: ['cypress/e2e/**/*.cy.ts'],
     excludeSpecPattern: ['cypress/e2e/examples/**/*.cy.js'],
     screenshotOnRunFailure: false,
-    viewportHeight: 1000,
-    viewportWidth: 1920,
+    viewportWidth: 1280,
+    viewportHeight: 720,
     video: false,
   },
 })

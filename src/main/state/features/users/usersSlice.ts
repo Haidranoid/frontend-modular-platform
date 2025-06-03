@@ -1,6 +1,6 @@
 // features/users/usersSlice.ts
 import { createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
-import { createBaseSlice, BaseState } from '../../utils/baseSlice'
+import { createBaseSlice, BaseState } from '@utils'
 
 interface UsersState {
   list: string[]
