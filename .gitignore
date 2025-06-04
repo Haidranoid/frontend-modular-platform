@@ -71,3 +71,5 @@ turbo/
 .pnp.*
 # Local Netlify folder
 .netlify
+
+*storybook.log

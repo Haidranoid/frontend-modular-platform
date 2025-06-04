@@ -29,7 +29,9 @@
     "eslint:cy": "eslint cypress/**/* --fix",
     "eslint:all": "eslint . --fix",
     "check:outdated": "npm outdated",
-    "optimize:deps": "npm dedupe"
+    "optimize:deps": "npm dedupe",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "devDependencies": {
     "@babel/core": "^7.27.4",
@@ -41,6 +43,10 @@
     "@eslint/json": "^0.12.0",
     "@jest/globals": "^29.7.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.6.0",
+    "@storybook/addon-docs": "^9.0.4",
+    "@storybook/addon-onboarding": "^9.0.4",
+    "@storybook/addon-webpack5-compiler-swc": "^3.0.0",
+    "@storybook/react-webpack5": "^9.0.4",
     "@testing-library/cypress": "^10.0.3",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
@@ -88,6 +94,7 @@
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-prettier": "^5.4.1",
     "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-storybook": "^9.0.4",
     "eslint-plugin-testing-library": "^7.3.0",
     "eslint-plugin-unused-imports": "^4.1.4",
     "fs-extra": "^11.3.0",
@@ -104,6 +111,7 @@
     "process": "^0.11.10",
     "react-refresh": "^0.17.0",
     "redux-logger": "^3.0.6",
+    "storybook": "^9.0.4",
     "terser-webpack-plugin": "^5.3.14",
     "ts-jest": "^29.3.4",
     "ts-loader": "^9.5.2",
