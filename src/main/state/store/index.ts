@@ -1,10 +1,8 @@
 import { configureStore, Tuple } from '@reduxjs/toolkit'
-import { AppReducerState } from '@types'
-import initialRootState from '../initialStates'
-import appReducer from '@features/app.reducer'
+import appReducer, { initialAppState, InitialAppState } from '@features/app.reducer'
 import logger from 'redux-logger'
 
-export const configureAppStore = (preloadedState: AppReducerState = initialRootState) => {
+export const configureAppStore = (preloadedState: InitialAppState = initialAppState) => {
   return configureStore({
     reducer: appReducer,
     preloadedState,

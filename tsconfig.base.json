@@ -42,6 +42,7 @@
     /* Project structure */
     "baseUrl": "./",
     "paths": {
+      "@msw/*": ["msw/*"],
       "@stories/*": ["src/stories/*"],
       "@test/*": ["src/test/*"],
       "@app": ["src/main/app/index.tsx"],
@@ -56,11 +57,10 @@
       "@router": ["src/main/router/index.ts"],
       "@features/*": ["src/main/state/features/*"],
       "@hooks": ["src/main/state/hooks/index.ts"],
-      "@initial-states": ["src/main/state/initialStates/index.ts"],
       "@selectors": ["src/main/state/selectors/index.ts"],
       "@store": ["src/main/state/store/index.ts"],
       "@styles/*": ["src/main/styles/*"],
-      "@types/*": ["src/main/types/*"],
+      "@types": ["src/main/types/index.ts"],
       "@utils": ["src/main/utils/index.ts"],
     },
   },

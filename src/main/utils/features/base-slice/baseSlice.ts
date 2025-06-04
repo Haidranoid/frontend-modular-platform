@@ -27,7 +27,7 @@ interface ResetState<S> {
 
 interface Options<S, CR extends SliceCaseReducers<S & BaseState>> {
   name: string
-  initialState: S
+  initialState: S & BaseState
   reducers: CR
   extraReducers: (builder: ActionReducerMapBuilder<S & BaseState>) => void
 }

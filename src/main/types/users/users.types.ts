@@ -6,5 +6,5 @@ export interface User {
   password: string
   firstName: string
   lastName: string
-  role: Roles | null
+  role: Roles
 }

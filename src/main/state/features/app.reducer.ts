@@ -1,5 +1,13 @@
 import { combineReducers } from 'redux'
-import { authReducer } from '@features/auth/authSlice'
+import { authReducer, initialAuthState, AuthState } from '@features/auth/authSlice'
+
+export type InitialAppState = {
+  auth: AuthState
+}
+
+export const initialAppState: InitialAppState = {
+  auth: initialAuthState,
+}
 
 const appReducer = combineReducers({
   auth: authReducer,

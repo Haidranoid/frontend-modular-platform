@@ -1,12 +1,11 @@
 // features/auth/authSlice.ts
 import { PayloadAction } from '@reduxjs/toolkit'
-import { createBaseSlice } from '@utils'
+import { BaseState, createBaseSlice } from '@utils'
 import { Roles } from '@constants'
 import { me } from './authThunks'
 import { User } from '@types'
-import AuthTypes from './authTypes'
 
-interface AuthState {
+export interface AuthState extends BaseState {
   isAuthenticated: boolean
   user: User | null
 }
@@ -21,6 +20,8 @@ export const initialAuthState: AuthState = {
     password: '',
     role: Roles.ADMIN,
   },
+  loading: false,
+  error: null,
 }
 
 const authSlice = createBaseSlice({
