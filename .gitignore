@@ -7,6 +7,9 @@ dist/
 # server
 server/
 
+# alias mappings json
+alias.mappings.json
+
 # Logs
 npm-debug.log*
 yarn-debug.log*

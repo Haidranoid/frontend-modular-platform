@@ -69,5 +69,6 @@
     "coverage",
     "public",
     ".idea",
+    "alias.mappings.json"
   ]
 }

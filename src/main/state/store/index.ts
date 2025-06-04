@@ -1,12 +1,12 @@
 import { configureStore, Tuple } from '@reduxjs/toolkit'
-import { AppReducerState } from '../types/index.types'
+import { AppReducerState } from '@types'
 import initialRootState from '../initialStates'
-import rootReducer from '../reducers/root/root.reducer'
+import appReducer from '@features/app.reducer'
 import logger from 'redux-logger'
 
 export const configureAppStore = (preloadedState: AppReducerState = initialRootState) => {
   return configureStore({
-    reducer: rootReducer,
+    reducer: appReducer,
     preloadedState,
     middleware: () => new Tuple(logger),
     devTools: {

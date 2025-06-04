@@ -18,6 +18,7 @@
     ]
   },
   "include": [
+    "utils",
     "src",
     "webpack.config.ts",
     "jest.config.ts",
@@ -33,6 +34,7 @@
     "coverage",
     "public",
     ".idea",
+    "alias.mappings.json",
     "src/main/experimental" // temporal
   ],
 }

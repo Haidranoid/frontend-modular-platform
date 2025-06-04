@@ -1,7 +1,6 @@
 // webpack.common.ts
 import type { WebpackConfiguration } from 'webpack-cli'
 import * as path from 'path'
-import webpackAlias from './webpack.alias'
 import bufferPlugin from './plugins/BufferPlugin'
 import tsconfigPathsPlugin from './plugins/TsConfigPathsPlugin'
 import dotEnvPlugin from './plugins/DotEnvPlugin'
@@ -11,6 +10,7 @@ import MiniCssExtractPlugin, {
   miniCssExtractPlugin,
 } from './plugins/MiniCssExtractPlugin'
 import { ROOT_DIR } from './constants'
+import getAliasMappings from '../../utils/getAliasMappings'
 
 const commonConfig: WebpackConfiguration = {
   target: ['web', 'es5'],
@@ -50,7 +50,7 @@ const commonConfig: WebpackConfiguration = {
       buffer: require.resolve('buffer/'),
     },
     fullySpecified: false,
-    alias: webpackAlias,
+    alias: getAliasMappings().webpackAlias,
   },
   plugins: [
     dotEnvPlugin,

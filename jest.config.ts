@@ -1,5 +1,6 @@
 // jest.config.ts
 import type { Config } from 'jest'
+import getAliasMappings from './utils/getAliasMappings'
 
 const config: Config = {
   preset: 'ts-jest',
@@ -30,23 +31,7 @@ const config: Config = {
     //'^@app/(.*)$': '<rootDir>/src/main/$1'
 
     // ⬇️ ORDER MATTERS: longer pattern first
-    '^@assets/(.*)$': '<rootDir>/src/assets/$1',
-    '^@config/(.*)$': '<rootDir>/src/config/$1',
-    '^@test/(.*)$': '<rootDir>/src/test/$1',
-    '^@app$': '<rootDir>/src/main/app/index.tsx',
-    '^@components$': '<rootDir>/src/main/components/index.ts',
-    '^@constants$': '<rootDir>/src/main/constants/index.ts',
-    '^@experimental/(.*)$': '<rootDir>/src/main/experimental/$1',
-    '^@layouts/(.*)$': '<rootDir>/src/main/layouts/$1',
-    '^@pages/(.*)$': '<rootDir>/src/main/pages/$1',
-    '^@lib/(.*)$': '<rootDir>/src/main/lib/$1',
-    '^@router$': '<rootDir>/src/main/router/index.ts',
-    '^@features/(.*)$': '<rootDir>/src/main/features/$1',
-    '^@hooks$': '<rootDir>/src/main/state/hooks/index.ts',
-    '^@store$': '<rootDir>/src/main/state/store/index.ts',
-    '^@types$': '<rootDir>/src/main/state/types/index.ts',
-    '^@styles/(.*)$': '<rootDir>/src/main/styles/$1',
-    '^@utils$': '<rootDir>/src/main/utils/index.ts',
+    ...getAliasMappings().moduleNameMapper,
   },
 
   collectCoverage: false,
