@@ -28,10 +28,10 @@
     "eslint": "eslint src/main/**/* --fix",
     "eslint:cy": "eslint cypress/**/* --fix",
     "eslint:all": "eslint . --fix",
-    "check:outdated": "npm outdated",
-    "optimize:deps": "npm dedupe",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "check:outdated": "npm outdated",
+    "optimize:deps": "npm dedupe"
   },
   "devDependencies": {
     "@babel/core": "^7.27.4",

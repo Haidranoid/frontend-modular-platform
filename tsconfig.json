@@ -18,8 +18,10 @@
     ]
   },
   "include": [
-    "utils",
+    ".storybook/*",
     "src",
+    "utils",
+    "webpack",
     "webpack.config.ts",
     "jest.config.ts",
     "jest.setup.ts",
@@ -35,7 +37,7 @@
     "public",
     ".idea",
     "alias.mappings.json",
-    "src/main/experimental" // temporal
+    "src/main/experimental",
   ],
 }
 

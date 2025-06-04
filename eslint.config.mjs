@@ -17,7 +17,6 @@ import prettierConfig from './.prettierrc.json' with { type: 'json' }
 //});
 
 export default [
-  ...storybook.configs['flat/recommended'],
   {
     // 1) Base config for JS/TS/React files (source code)
     files: ['**/*.{ts,tsx,js,jsx}'],
@@ -144,7 +143,8 @@ export default [
       'coverage',
       'public',
       '.idea',
-      'src/main/experimental', // temporal
+      'src/main/experimental',
     ],
   },
+  ...storybook.configs['flat/recommended'],
 ]

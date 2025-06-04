@@ -42,11 +42,12 @@
     /* Project structure */
     "baseUrl": "./",
     "paths": {
-      "@assets/*": ["src/assets/*"],
-      "@config/*": ["src/config/*"],
+      "@stories/*": ["src/stories/*"],
       "@test/*": ["src/test/*"],
       "@app": ["src/main/app/index.tsx"],
+      "@assets/*": ["src/main/assets/*"],
       "@components": ["src/main/components/index.ts"],
+      "@config/*": ["src/main/config/*"],
       "@constants": ["src/main/constants/index.ts"],
       "@experimental/*": ["src/main/experimental/*"],
       "@layouts/*": ["src/main/layouts/*"],
@@ -55,9 +56,11 @@
       "@router": ["src/main/router/index.ts"],
       "@features/*": ["src/main/state/features/*"],
       "@hooks": ["src/main/state/hooks/index.ts"],
+      "@initial-states": ["src/main/state/initialStates/index.ts"],
+      "@selectors": ["src/main/state/selectors/index.ts"],
       "@store": ["src/main/state/store/index.ts"],
-      "@types": ["src/main/state/types/index.ts"],
       "@styles/*": ["src/main/styles/*"],
+      "@types/*": ["src/main/types/*"],
       "@utils": ["src/main/utils/index.ts"],
     },
   },
@@ -69,6 +72,7 @@
     "coverage",
     "public",
     ".idea",
-    "alias.mappings.json"
+    "alias.mappings.json",
+    "src/main/experimental",
   ]
 }

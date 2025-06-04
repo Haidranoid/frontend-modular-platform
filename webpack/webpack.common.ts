@@ -10,7 +10,7 @@ import MiniCssExtractPlugin, {
   miniCssExtractPlugin,
 } from './plugins/MiniCssExtractPlugin'
 import { ROOT_DIR } from './constants'
-import getAliasMappings from '../../utils/getAliasMappings'
+import getAliasMappings from '../utils/getAliasMappings'
 
 const commonConfig: WebpackConfiguration = {
   target: ['web', 'es5'],
