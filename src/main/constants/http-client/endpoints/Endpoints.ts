@@ -1,4 +1,4 @@
-import { getBaseUrl } from '@utils'
+import { getBaseUrl } from '@utils/http-client/httpClientUtils'
 
 const baseUrl = getBaseUrl()
 

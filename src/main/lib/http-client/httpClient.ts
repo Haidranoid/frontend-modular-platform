@@ -1,6 +1,6 @@
 import { default as axios, AxiosResponse } from 'axios'
 import qs from 'query-string'
-import HttpMethods from './HttpMethods'
+import { HttpMethods } from '@constants'
 import browserSecurityService from '../security-service/SecurityService'
 import AuthenticationService from '../auth-service/AuthenticationService'
 import {
@@ -8,8 +8,8 @@ import {
   ReplaceEndpointVariables,
   EndpointBuilder,
   DefaultAxiosHeaders,
-  AxiosConfigurationBuilder,
-  params,
+  RequestParams,
+  ConfigureAxiosRequest,
 } from './httpClient.types'
 
 /**
@@ -56,10 +56,9 @@ const endpointBuilder: EndpointBuilder = (endpoint, queryParams, endpointVariabl
   return `${endpointVariablesReplaced}${queryParamsBuilt}`
 }
 
-const axiosConfigurationBuilder: AxiosConfigurationBuilder = (
+const configureAxiosRequest: ConfigureAxiosRequest = (
   useDefaultHeaders,
   useAuthorization,
-  contentType,
   customHeaders,
   axiosConfig,
 ) => {
@@ -70,7 +69,7 @@ const axiosConfigurationBuilder: AxiosConfigurationBuilder = (
   }
 
   let headers: DefaultAxiosHeaders = {
-    'Content-Type': contentType,
+    'Content-Type': 'application/json',
   }
 
   if (useDefaultHeaders) {
@@ -107,7 +106,7 @@ type Response = object
 type Body = object | FormData
 
 const httpClient = async <R extends Response = Response, B extends Body = {}>(
-  params: params<B>,
+  params: RequestParams<B>,
 ): Promise<AxiosResponse<R>> => {
   const {
     endpoint,
@@ -117,31 +116,29 @@ const httpClient = async <R extends Response = Response, B extends Body = {}>(
     queryParams,
     useDefaultHeaders = true,
     useAuthorization = true,
-    contentType = 'application/json',
     customHeaders = {},
     axiosRequestConfig = {},
   } = params
 
   const endpointBuilt = endpointBuilder(endpoint, queryParams, endpointVariables)
-  const axiosConfigured = axiosConfigurationBuilder(
+  const requestConfig = configureAxiosRequest(
     useDefaultHeaders,
     useAuthorization,
-    contentType,
     customHeaders,
     axiosRequestConfig,
   )
 
   switch (method) {
     case HttpMethods.GET:
-      return Axios.get(endpointBuilt, axiosConfigured)
+      return Axios.get(endpointBuilt, requestConfig)
     case HttpMethods.POST:
-      return Axios.post(endpointBuilt, body, axiosConfigured)
+      return Axios.post(endpointBuilt, body, requestConfig)
     case HttpMethods.PUT:
-      return Axios.put(endpointBuilt, body, axiosConfigured)
+      return Axios.put(endpointBuilt, body, requestConfig)
     case HttpMethods.PATCH:
-      return Axios.patch(endpointBuilt, body, axiosConfigured)
+      return Axios.patch(endpointBuilt, body, requestConfig)
     case HttpMethods.DELETE:
-      return Axios.delete(endpointBuilt, axiosConfigured)
+      return Axios.delete(endpointBuilt, requestConfig)
   }
 }
 

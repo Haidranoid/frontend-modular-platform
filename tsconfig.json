@@ -13,11 +13,12 @@
       "jest"
     ],
     "typeRoots": [
-      "./src/@types",
+      "./webpack/@types",
       "node_modules/@types"
     ]
   },
   "include": [
+    "msw",
     ".storybook/*",
     "src",
     "utils",
