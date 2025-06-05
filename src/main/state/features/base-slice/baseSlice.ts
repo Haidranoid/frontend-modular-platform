@@ -9,7 +9,7 @@ import {
 import {
   commonPendingMatcher,
   commonRejectedMatcher,
-} from '../async-matchers/asyncMatchersUtils'
+} from '@utils/features/async-matchers/asyncMatchersUtils'
 
 export interface BaseState {
   loading: boolean
@@ -27,7 +27,7 @@ interface ResetState<S> {
 
 interface Options<S, CR extends SliceCaseReducers<S & BaseState>> {
   name: string
-  initialState: S & BaseState
+  initialState: S
   reducers: CR
   extraReducers: (builder: ActionReducerMapBuilder<S & BaseState>) => void
 }

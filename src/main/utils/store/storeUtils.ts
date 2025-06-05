@@ -1,4 +1,3 @@
-import store from '@store/index'
-import { GlobalActionTypes } from '@actions'
+import store from '@store'
 
-const resetState = () => store.dispatch({ type: GlobalActionTypes.RESET_APP })
+export const resetState = () => store.dispatch({ type: '' })

@@ -1,9 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { User } from '@types'
-import Endpoints from '@lib/http-client/Endpoints'
-import HttpMethods from '@lib/http-client/HttpMethods'
+import { Endpoints, HttpMethods } from '@constants'
 import httpClient from '@lib/http-client/httpClient'
-import { getErrorMessage } from '@utils'
 
 export const me = createAsyncThunk<User>('auth/me', async (_, { rejectWithValue }) => {
   try {
@@ -14,7 +12,7 @@ export const me = createAsyncThunk<User>('auth/me', async (_, { rejectWithValue 
 
     return data
   } catch (e: unknown) {
-    return rejectWithValue(getErrorMessage(e))
+    return rejectWithValue(e)
   } finally {
     //cb?.()
   }
