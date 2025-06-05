@@ -1,3 +1,3 @@
-export interface MockAxiosResponse<T extends object | undefined = undefined> {
-  data: T
-}
+import { AxiosResponse } from 'axios'
+
+export type MockAxiosResponse = AxiosResponse

@@ -1,5 +1,5 @@
-import { User } from '@state/auth/interfaces/authentication.types'
-import { UserRoles } from '@constants'
+import { User } from '@types'
+import { Roles } from '@constants'
 import { MockAxiosResponse } from '@test/interfaces/index.types'
 import {
   GetMeDataRequestResponse,
