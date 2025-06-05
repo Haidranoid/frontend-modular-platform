@@ -3,7 +3,7 @@ import '@config/window'
 
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import App from './app/App'
+import App from '@app'
 
 // @ts-ignore
 const root = createRoot(document.getElementById('root'))

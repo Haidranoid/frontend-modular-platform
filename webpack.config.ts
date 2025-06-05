@@ -1,8 +1,8 @@
 // webpack.config.ts
 import { merge } from 'webpack-merge'
-import commonConfig from './src/webpack/webpack.common'
-import devConfig from './src/webpack/webpack.dev'
-import prodConfig from './src/webpack/webpack.prod'
+import commonConfig from './webpack/webpack.common'
+import devConfig from './webpack/webpack.dev'
+import prodConfig from './webpack/webpack.prod'
 
 interface EnvironmentVariables {
   mode: 'development' | 'production'

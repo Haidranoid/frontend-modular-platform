@@ -43,9 +43,8 @@
     "baseUrl": "./",
     "paths": {
       "@msw/*": ["msw/*"],
-      "@stories/*": ["src/stories/*"],
       "@test/*": ["src/test/*"],
-      "@app": ["src/main/app/index.tsx"],
+      "@app": ["src/main/app/App.tsx"],
       "@assets/*": ["src/main/assets/*"],
       "@components": ["src/main/components/index.ts"],
       "@config/*": ["src/main/config/*"],
@@ -61,7 +60,7 @@
       "@store": ["src/main/state/store/index.ts"],
       "@styles/*": ["src/main/styles/*"],
       "@types": ["src/main/types/index.ts"],
-      "@utils": ["src/main/utils/index.ts"],
+      "@utils/*": ["src/main/utils/*"],
     },
   },
   "exclude": [

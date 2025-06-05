@@ -5,11 +5,12 @@ import * as fs from 'node:fs'
 const ROOT_DIR = process.cwd()
 
 interface AliasMappings {
+  paths?: Record<string, string>
   webpackAlias: Record<string, string>
   moduleNameMapper: Record<string, string>
 }
 
-export default function getAliasMappings(writeOutput = false): AliasMappings {
+export default function getAliasMappings(writeOutput = true): AliasMappings {
   const outputPath = path.join(ROOT_DIR, 'alias.mappings.json')
   const configPath = path.join(ROOT_DIR, 'tsconfig.base.json')
   const configFile = ts.readConfigFile(configPath, ts.sys.readFile)
@@ -27,7 +28,7 @@ export default function getAliasMappings(writeOutput = false): AliasMappings {
     const alias = aliasKey.replace(/\/\*$/, '')
 
     const cleanedRelativePath = targetPath
-      .replace(/\/index\.(ts|tsx|js|jsx)$/, '') // remove file endings
+      .replace(/\/(index|App)\.(ts|tsx|js|jsx)$/, '') // remove file endings
       .replace(/\/\*$/, '') // remove wildcard
 
     // webpack alias
