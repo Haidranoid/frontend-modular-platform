@@ -50,7 +50,7 @@ const commonConfig: WebpackConfiguration = {
       buffer: require.resolve('buffer/'),
     },
     fullySpecified: false,
-    alias: getAliasMappings().webpackAlias,
+    alias: { ...getAliasMappings().webpackAlias },
   },
   plugins: [
     dotEnvPlugin,

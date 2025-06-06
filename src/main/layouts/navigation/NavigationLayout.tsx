@@ -1,13 +1,11 @@
-import { FC, ReactNode } from 'react'
+import { FC } from 'react'
+import { Outlet } from 'react-router'
 
-interface NavigationMenuProps {
-  children: ReactNode
-}
-
-const NavigationLayout: FC<NavigationMenuProps> = ({ children }) => {
+const NavigationLayout: FC<NavigationMenuProps> = () => {
   return (
     <div>
-      <div tabIndex={-1}>{children}</div>
+      <h3>Navbar</h3>
+      <Outlet />
     </div>
   )
 }

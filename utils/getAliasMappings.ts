@@ -40,7 +40,6 @@ export default function getAliasMappings(writeOutput = true): AliasMappings {
 
   const result: AliasMappings = { webpackAlias, moduleNameMapper }
 
-  // Escribir archivo JSON
   if (writeOutput) {
     fs.writeFileSync(outputPath, JSON.stringify(result, null, 2), 'utf-8')
   }

@@ -10,6 +10,7 @@ import {
   commonPendingMatcher,
   commonRejectedMatcher,
 } from '@utils/features/async-matchers/asyncMatchersUtils'
+import { getErrorMessage } from '@utils/http-client/httpClientUtils'
 
 export interface BaseState {
   loading: boolean
@@ -62,7 +63,7 @@ export const createBaseSlice: CreatBaseSlice = (options) => {
       })
       builder.addMatcher(commonRejectedMatcher, (state, action) => {
         state.loading = false
-        state.error = action.payload || action.error?.message || 'Error inesperado'
+        state.error = getErrorMessage(action.payload)
       })
     },
   })

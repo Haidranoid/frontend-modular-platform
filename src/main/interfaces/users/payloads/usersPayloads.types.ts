@@ -1,10 +1,10 @@
 import { Roles } from '@constants'
 
-export interface GetSingleUserRequestBody {
+export interface GetUserPayload {
   id: number
 }
 
-export interface CreateUserRequestBody {
+export interface CreateUserPayload {
   email: string
   password: string
   firstName: string
@@ -12,7 +12,7 @@ export interface CreateUserRequestBody {
   role: Roles
 }
 
-export interface UpdateUserRequestBody {
+export interface UpdateUserPayload {
   id: number
   email: string
   password?: string
@@ -21,6 +21,6 @@ export interface UpdateUserRequestBody {
   role: Roles
 }
 
-export interface DeleteUserRequestBody {
+export interface DeleteUserPayload {
   id: number
 }

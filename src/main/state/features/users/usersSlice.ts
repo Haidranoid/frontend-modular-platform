@@ -1,49 +1,50 @@
 // features/users/usersSlice.ts
-import { createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
-import { createBaseSlice, BaseState } from '@utils'
+import { createBaseSlice } from '../base-slice/baseSlice'
+import {
+  createUser,
+  deleteUser,
+  getAllUsers,
+  getSingleUser,
+  updateUser,
+} from './usersThunk'
+import { User } from '@interfaces/users/users.types'
 
 interface UsersState {
-  list: string[]
+  users: User[]
+  user: User | null
 }
 
-const initialState: UsersState & BaseState = {
-  list: [],
-  loading: false,
-  error: null,
+const initialState: UsersState = {
+  users: [],
+  user: null,
 }
-
-export const fetchUsers = createAsyncThunk<string[]>(
-  'users/fetchUsers',
-  async (_, { rejectWithValue }) => {
-    try {
-      const users = await new Promise<string[]>((resolve) =>
-        setTimeout(() => resolve(['Ana', 'Juan', 'Luisa']), 1500),
-      )
-      return users
-    } catch (err) {
-      return rejectWithValue('Error al obtener usuarios')
-    }
-  },
-)
 
 const usersSlice = createBaseSlice({
   name: 'users',
   initialState,
-  reducers: {
-    addUser(state, action: PayloadAction<string>) {
-      state.list.push(action.payload)
-    },
-    removeUser(state, action: PayloadAction<string>) {
-      state.list = state.list.filter((u) => u !== action.payload)
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchUsers.fulfilled, (state, action) => {
-      state.list = action.payload
-      state.loading = false
+    builder.addCase(getAllUsers.fulfilled, (state, action) => {
+      state.users = action.payload.users
+    })
+    builder.addCase(getSingleUser.fulfilled, (state, action) => {
+      state.user = action.payload.user
+    })
+    builder.addCase(createUser.fulfilled, (state, action) => {
+      state.users.push(action.payload.user)
+    })
+    builder.addCase(updateUser.fulfilled, (state, action) => {
+      state.users = state.users.map((user) =>
+        user.id === action.payload.user.id ? action.payload.user : user,
+      )
+    })
+    builder.addCase(deleteUser.fulfilled, (state, action) => {
+      //state.users = state.users.filter((user) => user.id !== action.payload.userId)
     })
   },
 })
 
-export const { addUser, removeUser } = usersSlice.actions
-export default usersSlice.reducer
+const usersActions = usersSlice.actions
+const usersReducer = usersSlice.reducer
+
+export { usersActions, usersReducer }

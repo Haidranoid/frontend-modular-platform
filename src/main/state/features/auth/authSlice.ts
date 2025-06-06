@@ -1,9 +1,8 @@
 // features/auth/authSlice.ts
-import { createBaseSlice } from '@features/base-slice/baseSlice'
-import { PayloadAction } from '@reduxjs/toolkit'
+import { createBaseSlice } from '../base-slice/baseSlice'
 import { Roles } from '@constants'
-import { me } from './authThunks'
-import { User } from '@types'
+import { login, logout, me } from './authThunks'
+import { User } from '@interfaces/users/users.types'
 
 export interface AuthState {
   isAuthenticated: boolean
@@ -26,6 +25,7 @@ const authSlice = createBaseSlice({
   name: 'auth',
   initialState: initialAuthState,
   reducers: {
+    /*
     loginSuccess(state, action: PayloadAction<User>) {
       state.isAuthenticated = true
       state.user = action.payload
@@ -34,11 +34,20 @@ const authSlice = createBaseSlice({
       state.isAuthenticated = false
       state.user = null
     },
+    */
   },
   extraReducers: (builder) => {
     builder.addCase(me.fulfilled, (state, action) => {
       state.isAuthenticated = true
-      state.user = action.payload
+      state.user = action.payload.user
+    })
+    builder.addCase(login.fulfilled, (state, action) => {
+      state.isAuthenticated = true
+      state.user = action.payload.user
+    })
+    builder.addCase(logout.fulfilled, (state, action) => {
+      state.isAuthenticated = false
+      state.user = null
     })
   },
 })
