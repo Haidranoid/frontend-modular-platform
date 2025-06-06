@@ -2,10 +2,12 @@ import { useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { AppDispatch } from '@store'
 
-import * as authAC from '@features/auth/authThunks'
+import * as authThunks from '@features/auth/authThunks'
+import * as usersThunks from '@features/users/usersThunk'
 
 const allActions = {
-  ...authAC,
+  ...authThunks,
+  ...usersThunks,
 }
 
 export const useAppDispatch = useDispatch.withTypes<AppDispatch>()

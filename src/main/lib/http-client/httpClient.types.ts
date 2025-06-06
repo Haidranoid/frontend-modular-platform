@@ -6,8 +6,8 @@ import {
 } from 'axios'
 import { HttpMethods } from '@constants'
 
-export type Body = object | FormData | undefined
-export type Response = object
+export type Body = object | FormData | void
+export type Response = object | undefined
 
 export type HttpClientType = {
   get: <R extends Response = Response>(
