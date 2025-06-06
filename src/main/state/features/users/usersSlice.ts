@@ -9,19 +9,19 @@ import {
 } from './usersThunk'
 import { User } from '@interfaces/users/users.types'
 
-interface UsersState {
+export interface UsersState {
   users: User[]
   user: User | null
 }
 
-const initialState: UsersState = {
+export const initialUsersState: UsersState = {
   users: [],
   user: null,
 }
 
 const usersSlice = createBaseSlice({
   name: 'users',
-  initialState,
+  initialState: initialUsersState,
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getAllUsers.fulfilled, (state, action) => {
@@ -38,7 +38,7 @@ const usersSlice = createBaseSlice({
         user.id === action.payload.user.id ? action.payload.user : user,
       )
     })
-    builder.addCase(deleteUser.fulfilled, (state, action) => {
+    builder.addCase(deleteUser.fulfilled, () => {
       //state.users = state.users.filter((user) => user.id !== action.payload.userId)
     })
   },

@@ -1,11 +1,6 @@
-import { FC, useEffect } from 'react'
-import { useActions } from '@hooks'
+import { FC } from 'react'
 
 const Login: FC = () => {
-  const { fetchUser } = useActions()
-  useEffect(() => {
-    fetchUser()
-  }, [])
   return <div data-testid="login-page">Login Page</div>
 }
 

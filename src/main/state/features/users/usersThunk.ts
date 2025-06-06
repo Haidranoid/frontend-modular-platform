@@ -7,15 +7,14 @@ import {
 } from '@interfaces/users/payloads/usersPayloads.types'
 import {
   CreateUserSuccess,
-  DeleteUserSuccess,
   GetAllUsersSuccess,
   GetUserSuccess,
   UpdateUserSuccess,
 } from '@interfaces/users/responses/usersResponses.types'
 import { Endpoints } from '@constants'
-import httpClient from '@experimental/http-client/httpClient'
+import httpClient from '@lib/http-client/httpClient'
 
-export const getAllUsers = createAsyncThunk(
+export const getAllUsers = createAsyncThunk<GetAllUsersSuccess>(
   'users/getAllUser',
   async (_, { rejectWithValue }) => {
     try {
@@ -25,7 +24,7 @@ export const getAllUsers = createAsyncThunk(
 
       return data
     } catch (e: unknown) {
-      rejectWithValue(e)
+      return rejectWithValue(e)
     }
   },
 )
@@ -82,18 +81,16 @@ export const updateUser = createAsyncThunk<UpdateUserSuccess, UpdateUserPayload>
   },
 )
 
-export const deleteUser = createAsyncThunk<DeleteUserSuccess, DeleteUserPayload>(
+export const deleteUser = createAsyncThunk<undefined, DeleteUserPayload>(
   'users/deleteUser',
   async (arg, { rejectWithValue }) => {
     try {
-      const { data } = await httpClient.delete<DeleteUserSuccess>({
+      await httpClient.delete<DeleteUserPayload>({
         endpoint: Endpoints.DELETE_USER,
         endpointVariables: {
           userId: arg.id,
         },
       })
-
-      return data
     } catch (e) {
       return rejectWithValue(e)
     }
