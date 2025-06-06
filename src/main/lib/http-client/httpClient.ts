@@ -1,145 +1,102 @@
-import { default as axios, AxiosResponse } from 'axios'
+import { default as axios } from 'axios'
 import qs from 'query-string'
 import { HttpMethods } from '@constants'
-import browserSecurityService from '../security-service/SecurityService'
-import AuthenticationService from '../auth-service/AuthenticationService'
+import browserSecurityService from '@lib/security-service/SecurityService'
+import AuthenticationService from '@lib/auth-service/AuthenticationService'
 import {
+  HttpClientType,
   GenerateQueryParams,
   ReplaceEndpointVariables,
   EndpointBuilder,
   DefaultAxiosHeaders,
+  AxiosConfigurationBuilder,
   RequestParams,
-  ConfigureAxiosRequest,
 } from './httpClient.types'
 
-/**
- * @description this function converts an object to query params.
- * @param queryParams example: {foo: 'foo', bar: 'bar'}
- * @return The query params as string, example: {foo: 'foo', bar: 'bar' } => ?foo=foo&bar=bar
- */
+// ========== Utility Functions ==========
 const generateQueryParams: GenerateQueryParams = (queryParams) => {
-  if (!queryParams) {
-    return ''
-  }
-
-  return `?${qs.stringify(queryParams)}`
+  return queryParams ? `?${qs.stringify(queryParams)}` : ''
 }
 
-/**
- * @description Replace in the endpoint string with the values declared in endpointVariables
- * @param endpoint example: ${baseUrl}/users/{spaceId}/{accountId}
- * @param endpointVariables example: {spaceId: 15, accountId: 24465}
- * @returns The endpoint with the variables replaced, example: ${baseUrl}/users/15/24465
- */
-const replaceEndpointVariables: ReplaceEndpointVariables = (
-  endpoint,
-  endpointVariables,
-) => {
-  if (!endpointVariables) {
-    return endpoint
-  }
+const replaceEndpointVariables: ReplaceEndpointVariables = (endpoint, variables) => {
+  if (!variables) return endpoint
 
-  return Object.keys(endpointVariables).reduce(
-    (str, param) => str.replace(`{${param}}`, endpointVariables[param]),
+  return Object.keys(variables).reduce(
+    (url, key) => url.replace(`{${key}}`, String(variables[key])),
     endpoint,
   )
 }
 
-/**
- * @description this function provide an abstraction to replace values in the url with
- * certain properties provided
- */
-const endpointBuilder: EndpointBuilder = (endpoint, queryParams, endpointVariables) => {
-  const endpointVariablesReplaced = replaceEndpointVariables(endpoint, endpointVariables)
-  const queryParamsBuilt = generateQueryParams(queryParams)
-
-  return `${endpointVariablesReplaced}${queryParamsBuilt}`
+const buildEndpoint: EndpointBuilder = (endpoint, queryParams, endpointVariables) => {
+  const withVars = replaceEndpointVariables(endpoint, endpointVariables)
+  const query = generateQueryParams(queryParams)
+  return `${withVars}${query}`
 }
 
-const configureAxiosRequest: ConfigureAxiosRequest = (
-  useDefaultHeaders,
-  useAuthorization,
-  customHeaders,
-  axiosConfig,
+const buildAxiosConfig: AxiosConfigurationBuilder = (
+  customHeaders = {},
+  useDefaultHeaders = true,
+  useAuthorization = true,
 ) => {
-  // default headers
-  const defaultHeaders: DefaultAxiosHeaders = {
-    'Device-Id': `${browserSecurityService.getBrowserFingerprint()}`,
-    'Access-Control-Allow-Origin': '*',
-  }
-
-  let headers: DefaultAxiosHeaders = {
-    'Content-Type': 'application/json',
-  }
+  let headers: DefaultAxiosHeaders = {}
 
   if (useDefaultHeaders) {
     headers = {
-      ...headers,
-      ...defaultHeaders,
+      'Device-Id': `${browserSecurityService.getBrowserFingerprint()}`,
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json',
     }
   }
 
   if (customHeaders) {
-    headers = {
-      ...headers,
-      ...customHeaders,
-    }
+    headers = { ...headers, ...customHeaders }
   }
 
   if (useAuthorization) {
-    const accessToken = AuthenticationService.getAccessToken()
-    headers = {
-      ...headers,
-      Authorization: `Bearer ${accessToken}`,
-    }
+    const token = AuthenticationService.getAccessToken()
+    headers['Authorization'] = `Bearer ${token}`
   }
 
-  axiosConfig.headers = headers
-
-  return axiosConfig
+  return { headers }
 }
 
-// default configuration
-const Axios = axios.create()
+// ========== HTTP Client Core ==========
+const axiosInstance = axios.create()
 
-type Response = object
-type Body = object | FormData
-
-const httpClient = async <R extends Response = Response, B extends Body = {}>(
-  params: RequestParams<B>,
-): Promise<AxiosResponse<R>> => {
-  const {
-    endpoint,
-    method,
-    body,
-    endpointVariables,
-    queryParams,
-    useDefaultHeaders = true,
-    useAuthorization = true,
-    customHeaders = {},
-    axiosRequestConfig = {},
-  } = params
-
-  const endpointBuilt = endpointBuilder(endpoint, queryParams, endpointVariables)
-  const requestConfig = configureAxiosRequest(
-    useDefaultHeaders,
-    useAuthorization,
-    customHeaders,
-    axiosRequestConfig,
-  )
+async function request<R, B>({
+  endpoint,
+  method,
+  body,
+  queryParams,
+  endpointVariables,
+  useAuthorization,
+  useDefaultHeaders,
+  customHeaders,
+}: RequestParams<B>) {
+  const finalUrl = buildEndpoint(endpoint, queryParams, endpointVariables)
+  const config = buildAxiosConfig(customHeaders, useDefaultHeaders, useAuthorization)
 
   switch (method) {
     case HttpMethods.GET:
-      return Axios.get(endpointBuilt, requestConfig)
+      return axiosInstance.get<R>(finalUrl, config)
     case HttpMethods.POST:
-      return Axios.post(endpointBuilt, body, requestConfig)
+      return axiosInstance.post<R>(finalUrl, body, config)
     case HttpMethods.PUT:
-      return Axios.put(endpointBuilt, body, requestConfig)
+      return axiosInstance.put<R>(finalUrl, body, config)
     case HttpMethods.PATCH:
-      return Axios.patch(endpointBuilt, body, requestConfig)
+      return axiosInstance.patch<R>(finalUrl, body, config)
     case HttpMethods.DELETE:
-      return Axios.delete(endpointBuilt, requestConfig)
+      return axiosInstance.delete<R>(finalUrl, config)
   }
+}
+
+// ========== Public API ==========
+const httpClient: HttpClientType = {
+  get: (params) => request({ ...params, method: HttpMethods.GET }),
+  post: (params) => request({ ...params, method: HttpMethods.POST }),
+  put: (params) => request({ ...params, method: HttpMethods.PUT }),
+  patch: (params) => request({ ...params, method: HttpMethods.PATCH }),
+  delete: (params) => request({ ...params, method: HttpMethods.DELETE }),
 }
 
 export default httpClient

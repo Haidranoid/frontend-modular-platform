@@ -1,13 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { GetMeSuccess } from '@interfaces/auth/responses/authResponses.types'
-import httpClient from '@lib/http-client/httpClient'
 import {
   CreateUserPayload,
   DeleteUserPayload,
   GetUserPayload,
   UpdateUserPayload,
 } from '@interfaces/users/payloads/usersPayloads.types'
-import { Endpoints, HttpMethods } from '@constants'
 import {
   CreateUserSuccess,
   DeleteUserSuccess,
@@ -15,17 +12,19 @@ import {
   GetUserSuccess,
   UpdateUserSuccess,
 } from '@interfaces/users/responses/usersResponses.types'
+import { Endpoints } from '@constants'
+import httpClient from '@experimental/http-client/httpClient'
 
-export const getAllUsers = createAsyncThunk<GetAllUsersSuccess>(
+export const getAllUsers = createAsyncThunk(
   'users/getAllUser',
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await httpClient<GetAllUsersSuccess>({
+      const { data } = await httpClient.get<GetAllUsersSuccess>({
         endpoint: Endpoints.GET_USERS,
-        method: HttpMethods.GET,
       })
+
       return data
-    } catch (e) {
+    } catch (e: unknown) {
       rejectWithValue(e)
     }
   },
@@ -35,29 +34,26 @@ export const getSingleUser = createAsyncThunk<GetUserSuccess, GetUserPayload>(
   'users/getSingleUser',
   async (arg, { rejectWithValue }) => {
     try {
-      const { data } = await httpClient<GetUserSuccess, GetUserPayload>({
+      const { data } = await httpClient.get<GetUserSuccess>({
         endpoint: Endpoints.GET_USER,
-        method: HttpMethods.GET,
         endpointVariables: {
           userId: arg.id,
         },
       })
-
       return data
-    } catch (e) {
-      rejectWithValue(e)
+    } catch (e: unknown) {
+      return rejectWithValue(e)
     }
   },
 )
 
 export const createUser = createAsyncThunk<CreateUserSuccess, CreateUserPayload>(
   'users/createUser',
-  async (args, { rejectWithValue }) => {
+  async (arg, { rejectWithValue }) => {
     try {
-      const { data } = await httpClient<CreateUserSuccess, CreateUserPayload>({
+      const { data } = await httpClient.post<CreateUserPayload, CreateUserSuccess>({
         endpoint: Endpoints.CREATE_USER,
-        method: HttpMethods.POST,
-        body: args,
+        body: arg,
       })
 
       return data
@@ -71,17 +67,17 @@ export const updateUser = createAsyncThunk<UpdateUserSuccess, UpdateUserPayload>
   'users/updateUser',
   async (arg, { rejectWithValue }) => {
     try {
-      const { data } = await httpClient<UpdateUserSuccess, UpdateUserPayload>({
+      const { data } = await httpClient.patch<UpdateUserPayload, UpdateUserSuccess>({
         endpoint: Endpoints.UPDATE_USER,
-        method: HttpMethods.PATCH,
         body: arg,
         endpointVariables: {
           userId: arg.id,
         },
       })
+
       return data
-    } catch (e) {
-      rejectWithValue(e)
+    } catch (e: unknown) {
+      return rejectWithValue(e)
     }
   },
 )
@@ -90,16 +86,16 @@ export const deleteUser = createAsyncThunk<DeleteUserSuccess, DeleteUserPayload>
   'users/deleteUser',
   async (arg, { rejectWithValue }) => {
     try {
-      const { data } = await httpClient<DeleteUserPayload>({
+      const { data } = await httpClient.delete<DeleteUserSuccess>({
         endpoint: Endpoints.DELETE_USER,
-        method: HttpMethods.DELETE,
         endpointVariables: {
           userId: arg.id,
         },
       })
+
       return data
     } catch (e) {
-      rejectWithValue(e)
+      return rejectWithValue(e)
     }
   },
 )

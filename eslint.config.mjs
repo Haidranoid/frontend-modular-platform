@@ -143,7 +143,6 @@ export default [
       'coverage',
       'public',
       '.idea',
-      'src/main/experimental',
     ],
   },
   ...storybook.configs['flat/recommended'],

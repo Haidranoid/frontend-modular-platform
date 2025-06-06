@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { LoginPayload } from '@interfaces/auth/payloads/authPayloads.types'
 import { GetMeSuccess } from '@interfaces/auth/responses/authResponses.types'
 import { LoginSuccess } from '@interfaces/auth/responses/authResponses.types'
-import { Endpoints, HttpMethods } from '@constants'
+import { Endpoints } from '@constants'
 import httpClient from '@lib/http-client/httpClient'
 import AuthenticationService from '@lib/auth-service/AuthenticationService'
 
@@ -10,9 +10,8 @@ export const me = createAsyncThunk<GetMeSuccess>(
   'auth/me',
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await httpClient<GetMeSuccess>({
+      const { data } = await httpClient.get<GetMeSuccess>({
         endpoint: Endpoints.ME,
-        method: HttpMethods.GET,
       })
 
       return data
@@ -26,9 +25,8 @@ export const login = createAsyncThunk<LoginSuccess, LoginPayload>(
   'auth/login',
   async (arg, { rejectWithValue }) => {
     try {
-      const { data } = await httpClient<LoginSuccess, LoginPayload>({
+      const { data } = await httpClient.post<LoginPayload, LoginSuccess>({
         endpoint: Endpoints.LOGIN,
-        method: HttpMethods.POST,
         body: arg,
         useAuthorization: false,
       })
@@ -46,9 +44,8 @@ export const login = createAsyncThunk<LoginSuccess, LoginPayload>(
 
 export const logout = createAsyncThunk('auth/logout', async (_, { rejectWithValue }) => {
   try {
-    await httpClient({
+    await httpClient.delete({
       endpoint: Endpoints.LOGOUT,
-      method: HttpMethods.POST,
     })
 
     // remove access and refresh token in local machine

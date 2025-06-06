@@ -38,7 +38,6 @@
     "public",
     ".idea",
     "alias.mappings.json",
-    "src/main/experimental",
   ],
 }
 
