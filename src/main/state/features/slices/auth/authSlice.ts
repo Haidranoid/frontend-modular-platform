@@ -3,6 +3,12 @@ import { createBaseSlice } from '@utils/features/base-slice/baseSlice'
 import { Roles } from '@constants'
 import { login, logout, me } from './authThunks'
 import { User } from '@interfaces/users/users.types'
+import {
+  commonPendingMatcher,
+  commonRejectedMatcher,
+} from '@utils/features/async-matchers/asyncMatchersUtils'
+import { AnyAction } from '@reduxjs/toolkit'
+import { getErrorMessage } from '@utils/http-client/httpClientUtils'
 
 export interface AuthState {
   isAuthenticated: boolean
@@ -45,6 +51,14 @@ const authSlice = createBaseSlice({
     builder.addCase(logout.fulfilled, (state) => {
       state.isAuthenticated = false
       state.user = null
+    })
+    builder.addMatcher(commonPendingMatcher, (state) => {
+      state.loading = true
+      state.error = null
+    })
+    builder.addMatcher(commonRejectedMatcher, (state, action) => {
+      state.loading = false
+      state.error = getErrorMessage(action.error)
     })
   },
 })

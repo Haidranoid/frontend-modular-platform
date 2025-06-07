@@ -6,10 +6,11 @@ import {
   ActionReducerMapBuilder,
   CaseReducer,
   SliceSelectors,
+  AnyAction,
 } from '@reduxjs/toolkit'
 import {
-  commonPendingMatcher,
-  commonRejectedMatcher,
+  authPendingMatcher,
+  authRejectedMatcher,
 } from '@utils/features/async-matchers/asyncMatchersUtils'
 import { getErrorMessage } from '@utils/http-client/httpClientUtils'
 
@@ -64,14 +65,6 @@ export const createBaseSlice = <
     selectors: options.selectors,
     extraReducers: (builder) => {
       options.extraReducers?.(builder)
-      builder.addMatcher(commonPendingMatcher, (state) => {
-        state.loading = true
-        state.error = null
-      })
-      builder.addMatcher(commonRejectedMatcher, (state, action) => {
-        state.loading = false
-        state.error = getErrorMessage(action.payload)
-      })
     },
   })
 }
