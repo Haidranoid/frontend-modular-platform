@@ -10,19 +10,13 @@ export type Body = object | FormData | void
 export type Response = object | undefined
 
 export type HttpClientType = {
-  get: <R extends Response = Response>(
+  get: <R>(
     params: Omit<RequestParams<undefined>, 'method' | 'body'>,
   ) => Promise<AxiosResponse<R>>
-  post: <B extends Body = Body, R extends Response = Response>(
-    params: Omit<RequestParams<B>, 'method'>,
-  ) => Promise<AxiosResponse<R>>
-  put: <B extends Body = Body, R extends Response = Response>(
-    params: Omit<RequestParams<B>, 'method'>,
-  ) => Promise<AxiosResponse<R>>
-  patch: <B extends Body = Body, R extends Response = Response>(
-    params: Omit<RequestParams<B>, 'method'>,
-  ) => Promise<AxiosResponse<R>>
-  delete: <R extends Response = Response>(
+  post: <B, R>(params: Omit<RequestParams<B>, 'method'>) => Promise<AxiosResponse<R>>
+  put: <B, R>(params: Omit<RequestParams<B>, 'method'>) => Promise<AxiosResponse<R>>
+  patch: <B, R>(params: Omit<RequestParams<B>, 'method'>) => Promise<AxiosResponse<R>>
+  delete: <R>(
     params: Omit<RequestParams<undefined>, 'method' | 'body'>,
   ) => Promise<AxiosResponse<R>>
 }
