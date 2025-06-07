@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect'
-import { AppReducerState } from '@reducers/interfaces/app.reducer.types'
 
 // Base selector (raw data from state)
 const selectAuth = (state: AppReducerState) => state.auth

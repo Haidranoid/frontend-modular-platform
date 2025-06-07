@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Provider } from 'react-redux'
 import { RouterProvider } from 'react-router'
-import store from '@store/index'
+import store from '@store'
 import router from '@router'
 /*
 const App: FC = () => {

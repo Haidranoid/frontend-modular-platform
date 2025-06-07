@@ -1,8 +1,12 @@
 import { combineReducers } from 'redux'
-import { authReducer, initialAuthState, AuthState } from '@features/auth/authSlice'
-import { usersReducer, initialUsersState, UsersState } from '@features/users/usersSlice'
+import { authReducer, initialAuthState, AuthState } from '@features/slices/auth/authSlice'
+import {
+  usersReducer,
+  initialUsersState,
+  UsersState,
+} from '@features/slices/users/usersSlice'
 import { withBaseState } from '@utils/features/with-base-state/withBaseState'
-import { BaseState } from '@features/base-slice/baseSlice'
+import { BaseState } from '@utils/features/base-slice/baseSlice'
 
 export type InitialAppState = {
   auth: AuthState & BaseState

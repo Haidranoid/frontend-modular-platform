@@ -5,6 +5,7 @@ import {
   SliceCaseReducers,
   ActionReducerMapBuilder,
   CaseReducer,
+  SliceSelectors,
 } from '@reduxjs/toolkit'
 import {
   commonPendingMatcher,
@@ -26,37 +27,43 @@ interface ResetState<S> {
   resetState: CaseReducer<S>
 }
 
-interface Options<S, CR extends SliceCaseReducers<S & BaseState>> {
+interface Options<
+  S,
+  CR extends SliceCaseReducers<S & BaseState>,
+  Selectors extends SliceSelectors<S & BaseState>,
+> {
   name: string
   initialState: S
   reducers: CR
+  selectors?: Selectors
   extraReducers: (builder: ActionReducerMapBuilder<S & BaseState>) => void
 }
 
-type CreatBaseSlice = <S, CR extends SliceCaseReducers<S & BaseState>>(
-  options: Options<S, CR>,
-) => Slice<S & BaseState, CR & ResetState<S & BaseState>>
+export const createBaseSlice = <
+  S,
+  CR extends SliceCaseReducers<S & BaseState>,
+  Selectors extends SliceSelectors<S & BaseState>,
+  Name extends string = string,
+  CaseName extends string = string,
+>(
+  options: Options<S, CR, Selectors>,
+): Slice<S & BaseState, CR & ResetState<S & BaseState>, Name, CaseName, Selectors> => {
+  const baseInitialState = {
+    ...initialBaseState,
+    ...options.initialState,
+  }
 
-export const createBaseSlice: CreatBaseSlice = (options) => {
-  const { name, initialState, reducers, extraReducers } = options
   return createSlice({
-    name,
-    initialState: {
-      ...initialState,
-      ...initialBaseState,
-    },
+    name: options.name as Name,
+    initialState: baseInitialState,
     // @ts-ignore
     reducers: {
-      ...reducers,
-      resetState: () => {
-        return {
-          ...initialState,
-          ...initialBaseState,
-        }
-      },
+      ...options.reducers,
+      resetState: () => baseInitialState,
     },
+    selectors: options.selectors,
     extraReducers: (builder) => {
-      extraReducers?.(builder)
+      options.extraReducers?.(builder)
       builder.addMatcher(commonPendingMatcher, (state) => {
         state.loading = true
         state.error = null

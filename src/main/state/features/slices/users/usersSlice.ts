@@ -1,5 +1,5 @@
 // features/users/usersSlice.ts
-import { createBaseSlice } from '../base-slice/baseSlice'
+import { createBaseSlice } from '@utils/features/base-slice/baseSlice'
 import {
   createUser,
   deleteUser,
