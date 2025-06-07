@@ -11,25 +11,8 @@ import {
 } from '@state/users/actions/UsersActions.responses'
 import { DeleteUserRequestBody } from '@state/users/actions/UsersActions.payloads'
 
-export const mockAdminUser: User = {
-  id: 1,
-  email: 'admin@hotmail.com',
-  password: '',
-  firstName: 'Nelly',
-  lastName: 'Santollo',
-  role: UserRoles.ADMIN,
-}
 
-export const mockTeacherUser: User = {
-  id: 2,
-  email: 'teacher@hotmail.com',
-  password: '',
-  firstName: 'Carlos',
-  lastName: 'Cordoba',
-  role: UserRoles.TEACHER,
-}
-
-export const mockStudentUser: User = {
+export const studentUserFixture: User = {
   id: 3,
   email: 'student@hotmail.com',
   password: '',

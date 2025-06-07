@@ -33,6 +33,12 @@ const buildEndpoint: EndpointBuilder = (endpoint, queryParams, endpointVariables
   return `${withVars}${query}`
 }
 
+export const defaultHeaders: DefaultAxiosHeaders = {
+  'Device-Id': `${browserSecurityService.getBrowserFingerprint()}`,
+  'Access-Control-Allow-Origin': '*',
+  'Content-Type': 'application/json',
+}
+
 const buildAxiosConfig: AxiosConfigurationBuilder = (
   customHeaders = {},
   useDefaultHeaders = true,
@@ -42,9 +48,7 @@ const buildAxiosConfig: AxiosConfigurationBuilder = (
 
   if (useDefaultHeaders) {
     headers = {
-      'Device-Id': `${browserSecurityService.getBrowserFingerprint()}`,
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json',
+      ...defaultHeaders,
     }
   }
 
