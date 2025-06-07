@@ -4,7 +4,7 @@ import { GetMeSuccess } from '@interfaces/auth/responses/authResponses.types'
 import { LoginSuccess } from '@interfaces/auth/responses/authResponses.types'
 import { Endpoints } from '@constants'
 import httpClient from '@lib/http-client/httpClient'
-import AuthenticationService from '@lib/auth-service/AuthenticationService'
+import { authActions } from '@features/slices/auth/authSlice'
 
 export const me = createAsyncThunk<GetMeSuccess>(
   'auth/me',
@@ -23,7 +23,7 @@ export const me = createAsyncThunk<GetMeSuccess>(
 
 export const login = createAsyncThunk<LoginSuccess, LoginPayload>(
   'auth/login',
-  async (arg, { rejectWithValue }) => {
+  async (arg, { rejectWithValue, dispatch }) => {
     try {
       const { data } = await httpClient.post<LoginPayload, LoginSuccess>({
         endpoint: Endpoints.LOGIN,
@@ -31,9 +31,7 @@ export const login = createAsyncThunk<LoginSuccess, LoginPayload>(
         useAuthorization: false,
       })
 
-      const { accessToken, refreshToken } = data
-      // save access and refresh token in local machine
-      AuthenticationService.startSession(accessToken, refreshToken)
+      dispatch(authActions.startSession(data))
 
       return data
     } catch (e: unknown) {
@@ -42,15 +40,16 @@ export const login = createAsyncThunk<LoginSuccess, LoginPayload>(
   },
 )
 
-export const logout = createAsyncThunk('auth/logout', async (_, { rejectWithValue }) => {
-  try {
-    await httpClient.delete({
-      endpoint: Endpoints.LOGOUT,
-    })
-
-    // remove access and refresh token in local machine
-    AuthenticationService.closeSession()
-  } catch (e) {
-    return rejectWithValue(e)
-  }
-})
+export const logout = createAsyncThunk(
+  'auth/logout',
+  async (_, { rejectWithValue, dispatch }) => {
+    try {
+      await httpClient.delete({
+        endpoint: Endpoints.LOGOUT,
+      })
+      dispatch(authActions.closeSession())
+    } catch (e) {
+      return rejectWithValue(e)
+    }
+  },
+)

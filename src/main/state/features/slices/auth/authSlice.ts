@@ -7,8 +7,10 @@ import {
   commonPendingMatcher,
   commonRejectedMatcher,
 } from '@utils/features/async-matchers/asyncMatchersUtils'
-import { AnyAction } from '@reduxjs/toolkit'
+import AuthenticationService from '@lib/auth-service/AuthenticationService'
 import { getErrorMessage } from '@utils/http-client/httpClientUtils'
+import { PayloadAction } from '@reduxjs/toolkit'
+import { LoginSuccess } from '@interfaces/auth/responses/authResponses.types'
 
 export interface AuthState {
   isAuthenticated: boolean
@@ -30,14 +32,18 @@ export const initialAuthState: AuthState = {
 const authSlice = createBaseSlice({
   name: 'auth',
   initialState: initialAuthState,
-  reducers: {},
+  reducers: {
+    startSession: (state, action: PayloadAction<LoginSuccess>) => {
+      const { accessToken, refreshToken } = action.payload
+      AuthenticationService.startSession(accessToken, refreshToken)
+    },
+    closeSession: () => {
+      AuthenticationService.closeSession()
+    },
+  },
   selectors: {
     user: (state) => state.user,
     isAuthenticated: (state) => state.user !== null,
-    state: (state) => ({
-      loading: state.loading,
-      error: state.error,
-    }),
   },
   extraReducers: (builder) => {
     builder.addCase(me.fulfilled, (state, action) => {
@@ -63,7 +69,6 @@ const authSlice = createBaseSlice({
   },
 })
 
-const authActions = authSlice.actions
-const authReducer = authSlice.reducer
-
-export { authActions, authReducer }
+export const authActions = authSlice.actions
+export const authReducer = authSlice.reducer
+export const authSelectors = authSlice.selectors

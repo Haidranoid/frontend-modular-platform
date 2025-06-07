@@ -23,6 +23,14 @@ const usersSlice = createBaseSlice({
   name: 'users',
   initialState: initialUsersState,
   reducers: {},
+  selectors: {
+    users: (state) => state.users,
+    user: (state) => state.user,
+    flags: (state) => ({
+      loading: state.loading,
+      error: state.error,
+    }),
+  },
   extraReducers: (builder) => {
     builder.addCase(getAllUsers.fulfilled, (state, action) => {
       state.users = action.payload.users
@@ -44,7 +52,6 @@ const usersSlice = createBaseSlice({
   },
 })
 
-const usersActions = usersSlice.actions
-const usersReducer = usersSlice.reducer
-
-export { usersActions, usersReducer }
+export const usersActions = usersSlice.actions
+export const usersReducer = usersSlice.reducer
+export const usersSelectors = usersSlice.selectors

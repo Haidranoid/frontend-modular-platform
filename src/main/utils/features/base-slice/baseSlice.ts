@@ -6,13 +6,7 @@ import {
   ActionReducerMapBuilder,
   CaseReducer,
   SliceSelectors,
-  AnyAction,
 } from '@reduxjs/toolkit'
-import {
-  authPendingMatcher,
-  authRejectedMatcher,
-} from '@utils/features/async-matchers/asyncMatchersUtils'
-import { getErrorMessage } from '@utils/http-client/httpClientUtils'
 
 export interface BaseState {
   loading: boolean
