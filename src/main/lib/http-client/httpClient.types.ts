@@ -1,8 +1,8 @@
 import {
   AxiosRequestConfig,
-  RawAxiosRequestHeaders,
-  AxiosHeaders,
   AxiosResponse,
+  RawAxiosResponseHeaders,
+  AxiosResponseHeaders,
 } from 'axios'
 import { HttpMethods } from '@constants'
 
@@ -34,7 +34,7 @@ export type EndpointBuilder = (
   endpointVariables?: object,
 ) => string
 
-export type DefaultAxiosHeaders = RawAxiosRequestHeaders | typeof AxiosHeaders
+export type DefaultAxiosHeaders = RawAxiosResponseHeaders | AxiosResponseHeaders
 
 export type AxiosConfigurationBuilder = (
   customHeaders?: DefaultAxiosHeaders,
