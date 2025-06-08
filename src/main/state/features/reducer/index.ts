@@ -5,20 +5,28 @@ import {
   initialUsersState,
   UsersState,
 } from '@features/slices/users/usersSlice'
+import {
+  globalReducer,
+  initialGlobalState,
+  GlobalState,
+} from '@features/slices/global/globalSlice'
 import { withBaseState } from '@utils/features/with-base-state/withBaseState'
 import { BaseState } from '@utils/features/base-slice/baseSlice'
 
-export type InitialAppState = {
+export interface InitialAppState {
   auth: AuthState & BaseState
   users: UsersState & BaseState
+  global: GlobalState & BaseState
 }
 
 export const initialAppState: InitialAppState = {
   auth: withBaseState(initialAuthState),
   users: withBaseState(initialUsersState),
+  global: withBaseState(initialGlobalState),
 }
 
 export const appReducer = combineReducers({
   auth: authReducer,
   users: usersReducer,
+  global: globalReducer,
 })

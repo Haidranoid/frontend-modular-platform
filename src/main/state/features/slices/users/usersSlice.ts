@@ -26,10 +26,6 @@ const usersSlice = createBaseSlice({
   selectors: {
     users: (state) => state.users,
     user: (state) => state.user,
-    flags: (state) => ({
-      loading: state.loading,
-      error: state.error,
-    }),
   },
   extraReducers: (builder) => {
     builder.addCase(getAllUsers.fulfilled, (state, action) => {

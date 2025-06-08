@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { appReducer, initialAppState, InitialAppState } from '@features/reducer'
-import logger from 'redux-logger'
+import reduxLogger from '@utils/redux-logger/reduxLogger'
 
 export const configureAppStore = (preloadedState: InitialAppState = initialAppState) => {
   return configureStore({
     reducer: appReducer,
     preloadedState,
-    middleware: (gDM) => gDM().concat(logger),
+    middleware: (gDM) => gDM().concat(reduxLogger),
     devTools: {
       name: 'Redux Devtools',
       shouldHotReload: false,

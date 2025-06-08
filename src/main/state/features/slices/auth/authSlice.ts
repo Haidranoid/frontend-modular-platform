@@ -41,10 +41,6 @@ const authSlice = createBaseSlice({
       AuthenticationService.closeSession()
     },
   },
-  selectors: {
-    user: (state) => state.user,
-    isAuthenticated: (state) => state.user !== null,
-  },
   extraReducers: (builder) => {
     builder.addCase(me.fulfilled, (state, action) => {
       state.isAuthenticated = true
@@ -59,11 +55,11 @@ const authSlice = createBaseSlice({
       state.user = null
     })
     builder.addMatcher(commonPendingMatcher, (state) => {
-      state.loading = true
+      state.isLoading = true
       state.error = null
     })
     builder.addMatcher(commonRejectedMatcher, (state, action) => {
-      state.loading = false
+      state.isLoading = false
       state.error = getErrorMessage(action.error)
     })
   },
@@ -71,4 +67,3 @@ const authSlice = createBaseSlice({
 
 export const authActions = authSlice.actions
 export const authReducer = authSlice.reducer
-export const authSelectors = authSlice.selectors

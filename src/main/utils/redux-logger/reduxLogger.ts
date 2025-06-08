@@ -1,6 +1,5 @@
 import { createLogger } from 'redux-logger'
 import { Middleware } from 'redux'
-import { AppReducerState } from '../../state/reducers/interfaces/app.reducer.types'
 
 const reduxLogger = createLogger({
   collapsed: false,
@@ -9,4 +8,4 @@ const reduxLogger = createLogger({
   actionTransformer: (action) => JSON.parse(JSON.stringify(action)),
 })
 
-export default reduxLogger as Middleware<AppReducerState>
+export default reduxLogger as Middleware

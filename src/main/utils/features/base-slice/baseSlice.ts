@@ -1,64 +1,81 @@
-// utils/baseSlice.ts
 import {
-  createSlice,
-  Slice,
-  SliceCaseReducers,
   ActionReducerMapBuilder,
   CaseReducer,
+  createSlice,
+  Draft,
+  Slice,
+  SliceCaseReducers,
   SliceSelectors,
+  ValidateSliceCaseReducers,
 } from '@reduxjs/toolkit'
 
 export interface BaseState {
-  loading: boolean
+  isLoading: boolean
   error: Error | object | string | null
 }
 
 export const initialBaseState: BaseState = {
-  loading: false,
+  isLoading: false,
   error: null,
 }
 
-interface ResetState<S> {
-  resetState: CaseReducer<S>
+// 👇 Helper selector to inject
+function createFlagsSelector<S>() {
+  return (state: S & BaseState) => ({
+    isLoading: state.isLoading,
+    error: state.error,
+  })
 }
 
-interface Options<
-  S,
-  CR extends SliceCaseReducers<S & BaseState>,
-  Selectors extends SliceSelectors<S & BaseState>,
-> {
-  name: string
-  initialState: S
-  reducers: CR
-  selectors?: Selectors
-  extraReducers: (builder: ActionReducerMapBuilder<S & BaseState>) => void
-}
-
+// 👇 Options type declared in place
 export const createBaseSlice = <
   S,
   CR extends SliceCaseReducers<S & BaseState>,
   Selectors extends SliceSelectors<S & BaseState>,
   Name extends string = string,
   CaseName extends string = string,
->(
-  options: Options<S, CR, Selectors>,
-): Slice<S & BaseState, CR & ResetState<S & BaseState>, Name, CaseName, Selectors> => {
-  const baseInitialState = {
+>(options: {
+  name: Name
+  initialState: S
+  reducers: CR
+  selectors?: Selectors
+  extraReducers: (builder: ActionReducerMapBuilder<S & BaseState>) => void
+}): Slice<
+  S & BaseState,
+  CR & { resetState: CaseReducer<S & BaseState> },
+  Name,
+  CaseName,
+  Selectors & {
+    flags: ReturnType<typeof createFlagsSelector<S>>
+  }
+> => {
+  const baseInitialState: S & BaseState = {
     ...initialBaseState,
     ...options.initialState,
   }
 
-  return createSlice({
-    name: options.name as Name,
-    initialState: baseInitialState,
-    // @ts-ignore
-    reducers: {
-      ...options.reducers,
-      resetState: () => baseInitialState,
+  const reducers = {
+    ...options.reducers,
+    resetState: (state: Draft<S & BaseState>) => {
+      Object.assign(state, baseInitialState)
     },
-    selectors: options.selectors,
+  } as ValidateSliceCaseReducers<
+    S & BaseState,
+    CR & {
+      resetState: CaseReducer<S & BaseState>
+    }
+  >
+
+  return createSlice({
+    name: options.name,
+    initialState: baseInitialState,
+    reducers,
+    selectors: {
+      ...(options.selectors ?? {}),
+      flags: createFlagsSelector<S>(),
+    } as any,
     extraReducers: (builder) => {
-      options.extraReducers?.(builder)
+      options.extraReducers(builder)
     },
   })
 }
