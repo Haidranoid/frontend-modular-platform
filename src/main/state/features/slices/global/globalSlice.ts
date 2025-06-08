@@ -21,4 +21,3 @@ const globalSlice = createBaseSlice({
 
 export const globalActions = globalSlice.actions
 export const globalReducer = globalSlice.reducer
-export const globalSelectors = globalSlice.selectors

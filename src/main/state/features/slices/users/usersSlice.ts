@@ -50,4 +50,3 @@ const usersSlice = createBaseSlice({
 
 export const usersActions = usersSlice.actions
 export const usersReducer = usersSlice.reducer
-export const usersSelectors = usersSlice.selectors

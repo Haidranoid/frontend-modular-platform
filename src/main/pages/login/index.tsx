@@ -1,12 +1,9 @@
 import { FC, useEffect } from 'react'
-import { useActions } from '@hooks'
+import { useActions, useAppSelector } from '@hooks'
+import { usersSelectors } from '@selectors'
 
 const Login: FC = () => {
-  const { me } = useActions()
-
-  useEffect(() => {
-    me()
-  }, [])
+  const { users } = useAppSelector(usersSelectors.base)
 
   return <div data-testid="login-page">Login Page</div>
 }
