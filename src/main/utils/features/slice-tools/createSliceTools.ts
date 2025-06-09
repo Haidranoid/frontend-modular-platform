@@ -1,7 +1,7 @@
 // utils/createSliceTools.ts
 import { SliceNames } from '@constants'
 import { createThunk } from '@utils/features/thunks/createThunk'
-import type { ActionReducerMapBuilder } from '@reduxjs/toolkit'
+import type { ActionReducerMapBuilder, Draft, PayloadAction } from '@reduxjs/toolkit'
 import {
   isPendingGeneric,
   isRejectedGeneric,
@@ -14,7 +14,7 @@ function createSliceTools<TState, TApi extends Api>(
   slice: SliceNames,
   api: TApi,
   options?: {
-    onFulfilled?: OnFulfilledMap<TApi>
+    onFulfilled?: OnFulfilledMap<TState, TApi>
   },
 ) {
   const thunks = {} as {
@@ -35,11 +35,16 @@ function createSliceTools<TState, TApi extends Api>(
   )
 
   const extraReducers = (builder: ActionReducerMapBuilder<TState & BaseState>) => {
-    Object.entries(thunks).forEach(([key, thunk]) => {
+    ;(Object.keys(thunks) as (keyof TApi)[]).forEach((key) => {
+      const thunk = thunks[key]
       builder.addCase(thunk.fulfilled, (state, action) => {
         state.isLoading = false
         state.error = null
-        options?.onFulfilled?.[key as keyof TApi]?.(state, action)
+
+        options?.onFulfilled?.[key]?.(
+          state,
+          action as PayloadAction<Awaited<ReturnType<TApi[typeof key]>>>,
+        )
       })
     })
 

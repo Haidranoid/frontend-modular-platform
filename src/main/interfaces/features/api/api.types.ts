@@ -1,10 +1,11 @@
 // Para una API arbitraria
-import { PayloadAction } from '@reduxjs/toolkit'
+import { Draft, PayloadAction } from '@reduxjs/toolkit'
 import {
   GetMeSuccess,
   LoginSuccess,
 } from '@interfaces/auth/responses/authResponses.types'
 import { LoginPayload } from '@interfaces/auth/payloads/authPayloads.types'
+import { BaseState } from '@utils/features/base-slice/baseSlice'
 
 export type Api = {
   [K in string]: (arg?: any) => Promise<any>
@@ -24,6 +25,9 @@ export interface CrudApi<T> extends Api {
   delete: (id: number) => Promise<void>
 }
 
-export type OnFulfilledMap<TApi extends Api> = {
-  [K in keyof TApi]?: (state: any, action: PayloadAction<any>) => void
+export type OnFulfilledMap<TState, TApi extends Api> = {
+  [K in keyof TApi]?: (
+    state: Draft<TState & BaseState>,
+    action: PayloadAction<Awaited<ReturnType<TApi[K]>>>,
+  ) => void
 }

@@ -2,28 +2,35 @@
 import { SliceNames } from '@constants'
 import createSliceTools from '@utils/features/slice-tools/createSliceTools'
 import usersApi from './usersApi'
+import { UsersState } from '@features/slices/users/usersSlice'
+import { CrudApi } from '@interfaces/features/api/api.types'
+import { User } from '@interfaces/users/users.types'
 
-const usersTools = createSliceTools(SliceNames.Users, usersApi, {
-  onFulfilled: {
-    fetchAll: (state, action) => {
-      state.users = action.payload.users
-    },
-    fetchById: (state, action) => {
-      state.user = action.payload.user
-    },
-    create: (state, action) => {
-      state.users.push(action.payload.user)
-    },
-    update: (state, action) => {
-      state.users = state.users.map((user) =>
-        user.id === action.payload.user.id ? action.payload.user : user,
-      )
-    },
-    delete: () => {
-      //state.users = state.users.filter((user) => user.id !== action.payload.userId)
+const usersTools = createSliceTools<UsersState, CrudApi<User>>(
+  SliceNames.Users,
+  usersApi,
+  {
+    onFulfilled: {
+      fetchAll: (state, action) => {
+        state.users = action.payload
+      },
+      fetchById: (state, action) => {
+        state.user = action.payload
+      },
+      create: (state, action) => {
+        state.users.push(action.payload)
+      },
+      update: (state, action) => {
+        state.users = state.users.map((user) =>
+          user.id === action.payload.id ? action.payload : user,
+        )
+      },
+      delete: () => {
+        //state.users = state.users.filter((user) => user.id !== action.payload.userId)
+      },
     },
   },
-})
+)
 
 const usersThunks = usersTools.thunks
 
