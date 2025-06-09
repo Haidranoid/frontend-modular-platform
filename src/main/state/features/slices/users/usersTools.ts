@@ -25,4 +25,7 @@ const usersTools = createSliceTools(SliceNames.Users, usersApi, {
   },
 })
 
+const usersThunks = usersTools.thunks
+
+export { usersThunks }
 export default usersTools
