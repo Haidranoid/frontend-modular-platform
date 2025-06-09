@@ -1,7 +1,7 @@
 import { FC } from 'react'
 
-const Singup: FC = () => {
+const Signup: FC = () => {
   return <div data-testid="signup-page">Signup Page</div>
 }
 
-export default Singup
+export default Signup

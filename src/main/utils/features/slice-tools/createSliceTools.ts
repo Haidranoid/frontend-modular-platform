@@ -1,15 +1,16 @@
 // utils/createSliceTools.ts
 import { SliceNames } from '@constants'
 import { createThunk } from '@utils/features/thunks/createThunk'
-import type { ActionReducerMapBuilder, AsyncThunk } from '@reduxjs/toolkit'
+import type { ActionReducerMapBuilder } from '@reduxjs/toolkit'
 import {
   isPendingGeneric,
   isRejectedGeneric,
 } from '@utils/features/matchers/matchersUtils'
 import { getErrorMessage } from '@utils/http-client/httpClientUtils'
-import { Api, OnFulfilledMap } from '@interfaces/features/api.types'
+import { Api, OnFulfilledMap } from '@interfaces/features/api/api.types'
+import { BaseState } from '@utils/features/base-slice/baseSlice'
 
-function createSliceTools<TApi extends Api>(
+function createSliceTools<TState, TApi extends Api>(
   slice: SliceNames,
   api: TApi,
   options?: {
@@ -17,7 +18,7 @@ function createSliceTools<TApi extends Api>(
   },
 ) {
   const thunks = {} as {
-    [K in keyof TApi]: AsyncThunk<unknown, object | undefined, object>
+    [K in keyof TApi]: ReturnType<typeof createThunk>
   }
 
   for (const key in api) {
@@ -33,22 +34,22 @@ function createSliceTools<TApi extends Api>(
     {} as Record<keyof TApi, string>,
   )
 
-  const extraReducers = (builder: ActionReducerMapBuilder<any>) => {
+  const extraReducers = (builder: ActionReducerMapBuilder<TState & BaseState>) => {
     Object.entries(thunks).forEach(([key, thunk]) => {
       builder.addCase(thunk.fulfilled, (state, action) => {
-        state.loading = false
+        state.isLoading = false
         state.error = null
         options?.onFulfilled?.[key as keyof TApi]?.(state, action)
       })
     })
 
-    builder.addMatcher(isPendingGeneric, (state) => {
-      state.loading = true
+    builder.addMatcher(isPendingGeneric(slice), (state) => {
+      state.isLoading = true
       state.error = null
     })
 
-    builder.addMatcher(isRejectedGeneric, (state, action) => {
-      state.loading = false
+    builder.addMatcher(isRejectedGeneric(slice), (state, action) => {
+      state.isLoading = false
       state.error = getErrorMessage(action)
     })
   }

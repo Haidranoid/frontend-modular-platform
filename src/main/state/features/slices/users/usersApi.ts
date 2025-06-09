@@ -1,6 +1,6 @@
 import httpClient from '@lib/http-client/httpClient'
 import { Endpoints } from '@constants'
-import { CrudApi } from '@interfaces/features/api.types'
+import { CrudApi } from '@interfaces/features/api/api.types'
 import { User } from '@interfaces/users/users.types'
 import {
   CreateUserSuccess,
@@ -39,12 +39,12 @@ const usersApi: CrudApi<User> = {
 
     return data
   },
-  update: async (id, payload) => {
+  update: async (payload) => {
     const { data } = await httpClient.patch<UpdateUserPayload, UpdateUserSuccess>({
       endpoint: Endpoints.UPDATE_USER,
       body: payload,
       endpointVariables: {
-        userId: id,
+        userId: payload.id,
       },
     })
 

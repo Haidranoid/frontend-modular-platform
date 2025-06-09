@@ -1,6 +1,4 @@
-// features/auth/authSlice.ts
 import { createBaseSlice } from '@utils/features/base-slice/baseSlice'
-import { Roles } from '@constants'
 import { User } from '@interfaces/users/users.types'
 import authTools from '@features/slices/auth/authTools'
 
@@ -11,14 +9,7 @@ export interface AuthState {
 
 export const initialAuthState: AuthState = {
   isAuthenticated: false,
-  user: {
-    id: 1,
-    email: '',
-    firstName: '',
-    lastName: '',
-    password: '',
-    role: Roles.ADMIN,
-  },
+  user: null,
 }
 
 const authSlice = createBaseSlice({

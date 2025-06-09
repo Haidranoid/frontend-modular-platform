@@ -21,8 +21,8 @@ export const rebootMatcher = (action: Action) =>
 export const shutdownMatcher = (action: Action) =>
   action.type.startsWith(`${SliceNames.Global}/`) && isFulfilled(action)
 
-export const isPendingGeneric = (action: Action) =>
-  isPending(action) || action.type.endsWith('/pending')
+export const isPendingGeneric = (slice: string) => (action: Action) =>
+  action.type.startsWith(`${slice}/`) && action.type.endsWith('/pending')
 
-export const isRejectedGeneric = (action: Action) =>
-  isRejected(action) || action.type.endsWith('/rejected')
+export const isRejectedGeneric = (slice: string) => (action: Action) =>
+  action.type.startsWith(`${slice}/`) && action.type.endsWith('/rejected')

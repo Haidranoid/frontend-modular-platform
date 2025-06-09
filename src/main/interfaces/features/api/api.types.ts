@@ -1,8 +1,19 @@
 // Para una API arbitraria
 import { PayloadAction } from '@reduxjs/toolkit'
+import {
+  GetMeSuccess,
+  LoginSuccess,
+} from '@interfaces/auth/responses/authResponses.types'
+import { LoginPayload } from '@interfaces/auth/payloads/authPayloads.types'
 
 export type Api = {
   [K in string]: (arg?: any) => Promise<any>
+}
+
+export interface AuthApi extends Api {
+  me: () => Promise<GetMeSuccess>
+  login: (credentials: LoginPayload) => Promise<LoginSuccess>
+  logout: () => Promise<void>
 }
 
 export interface CrudApi<T> extends Api {
