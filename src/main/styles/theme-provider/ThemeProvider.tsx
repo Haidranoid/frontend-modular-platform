@@ -1,25 +1,28 @@
-import React, { FC } from 'react'
-import { createTheme, ThemeProvider as ThemeProviderMUI } from '@mui/material/styles'
-
-export const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#1A88E5',
-      //main: '#0d3d63',
-    },
-    secondary: {
-      main: '#1a64e5',
-    },
-    mode: 'dark',
-  },
-})
+import React, { useState } from 'react'
+import { ThemeProvider as ThemeProviderStyled } from 'styled-components'
+import { GlobalStyle } from './global-style/GlobalStyle'
+import { ThemeMode, ThemeModeContext } from './hooks/useThemeMode'
+import { lightTheme, darkTheme } from './themes/themes'
 
 interface ThemeProviderProps {
   children: React.ReactNode
 }
 
-const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
-  return <ThemeProviderMUI theme={theme}>{children}</ThemeProviderMUI>
-}
+export const ThemeProvider: React.FC<ThemeProviderProps> = (props) => {
+  const [mode, setMode] = useState<ThemeMode>('light')
 
-export default ThemeProvider
+  const toggle = () => {
+    setMode((prev) => (prev === 'light' ? 'dark' : 'light'))
+  }
+
+  const theme = mode === 'light' ? lightTheme : darkTheme
+
+  return (
+    <ThemeModeContext.Provider value={{ mode, toggle }}>
+      <ThemeProviderStyled theme={theme}>
+        <GlobalStyle />
+        {props.children}
+      </ThemeProviderStyled>
+    </ThemeModeContext.Provider>
+  )
+}
