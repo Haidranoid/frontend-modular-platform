@@ -13,9 +13,7 @@ import { BaseState } from '@utils/features/base-slice/baseSlice'
 function createSliceTools<TState, TApi extends Api>(
   slice: SliceNames,
   api: TApi,
-  options?: {
-    onFulfilled?: OnFulfilledMap<TState, TApi>
-  },
+  onFulfilledMap: OnFulfilledMap<TState, TApi> | null,
 ) {
   const thunks = {} as {
     [K in keyof TApi]: ReturnType<typeof createThunk>
@@ -41,7 +39,7 @@ function createSliceTools<TState, TApi extends Api>(
         state.isLoading = false
         state.error = null
 
-        options?.onFulfilled?.[key]?.(
+        onFulfilledMap?.[key]?.(
           state,
           action as PayloadAction<Awaited<ReturnType<TApi[typeof key]>>>,
         )

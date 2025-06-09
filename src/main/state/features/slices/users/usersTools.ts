@@ -10,24 +10,22 @@ const usersTools = createSliceTools<UsersState, CrudApi<User>>(
   SliceNames.Users,
   usersApi,
   {
-    onFulfilled: {
-      fetchAll: (state, action) => {
-        state.users = action.payload
-      },
-      fetchById: (state, action) => {
-        state.user = action.payload
-      },
-      create: (state, action) => {
-        state.users.push(action.payload)
-      },
-      update: (state, action) => {
-        state.users = state.users.map((user) =>
-          user.id === action.payload.id ? action.payload : user,
-        )
-      },
-      delete: () => {
-        //state.users = state.users.filter((user) => user.id !== action.payload.userId)
-      },
+    fetchAll: (state, action) => {
+      state.users = action.payload
+    },
+    fetchById: (state, action) => {
+      state.user = action.payload
+    },
+    create: (state, action) => {
+      state.users.push(action.payload)
+    },
+    update: (state, action) => {
+      state.users = state.users.map((user) =>
+        user.id === action.payload.id ? action.payload : user,
+      )
+    },
+    delete: () => {
+      //state.users = state.users.filter((user) => user.id !== action.payload.userId)
     },
   },
 )
