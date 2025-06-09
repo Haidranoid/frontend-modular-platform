@@ -15,7 +15,9 @@ export type HttpClientType = {
   ) => Promise<AxiosResponse<R>>
   post: <B, R>(params: Omit<RequestParams<B>, 'method'>) => Promise<AxiosResponse<R>>
   put: <B, R>(params: Omit<RequestParams<B>, 'method'>) => Promise<AxiosResponse<R>>
-  patch: <B, R>(params: Omit<RequestParams<B>, 'method'>) => Promise<AxiosResponse<R>>
+  patch: <B, R>(
+    params: Omit<RequestParams<Partial<B>>, 'method'>,
+  ) => Promise<AxiosResponse<R>>
   delete: <R>(
     params: Omit<RequestParams<undefined>, 'method' | 'body'>,
   ) => Promise<AxiosResponse<R>>

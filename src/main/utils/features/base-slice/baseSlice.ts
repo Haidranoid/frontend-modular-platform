@@ -1,10 +1,6 @@
-import {
-  ActionReducerMapBuilder,
-  createSlice,
-  Slice,
-  SliceCaseReducers,
-  SliceSelectors,
-} from '@reduxjs/toolkit'
+import { CaseReducer, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { rebootMatcher } from '@utils/features/matchers/matchersUtils'
+import { SliceNames } from '@constants'
 
 export interface BaseState {
   isLoading: boolean
@@ -16,32 +12,34 @@ export const initialBaseState: BaseState = {
   error: null,
 }
 
-// 👇 Options type declared in place
-export const createBaseSlice = <
-  S,
-  CR extends SliceCaseReducers<S & BaseState>,
-  Selectors extends SliceSelectors<S & BaseState>,
-  Name extends string = string,
-  CaseName extends string = string,
->(options: {
+type Options<S, CR, Name> = {
   name: Name
   initialState: S
   reducers: CR
-  selectors?: Selectors
-  extraReducers: (builder: ActionReducerMapBuilder<S & BaseState>) => void
-}): Slice<S & BaseState, CR, Name, CaseName, Selectors> => {
-  const baseInitialState = {
+  extraReducers?: (builder: any) => void
+}
+
+export const createBaseSlice = <
+  S,
+  CR extends Record<string, CaseReducer<S & BaseState, PayloadAction<any>>>,
+  Name extends SliceNames,
+>(
+  options: Options<S, CR, Name>,
+) => {
+  const baseInitialState: S & BaseState = {
     ...initialBaseState,
     ...options.initialState,
   }
 
+  //CR extends SliceCaseReducers<S & BaseState>,
   return createSlice({
     name: options.name,
     initialState: baseInitialState,
     //@ts-ignore
     reducers: options.reducers,
     extraReducers: (builder) => {
-      options.extraReducers(builder)
+      options.extraReducers?.(builder)
+      builder.addMatcher(rebootMatcher, () => baseInitialState)
     },
   })
 }

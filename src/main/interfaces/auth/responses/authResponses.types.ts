@@ -1,14 +1,9 @@
 import { User } from '@interfaces/users/users.types'
 
-export interface GetMeSuccess {
-  user: User
-}
+export type GetMeSuccess = User
 
-export interface Tokens {
+export interface LoginSuccess {
   accessToken: string
   refreshToken: string
-}
-
-export interface LoginSuccess extends Tokens {
   user: User
 }

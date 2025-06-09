@@ -3,7 +3,7 @@ import { useActions, useAppSelector } from '@hooks'
 import { authSelectors } from '@selectors'
 
 const Home: FC = () => {
-  const { me } = useActions()
+  const {} = useActions()
   const { isLoading, error } = useAppSelector(authSelectors.status)
 
   console.log({ isLoading, error })

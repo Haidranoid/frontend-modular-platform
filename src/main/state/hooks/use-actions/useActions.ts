@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { AppDispatch } from '@store'
-import * as thunks from '@features/thunks'
+import thunks from '@features/thunks'
 
 export const useAppDispatch = useDispatch.withTypes<AppDispatch>()
 

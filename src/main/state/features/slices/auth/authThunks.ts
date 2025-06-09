@@ -4,7 +4,7 @@ import { GetMeSuccess } from '@interfaces/auth/responses/authResponses.types'
 import { LoginSuccess } from '@interfaces/auth/responses/authResponses.types'
 import { Endpoints } from '@constants'
 import httpClient from '@lib/http-client/httpClient'
-import { authActions } from '@features/slices/auth/authSlice'
+import AuthenticationService from '@lib/auth-service/AuthenticationService'
 
 export const me = createAsyncThunk<GetMeSuccess>(
   'auth/me',
@@ -31,7 +31,7 @@ export const login = createAsyncThunk<LoginSuccess, LoginPayload>(
         useAuthorization: false,
       })
 
-      dispatch(authActions.startSession(data))
+      AuthenticationService.startSession(data.accessToken, data.refreshToken)
 
       return data
     } catch (e: unknown) {
@@ -47,7 +47,7 @@ export const logout = createAsyncThunk(
       await httpClient.delete({
         endpoint: Endpoints.LOGOUT,
       })
-      dispatch(authActions.closeSession())
+      AuthenticationService.closeSession()
     } catch (e) {
       return rejectWithValue(e)
     }

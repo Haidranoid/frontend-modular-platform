@@ -1,21 +1,11 @@
 import { User } from '../users.types'
 
-export interface GetAllUsersSuccess {
-  users: User[]
-}
+export type GetAllUsersSuccess = User[]
 
-export interface GetUserSuccess {
-  user: User
-}
+export type GetUserSuccess = User
 
-export interface CreateUserSuccess {
-  user: User
-}
+export type CreateUserSuccess = User
 
-export interface UpdateUserSuccess {
-  user: User
-}
+export type UpdateUserSuccess = User
 
-export interface DeleteUserSuccess {
-  userId: number
-}
+export type DeleteUserSuccess = void
