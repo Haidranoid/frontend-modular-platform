@@ -20,8 +20,6 @@ const selectAuthStatus = createSelector(
 export const authSelectors = {
   base: selectAuth,
   user: selectAuthUser,
-  loading: selectAuthIsLoading,
-  error: selectAuthError,
   isAuthenticated: selectIsAuthenticated,
   status: selectAuthStatus,
 }

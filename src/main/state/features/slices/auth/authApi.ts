@@ -6,7 +6,6 @@ import {
 } from '@interfaces/auth/responses/authResponses.types'
 import { Endpoints } from '@constants'
 import { LoginPayload } from '@interfaces/auth/payloads/authPayloads.types'
-import AuthenticationService from '@lib/auth-service/AuthenticationService'
 
 const authApi: AuthApi = {
   me: async () => {
@@ -15,25 +14,16 @@ const authApi: AuthApi = {
     })
   },
   login: async (credentials) => {
-    const loginSuccess = await httpClient.post<LoginPayload, LoginSuccess>({
+    return await httpClient.post<LoginPayload, LoginSuccess>({
       endpoint: Endpoints.LOGIN,
       body: credentials,
       useAuthorization: false,
     })
-
-    AuthenticationService.startSession(
-      loginSuccess.accessToken,
-      loginSuccess.refreshToken,
-    )
-
-    return loginSuccess
   },
   logout: async () => {
-    await httpClient.delete({
+    return await httpClient.delete({
       endpoint: Endpoints.LOGOUT,
     })
-
-    AuthenticationService.closeSession()
   },
 }
 
