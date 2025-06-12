@@ -1,7 +1,7 @@
 // utils/createSliceTools.ts
 import { SliceNames } from '@constants'
 import { createThunk } from '@utils/features/thunks/createThunk'
-import type { ActionReducerMapBuilder, Draft, PayloadAction } from '@reduxjs/toolkit'
+import type { ActionReducerMapBuilder, PayloadAction } from '@reduxjs/toolkit'
 import {
   isPendingGeneric,
   isRejectedGeneric,

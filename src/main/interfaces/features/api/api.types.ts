@@ -25,9 +25,17 @@ export interface CrudApi<T> extends Api {
   delete: (id: number) => Promise<void>
 }
 
+/*
 export type OnFulfilledMap<TState, TApi extends Api> = {
   [K in keyof TApi]?: (
     state: Draft<TState & BaseState>,
+    action: PayloadAction<Awaited<ReturnType<TApi[K]>>>,
+  ) => void
+}*/
+
+export type OnFulfilledMap<TState, TApi extends Api> = {
+  [K in keyof TApi]?: (
+    state: TState,
     action: PayloadAction<Awaited<ReturnType<TApi[K]>>>,
   ) => void
 }

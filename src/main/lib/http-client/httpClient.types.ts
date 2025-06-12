@@ -10,17 +10,11 @@ export type Body = object | FormData | void
 export type Response = object | undefined
 
 export type HttpClientType = {
-  get: <R>(
-    params: Omit<RequestParams<undefined>, 'method' | 'body'>,
-  ) => Promise<AxiosResponse<R>>
-  post: <B, R>(params: Omit<RequestParams<B>, 'method'>) => Promise<AxiosResponse<R>>
-  put: <B, R>(params: Omit<RequestParams<B>, 'method'>) => Promise<AxiosResponse<R>>
-  patch: <B, R>(
-    params: Omit<RequestParams<Partial<B>>, 'method'>,
-  ) => Promise<AxiosResponse<R>>
-  delete: <R>(
-    params: Omit<RequestParams<undefined>, 'method' | 'body'>,
-  ) => Promise<AxiosResponse<R>>
+  get: <R>(params: Omit<RequestParams<undefined>, 'method' | 'body'>) => Promise<R>
+  post: <B, R>(params: Omit<RequestParams<B>, 'method'>) => Promise<R>
+  put: <B, R>(params: Omit<RequestParams<B>, 'method'>) => Promise<R>
+  patch: <B, R>(params: Omit<RequestParams<Partial<B>>, 'method'>) => Promise<R>
+  delete: <R>(params: Omit<RequestParams<undefined>, 'method' | 'body'>) => Promise<R>
 }
 
 export type GenerateQueryParams = (queryParams: object | undefined) => string
@@ -54,4 +48,5 @@ export interface RequestParams<B> {
   useAuthorization?: boolean
   customHeaders?: DefaultAxiosHeaders
   axiosRequestConfig?: AxiosRequestConfig
+  returnFullResponse?: boolean
 }

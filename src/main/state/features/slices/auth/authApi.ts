@@ -8,33 +8,25 @@ import { Endpoints } from '@constants'
 import { LoginPayload } from '@interfaces/auth/payloads/authPayloads.types'
 import AuthenticationService from '@lib/auth-service/AuthenticationService'
 
-/*const authApi = {
-  me: async (): Promise<GetMeSuccess> => { ... },
-  login: async (payload: LoginPayload): Promise<LoginSuccess> => { ... },
-  logout: async (): Promise<void> => { ... }
-}
-
-type AuthApi = typeof authApi
-*/
-
 const authApi: AuthApi = {
   me: async () => {
-    const { data } = await httpClient.get<GetMeSuccess>({
+    return await httpClient.get<GetMeSuccess>({
       endpoint: Endpoints.ME,
     })
-
-    return data
   },
   login: async (credentials) => {
-    const { data } = await httpClient.post<LoginPayload, LoginSuccess>({
+    const loginSuccess = await httpClient.post<LoginPayload, LoginSuccess>({
       endpoint: Endpoints.LOGIN,
       body: credentials,
       useAuthorization: false,
     })
 
-    AuthenticationService.startSession(data.accessToken, data.refreshToken)
+    AuthenticationService.startSession(
+      loginSuccess.accessToken,
+      loginSuccess.refreshToken,
+    )
 
-    return data
+    return loginSuccess
   },
   logout: async () => {
     await httpClient.delete({

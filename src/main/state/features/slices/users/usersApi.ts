@@ -4,54 +4,47 @@ import { CrudApi } from '@interfaces/features/api/api.types'
 import { User } from '@interfaces/users/users.types'
 import {
   CreateUserSuccess,
+  DeleteUserSuccess,
   GetAllUsersSuccess,
   GetUserSuccess,
   UpdateUserSuccess,
 } from '@interfaces/users/responses/usersResponses.types'
 import {
   CreateUserPayload,
-  DeleteUserPayload,
   UpdateUserPayload,
 } from '@interfaces/users/payloads/usersPayloads.types'
 
 const usersApi: CrudApi<User> = {
   fetchAll: async () => {
-    const { data } = await httpClient.get<GetAllUsersSuccess>({
+    return await httpClient.get<GetAllUsersSuccess>({
       endpoint: Endpoints.GET_USERS,
     })
-
-    return data
   },
   fetchById: async (id) => {
-    const { data } = await httpClient.get<GetUserSuccess>({
+    return await httpClient.get<GetUserSuccess>({
       endpoint: Endpoints.GET_USER,
       endpointVariables: {
         userId: id,
       },
     })
-    return data
   },
   create: async (payload) => {
-    const { data } = await httpClient.post<CreateUserPayload, CreateUserSuccess>({
+    return await httpClient.post<CreateUserPayload, CreateUserSuccess>({
       endpoint: Endpoints.CREATE_USER,
       body: payload,
     })
-
-    return data
   },
   update: async (payload) => {
-    const { data } = await httpClient.patch<UpdateUserPayload, UpdateUserSuccess>({
+    return await httpClient.patch<UpdateUserPayload, UpdateUserSuccess>({
       endpoint: Endpoints.UPDATE_USER,
       body: payload,
       endpointVariables: {
         userId: payload.id,
       },
     })
-
-    return data
   },
   delete: async (id) => {
-    await httpClient.delete<DeleteUserPayload>({
+    await httpClient.delete<DeleteUserSuccess>({
       endpoint: Endpoints.DELETE_USER,
       endpointVariables: {
         userId: id,

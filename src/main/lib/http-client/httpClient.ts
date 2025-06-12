@@ -4,12 +4,12 @@ import { HttpMethods } from '@constants'
 import browserSecurityService from '@lib/security-service/SecurityService'
 import AuthenticationService from '@lib/auth-service/AuthenticationService'
 import {
-  HttpClientType,
-  GenerateQueryParams,
-  ReplaceEndpointVariables,
-  EndpointBuilder,
-  DefaultAxiosHeaders,
   AxiosConfigurationBuilder,
+  DefaultAxiosHeaders,
+  EndpointBuilder,
+  GenerateQueryParams,
+  HttpClientType,
+  ReplaceEndpointVariables,
   RequestParams,
 } from './httpClient.types'
 
@@ -80,18 +80,15 @@ async function request<R, B>({
   const finalUrl = buildEndpoint(endpoint, queryParams, endpointVariables)
   const config = buildAxiosConfig(customHeaders, useDefaultHeaders, useAuthorization)
 
-  switch (method) {
-    case HttpMethods.GET:
-      return axiosInstance.get<R>(finalUrl, config)
-    case HttpMethods.POST:
-      return axiosInstance.post<R>(finalUrl, body, config)
-    case HttpMethods.PUT:
-      return axiosInstance.put<R>(finalUrl, body, config)
-    case HttpMethods.PATCH:
-      return axiosInstance.patch<R>(finalUrl, body, config)
-    case HttpMethods.DELETE:
-      return axiosInstance.delete<R>(finalUrl, config)
+  const axiosMethods = {
+    [HttpMethods.GET]: () => axiosInstance.get<undefined, R>(finalUrl, config),
+    [HttpMethods.POST]: () => axiosInstance.post<B, R>(finalUrl, body, config),
+    [HttpMethods.PUT]: () => axiosInstance.put<B, R>(finalUrl, body, config),
+    [HttpMethods.PATCH]: () => axiosInstance.patch<B, R>(finalUrl, body, config),
+    [HttpMethods.DELETE]: () => axiosInstance.delete<undefined, R>(finalUrl, config),
   }
+
+  return await axiosMethods[method]()
 }
 
 // ========== Public API ==========
