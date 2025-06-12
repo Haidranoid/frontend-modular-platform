@@ -10,7 +10,7 @@ export const me = createAsyncThunk<GetMeSuccess>(
   'auth/me',
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await httpClient.get<GetMeSuccess>({
+      const data = await httpClient.get<GetMeSuccess>({
         endpoint: Endpoints.ME,
       })
 
@@ -25,7 +25,7 @@ export const login = createAsyncThunk<LoginSuccess, LoginPayload>(
   'auth/login',
   async (arg, { rejectWithValue }) => {
     try {
-      const { data } = await httpClient.post<LoginPayload, LoginSuccess>({
+      const data = await httpClient.post<LoginPayload, LoginSuccess>({
         endpoint: Endpoints.LOGIN,
         body: arg,
         useAuthorization: false,

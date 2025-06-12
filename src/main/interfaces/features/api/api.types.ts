@@ -1,10 +1,11 @@
-// Para una API arbitraria
-import { PayloadAction } from '@reduxjs/toolkit'
+// api.types.ts
+import { Draft, PayloadAction } from '@reduxjs/toolkit'
 import {
   GetMeSuccess,
   LoginSuccess,
 } from '@interfaces/auth/responses/authResponses.types'
 import { LoginPayload } from '@interfaces/auth/payloads/authPayloads.types'
+import { BaseState } from '@utils/features/base-slice/baseSlice'
 
 export type Api = {
   [K in string]: (arg?: any) => Promise<any>
@@ -34,7 +35,7 @@ export type OnFulfilledMap<TState, TApi extends Api> = {
 
 export type OnFulfilledMap<TState, TApi extends Api> = {
   [K in keyof TApi]?: (
-    state: TState,
+    state: Draft<TState & BaseState>,
     action: PayloadAction<Awaited<ReturnType<TApi[K]>>>,
   ) => void
 }
