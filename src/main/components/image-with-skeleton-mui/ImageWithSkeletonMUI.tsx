@@ -8,7 +8,7 @@ interface ImageWithSkeletonMUI {
   title: string
 }
 
-const Skeleton: FC<{ width: string; height: string }> = ({ width, height }) => <div />
+const Skeleton: FC<{ width: string; height: string }> = () => <div />
 const ImageWithSkeletonMUI: FC<ImageWithSkeletonMUI> = ({ url, title }) => {
   const [loaded, setLoaded] = useState(false)
   const [error, setError] = useState(false)

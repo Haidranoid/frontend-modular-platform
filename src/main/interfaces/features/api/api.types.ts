@@ -1,11 +1,10 @@
 // Para una API arbitraria
-import { Draft, PayloadAction } from '@reduxjs/toolkit'
+import { PayloadAction } from '@reduxjs/toolkit'
 import {
   GetMeSuccess,
   LoginSuccess,
 } from '@interfaces/auth/responses/authResponses.types'
 import { LoginPayload } from '@interfaces/auth/payloads/authPayloads.types'
-import { BaseState } from '@utils/features/base-slice/baseSlice'
 
 export type Api = {
   [K in string]: (arg?: any) => Promise<any>

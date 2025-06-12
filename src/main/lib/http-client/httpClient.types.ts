@@ -1,9 +1,4 @@
-import {
-  AxiosRequestConfig,
-  AxiosResponse,
-  RawAxiosResponseHeaders,
-  AxiosResponseHeaders,
-} from 'axios'
+import { AxiosRequestConfig, RawAxiosResponseHeaders, AxiosResponseHeaders } from 'axios'
 import { HttpMethods } from '@constants'
 
 export type Body = object | FormData | void

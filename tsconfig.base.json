@@ -74,5 +74,6 @@
     ".idea",
     "alias.mappings.json",
     "src/main/experimental",
+    "src/main/legacy",
   ]
 }

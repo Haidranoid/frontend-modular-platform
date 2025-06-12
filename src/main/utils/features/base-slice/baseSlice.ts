@@ -15,7 +15,7 @@ export const initialBaseState: BaseState = {
 type Options<S, CR, Name> = {
   name: Name
   initialState: S
-  reducers: CR
+  reducers?: CR
   extraReducers?: (builder: any) => void
 }
 
@@ -36,7 +36,7 @@ export const createBaseSlice = <
     name: options.name,
     initialState: baseInitialState,
     //@ts-ignore
-    reducers: options.reducers,
+    reducers: options.reducers ? options.reducers : {},
     extraReducers: (builder) => {
       options.extraReducers?.(builder)
       builder.addMatcher(rebootMatcher, () => baseInitialState)

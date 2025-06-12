@@ -23,7 +23,7 @@ export const me = createAsyncThunk<GetMeSuccess>(
 
 export const login = createAsyncThunk<LoginSuccess, LoginPayload>(
   'auth/login',
-  async (arg, { rejectWithValue, dispatch }) => {
+  async (arg, { rejectWithValue }) => {
     try {
       const { data } = await httpClient.post<LoginPayload, LoginSuccess>({
         endpoint: Endpoints.LOGIN,
@@ -40,16 +40,13 @@ export const login = createAsyncThunk<LoginSuccess, LoginPayload>(
   },
 )
 
-export const logout = createAsyncThunk(
-  'auth/logout',
-  async (_, { rejectWithValue, dispatch }) => {
-    try {
-      await httpClient.delete({
-        endpoint: Endpoints.LOGOUT,
-      })
-      AuthenticationService.closeSession()
-    } catch (e) {
-      return rejectWithValue(e)
-    }
-  },
-)
+export const logout = createAsyncThunk('auth/logout', async (_, { rejectWithValue }) => {
+  try {
+    await httpClient.delete({
+      endpoint: Endpoints.LOGOUT,
+    })
+    AuthenticationService.closeSession()
+  } catch (e) {
+    return rejectWithValue(e)
+  }
+})

@@ -4,7 +4,7 @@ interface SelectProps {
   label: string
   value?: string
   optionValues: string[]
-  handleOnChange: (event: any, child: React.ReactNode) => void
+  handleOnChange: (event: React.ChangeEvent<HTMLSelectElement>) => void
   disabled?: boolean
   required?: boolean
   children?: React.ReactNode
@@ -33,6 +33,7 @@ const Select: FC<SelectProps> = (props) => {
         //onChange={handleOnChange}
         disabled={disabled}
         required={required}
+        onChange={handleOnChange}
       >
         {optionValues.map((optionValue) => (
           <span key={optionValue}>{optionValue}</span>

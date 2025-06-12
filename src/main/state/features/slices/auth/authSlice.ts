@@ -15,7 +15,6 @@ export const initialAuthState: AuthState = {
 const authSlice = createBaseSlice({
   name: authTools.slice,
   initialState: initialAuthState,
-  reducers: {},
   extraReducers: authTools.extraReducers,
 })
 

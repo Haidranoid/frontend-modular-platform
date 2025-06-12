@@ -54,7 +54,9 @@ describe('useActions hook', () => {
     const dispatch = jest.fn()
     jest.spyOn(reactRedux, 'useDispatch').mockReturnValue(dispatch)
 
-    const spyBindActionCreators = jest.spyOn(redux, 'bindActionCreators').mockReturnValue(mockActions)
+    const spyBindActionCreators = jest
+      .spyOn(redux, 'bindActionCreators')
+      .mockReturnValue(mockActions)
 
     render(<Component />)
 

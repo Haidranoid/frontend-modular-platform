@@ -5,9 +5,9 @@ import { AuthApi, OnFulfilledMap } from '@interfaces/features/api/api.types'
 import { AuthState } from '@features/slices/auth/authSlice'
 
 const onFulfilledMap: OnFulfilledMap<AuthState, AuthApi> = {
-  me: (state, action) => {},
-  login: (state, action) => {},
-  logout: (state, action) => {},
+  me: () => {},
+  login: () => {},
+  logout: () => {},
 }
 
 const authTools = createSliceTools(SliceNames.Auth, authApi, onFulfilledMap)
