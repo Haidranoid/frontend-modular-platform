@@ -88,7 +88,9 @@ async function request<R, B>({
     [HttpMethods.DELETE]: () => axiosInstance.delete<undefined, R>(finalUrl, config),
   }
 
-  return await axiosMethods[method]()
+  const response = await axiosMethods[method]()
+
+  return response['data']
 }
 
 // ========== Public API ==========

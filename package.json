@@ -12,8 +12,8 @@
   },
   "scripts": {
     "start": "webpack serve --env mode=development",
-    "server": "java -Dspring.profiles.active=dev -Dserver.port=8080 -jar src/api/server.jar",
-    "dev": "concurrently -k \"npm run server \" \"wait-on http://localhost:8080/actuator/health && npm start\"",
+    "server": "java -Dspring.profiles.active=dev -Dserver.port=8080 -jar server/api.jar",
+    "dev": "concurrently -k \"npm run server \" \"wait-on http://localhost:8080/api/actuator/health && npm start\"",
     "stop": "(pkill -f webpack && pkill -f node && pkill -f java) || (taskkill /IM node.exe /F & taskkill /IM java.exe /F)",
     "build": "webpack --env mode=production",
     "clean": "concurrently -k \"del-cli package-lock.json\" \"del-cli dist\" \"del-cli coverage\" && del-cli node_modules",

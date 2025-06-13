@@ -12,6 +12,7 @@ const onFulfilledMap: OnFulfilledMap<AuthState, AuthApi> = {
   login: (state, action) => {
     const { user, accessToken, refreshToken } = action.payload
 
+    state.isAuthenticated = true
     state.user = user
     AuthenticationService.startSession(accessToken, refreshToken)
   },
