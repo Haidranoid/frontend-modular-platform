@@ -16,7 +16,7 @@ describe('useActions', () => {
 })*/
 
 import React, { useEffect } from 'react'
-import { render } from '@test/utils/testing-library'
+import { render } from '@test-utils'
 import * as reactRedux from 'react-redux'
 import * as redux from 'redux'
 import useActions from './index'

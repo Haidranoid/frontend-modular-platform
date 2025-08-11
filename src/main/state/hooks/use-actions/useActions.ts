@@ -5,7 +5,9 @@ import thunks from '@features/thunks'
 
 export const useAppDispatch = useDispatch.withTypes<AppDispatch>()
 
-export const useActions = () => {
+const useActions = () => {
   const dispatch = useAppDispatch()
   return bindActionCreators({ ...thunks }, dispatch)
 }
+
+export default useActions

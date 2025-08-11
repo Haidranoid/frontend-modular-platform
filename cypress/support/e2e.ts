@@ -12,6 +12,17 @@
 // You can read more here:
 // https://on.cypress.io/configuration
 // ***********************************************************
+// Import cypress jest matchers
+import '@testing-library/cypress/add-commands'
+
+// Import cypress reporter (for adding test info to the report)
+import 'cypress-mochawesome-reporter/register'
+
+// now can use describe.each and it.each
+import 'cypress-each'
+
+// allows to access to local storage
+import 'cypress-localstorage-commands'
 
 // Import commands.js using ES2015 syntax:
 import './commands'

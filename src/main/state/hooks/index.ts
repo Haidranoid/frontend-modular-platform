@@ -1,2 +1,4 @@
-export * from './use-actions/useActions'
-export * from './use-selector/useSelector'
+import useActions from './use-actions/useActions'
+import useAppSelector from './use-app-selector/useAppSelector'
+
+export { useActions, useAppSelector }

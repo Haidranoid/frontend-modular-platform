@@ -35,7 +35,11 @@ export default function getAliasMappings(writeOutput = true): AliasMappings {
     webpackAlias[alias] = path.resolve(ROOT_DIR, cleanedRelativePath) + path.sep
 
     // Ensure trailing slash in a mapper path
-    moduleNameMapper[`^${alias}/(.*)$`] = `<rootDir>/${cleanedRelativePath}/$1`
+    moduleNameMapper[`^${alias}/(.*)$`] =
+      path.resolve(ROOT_DIR, cleanedRelativePath) + path.sep + '$1'
+
+    moduleNameMapper[`^${alias}$`] =
+      path.resolve(ROOT_DIR, cleanedRelativePath) + path.sep + 'index.ts'
   })
 
   const result: AliasMappings = { webpackAlias, moduleNameMapper }

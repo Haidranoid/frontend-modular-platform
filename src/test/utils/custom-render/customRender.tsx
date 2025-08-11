@@ -4,7 +4,7 @@ import { EnhancedStore } from '@reduxjs/toolkit'
 import { render, RenderOptions, RenderResult } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import { createMemoryRouter, MemoryRouterProps } from 'react-router'
-import { initialAppState, InitialAppState } from '@features/app.reducer'
+import { initialAppState, InitialAppState } from '@features/reducer'
 import { configureAppStore, RootState } from '@store'
 
 // TODO: check this
@@ -61,13 +61,6 @@ interface SelectiveProvidersProps {
   themeProvider?: boolean
 }
 
-const SelectiveProviders: SelectiveProvidersProps = {
-  stateProvider: true,
-  routerProvider: true,
-  cacheProvider: true,
-  themeProvider: true,
-}
-
 // Define the options for your custom render function
 interface CustomRenderOptions extends Omit<RenderOptions, 'queries'> {
   initialState?: InitialAppState
@@ -84,6 +77,13 @@ type RenderWithProvidersType = (
   ui: React.JSX.Element | React.JSX.Element[],
   customRenderOptions?: CustomRenderOptions,
 ) => ExtendedRenderResult
+
+const SelectiveProviders: SelectiveProvidersProps = {
+  stateProvider: true,
+  routerProvider: true,
+  cacheProvider: true,
+  themeProvider: true,
+}
 
 const renderWithProviders: RenderWithProvidersType = (
   ui,
@@ -145,6 +145,7 @@ const renderWithProviders: RenderWithProvidersType = (
   }
 
   const view = render(ui, { wrapper: Wrapper, ...renderOptions })
+
   return {
     ...view,
     store,
