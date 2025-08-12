@@ -4,6 +4,7 @@ import { usersReducer, initialUsersState } from '@features/slices/users/usersSli
 import { globalReducer, initialGlobalState } from '@features/slices/global/globalSlice'
 import { withBaseState } from '@utils/features/with-base-state/withBaseState'
 
+//TODO: declare types for each reducer
 export const initialAppState = {
   auth: withBaseState(initialAuthState),
   users: withBaseState(initialUsersState),
