@@ -1,20 +1,17 @@
 import { combineReducers } from 'redux'
-import { authReducer, initialAuthState } from '@features/slices/auth/authSlice'
-import { usersReducer, initialUsersState } from '@features/slices/users/usersSlice'
-import { globalReducer, initialGlobalState } from '@features/slices/global/globalSlice'
-import { withBaseState } from '@utils/features/with-base-state/withBaseState'
+import { authSlice, globalSlice, usersSlice } from '@features/slices'
 
 //TODO: declare types for each reducer
 export const initialAppState = {
-  auth: withBaseState(initialAuthState),
-  users: withBaseState(initialUsersState),
-  global: withBaseState(initialGlobalState),
+  auth: authSlice.getInitialState(),
+  users: usersSlice.getInitialState(),
+  global: usersSlice.getInitialState(),
 }
 
 export type InitialAppState = typeof initialAppState
 
 export const appReducer = combineReducers({
-  auth: authReducer,
-  users: usersReducer,
-  global: globalReducer,
+  auth: authSlice.reducer,
+  users: usersSlice.reducer,
+  global: globalSlice.reducer,
 })

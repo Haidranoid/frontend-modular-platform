@@ -1,63 +1,15 @@
-// test-utils.tsx
 import React from 'react'
 import { EnhancedStore } from '@reduxjs/toolkit'
 import { render, RenderOptions, RenderResult } from '@testing-library/react'
+import { MemoryRouter, MemoryRouterProps } from 'react-router'
 import { Provider } from 'react-redux'
-import { createMemoryRouter, MemoryRouterProps } from 'react-router'
+import { ThemeProvider } from '@theme-provider/ThemeProvider'
 import { initialAppState, InitialAppState } from '@features/reducer'
 import { configureAppStore, RootState } from '@store'
-
-// TODO: check this
-/*
-import ThemeProvider from '../../main/styles/theme/ThemeProvider'
-import CacheProvider from '../../main/styles/cache/CacheProvider'
-const conditionalProviders = [
-  [ProvidersObject.STATE_PROVIDER, (children: React.ReactNode) => <Provider store={store}>{children}</Provider>],
-  [ProvidersObject.ROUTER_PROVIDER, (children) => <MemoryRouter {...routerProps}>{children}</MemoryRouter>],
-  [ProvidersObject.CACHE_PROVIDER, (children) => <CacheProvider>{children}</CacheProvider>],
-  [ProvidersObject.THEME_PROVIDER, (children) => <ThemeProvider>{children}</ThemeProvider>],
-];
-
-const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const wrapped = conditionalProviders.reduce(
-    (acc, [enabled, wrap]) => (enabled ? wrap(acc) : acc),
-    children
-  );
-  return <>{wrapped}</>;
-};
-
-
-
-    if (switchProvider) {
-      wrapped = <Switch>{wrapped}</Switch>
-    }
-
-    if (suspenseProvider) {
-      wrapped = <Suspense fallback={<Loading color="primary" />}>{wrapped}</Suspense>
-    }
-
-    if (authGateProvider) {
-      wrapped = <AuthGate>{wrapped}</AuthGate>
-    }
-
-    if (navigationProvider) {
-      wrapped = <NavigationMenu>{wrapped}</NavigationMenu>
-    }
-
-    if (themeProvider) {
-      wrapped = <ThemeProvider>{wrapped}</ThemeProvider>
-    }
-
-    if (cacheProvider) {
-      wrapped = <CacheProvider>{wrapped}</CacheProvider>
-    }
-
-*/
 
 interface SelectiveProvidersProps {
   stateProvider?: boolean
   routerProvider?: boolean
-  cacheProvider?: boolean
   themeProvider?: boolean
 }
 
@@ -81,7 +33,6 @@ type RenderWithProvidersType = (
 const SelectiveProviders: SelectiveProvidersProps = {
   stateProvider: true,
   routerProvider: true,
-  cacheProvider: true,
   themeProvider: true,
 }
 
@@ -100,20 +51,11 @@ const renderWithProviders: RenderWithProvidersType = (
   const store = storeOverride ?? configureAppStore(initialState)
 
   const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const { stateProvider, routerProvider, cacheProvider, themeProvider } =
-      selectiveProviders
+    const { stateProvider, routerProvider, themeProvider } = selectiveProviders
 
     let wrapped = children
 
     /*
-    if (switchProvider) {
-      wrapped = <Switch>{wrapped}</Switch>
-    }
-
-    if (suspenseProvider) {
-      wrapped = <Suspense fallback={<Loading color="primary" />}>{wrapped}</Suspense>
-    }
-
     if (authGateProvider) {
       wrapped = <AuthGate>{wrapped}</AuthGate>
     }
@@ -122,20 +64,17 @@ const renderWithProviders: RenderWithProvidersType = (
       wrapped = <NavigationMenu>{wrapped}</NavigationMenu>
     }
 
-    if (themeProvider) {
-      wrapped = <ThemeProvider>{wrapped}</ThemeProvider>
-    }
+    */
 
-    if (cacheProvider) {
-      wrapped = <CacheProvider>{wrapped}</CacheProvider>
-    }
-    
     if (routerProvider) {
       wrapped = (
         <MemoryRouter initialEntries={routerProps.initialEntries}>{wrapped}</MemoryRouter>
       )
     }
-    */
+
+    if (themeProvider) {
+      wrapped = <ThemeProvider>{wrapped}</ThemeProvider>
+    }
 
     if (stateProvider) {
       wrapped = <Provider store={store}>{wrapped}</Provider>

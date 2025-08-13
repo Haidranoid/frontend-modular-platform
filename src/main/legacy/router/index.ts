@@ -18,8 +18,12 @@ const router = createBrowserRouter([
   {
     path: Paths.HOME,
     lazy: async () => {
-      const { Home, homeLoader } = await import('@pages/home')
-      return { Component: Home, loader: homeLoader }
+      // load component and loader in parallel before rendering
+      const [Component, { homeLoader }] = await Promise.all([
+        import('@pages/home/Home').then((page) => page.default),
+        import('@pages/home/loader'),
+      ])
+      return { Component, loader: homeLoader }
     },
   },
 ])

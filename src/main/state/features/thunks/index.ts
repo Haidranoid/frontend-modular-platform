@@ -1,9 +1,8 @@
-import { authThunks } from '@features/slices/auth/authTools'
-import { usersThunks } from '@features/slices/users/usersTools'
+import { authTools, usersTools } from '@features/tools'
 
 const thunks = {
-  ...authThunks,
-  ...usersThunks,
+  ...authTools.thunks,
+  ...usersTools.thunks,
 }
 
 export default thunks

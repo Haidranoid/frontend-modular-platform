@@ -1,4 +1,4 @@
-import { HandleSpaceEvent } from './index.types'
+import { HandleSpaceEvent } from './userEventsUtils.types'
 
 export const handleSpaceEvent: HandleSpaceEvent = (e) => {
   if (e.key === ' ' || e.key === 'Spacebar' || e.key === 'Enter') {

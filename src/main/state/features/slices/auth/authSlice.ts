@@ -1,6 +1,6 @@
-import { createBaseSlice } from '@utils/features/base-slice/baseSlice'
-import { User } from '@interfaces/users/users.types'
-import authTools from '@features/slices/auth/authTools'
+import { createBaseSlice } from '@features/helpers/base-slice/baseSlice'
+import { User } from '@features/types'
+import { authTools } from '@features/tools'
 
 export interface AuthState {
   isAuthenticated: boolean
@@ -12,12 +12,9 @@ export const initialAuthState: AuthState = {
   user: null,
 }
 
-const authSlice = createBaseSlice({
+export const authSlice = createBaseSlice({
   name: authTools.slice,
   initialState: initialAuthState,
   reducers: {},
   extraReducers: authTools.extraReducers,
 })
-
-export const authActions = authSlice.actions
-export const authReducer = authSlice.reducer

@@ -1,6 +1,5 @@
 import { default as axios } from 'axios'
 import qs from 'query-string'
-import { HttpMethods } from '@constants'
 import browserSecurityService from '@lib/security-service/SecurityService'
 import AuthenticationService from '@lib/auth-service/AuthenticationService'
 import {
@@ -12,6 +11,7 @@ import {
   ReplaceEndpointVariables,
   RequestParams,
 } from './httpClient.types'
+import HttpMethods from './http-methods'
 
 // ========== Utility Functions ==========
 const generateQueryParams: GenerateQueryParams = (queryParams) => {

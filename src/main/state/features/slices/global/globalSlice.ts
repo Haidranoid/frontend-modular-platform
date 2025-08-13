@@ -1,4 +1,4 @@
-import { createBaseSlice } from '@utils/features/base-slice/baseSlice'
+import { createBaseSlice } from '@features/helpers/base-slice/baseSlice'
 import { SliceNames } from '@constants'
 
 export interface GlobalState {
@@ -13,7 +13,7 @@ export const initialGlobalState: GlobalState = {
   shutdown: false,
 }
 
-const globalSlice = createBaseSlice({
+export const globalSlice = createBaseSlice({
   name: SliceNames.Global,
   initialState: initialGlobalState,
   reducers: {
@@ -23,6 +23,3 @@ const globalSlice = createBaseSlice({
   },
   extraReducers: () => {},
 })
-
-export const globalActions = globalSlice.actions
-export const globalReducer = globalSlice.reducer

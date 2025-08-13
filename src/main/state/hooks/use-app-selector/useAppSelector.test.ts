@@ -21,10 +21,8 @@ describe('useAppSelector hook', () => {
         isLoading: false,
         error: null,
       },
-      // otras slices que tenga tu store...
     }
 
-    // simular que useSelector llama al selector con nuestro estado falso
     mockUseSelector.mockImplementation((selector) => selector(fakeState))
 
     const { result } = renderHook(() => useAppSelector(globalSelectors.base))

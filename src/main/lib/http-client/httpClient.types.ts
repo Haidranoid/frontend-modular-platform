@@ -1,5 +1,5 @@
 import { AxiosRequestConfig, RawAxiosResponseHeaders, AxiosResponseHeaders } from 'axios'
-import { HttpMethods } from '@constants'
+import HttpMethods from './http-methods'
 
 export type Body = object | FormData | void
 export type Response = object | undefined

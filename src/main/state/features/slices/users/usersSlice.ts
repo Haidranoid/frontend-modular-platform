@@ -1,7 +1,6 @@
-// features/users/usersSlice.ts
-import { createBaseSlice } from '@utils/features/base-slice/baseSlice'
-import usersTools from '@features/slices/users/usersTools'
-import { User } from '@interfaces/users/users.types'
+import { createBaseSlice } from '@features/helpers/base-slice/baseSlice'
+import { usersTools } from '@features/tools'
+import { User } from '@features/types'
 
 export interface UsersState {
   users: User[]
@@ -13,12 +12,9 @@ export const initialUsersState: UsersState = {
   user: null,
 }
 
-const usersSlice = createBaseSlice({
+export const usersSlice = createBaseSlice({
   name: usersTools.slice,
   initialState: initialUsersState,
   reducers: {},
   extraReducers: usersTools.extraReducers,
 })
-
-export const usersActions = usersSlice.actions
-export const usersReducer = usersSlice.reducer

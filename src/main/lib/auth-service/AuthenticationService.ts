@@ -1,21 +1,21 @@
-const ACCESS_TOKEN = 'accessToken'
-const REFRESH_TOKEN = 'refreshToken'
-
 class AuthenticationService {
+  private static ACCESS_TOKEN = 'accessToken'
+  private static REFRESH_TOKEN = 'refreshToken'
+
   public static getAccessToken() {
-    return localStorage.getItem(ACCESS_TOKEN)
+    return localStorage.getItem(this.ACCESS_TOKEN)
   }
 
   public static getRefreshToken() {
-    return localStorage.getItem(REFRESH_TOKEN)
+    return localStorage.getItem(this.REFRESH_TOKEN)
   }
 
   public static setAccessToken(accessToken: string) {
-    localStorage.setItem(ACCESS_TOKEN, accessToken)
+    localStorage.setItem(this.ACCESS_TOKEN, accessToken)
   }
 
   public static setRefreshToken(refreshToken: string) {
-    localStorage.setItem(REFRESH_TOKEN, refreshToken)
+    localStorage.setItem(this.REFRESH_TOKEN, refreshToken)
   }
 
   public static startSession(accessToken: string, refreshToken: string) {
@@ -24,8 +24,8 @@ class AuthenticationService {
   }
 
   public static closeSession() {
-    localStorage.removeItem(ACCESS_TOKEN)
-    localStorage.removeItem(REFRESH_TOKEN)
+    localStorage.removeItem(this.ACCESS_TOKEN)
+    localStorage.removeItem(this.REFRESH_TOKEN)
   }
 }
 
