@@ -2,8 +2,9 @@ import React, { FC } from 'react'
 
 interface InputProps {
   value?: string
-  handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  handleOnKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void
+  type?: string
   disabled?: boolean
   required?: boolean
   children?: React.ReactNode
@@ -12,20 +13,22 @@ interface InputProps {
 const Input: FC<InputProps> = (props) => {
   const {
     value = '',
-    handleOnChange,
-    handleOnKeyDown,
+    onChange,
+    onKeyDown,
+    type = 'text',
     disabled = false,
     required = true,
   } = props
 
   return (
     <input
+      type={type}
       role="textbox"
       disabled={disabled}
       required={required}
       value={value}
-      onChange={handleOnChange}
-      onKeyDown={handleOnKeyDown}
+      onChange={onChange}
+      onKeyDown={onKeyDown}
     />
   )
 }

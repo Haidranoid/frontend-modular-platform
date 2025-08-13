@@ -17,6 +17,13 @@ const onFulfilledMap: OnFulfilledMap<AuthState, AuthApi> = {
     state.user = user
     AuthenticationService.startSession(accessToken, refreshToken)
   },
+  signup: (state, action) => {
+    const { user, accessToken, refreshToken } = action.payload
+
+    state.isAuthenticated = true
+    state.user = user
+    AuthenticationService.startSession(accessToken, refreshToken)
+  },
   logout: (state) => {
     state.user = null
     AuthenticationService.closeSession()

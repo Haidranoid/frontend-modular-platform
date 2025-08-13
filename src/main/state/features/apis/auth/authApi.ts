@@ -5,6 +5,8 @@ import {
   LoginPayload,
   GetMeSuccess,
   LoginSuccess,
+  SignupPayload,
+  SignupSuccess,
 } from '@features/types/apis/auth'
 
 const authApi: AuthApi = {
@@ -16,6 +18,13 @@ const authApi: AuthApi = {
   login: async (credentials) => {
     return await httpClient.post<LoginPayload, LoginSuccess>({
       endpoint: Endpoints.LOGIN,
+      body: credentials,
+      useAuthorization: false,
+    })
+  },
+  signup: async (credentials) => {
+    return await httpClient.post<SignupPayload, SignupSuccess>({
+      endpoint: Endpoints.SIGNUP,
       body: credentials,
       useAuthorization: false,
     })

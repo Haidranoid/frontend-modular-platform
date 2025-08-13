@@ -1,26 +1,34 @@
 import { createBrowserRouter } from 'react-router'
 import { Paths } from '@constants'
 
-import { Login, loginLoader } from '@pages/login'
-import { Signup, signupLoader } from '@pages/signup'
+import { Login } from '@pages/login'
+import { Signup } from '@pages/signup'
+import { Home } from '@pages/home'
+import AuthLayout from '@layouts/auth/AuthLayout'
 
 const router = createBrowserRouter([
   {
-    path: Paths.LOGIN,
-    Component: Login,
-    loader: loginLoader,
-  },
-  {
-    path: Paths.SIGNUP,
-    Component: Signup,
-    loader: signupLoader,
-  },
-  {
     path: Paths.HOME,
-    lazy: async () => {
-      const { Home, homeLoader } = await import('@pages/home')
-      return { Component: Home, loader: homeLoader }
-    },
+    children: [
+      {
+        index: true,
+        Component: Home,
+      },
+      {
+        path: Paths.AUTH_HOME,
+        Component: AuthLayout,
+        children: [
+          {
+            path: Paths.AUTH_LOGIN,
+            Component: Login,
+          },
+          {
+            path: Paths.AUTH_SIGNUP,
+            Component: Signup,
+          },
+        ],
+      },
+    ],
   },
 ])
 

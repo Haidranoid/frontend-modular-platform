@@ -7,3 +7,9 @@ export interface LoginSuccess {
   refreshToken: string
   user: User
 }
+
+export interface SignupSuccess {
+  accessToken: string
+  refreshToken: string
+  user: User
+}

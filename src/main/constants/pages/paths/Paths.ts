@@ -1,7 +1,8 @@
 enum Paths {
   HOME = '/',
-  LOGIN = '/login',
-  SIGNUP = '/signup',
+  AUTH_HOME = '/auth',
+  AUTH_LOGIN = Paths.AUTH_HOME + '/login',
+  AUTH_SIGNUP = Paths.AUTH_HOME + '/signup',
   DASHBOARD = '/dashboard',
 }
 
