@@ -1,0 +1,4 @@
+{
+  "extends": "@configs/typescript/tsconfig.esnext.json",
+  "include": ["src"]
+}

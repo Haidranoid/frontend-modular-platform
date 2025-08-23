@@ -1,0 +1,188 @@
+/**
+ * This configuration file specifies NPM dependency version selections that affect all projects
+ * in a Rush repo.  More documentation is available on the Rush website: https://rushjs.io
+ */
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/common-versions.schema.json",
+
+  /**
+   * A table that specifies a "preferred version" for a given NPM package.  This feature is typically used
+   * to hold back an indirect dependency to a specific older version, or to reduce duplication of indirect dependencies.
+   *
+   * The "preferredVersions" value can be any SemVer range specifier (e.g. "~1.2.3").  Rush injects these values into
+   * the "dependencies" field of the top-level common/temp/package.json, which influences how the package manager
+   * will calculate versions.  The specific effect depends on your package manager.  Generally it will have no
+   * effect on an incompatible or already constrained SemVer range.  If you are using PNPM, similar effects can be
+   * achieved using the pnpmfile.js hook.  See the Rush documentation for more details.
+   *
+   * After modifying this field, it's recommended to run "rush update --full" so that the package manager
+   * will recalculate all version selections.
+   */
+  "preferredVersions": {
+    /**
+     * When someone asks for "^1.0.0" make sure they get "1.2.3" when working in this repo,
+     * instead of the latest version.
+     */
+    // "some-library": "1.2.3"
+    // devDependencies {
+    "@axe-core/react": "4.10.2",
+    "@babel/core": "7.28.3",
+    "@babel/plugin-transform-runtime": "7.28.3",
+    "@babel/preset-env": "7.28.3",
+    "@babel/preset-react": "7.27.1",
+    "@babel/preset-typescript": "7.27.1",
+    "@babel/runtime": "7.28.3",
+    "@cypress/webpack-preprocessor": "6.0.4",
+    "@eslint/json": "0.13.1",
+    "@jest/globals": "29.7.0",
+    "@pmmmwh/react-refresh-webpack-plugin": "0.6.0",
+    "@storybook/addon-docs": "9.1.2",
+    "@storybook/addon-onboarding": "9.1.2",
+    "@storybook/addon-webpack5-compiler-swc": "3.0.0",
+    "@storybook/react-webpack5": "9.1.2",
+    "@testing-library/cypress": "10.0.3",
+    "@testing-library/dom": "10.4.1",
+    "@testing-library/jest-dom": "6.7.0",
+    "@testing-library/react": "16.3.0",
+    "@testing-library/user-event": "14.6.1",
+    "@types/babel__core": "7.20.5",
+    "@types/dotenv-webpack": "7.0.8",
+    "@types/eslint-plugin-jsx-a11y": "6.10.0",
+    "@types/fs-extra": "11.0.4",
+    "@types/jest": "30.0.0",
+    "@types/jest-axe": "3.5.9",
+    "@types/lodash": "4.17.20",
+    "@types/node": "22.17.1",
+    "@types/react": "19.1.10",
+    "@types/react-dom": "19.1.7",
+    "@types/redux-logger": "3.0.13",
+    "@types/regenerator-runtime": "0.13.8",
+    "@types/styled-components": "5.1.34",
+    "@types/testing-library__jest-dom": "6.0.0",
+    "@types/webpack": "5.28.5",
+    "@types/webpack-bundle-analyzer": "4.7.0",
+    "@typescript-eslint/eslint-plugin": "8.39.1",
+    "@typescript-eslint/parser": "8.39.1",
+    "babel-jest": "30.0.5",
+    "babel-loader": "10.0.0",
+    "buffer": "6.0.3",
+    "clean-webpack-plugin": "4.0.0",
+    "compression-webpack-plugin": "11.1.0",
+    "concurrently": "9.2.0",
+    "copy-webpack-plugin": "13.0.1",
+    "core-js": "3.45.0",
+    "cross-env": "7.0.3",
+    "css-loader": "7.1.2",
+    "css-minimizer-webpack-plugin": "7.0.2",
+    "cypress": "14.5.4",
+    "cypress-each": "1.14.0",
+    "cypress-localstorage-commands": "2.2.8",
+    "del-cli": "6.0.0",
+    "rimraf": "6.0.1",
+    "dotenv-webpack": "8.1.1",
+    "eslint": "9.33.0",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-cypress": "5.1.1",
+    "eslint-plugin-import": "2.32.0",
+    "eslint-plugin-jest": "28.14.0",
+    "eslint-plugin-jest-dom": "5.5.0",
+    "eslint-plugin-jsx-a11y": "6.10.2",
+    "eslint-plugin-prettier": "5.5.4",
+    "eslint-plugin-react": "7.37.5",
+    "eslint-plugin-storybook": "9.1.2",
+    "eslint-plugin-testing-library": "7.6.6",
+    "eslint-plugin-unused-imports": "4.1.4",
+    "fs-extra": "11.3.1",
+    "globals": "16.3.0",
+    "html-webpack-plugin": "5.6.4",
+    "jest": "30.0.5",
+    "jest-axe": "10.0.0",
+    "jest-environment-jsdom": "30.0.5",
+    "jest-html-reporter": "4.3.0",
+    "mini-css-extract-plugin": "2.9.4",
+    "msw": "2.10.5",
+    "node-polyfill-webpack-plugin": "4.1.0",
+    "prettier": "3.6.2",
+    "process": "0.11.10",
+    "react-refresh": "0.17.0",
+    "redux-logger": "3.0.6",
+    "storybook": "9.1.2",
+    "strip-json-comments": "5.0.3",
+    "terser-webpack-plugin": "5.3.14",
+    "ts-jest": "29.4.1",
+    "ts-loader": "9.5.2",
+    "ts-node": "10.9.2",
+    "tsconfig-paths-webpack-plugin": "4.2.0",
+    "typescript": "5.9.2",
+    "typescript-eslint": "8.39.1",
+    "wait-on": "8.0.4",
+    "webpack": "5.101.2",
+    "webpack-bundle-analyzer": "4.10.2",
+    "webpack-cli": "6.0.1",
+    "webpack-dev-server": "5.2.2",
+    "webpack-merge": "6.0.1",
+    // dependencies {
+    "@reduxjs/toolkit": "2.8.2",
+    "axios": "1.11.0",
+    "clsx": "2.1.1",
+    "lodash": "4.17.21",
+    "query-string": "7.1.3",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "react-hook-form": "7.62.0",
+    "react-redux": "9.2.0",
+    "react-router": "7.8.0",
+    "redux": "5.0.1",
+    "regenerator-runtime": "0.14.1",
+    "styled-components": "6.1.19"
+  },
+
+  /**
+   * When set to true, for all projects in the repo, all dependencies will be automatically added as preferredVersions,
+   * except in cases where different projects specify different version ranges for a given dependency.  For older
+   * package managers, this tended to reduce duplication of indirect dependencies.  However, it can sometimes cause
+   * trouble for indirect dependencies with incompatible peerDependencies ranges.
+   *
+   * The default value is true.  If you're encountering installation errors related to peer dependencies,
+   * it's recommended to set this to false.
+   *
+   * After modifying this field, it's recommended to run "rush update --full" so that the package manager
+   * will recalculate all version selections.
+   */
+  // "implicitlyPreferredVersions": false,
+
+  /**
+   * If you would like the version specifiers for your dependencies to be consistent, then
+   * uncomment this line. This is effectively similar to running "rush check" before any
+   * of the following commands:
+   *
+   *   rush install, rush update, rush link, rush version, rush publish
+   *
+   * In some cases you may want this turned on, but need to allow certain packages to use a different
+   * version. In those cases, you will need to add an entry to the "allowedAlternativeVersions"
+   * section of the common-versions.json.
+   *
+   * In the case that subspaces is enabled, this setting will take effect at a subspace level.
+   */
+  // "ensureConsistentVersions": true,
+
+  /**
+   * The "rush check" command can be used to enforce that every project in the repo must specify
+   * the same SemVer range for a given dependency.  However, sometimes exceptions are needed.
+   * The allowedAlternativeVersions table allows you to list other SemVer ranges that will be
+   * accepted by "rush check" for a given dependency.
+   *
+   * IMPORTANT: THIS TABLE IS FOR *ADDITIONAL* VERSION RANGES THAT ARE ALTERNATIVES TO THE
+   * USUAL VERSION (WHICH IS INFERRED BY LOOKING AT ALL PROJECTS IN THE REPO).
+   * This design avoids unnecessary churn in this file.
+   */
+  "allowedAlternativeVersions": {
+    /**
+     * For example, allow some projects to use an older TypeScript compiler
+     * (in addition to whatever "usual" version is being used by other projects in the repo):
+     */
+    // "typescript": [
+    //   "~2.4.0"
+    // ]
+  }
+}

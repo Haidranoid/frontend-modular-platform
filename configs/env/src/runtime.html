@@ -1,0 +1,9 @@
+<!-- apps/webapp/index.html -->
+<script>
+    window.__APP_CONFIG__ = null;
+</script>
+<script type="module">
+    const res = await fetch('/config/runtime.json');
+    window.__APP_CONFIG__ = await res.json();
+    import('/src/main.tsx'); // render después de cargar config
+</script>

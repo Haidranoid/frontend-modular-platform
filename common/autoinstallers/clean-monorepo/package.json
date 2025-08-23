@@ -1,0 +1,8 @@
+{
+  "name": "clean-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "devDependencies": {
+    "rimraf": "^6.0.1"
+  }
+}

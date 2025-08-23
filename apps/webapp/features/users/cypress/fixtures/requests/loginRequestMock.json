@@ -1,0 +1,14 @@
+{
+  "ADMIN": {
+    "email": "admin@hotmail.com",
+    "password": "12345678"
+  },
+  "TEACHER": {
+    "email": "teacher@hotmail.com",
+    "password": "12345678"
+  },
+  "STUDENT": {
+    "email": "student@hotmail.com",
+    "password": "12345678"
+  }
+}

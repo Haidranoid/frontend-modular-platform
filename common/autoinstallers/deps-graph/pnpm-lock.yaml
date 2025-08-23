@@ -1,0 +1,31 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    devDependencies:
+      elkjs:
+        specifier: ^0.10.0
+        version: 0.10.0
+      graphviz-builder:
+        specifier: ^0.1.1
+        version: 0.1.1
+
+packages:
+
+  elkjs@0.10.0:
+    resolution: {integrity: sha512-v/3r+3Bl2NMrWmVoRTMBtHtWvRISTix/s9EfnsfEWApNrsmNjqgqJOispCGg46BPwIFdkag3N/HYSxJczvCm6w==}
+
+  graphviz-builder@0.1.1:
+    resolution: {integrity: sha512-4pzfUc6v6DiWk/e7arrzxAn6UTb03XgN30sd1YKiYgUUwR00ZH+fU9ZZy4yh+jkNh9iZjRwlaX/C6/U2wPTEUA==}
+    engines: {node: '>=10'}
+
+snapshots:
+
+  elkjs@0.10.0: {}
+
+  graphviz-builder@0.1.1: {}

@@ -1,0 +1,51 @@
+{
+  "name": "@libraries/ui",
+  "version": "0.0.0",
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "import": "./lib/esm/index.js",
+      "require": "./lib/cjs/index.js"
+    }
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "jestx --detectOpenHandles",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "devDependencies": {
+    "@configs/typescript": "workspace:*",
+    "@tools/jest-scripts": "workspace:*",
+    "@tools/eslint-scripts": "workspace:*",
+    "@storybook/addon-essentials": "9.0.0-alpha.12",
+    "@storybook/addon-interactions": "9.0.0-alpha.10",
+    "@storybook/addon-webpack5-compiler-swc": "3.0.0",
+    "@storybook/react-webpack5": "9.1.2",
+    "@types/node": "22.17.1",
+    "@types/react": "19.1.10",
+    "@types/react-dom": "19.1.7",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "rimraf": "6.0.1",
+    "storybook": "9.1.2",
+    "styled-components": "6.1.19",
+    "tsconfig-paths-webpack-plugin": "4.2.0",
+    "tsup": "8.5.0",
+    "tslib": "2.8.1",
+    "typescript": "5.9.2",
+    "msw": "2.10.5",
+    "msw-storybook-addon": "2.0.5"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
+  }
+}

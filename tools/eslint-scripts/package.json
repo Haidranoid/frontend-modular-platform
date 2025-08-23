@@ -1,0 +1,33 @@
+{
+  "name": "@tools/eslint-scripts",
+  "version": "0.0.0",
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "bin": {
+    "jestx": "bin/main.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./lib/types/runner.d.ts",
+      "import": "./lib/esm/runner.js",
+      "require":"./lib/cjs/runner.js"
+    }
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "exit 0"
+  },
+  "devDependencies": {
+    "@configs/typescript": "workspace:*",
+    "@configs/eslint": "workspace:*",
+    "@types/node": "22.17.1",
+    "rimraf": "6.0.1",
+    "tsup": "8.5.0",
+    "tslib": "2.8.1",
+    "typescript": "5.9.2"
+  }
+}

@@ -1,0 +1,4 @@
+{
+  "extends": "@configs/typescript/tsconfig.jest.json",
+  "include": ["src"]
+}

@@ -1,0 +1,33 @@
+{
+  "webpackAlias": {
+    "@assets": "C:\\Users\\Haidranoid16\\WebstormProjects\\react-base-project\\apps\\webapp\\src\\assets\\",
+    "@config": "C:\\Users\\Haidranoid16\\WebstormProjects\\react-base-project\\apps\\webapp\\src\\config\\",
+    "@components": "C:\\Users\\Haidranoid16\\WebstormProjects\\react-base-project\\apps\\webapp\\src\\components\\",
+    "@constants": "C:\\Users\\Haidranoid16\\WebstormProjects\\react-base-project\\apps\\webapp\\src\\constants\\",
+    "@experimental": "C:\\Users\\Haidranoid16\\WebstormProjects\\react-base-project\\apps\\webapp\\src\\experimental\\",
+    "@layouts": "C:\\Users\\Haidranoid16\\WebstormProjects\\react-base-project\\apps\\webapp\\src\\layouts\\",
+    "@pages": "C:\\Users\\Haidranoid16\\WebstormProjects\\react-base-project\\apps\\webapp\\src\\pages\\",
+    "@router": "C:\\Users\\Haidranoid16\\WebstormProjects\\react-base-project\\apps\\webapp\\src\\router\\",
+    "@state": "C:\\Users\\Haidranoid16\\WebstormProjects\\react-base-project\\apps\\webapp\\src\\state\\"
+  },
+  "moduleNameMapper": {
+    "^@assets/(.*)$": "C:\\Users\\Haidranoid16\\WebstormProjects\\react-base-project\\apps\\webapp\\src\\assets\\$1",
+    "^@assets$": "C:\\Users\\Haidranoid16\\WebstormProjects\\react-base-project\\apps\\webapp\\src\\assets\\index.ts",
+    "^@config/(.*)$": "C:\\Users\\Haidranoid16\\WebstormProjects\\react-base-project\\apps\\webapp\\src\\config\\$1",
+    "^@config$": "C:\\Users\\Haidranoid16\\WebstormProjects\\react-base-project\\apps\\webapp\\src\\config\\index.ts",
+    "^@components/(.*)$": "C:\\Users\\Haidranoid16\\WebstormProjects\\react-base-project\\apps\\webapp\\src\\components\\$1",
+    "^@components$": "C:\\Users\\Haidranoid16\\WebstormProjects\\react-base-project\\apps\\webapp\\src\\components\\index.ts",
+    "^@constants/(.*)$": "C:\\Users\\Haidranoid16\\WebstormProjects\\react-base-project\\apps\\webapp\\src\\constants\\$1",
+    "^@constants$": "C:\\Users\\Haidranoid16\\WebstormProjects\\react-base-project\\apps\\webapp\\src\\constants\\index.ts",
+    "^@experimental/(.*)$": "C:\\Users\\Haidranoid16\\WebstormProjects\\react-base-project\\apps\\webapp\\src\\experimental\\$1",
+    "^@experimental$": "C:\\Users\\Haidranoid16\\WebstormProjects\\react-base-project\\apps\\webapp\\src\\experimental\\index.ts",
+    "^@layouts/(.*)$": "C:\\Users\\Haidranoid16\\WebstormProjects\\react-base-project\\apps\\webapp\\src\\layouts\\$1",
+    "^@layouts$": "C:\\Users\\Haidranoid16\\WebstormProjects\\react-base-project\\apps\\webapp\\src\\layouts\\index.ts",
+    "^@pages/(.*)$": "C:\\Users\\Haidranoid16\\WebstormProjects\\react-base-project\\apps\\webapp\\src\\pages\\$1",
+    "^@pages$": "C:\\Users\\Haidranoid16\\WebstormProjects\\react-base-project\\apps\\webapp\\src\\pages\\index.ts",
+    "^@router/(.*)$": "C:\\Users\\Haidranoid16\\WebstormProjects\\react-base-project\\apps\\webapp\\src\\router\\$1",
+    "^@router$": "C:\\Users\\Haidranoid16\\WebstormProjects\\react-base-project\\apps\\webapp\\src\\router\\index.ts",
+    "^@state/(.*)$": "C:\\Users\\Haidranoid16\\WebstormProjects\\react-base-project\\apps\\webapp\\src\\state\\$1",
+    "^@state$": "C:\\Users\\Haidranoid16\\WebstormProjects\\react-base-project\\apps\\webapp\\src\\state\\index.ts"
+  }
+}

@@ -1,0 +1,17 @@
+// tools/tsconfig.paths.json
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@assets/*": ["src/assets/*"],
+      "@config/*": ["src/config/*"],
+      "@components": ["src/components/index.ts"],
+      "@constants": ["src/constants/index.ts"],
+      "@experimental": ["src/experimental/index.ts"],
+      "@layouts": ["src/layouts/index.ts"],
+      "@pages": ["src/pages/index.ts"],
+      "@router": ["src/router/index.ts"],
+      "@state": ["src/state/index.ts"]
+    }
+  }
+}
