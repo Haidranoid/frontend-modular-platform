@@ -16,7 +16,7 @@ const devConfig = {
     allowedHosts: 'all',
     historyApiFallback: true,
   },
-  plugins: [],
+  //plugins: [],
 }
 
 module.exports = devConfig

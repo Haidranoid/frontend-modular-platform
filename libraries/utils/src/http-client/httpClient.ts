@@ -1,4 +1,4 @@
-import {AxiosHeaders, default as axios} from 'axios'
+import axios, { AxiosHeaders } from 'axios'
 import * as qs from 'query-string'
 import { getBrowserSecurityService } from '../security-service/index.js'
 import { AuthenticationService } from '../auth-service/index.js'

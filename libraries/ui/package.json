@@ -28,7 +28,7 @@
     "@storybook/addon-interactions": "9.0.0-alpha.10",
     "@storybook/addon-webpack5-compiler-swc": "3.0.0",
     "@storybook/react-webpack5": "9.1.2",
-    "@types/node": "22.17.1",
+    "@types/node": "24.3.0",
     "@types/react": "19.1.10",
     "@types/react-dom": "19.1.7",
     "react": "19.1.1",

@@ -191,6 +191,15 @@
       "enableParallelism": true,
       "ignoreDependencyOrder": true,
       "safeForSimultaneousRushProcesses": true
+    },
+    {
+      "commandKind": "bulk",
+      "name": "linter",
+      "summary": "",
+      "shellCommand": "eslintx src/**/* --fix || echo 'eslintx not found, skipping'",
+      "enableParallelism": true,
+      "ignoreDependencyOrder": true,
+      "safeForSimultaneousRushProcesses": true
     }
   ],
 

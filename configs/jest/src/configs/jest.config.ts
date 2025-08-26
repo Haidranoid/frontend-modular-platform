@@ -1,6 +1,6 @@
 import type { JestConfigWithTsJest } from 'ts-jest'
 import * as path from 'path'
-import fs from "fs";
+import fs from 'fs'
 
 const baseConfig: JestConfigWithTsJest = {
   verbose: true,
@@ -8,18 +8,14 @@ const baseConfig: JestConfigWithTsJest = {
   // 'jsdom' for browser environments
   testEnvironment: 'jsdom',
   // add global mocks (e.g., globalThis.global)
-  setupFiles: [
-    path.join(__dirname, 'jest-global-mocks.js'),
-  ],
+  setupFiles: [path.join(__dirname, 'jest-global-mocks.js')],
   // Setups for RTL, Jest matchers, etc.
-  setupFilesAfterEnv: [
-    path.join(__dirname, 'jest.setup.js'),
-  ],
+  setupFilesAfterEnv: [path.join(__dirname, 'jest.setup.js')],
   testPathIgnorePatterns: [
     '<rootDir>/lib/*',
     '<rootDir>/dist/*',
     '<rootDir>/coverage/*',
-    '<rootDir>/node_modules/*'
+    '<rootDir>/node_modules/*',
   ],
 }
 
@@ -30,9 +26,9 @@ const loadJestConfig = (): JestConfigWithTsJest => {
   let customJestConfig = {}
 
   if (fs.existsSync(tsConfigPath)) {
-    customJestConfig = require(tsConfigPath).default || require(tsConfigPath);
+    customJestConfig = require(tsConfigPath).default || require(tsConfigPath)
   } else if (fs.existsSync(jsConfigPath)) {
-    customJestConfig = require(jsConfigPath);
+    customJestConfig = require(jsConfigPath)
   }
 
   return {

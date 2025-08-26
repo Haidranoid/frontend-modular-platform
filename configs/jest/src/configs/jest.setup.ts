@@ -6,10 +6,10 @@ expect.extend(toHaveNoViolations)
 
 // solo para Jest/Node environment
 if (typeof global.TextEncoder === 'undefined') {
-    // @ts-ignore
-    global.TextEncoder = TextEncoder;
-    // @ts-ignore
-    global.TextDecoder = TextDecoder;
+  // @ts-ignore
+  global.TextEncoder = TextEncoder
+  // @ts-ignore
+  global.TextDecoder = TextDecoder
 }
 /*
 // Define a minimal Location mock with replace(), assign(), reload()

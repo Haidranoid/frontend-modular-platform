@@ -448,25 +448,25 @@
     },
     {
       "packageName": "@webapp/auth",
-      "projectFolder": "apps/webapp/features/auth",
+      "projectFolder": "features/auth",
       "reviewCategory": "features",
       "tags": [ "frontend-team" ]
     },
     {
       "packageName": "@webapp/global",
-      "projectFolder": "apps/webapp/features/global",
+      "projectFolder": "features/global",
       "reviewCategory": "features",
       "tags": [ "frontend-team" ]
     },
     {
       "packageName": "@webapp/shared",
-      "projectFolder": "apps/webapp/features/shared",
+      "projectFolder": "features/shared",
       "reviewCategory": "features",
       "tags": [ "frontend-team" ]
     },
     {
       "packageName": "@webapp/users",
-      "projectFolder": "apps/webapp/features/users",
+      "projectFolder": "features/users",
       "reviewCategory": "features",
       "tags": [ "frontend-team" ]
     },

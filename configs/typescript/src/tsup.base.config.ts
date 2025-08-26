@@ -1,7 +1,8 @@
 import type {Options} from 'tsup'
+// @ts-ignore
+import {importsRewritePlugin} from "./tsup-plugins/importsResolverPlugin.ts";
 
-const entriesForDualOutput = [
-    'src',
+const baseIgnoreCompilePatterns = [
     '!src/stories',
     '!src/@types',
     '!src/**/*.test.ts',
@@ -11,36 +12,66 @@ const entriesForDualOutput = [
     '!src/**/*.{mdx,avif,svg,png,jpg,jpeg,gif,webp}',
 ]
 
+const entriesForDualOutput = [
+    'src',
+    '!src/types', // avoid to compile src/types folder
+    ...baseIgnoreCompilePatterns
+]
+
+const entriesForDtsOutput = [
+    'src',
+    ...baseIgnoreCompilePatterns,
+]
+
 export const dualOutputOptions: Options[] = [
-    {
-        entry: entriesForDualOutput,
-        outDir: 'lib/types',
-        dts: {
-            only: true,
-        }
-    },
     {
         entry: entriesForDualOutput,
         format: ['cjs'],
         outDir: 'lib/cjs',
-        bundle: false,
         sourcemap: false,
         clean: true,
         dts: false,
         target: 'es2022',
-        external: ['tslib'],
+        esbuildPlugins: [importsRewritePlugin()],
+        bundle: false,
     },
     {
         entry: entriesForDualOutput,
         format: ['esm'],
         outDir: 'lib/esm',
-        bundle: false,
         splitting: false,
         sourcemap: false,
         clean: true,
         dts: false,
         target: 'es2022',
-        external: ['tslib'],
-        outExtension: () => ({js: '.js'})
+        outExtension: () => ({js: '.js'}),
+        esbuildPlugins: [importsRewritePlugin()],
+        bundle: false,
+    }
+]
+
+export const dtsOutputOptions: Options[] = [
+    {
+        entry: entriesForDtsOutput,
+        outDir: 'lib/types',
+        bundle: false,
+        splitting: false,
+        sourcemap: false,
+        clean: true,
+        dts: {
+            only: true,
+        }
     },
 ]
+
+export const getDualOutputOptions = (dts: boolean = true): Options[] => {
+    let options: Options[]
+
+    options = [...dualOutputOptions]
+
+    if (dts) {
+        options = [...options, ...dtsOutputOptions]
+    }
+
+    return options
+}

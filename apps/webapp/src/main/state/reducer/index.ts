@@ -1,8 +1,21 @@
 import { combineReducers } from 'redux'
-import { authReducer, initialAuthState } from '@webapp/auth/state'
-import { globalReducer, initialGlobalState } from '@webapp/global/state'
-import { usersReducer, initialUsersState } from '@webapp/users/state'
+//import * as auth from '@webapp/auth'
 
+export const initialAppState = {
+    auth: {},
+    users: {},
+    global: {},
+}
+export const appReducer = combineReducers({
+    auth: {},
+    users: {},
+    global: {},
+})
+//import { authReducer, initialAuthState, authThunks } from '@webapp/auth'
+//import { globalReducer, initialGlobalState, globalThunks } from '@webapp/global'
+//import { usersReducer, initialUsersState, usersThunks } from '@webapp/users'
+
+/*
 export const initialAppState = {
   auth: initialAuthState,
   users: initialUsersState,
@@ -16,3 +29,4 @@ export const appReducer = combineReducers({
   users: usersReducer,
   global: globalReducer,
 })
+*/

@@ -124,9 +124,5 @@ export const getBrowserSecurityService = () => {
     throw new Error('getBrowserSecurityService only works in the browser')
   }
 
-  return new SecurityService(
-      navigator.userAgent,
-      navigator,
-      window.screen,
-  )
+  return new SecurityService(navigator.userAgent, navigator, window.screen)
 }

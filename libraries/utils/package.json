@@ -4,23 +4,14 @@
   "author": "",
   "license": "ISC",
   "description": "",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
+  "browser": "lib/esm/index.js",
   "exports": {
     ".": {
       "types": "./lib/types/index.d.ts",
       "import": "./lib/esm/index.js",
       "require": "./lib/cjs/index.js"
-    },
-    "./node": {
-      "types": "./lib/types/node/index.d.ts",
-      "import": "./lib/esm/node/index.js",
-      "require":  "./lib/cjs/node/index.js"
-    }
-  },
-  "typesVersions": {
-    "*": {
-      "node": [
-        "lib/types/node/index.d.ts"
-      ]
     }
   },
   "files": [
@@ -32,8 +23,10 @@
   },
   "devDependencies": {
     "@configs/typescript": "workspace:*",
+    "@tools/jest-scripts": "workspace:*",
+    "@tools/eslint-scripts": "workspace:*",
     "@types/jest": "30.0.0",
-    "@types/node": "22.17.1",
+    "@types/node": "24.3.0",
     "@types/react": "19.1.10",
     "@types/redux-logger": "3.0.13",
     "axios": "1.11.0",

@@ -1,4 +1,4 @@
 import { defineConfig } from 'tsup'
-import { dualOutputOptions } from '@configs/typescript'
+import { getDualOutputOptions } from '@configs/typescript'
 
-export default defineConfig(dualOutputOptions);
+export default defineConfig(getDualOutputOptions());

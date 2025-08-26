@@ -1,0 +1,105 @@
+{
+  "name": "@webapp/shared",
+  "version": "0.0.0",
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "exports": {
+    "./constants": {
+      "types": "./lib/types/constants/index.d.ts",
+      "import": "./lib/esm/constants/index.js",
+      "require": "./lib/cjs/constants/index.js"
+    },
+    "./types": {
+      "default": "./lib/types/types/index.d.ts"
+    },
+    "./ui": {
+      "types": "./lib/types/ui/index.d.ts",
+      "import": "./lib/esm/ui/index.js",
+      "require": "./lib/cjs/ui/index.js"
+    },
+    "./utils": {
+      "types": "./lib/types/utils/index.d.ts",
+      "import": "./lib/esm/utils/index.js",
+      "require": "./lib/cjs/utils/index.js"
+    },
+    "./node-utils": {
+      "types": "./lib/types/utils/node-utils/index.d.ts",
+      "import": "./lib/esm/utils/node-utils/index.js",
+      "require": "./lib/cjs/utils/node-utils/index.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "constants": [
+        "./lib/types/constants/index.d.ts"
+      ],
+      "types": [
+        "./lib/types/types/index.d.ts"
+      ],
+      "ui": [
+        "./lib/types/ui/index.d.ts"
+      ],
+      "utils": [
+        "./lib/types/utils/index.d.ts"
+      ],
+      "node-utils": [
+        "./lib/types/utils/node-utils/index.d.ts"
+      ]
+    }
+  },
+  "imports": {
+    "#assets":"./src/assets/index.ts",
+    "#config": "./src/config/index.ts",
+    "#constants":  "./src/constants/index.ts",
+    "#experimental": "./src/experimental/index.ts",
+    "#router":"./src/router/index.ts",
+    "#state": "./src/state/index.ts",
+    "#types": "./src/types/index.d.ts",
+    "#ui": "./src/ui/index.ts",
+    "#utils": "./src/utils/index.ts"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "jestx --detectOpenHandles",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "devDependencies": {
+    "@configs/typescript": "workspace:*",
+    "@libraries/ui": "workspace:*",
+    "@libraries/utils": "workspace:*",
+    "@tools/jest-scripts": "workspace:*",
+    "@tools/eslint-scripts": "workspace:*",
+    "@testing-library/cypress": "10.0.3",
+    "@testing-library/dom": "10.4.1",
+    "@testing-library/jest-dom": "6.7.0",
+    "@testing-library/react": "16.3.0",
+    "@testing-library/user-event": "14.6.1",
+    "@reduxjs/toolkit": "2.8.2",
+    "@types/jest": "30.0.0",
+    "@types/node": "24.3.0",
+    "@types/react": "19.1.10",
+    "@types/react-dom": "19.1.7",
+    "jest": "30.0.5",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "react-hook-form": "7.62.0",
+    "react-redux": "9.2.0",
+    "react-router": "7.8.0",
+    "redux": "5.0.1",
+    "reselect": "5.1.1",
+    "rimraf": "6.0.1",
+    "tsup": "8.5.0",
+    "tslib": "2.8.1",
+    "typescript": "5.9.2"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
+  }
+}

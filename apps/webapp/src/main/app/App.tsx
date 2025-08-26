@@ -1,18 +1,18 @@
-import {ProviderComposer} from '@webapp/shared/providers'
+import { FC, StrictMode } from 'react'
+import { ProviderComposer } from '@webapp/shared/ui'
 
-import router from "../router";
-import store from "../store";
+import { router } from '../router'
+import { store } from '../state'
 
-function App() {
-    return (
-        <ProviderComposer
-            //@ts-ignore
-            reduxProviderProps={{store}}
-            routerProviderProps={{router}}
-        >
-            <div>app</div>
-        </ProviderComposer>
-    )
+
+export const App: FC = () => {
+  return (
+    <StrictMode>
+      <ProviderComposer
+        // @ts-ignore
+        reduxProviderProps={{ store }}
+        routerProviderProps={{ router }}
+      />
+    </StrictMode>
+  )
 }
-
-export default App

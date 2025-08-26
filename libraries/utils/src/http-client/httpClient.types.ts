@@ -1,4 +1,4 @@
-import {AxiosRequestConfig, AxiosRequestHeaders} from 'axios'
+import { AxiosRequestConfig } from 'axios'
 import HttpMethods from './http-methods/index.js'
 
 export type Body = object | FormData | void
