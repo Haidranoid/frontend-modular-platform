@@ -1,2 +1,2 @@
 // mocks/fileMocks.js
-module.exports = 'test-file-stub'
+export default 'test-file-stub'

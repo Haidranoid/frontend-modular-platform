@@ -1,4 +1,4 @@
 import { createUseAppSelector } from '@webapp/shared/utils'
-import { RootState } from '#state'
+import { RootState } from '../../store'
 
 export const useAppSelector = createUseAppSelector<RootState>()

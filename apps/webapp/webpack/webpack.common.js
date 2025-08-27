@@ -1,7 +1,6 @@
 // webpack.common.ts
 //const { getAliasUtils } = require('@libraries/utils/node')
 const path = require('path')
-const { generateAlias } = require('@webapp/shared/node-utils')
 const processPlugin = require('./plugins/ProcessPlugin')
 const dotEnvPlugin = require('./plugins/DotEnvPlugin')
 const htmlWebpackPlugin = require('./plugins/HtmlWebpackPlugin')
@@ -13,9 +12,6 @@ const {
 } = require('./plugins/MiniCssExtractPlugin')
 const { ROOT_DIR } = require('./constants')
 
-const { webpackAlias } = generateAlias()
-
-//console.log({webpackAlias})
 const commonConfig = {
   target: 'web',
   entry: [
@@ -51,39 +47,14 @@ const commonConfig = {
     plugins: [],
     fallback: {
       buffer: require.resolve('buffer/'),
-      process: require.resolve('process/browser.js'),
+      //process: require.resolve('process/browser.js'),
     },
-    alias: {
-        ...webpackAlias,
-        //axios: require.resolve("axios/dist/axios.js"),
-    },
-    //exportsFields: ["exports"],
-    //importsFields: ["imports"],
-    //mainFields: ["exports", "imports"],
-      // 👇 orden en que webpack va a evaluar package.json "exports"
-      /*
-      conditionNames: [
-          "browser",   // para web builds
-          "import",    // si es import ESM
-          "require",   // si es require CJS
-          "default"    // fallback
-      ],
-      // 👇 si usas package.json "imports" (subpaths con #)
-      byDependency: {
-          esm: { conditionNames: ["import", "browser", "default"] },
-          commonjs: { conditionNames: ["require", "browser", "default"] },
-      },
-      // 👇 ignora que te pidan rutas 100% fully specified (con .js/.mjs)
-      fullySpecified: false,
-       */
+    fullySpecified: false
   },
-  externals: {
-    //typescript: 'typescript',
-    //'@webapp/shared/node-utils': 'commonjs @webapp/shared/node-utils',
-  },
+  //externals: {typescript: 'typescript'},
   plugins: [
     dotEnvPlugin,
-    processPlugin,
+    //processPlugin,
     htmlWebpackPlugin,
     nodePolyfillPlugin,
     miniCssExtractPlugin,
@@ -91,4 +62,6 @@ const commonConfig = {
   ],
 }
 
-module.exports = commonConfig
+module.exports = {
+    commonConfig,
+}

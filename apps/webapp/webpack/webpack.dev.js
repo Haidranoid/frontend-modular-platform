@@ -19,4 +19,6 @@ const devConfig = {
   //plugins: [],
 }
 
-module.exports = devConfig
+module.exports = {
+    devConfig,
+}

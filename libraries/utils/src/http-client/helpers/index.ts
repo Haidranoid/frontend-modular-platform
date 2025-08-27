@@ -1,6 +1,6 @@
 export type ExtractPathVariables = (endpoint: string | null) => object
 
-function hasMessageProperty(error: unknown): error is { message: unknown } {
+export function hasMessageProperty(error: unknown): error is { message: unknown } {
   return typeof error === 'object' && error !== null && 'message' in error
 }
 

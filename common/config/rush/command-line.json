@@ -177,7 +177,7 @@
     // }
     {
       "commandKind": "global",
-      "name": "deps-graph",
+      "name": "graph",
       "summary": "Generates an SVG graph of internal monorepo dependencies",
       "autoinstallerName": "deps-graph",
       "shellCommand": "node common/autoinstallers/deps-graph/generate-deps-graph-v3.js",
@@ -196,7 +196,7 @@
       "commandKind": "bulk",
       "name": "linter",
       "summary": "",
-      "shellCommand": "eslintx src/**/* --fix || echo 'eslintx not found, skipping'",
+      "shellCommand": "linterx src/**/* --fix",
       "enableParallelism": true,
       "ignoreDependencyOrder": true,
       "safeForSimultaneousRushProcesses": true

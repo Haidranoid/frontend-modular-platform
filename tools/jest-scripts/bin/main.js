@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-require('../lib/cjs/runner.js')
+require('../src/runner.js')

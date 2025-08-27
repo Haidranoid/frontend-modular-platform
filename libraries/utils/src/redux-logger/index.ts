@@ -1,1 +1,1 @@
-export * from './reduxLogger.js'
+export * from './reduxLogger'

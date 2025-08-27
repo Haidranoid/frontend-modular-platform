@@ -1,4 +1,4 @@
-import { getBaseUrl } from '#utils'
+import { getBaseUrl } from '@libraries/utils'
 
 const baseUrl = getBaseUrl()
 

@@ -3,7 +3,8 @@ import type { ActionReducerMapBuilder, PayloadAction } from '@reduxjs/toolkit'
 import { getErrorMessage } from '@libraries/utils'
 import { Api, OnFulfilledMap, BaseState } from '#types'
 import { SliceNames } from '#constants'
-import { createThunk, isPendingGeneric, isRejectedGeneric } from '#utils'
+import { createThunk } from '../create-thunk'
+import { isPendingGeneric, isRejectedGeneric } from '../matchers'
 
 export function createSliceTools<TState, TApi extends Api>(
   slice: SliceNames,

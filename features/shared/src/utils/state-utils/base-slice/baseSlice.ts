@@ -1,5 +1,5 @@
 import { CaseReducer, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { rebootMatcher } from '#utils'
+import { rebootMatcher } from '../matchers'
 import { SliceNames } from '#constants'
 import { BaseState } from '#types'
 

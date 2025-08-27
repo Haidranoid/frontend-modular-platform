@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from 'axios'
-import HttpMethods from './http-methods/index.js'
+import { HttpMethods } from './http-methods'
 
 export type Body = object | FormData | void
 export type Response = object | undefined

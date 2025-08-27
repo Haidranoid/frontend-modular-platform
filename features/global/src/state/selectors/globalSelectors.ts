@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect'
-import { RootState } from '#state'
+import { RootState } from '../store'
 
 // Base selector (raw slice from state)
 const baseSelector = (state: RootState) => state

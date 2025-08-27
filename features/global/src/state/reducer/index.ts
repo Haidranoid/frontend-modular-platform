@@ -1,4 +1,4 @@
-import { globalSlice } from '#state'
+import { globalSlice } from '../slice'
 
 export const initialGlobalState = globalSlice.getInitialState()
 

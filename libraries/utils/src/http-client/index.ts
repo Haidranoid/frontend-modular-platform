@@ -1,3 +1,3 @@
-export * from './helpers/index.js'
-export * from './http-methods/index.js'
-export * from './httpClient.js'
+export * from './helpers'
+export * from './http-methods'
+export * from './httpClient'

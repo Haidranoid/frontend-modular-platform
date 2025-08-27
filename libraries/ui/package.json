@@ -15,7 +15,7 @@
     "lib"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "buildx",
     "test": "jestx --detectOpenHandles",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
@@ -24,6 +24,7 @@
     "@configs/typescript": "workspace:*",
     "@tools/jest-scripts": "workspace:*",
     "@tools/eslint-scripts": "workspace:*",
+    "@tools/rollup-scripts": "workspace:*",
     "@storybook/addon-essentials": "9.0.0-alpha.12",
     "@storybook/addon-interactions": "9.0.0-alpha.10",
     "@storybook/addon-webpack5-compiler-swc": "3.0.0",
@@ -37,7 +38,6 @@
     "storybook": "9.1.2",
     "styled-components": "6.1.19",
     "tsconfig-paths-webpack-plugin": "4.2.0",
-    "tsup": "8.5.0",
     "tslib": "2.8.1",
     "typescript": "5.9.2",
     "msw": "2.10.5",

@@ -1,15 +1,15 @@
 import { combineReducers } from 'redux'
-//import * as auth from '@webapp/auth'
+import { authReducer, initialAuthState } from '@webapp/auth'
 
 export const initialAppState = {
-    auth: {},
-    users: {},
-    global: {},
+    auth: initialAuthState,
+    //users: {},
+    //global: {},
 }
 export const appReducer = combineReducers({
-    auth: {},
-    users: {},
-    global: {},
+    auth: authReducer,
+    //users: {},
+    //global: {},
 })
 //import { authReducer, initialAuthState, authThunks } from '@webapp/auth'
 //import { globalReducer, initialGlobalState, globalThunks } from '@webapp/global'

@@ -1,4 +1,4 @@
-import { usersSlice } from '#state'
+import { usersSlice } from '../slice'
 
 export const initialUsersState = usersSlice.getInitialState()
 

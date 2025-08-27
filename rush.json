@@ -489,6 +489,12 @@
       "tags": [ "frontend-team" ]
     },
     {
+      "packageName": "@configs/rollup",
+      "projectFolder": "configs/rollup",
+      "reviewCategory": "configs",
+      "tags": [ "frontend-team" ]
+    },
+    {
       "packageName": "@configs/typescript",
       "projectFolder": "configs/typescript",
       "reviewCategory": "configs",
@@ -515,6 +521,12 @@
     {
       "packageName": "@tools/jest-scripts",
       "projectFolder": "tools/jest-scripts",
+      "reviewCategory": "tools",
+      "tags": [ "frontend-team" ]
+    },
+    {
+      "packageName": "@tools/rollup-scripts",
+      "projectFolder": "tools/rollup-scripts",
       "reviewCategory": "tools",
       "tags": [ "frontend-team" ]
     }

@@ -1,5 +1,5 @@
 import { configureAppStore } from '@webapp/shared/utils'
-import { usersReducer, initialUsersState } from '#state'
+import { usersReducer, initialUsersState } from '../reducer'
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>

@@ -4,22 +4,17 @@
   "author": "",
   "license": "ISC",
   "description": "",
-  "main": "src/index.js",
   "exports": {
     ".": "./src/index.js"
   },
   "scripts": {
     "build": "exit 0",
+    "linter": "exit 0",
     "test": "exit 0"
   },
   "devDependencies": {
-    "@configs/typescript": "workspace:*",
-    "@tools/eslint-scripts": "workspace:*",
     "@types/node": "24.3.0",
     "rimraf": "6.0.1",
-    "tslib": "2.8.1",
-    "tsup": "8.5.0",
-    "typescript": "5.9.2",
     "zod": "4.1.0"
   }
 }

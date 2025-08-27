@@ -1,7 +1,7 @@
 import axios, { AxiosHeaders } from 'axios'
 import * as qs from 'query-string'
-import { getBrowserSecurityService } from '../security-service/index.js'
-import { AuthenticationService } from '../auth-service/index.js'
+import { getBrowserSecurityService } from '../security-service'
+import { AuthenticationService } from '../auth-service'
 import {
   AxiosConfigurationBuilder,
   CustomHeaders,
@@ -11,7 +11,7 @@ import {
   ReplaceEndpointVariables,
   RequestParams,
 } from './httpClient.types.js'
-import HttpMethods from './http-methods/index.js'
+import { HttpMethods } from './http-methods'
 
 // ========== Utility Functions ==========
 const generateQueryParams: GenerateQueryParams = (queryParams) => {

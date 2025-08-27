@@ -1,6 +1,6 @@
 import { createBaseSlice } from '@webapp/shared/utils'
 import { User } from '@webapp/shared/types'
-import { authTools } from '#state'
+import { authTools } from '../tools'
 
 export interface AuthState {
   isAuthenticated: boolean

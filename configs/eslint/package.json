@@ -4,18 +4,18 @@
   "author": "",
   "license": "ISC",
   "description": "",
-  "main": "src/index.js",
   "exports": {
     ".": "./src/index.js"
   },
   "scripts": {
     "build": "exit 0",
+    "linter": "exit 0",
     "test": "exit 0"
   },
   "devDependencies": {
-    "@configs/typescript": "workspace:*",
     "@eslint/json": "0.13.1",
     "@testing-library/dom": "10.4.1",
+    "@types/eslint": "9.6.1",
     "@types/eslint-plugin-jsx-a11y": "6.10.0",
     "@types/node": "24.3.0",
     "@typescript-eslint/eslint-plugin": "8.39.1",
@@ -34,7 +34,6 @@
     "eslint-plugin-unused-imports": "4.1.4",
     "prettier": "3.6.2",
     "rimraf": "6.0.1",
-    "typescript": "5.9.2",
     "typescript-eslint": "8.39.1"
   }
 }

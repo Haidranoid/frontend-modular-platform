@@ -1,4 +1,9 @@
 {
-  "extends": "@configs/typescript/tsconfig.esnext.json",
+  "extends": "@configs/typescript/tsconfig.base.json",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler"
+  },
   "include": ["src"]
 }

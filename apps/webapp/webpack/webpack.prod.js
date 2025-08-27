@@ -1,7 +1,6 @@
 // webpack.prod.js
 const path = require('path')
 const cleanWebpackPlugin = require('./plugins/CleanWebpackPlugin')
-//const compressionPlugin = require('./plugins/CompressionPlugin')
 const cssMinimizerPlugin = require('./plugins/CssMinimizerPlugin')
 const myTerserPlugin = require('./plugins/TerserPlugin')
 const { ROOT_DIR } = require('./constants')
@@ -38,4 +37,6 @@ const prodConfig = {
   plugins: [cleanWebpackPlugin],
 }
 
-module.exports = prodConfig
+module.exports = {
+    prodConfig,
+}

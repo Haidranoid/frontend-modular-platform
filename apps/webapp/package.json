@@ -15,8 +15,6 @@
     "dev": "concurrently -k \"npm run server \" \"wait-on http://localhost:8080/api/actuator/health && npm start\"",
     "stop": "(pkill -f webpack && pkill -f node && pkill -f java) || (taskkill /IM node.exe /F & taskkill /IM java.exe /F)",
     "build": "webpack --env mode=production",
-    "clean": "rimraf dist coverage",
-    "clean:cache": "npm cache clean --force",
     "test": "jestx --detectOpenHandles",
     "test:ci": "jestx --ci --detectOpenHandles --forceExit",
     "test:clean": "jestx --clearCache",
@@ -28,17 +26,15 @@
     "eslint:cy": "eslintx cypress/**/* --fix",
     "eslint:all": "eslintx . --fix",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "check:outdated": "npm outdated",
-    "optimize:deps": "npm dedupe"
+    "build-storybook": "storybook build"
   },
   "devDependencies": {
     "@webapp/auth": "workspace:*",
     "@webapp/global": "workspace:*",
     "@webapp/shared": "workspace:*",
     "@webapp/users": "workspace:*",
-    "@tools/eslint-scripts": "workspace:*",
     "@configs/typescript": "workspace:*",
+    "@tools/eslint-scripts": "workspace:*",
     "@babel/core": "7.28.3",
     "@babel/plugin-transform-runtime": "7.28.3",
     "@babel/preset-env": "7.28.3",

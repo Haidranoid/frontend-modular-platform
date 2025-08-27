@@ -2,7 +2,8 @@ import { SliceNames } from '@webapp/shared/constants'
 import { createSliceTools } from '@webapp/shared/utils'
 import { AuthenticationService } from '@webapp/shared/utils'
 import { OnFulfilledMap } from '@webapp/shared/types'
-import { AuthState, AuthApi, authApi } from '#state'
+import { AuthApi, authApi } from '../api'
+import { AuthState } from '../slice'
 
 const onFulfilledMap: OnFulfilledMap<AuthState, AuthApi> = {
   me: (state, action) => {

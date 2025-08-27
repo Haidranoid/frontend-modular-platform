@@ -1,4 +1,4 @@
-import { authSlice } from '#state'
+import { authSlice } from '../slice'
 
 export const initialAuthState = authSlice.getInitialState()
 

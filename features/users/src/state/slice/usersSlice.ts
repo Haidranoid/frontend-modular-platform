@@ -1,6 +1,6 @@
 import { createBaseSlice } from '@webapp/shared/utils'
 import { User } from '@webapp/shared/types'
-import { usersTools } from '#state'
+import { usersTools } from '../tools'
 
 export interface UsersState {
   users: User[]

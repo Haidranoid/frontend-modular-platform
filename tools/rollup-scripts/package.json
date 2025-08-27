@@ -1,0 +1,20 @@
+{
+  "name": "@tools/rollup-scripts",
+  "version": "0.0.0",
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "bin": {
+    "buildx": "bin/main.js"
+  },
+  "scripts": {
+    "build": "exit 0",
+    "linter": "exit 0",
+    "test": "exit 0"
+  },
+  "devDependencies": {
+    "@configs/rollup": "workspace:*",
+    "@types/node": "24.3.0",
+    "rimraf": "6.0.1"
+  }
+}

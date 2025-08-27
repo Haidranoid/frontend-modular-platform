@@ -1,0 +1,32 @@
+{
+  "name": "@configs/rollup",
+  "version": "0.0.0",
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "scripts": {
+    "build": "exit 0",
+    "linter": "exit 0",
+    "test": "exit 0"
+  },
+  "devDependencies": {
+    "@babel/core": "7.28.3",
+    "@babel/preset-env": "7.28.3",
+    "@babel/preset-typescript": "7.27.1",
+    "@babel/preset-react": "7.27.1",
+    "@rollup/plugin-node-resolve": "16.0.1",
+    "@rollup/plugin-commonjs": "28.0.6",
+    "@rollup/plugin-json": "6.1.0",
+    "@rollup/plugin-alias": "5.1.1",
+    "@rollup/plugin-babel": "6.0.4",
+    "@types/node": "24.3.0",
+    "fast-glob": "3.3.3",
+    "rollup-plugin-typescript2": "0.36.0",
+    "rollup-plugin-clear": "2.0.7",
+    "rollup": "4.48.1",
+    "rimraf": "6.0.1"
+  }
+}
