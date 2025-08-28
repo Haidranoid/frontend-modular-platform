@@ -4,7 +4,7 @@ import { Home } from '#ui'
 
 export const routes: RouteObject[] = [
     {
-        path: BasePaths.USERS_BASE,
+        path: BasePaths.GLOBAL_BASE,
         children: [
             {
                 index: true,

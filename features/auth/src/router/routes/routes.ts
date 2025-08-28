@@ -1,29 +1,40 @@
-import { RouteObject } from 'react-router'
-import { BasePaths } from '@webapp/shared/constants'
-import { Home, AuthLayout, Login, Signup } from '#ui'
+import {RouteObject} from 'react-router'
+import {BasePaths} from '@webapp/shared/constants'
 
 export const routes: RouteObject[] = [
-  {
-    path: BasePaths.AUTH_BASE,
-    children: [
-      {
-        index: true,
-        Component: Home,
-      },
-      {
-        path: BasePaths.AUTH_BASE + '/',
-        Component: AuthLayout,
+    {
+        path: BasePaths.AUTH_BASE,
         children: [
-          {
-            path: BasePaths.AUTH_BASE + '/login',
-            Component: Login,
-          },
-          {
-            path: BasePaths.AUTH_BASE + '/signup',
-            Component: Signup,
-          },
+            {
+                index: true,
+                lazy: async () => {
+                    const {Home} = await import('#ui')
+                    return {Component: Home}
+                },
+            },
+            {
+                path: BasePaths.AUTH_BASE + '/',
+                lazy: async () => {
+                    const {AuthLayout} = await import('#ui')
+                    return {Component: AuthLayout}
+                },
+                children: [
+                    {
+                        path: BasePaths.AUTH_BASE + '/login',
+                        lazy: async () => {
+                            const {Login} = await import('#ui')
+                            return {Component: Login}
+                        },
+                    },
+                    {
+                        path: BasePaths.AUTH_BASE + '/signup',
+                        lazy: async () => {
+                            const {Signup} = await import('#ui')
+                            return {Component: Signup}
+                        },
+                    },
+                ],
+            },
         ],
-      },
-    ],
-  },
+    },
 ]

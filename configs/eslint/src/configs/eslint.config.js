@@ -7,8 +7,8 @@ const eslintPluginJestDom = require('eslint-plugin-jest-dom')
 const eslintPluginCypress = require('eslint-plugin-cypress')
 const eslintPluginPrettier = require('eslint-plugin-prettier')
 const eslintPluginJsxA11y = require('eslint-plugin-jsx-a11y')
-const eslintPluginUnusedImports = require('eslint-plugin-unused-consts')
-const eslintPluginImport = require('eslint-plugin-const')
+const eslintPluginUnusedImports = require('eslint-plugin-unused-imports')
+const eslintPluginImport = require('eslint-plugin-import')
 //import prettierConfig from './.prettierrc.json'
 const prettierConfig = require('./prettierrc')
 
