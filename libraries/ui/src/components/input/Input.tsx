@@ -10,7 +10,7 @@ interface InputProps {
   children?: React.ReactNode
 }
 
-const Input: FC<InputProps> = (props) => {
+export const Input: FC<InputProps> = (props) => {
   const {
     value = '',
     onChange,
@@ -33,4 +33,3 @@ const Input: FC<InputProps> = (props) => {
   )
 }
 
-export default Input

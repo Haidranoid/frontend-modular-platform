@@ -10,9 +10,7 @@ export interface ButtonProps {
   size?: 'sm' | 'md' | 'lg'
 }
 
-const Button: FC<ButtonProps> = (props) => {
+export const Button: FC<ButtonProps> = (props) => {
   const { onClick } = props
   return <ButtonStyled onClick={onClick}>{props.children}</ButtonStyled>
 }
-
-export default Button

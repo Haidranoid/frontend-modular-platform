@@ -1,17 +1,17 @@
 {
   "extends": "@configs/typescript/tsconfig.react.json",
   "compilerOptions": {
-    "baseUrl": "src",
+    "baseUrl": ".",
     "paths": {
-      "#assets": ["assets/index.ts"],
-      "#config": ["config/index.ts"],
-      "#constants": ["constants/index.ts"],
-      "#experimental": ["experimental/index.ts"],
-      "#router": ["router/index.ts"],
-      "#state": ["state/index.ts"],
-      "#types": ["types/index.ts"],
-      "#ui": ["ui/index.ts"],
-      "#utils": ["utils/index.ts"]
+      "#assets/*": ["src/assets/*"],
+      "#config/*": ["src/config/*"],
+      "#constants": ["src/constants/index.ts"],
+      "#experimental": ["src/experimental/index.ts"],
+      "#router": ["src/router/index.ts"],
+      "#state": ["src/state/index.ts"],
+      "#types": ["src/types/index.ts"],
+      "#ui": ["src/ui/index.ts"],
+      "#utils": ["src/utils/index.ts"]
     }
   },
   "include": ["src"]

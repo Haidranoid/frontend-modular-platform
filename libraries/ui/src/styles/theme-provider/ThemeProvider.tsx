@@ -8,7 +8,7 @@ interface ThemeProviderProps {
   children: React.ReactNode
 }
 
-const ThemeProvider: React.FC<ThemeProviderProps> = (props) => {
+export const ThemeProvider: React.FC<ThemeProviderProps> = (props) => {
   const [mode, setMode] = useState<ThemeMode>('light')
 
   const toggle = () => {
@@ -27,4 +27,3 @@ const ThemeProvider: React.FC<ThemeProviderProps> = (props) => {
   )
 }
 
-export default ThemeProvider

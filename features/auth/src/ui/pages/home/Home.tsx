@@ -1,7 +1,7 @@
 import { FC, useEffect } from 'react'
-//import { useActions } from '@webapp/shared/utils'
-import { Button } from '@webapp/shared/ui'
-import { useThemeMode } from '@webapp/shared/ui'
+//import { useActions } from '@webapp/shared'
+import { Button } from '@webapp/shared'
+import { useThemeMode } from '@webapp/shared'
 
 export const Home: FC = () => {
   //const { me, fetchAll } = useActions()

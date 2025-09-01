@@ -1,3 +1,3 @@
-import { authTools } from '../tools'
+import { authSlice } from '../slice'
 
-export const authThunks = authTools.thunks
+export const authThunks = authSlice.thunks

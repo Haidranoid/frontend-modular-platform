@@ -1,4 +1,4 @@
-import { configureAppStore } from '@webapp/shared/utils'
+import { configureAppStore } from '@webapp/shared'
 import { authReducer, initialAuthState } from '../reducer'
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

@@ -10,7 +10,7 @@ interface SelectProps {
   children?: React.ReactNode
 }
 
-const Select: FC<SelectProps> = (props) => {
+export const Select: FC<SelectProps> = (props) => {
   const {
     label,
     value = '',
@@ -43,4 +43,3 @@ const Select: FC<SelectProps> = (props) => {
   )
 }
 
-export default Select

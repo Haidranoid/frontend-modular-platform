@@ -1,1 +1,1 @@
-export const hooksSetup = "hooks-setup";
+export const hooksSetup = 'hooks-setup'

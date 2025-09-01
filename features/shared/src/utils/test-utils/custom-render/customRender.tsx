@@ -96,7 +96,7 @@ const renderWithProviders: RenderWithProvidersType = (
 }
 
 // re-export everything
-export * from '@testing-library/react'
+//export * from '@testing-library/react'
 
 // override render method
 export { renderWithProviders }

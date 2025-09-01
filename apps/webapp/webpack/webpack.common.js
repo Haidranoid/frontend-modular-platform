@@ -1,7 +1,6 @@
 // webpack.common.ts
 //const { getAliasUtils } = require('@libraries/utils/node')
 const path = require('path')
-const processPlugin = require('./plugins/ProcessPlugin')
 const dotEnvPlugin = require('./plugins/DotEnvPlugin')
 const htmlWebpackPlugin = require('./plugins/HtmlWebpackPlugin')
 const nodePolyfillPlugin = require('./plugins/NodePolyfillPlugin')

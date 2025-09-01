@@ -1,9 +1,9 @@
 import React, { FC, useState } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router'
-//import { useActions } from '@webapp/shared/utils'
-import { Input, Button } from '@webapp/shared/ui'
-import { BasePaths } from '@webapp/shared/constants'
+//import { useActions } from '@webapp/shared'
+import { Input, Button } from '@webapp/shared'
+import { BasePaths } from '@webapp/shared'
 
 const SignUpContainerStyled = styled.div`
   display: flex;

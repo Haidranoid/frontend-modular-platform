@@ -1,1 +1,1 @@
-export const layouts = "layouts"
+export const layouts = 'layouts'

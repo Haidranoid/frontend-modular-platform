@@ -1,1 +1,1 @@
-export const components = "components"
+export const components = 'components'

@@ -1,14 +1,41 @@
-import { Action, Draft, PayloadAction } from '@reduxjs/toolkit'
-import { BaseState, CrudApi, EntityId, OnFulfilledMap } from '#types'
+import {ApiFromSchema, RawApiSchema} from "#types";
+import {MakeApiSchema, User} from "#types";
+import {httpClient} from "@libraries/utils";
+
+export function defineApi<S, T extends RawApiSchema>(
+    api: ApiFromSchema<S, T>
+): ApiFromSchema<S, T> {
+    return api
+}
+
+
+
+/*
+export interface CrudApi<S, E extends EntityId> extends Api<S> {
+    fetchAll: {
+        operation: () => Promise<E[]>
+    }
+    fetchById: {
+        operation: (id: number) => Promise<E>
+    }
+    create: {
+        operation: (payload: E) => Promise<E>
+    }
+    update: {
+        operation: (payload: Partial<E>) => Promise<E>
+    }
+    delete: {
+        operation: (id: number) => Promise<E>
+    }
+}
 
 function getMetaArg<TArg>(action: Action): TArg {
   return (action as PayloadAction<any, string, { arg: TArg }>).meta.arg
 }
-
-export function createCrudOnFulfilledMap<TState, Entity extends EntityId>(
+export function createCrudApi<TState, Entity extends EntityId>(
   entitiesKey: keyof Draft<TState>,
   entityKey: keyof Draft<TState>,
-): OnFulfilledMap<TState, CrudApi<Entity>> {
+): OnFulfilledMap<TState, CrudApi<TState,Entity>> {
   type EntitiesKeyType = typeof entitiesKey
   type EntityKeyType = typeof entityKey
 
@@ -39,3 +66,4 @@ export function createCrudOnFulfilledMap<TState, Entity extends EntityId>(
     },
   }
 }
+ */

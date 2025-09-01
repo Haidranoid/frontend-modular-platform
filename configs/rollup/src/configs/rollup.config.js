@@ -1,108 +1,99 @@
-const { defineConfig } = require('rollup')
+const path = require('path')
+const {defineConfig} = require('rollup')
 const resolve = require('@rollup/plugin-node-resolve')
 const commonjs = require('@rollup/plugin-commonjs')
 const alias = require('@rollup/plugin-alias')
 const json = require('@rollup/plugin-json')
-const typescript = require('rollup-plugin-typescript2')
 const babel = require('@rollup/plugin-babel')
 const clear = require('rollup-plugin-clear')
-const glob = require('fast-glob')
-const path = require('path')
-const fs = require('fs')
+const {dts} = require('rollup-plugin-dts')
+const {getInputs, getImportsAliases, getExternalDependencies} = require('./rollupUtils');
 
-const pkg = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), "package.json"), "utf-8"));
 
-const aliases = pkg.imports
-    ? Object.entries(pkg.imports).map(([find, replacement]) => ({
-        find,
-        replacement: path.resolve(process.cwd(), replacement),
-    }))
-    : [];
-
-let inputs = glob.sync([
-    'src/index.{ts,tsx,js}',
-    'src/runner.{ts,tsx,js}',
-]);
-
-const ignorePatterns = [
-    '!src/stories',
-    '!src/@types',
-    '!src/**/*.test.ts',
-    '!src/**/*.ignore.*',
-    '!src/**/*.stories.*',
-    '!src/**/*.{css,scss,sass}',
-    '!src/**/*.{mdx,avif,svg,png,jpg,jpeg,gif,webp}',
-]
-
-// Si no existe src/index.ts(x), entonces buscamos src/*/index.ts(x)
-if (inputs.length === 0) {
-    inputs = glob.sync([
-        'src/*/index.{ts,tsx,js}',
-    ]);
-}
-
-inputs = glob.sync([
-    ...inputs,
-    ...ignorePatterns,
-]);
-
+const inputs = getInputs()
+const importsAliases = getImportsAliases()
+const externalDependencies = getExternalDependencies()
 const extensions = ['.js', '.ts', '.tsx'];
 
-const rollupConfig = defineConfig({
-    input: inputs,
-    output: [
-        {
-            dir: 'lib/cjs',
-            format: 'cjs',
-            sourcemap: true,
-            exports: 'named',
-            preserveModules: true,
-            preserveModulesRoot: 'src',
-        },
-        {
-            dir: 'lib/esm',
-            format: 'esm',
-            sourcemap: true,
-            preserveModules: true,
-            preserveModulesRoot: 'src',
-        },
-    ],
-    external: [
-        "react",
-        "react-dom",
-        "react-router",
-        "react-router-dom",
-        "tslib",
-    ],
-    plugins: [
-        clear({targets: ['lib'], watch: true}),
-        alias({entries: aliases}),
-        resolve({extensions, browser: true}),
-        commonjs(),
-        json(),
-        typescript({
-            tsconfig: 'tsconfig.json',
-            useTsconfigDeclarationDir: true,
-            tsconfigOverride: {
-                compilerOptions: {
-                    rootDir: 'src',
-                    declaration: true,
-                    declarationDir: 'lib/types',
-                }
+const rollupConfig = defineConfig([
+    {
+        input: inputs,
+        output: [
+            {
+                dir: 'dist',
+                format: 'cjs',
+                sourcemap: true,
+                exports: 'named',
+                preserveModules: true,
+                preserveModulesRoot: 'src',
+                entryFileNames: '[name].cjs',
             },
-        }),
-        babel({
-            extensions,
-            babelHelpers: 'bundled',
-            include: ['src/**/*'],
-            presets: [
-                "@babel/preset-env",
-                "@babel/preset-typescript",
-                ["@babel/preset-react", {runtime: "automatic"}]
-            ]
-        }),
-        //terser(),
-    ],
-});
+            {
+                dir: 'dist',
+                format: 'esm',
+                sourcemap: true,
+                preserveModules: true,
+                preserveModulesRoot: 'src',
+                entryFileNames: '[name].mjs',
+            },
+        ],
+        external: [
+            'react',
+            'react-dom',
+            'react-router',
+            'react-router-dom',
+            'redux',
+            'tslib',
+        ],
+        plugins: [
+            clear({targets: ['dist'], watch: true}),
+            alias({entries: importsAliases}),
+            resolve({extensions, browser: true}),
+            commonjs(),
+            json(),
+            babel({
+                extensions,
+                babelHelpers: 'bundled',
+                include: ['src/**/*'],
+                presets: [
+                    '@babel/preset-env',
+                    '@babel/preset-typescript',
+                    ['@babel/preset-react', {runtime: 'automatic'}]
+                ]
+            }),
+            //terser(),
+        ],
+    },
+    {
+        input: inputs,
+        output: [
+            {
+                dir: 'dist',
+                format: 'es',
+            }
+        ],
+        plugins: [
+            alias({
+                entries: [
+                    ...importsAliases,
+                    {
+                        find: '@libraries/ui',
+                        replacement: path.resolve(__dirname, '../../../../libraries/ui/src')
+                    },
+                    {
+                        find: '@libraries/utils',
+                        replacement: path.resolve(__dirname, '../../../../libraries/utils/src')
+                    },
+                    /*
+                    {
+                        find: '@webapp/shared',
+                        replacement: path.resolve(__dirname, '../../../../features/shared/src')
+                    },*/
+                ]
+            }),
+            dts()
+        ],
+    },
+]);
 
 module.exports = rollupConfig;

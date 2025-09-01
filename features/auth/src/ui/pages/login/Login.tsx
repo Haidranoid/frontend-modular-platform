@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router'
-import { Input, Button } from '@webapp/shared/ui'
+import { Input, Button } from '@webapp/shared'
 
 const LoginContainerStyled = styled.div`
   display: flex;

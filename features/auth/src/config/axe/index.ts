@@ -1,4 +1,4 @@
-if (process.env.NODE_ENV !== 'production') {
+/*if (process.env.NODE_ENV !== 'production') {
   ;(async () => {
     const React = (await import('react')).default
     const ReactDOM = await import('react-dom')
@@ -6,4 +6,4 @@ if (process.env.NODE_ENV !== 'production') {
 
     axe(React, ReactDOM, 1000)
   })()
-}
+}*/

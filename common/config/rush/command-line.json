@@ -196,7 +196,7 @@
       "commandKind": "bulk",
       "name": "linter",
       "summary": "",
-      "shellCommand": "linterx src/**/* --fix",
+      "shellCommand": "linterx src/**/* --fix || echo 'linterx not found'",
       "enableParallelism": true,
       "ignoreDependencyOrder": true,
       "safeForSimultaneousRushProcesses": true

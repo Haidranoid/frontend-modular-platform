@@ -3,13 +3,13 @@ import { BasePaths } from '@webapp/shared/constants'
 import { Home } from '#ui'
 
 export const routes: RouteObject[] = [
-    {
-        path: BasePaths.GLOBAL_BASE,
-        children: [
-            {
-                index: true,
-                Component: Home,
-            }
-        ],
-    },
+  {
+    path: BasePaths.GLOBAL_BASE,
+    children: [
+      {
+        index: true,
+        Component: Home,
+      },
+    ],
+  },
 ]

@@ -1,11 +1,24 @@
-export type Api = {
-  [K in string]: (arg?: any) => Promise<any>
+import type {Draft, PayloadAction} from "@reduxjs/toolkit";
+import type {UnifiedState} from "./common.types";
+
+export type Operation<Args = any, Return = any> = (args: Args) => Promise<Return>
+
+export type ReducerArgs<S, Op extends Operation> = (
+    state: Draft<UnifiedState<S>>,
+    action: PayloadAction<Awaited<ReturnType<Op>>>
+) => void
+
+export type ThunkValues<S, Op extends Operation> = {
+    operation: Op
+    onSuccess: ReducerArgs<S, Op>
+    onError?: ReducerArgs<S, Op>
+    onLoading?: ReducerArgs<S, Op>
 }
 
-export interface CrudApi<T> extends Api {
-  fetchAll: () => Promise<T[]>
-  fetchById: (id: number) => Promise<T>
-  create: (payload: T) => Promise<T>
-  update: (payload: Partial<T>) => Promise<T>
-  delete: (id: number) => Promise<void>
+export type RawApiSchema = Record<string, Operation>
+
+export type ApiFromSchema<S = unknown, T extends RawApiSchema = Record<string, Operation>> = {
+    [K in keyof T]: ThunkValues<S, T[K]>
 }
+
+export type MakeApiSchema<T extends RawApiSchema> = T
