@@ -16,6 +16,7 @@
   ],
   "scripts": {
     "build": "buildx",
+   "lint": "linterx src/**/* --fix",
     "test": "jestx --detectOpenHandles"
   },
   "devDependencies": {
@@ -24,7 +25,7 @@
     "@tools/eslint-scripts": "workspace:*",
     "@tools/rollup-scripts": "workspace:*",
     "@types/jest": "30.0.0",
-    "@types/node": "24.3.0",
+    "@types/node": "22.18.0",
     "@types/react": "19.1.10",
     "@types/redux-logger": "3.0.13",
     "axios": "1.11.0",

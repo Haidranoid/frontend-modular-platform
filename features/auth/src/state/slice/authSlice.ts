@@ -1,5 +1,5 @@
-import {createSlice, SliceNames, User} from '@webapp/shared'
-import {authApi} from "../api";
+import { createSlice, SliceNames, User } from '@webapp/shared'
+import { authApi } from '../api'
 
 export interface AuthState {
   isAuthenticated: boolean
@@ -14,5 +14,5 @@ const initialState: AuthState = {
 export const authSlice = createSlice({
   name: SliceNames.Auth,
   initialState,
-  api: authApi
+  api: authApi,
 })

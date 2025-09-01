@@ -1,16 +1,8 @@
-import type {Options} from 'tsup'
+/*import type {Options} from 'tsup'
 // @ts-ignore
 import {importsRewritePlugin} from "./tsup-plugins/importsResolverPlugin.ts";
 
-const baseIgnoreCompilePatterns = [
-    '!src/stories',
-    '!src/@types',
-    '!src/**/*.test.ts',
-    '!src/**/*.ignore.*',
-    '!src/**/*.stories.*',
-    '!src/**/*.{css,scss,sass}',
-    '!src/**/*.{mdx,avif,svg,png,jpg,jpeg,gif,webp}',
-]
+
 
 const entriesForDualOutput = [
     'src',
@@ -75,3 +67,6 @@ export const getDualOutputOptions = (dts: boolean = true): Options[] => {
 
     return options
 }
+
+
+ */

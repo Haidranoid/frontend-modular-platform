@@ -1,10 +1,14 @@
 {
-  "extends": "@configs/typescript/tsconfig.react.json",
+  "extends": "@configs/typescript/tsconfig.base.json",
   "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+
     "baseUrl": ".",
     "paths": {
-      "#assets/*": ["src/assets/*"],
-      "#config/*": ["src/config/*"],
+      "#assets": ["src/assets/index.ts"],
+      "#config": ["src/config/index.ts"],
       "#constants": ["src/constants/index.ts"],
       "#experimental": ["src/experimental/index.ts"],
       "#router": ["src/router/index.ts"],

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5'
 import { fn } from 'storybook/test'
-import Button from './Button'
+import { Button } from './Button'
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -14,7 +14,7 @@ const meta = {
   tags: ['autodocs'],
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
-    backgroundColor: { control: 'color' },
+    //backgroundColor: { control: 'color' },
   },
   // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
   args: { onClick: fn() },
@@ -27,26 +27,35 @@ type Story = StoryObj<typeof meta>
 export const Primary: Story = {
   args: {
     primary: true,
+    size: 'small',
     label: 'Button',
   },
 }
 
 export const Secondary: Story = {
   args: {
-    label: 'Button',
-  },
-}
-
-export const Large: Story = {
-  args: {
-    size: 'lg',
+    size: 'small',
     label: 'Button',
   },
 }
 
 export const Small: Story = {
   args: {
-    size: 'sm',
+    size: 'small',
+    label: 'Button',
+  },
+}
+
+export const Medium: Story = {
+  args: {
+    size: 'medium',
+    label: 'Button',
+  },
+}
+
+export const Large: Story = {
+  args: {
+    size: 'large',
     label: 'Button',
   },
 }

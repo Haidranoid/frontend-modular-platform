@@ -32,4 +32,3 @@ export const Input: FC<InputProps> = (props) => {
     />
   )
 }
-

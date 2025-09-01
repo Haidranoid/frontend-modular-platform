@@ -3,7 +3,20 @@
   "compilerOptions": {
     "target": "ES2022",
     "module": "ESNext",
-    "moduleResolution": "bundler"
+    "moduleResolution": "bundler",
+
+    "baseUrl": ".",
+    "paths": {
+      "#assets": ["src/assets/index.ts"],
+      "#config": ["src/config/index.ts"],
+      "#constants": ["src/constants/index.ts"],
+      "#experimental": ["src/experimental/index.ts"],
+      "#router": ["src/router/index.ts"],
+      "#state": ["src/state/index.ts"],
+      "#types": ["src/types/index.ts"],
+      "#ui": ["src/ui/index.ts"],
+      "#utils": ["src/utils/index.ts"]
+    },
   },
   "include": ["src"]
 }

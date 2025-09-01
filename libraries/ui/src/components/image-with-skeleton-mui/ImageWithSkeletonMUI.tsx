@@ -29,4 +29,3 @@ export const ImageWithSkeletonMUI: FC<ImageWithSkeletonMUI> = ({ url, title }) =
     </div>
   )
 }
-

@@ -22,17 +22,13 @@
     "cy:start": "npm start & wait-on http://localhost:8000 && npm run cy:run",
     "cy": "cross-env NODE_ENV=cy cypress run --browser electron",
     "cy:open": "cypress open",
-    "eslint": "eslintx src/main/**/* --fix",
-    "eslint:cy": "eslintx cypress/**/* --fix",
-    "eslint:all": "eslintx . --fix",
+    "lint": "linterx src/main/**/* --fix",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
   "devDependencies": {
     "@webapp/auth": "workspace:*",
-    "@webapp/global": "workspace:*",
     "@webapp/shared": "workspace:*",
-    "@webapp/users": "workspace:*",
     "@configs/typescript": "workspace:*",
     "@tools/eslint-scripts": "workspace:*",
     "@babel/core": "7.28.3",

@@ -1,4 +1,10 @@
 {
-  "extends": "@configs/typescript/tsconfig.cypress.json",
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": [
+      "cypress",
+      "node"
+    ]
+  },
   "include": ["cypress"]
 }

@@ -1,6 +1,4 @@
 export * from './auth-service'
-export * from './auth-utils'
-export * from './events-utils'
 export * from './http-client'
 export * from './redux-logger'
 export * from './security-service'

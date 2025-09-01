@@ -26,4 +26,3 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = (props) => {
     </ThemeModeContext.Provider>
   )
 }
-

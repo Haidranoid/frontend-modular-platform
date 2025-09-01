@@ -9,8 +9,8 @@ export const App: FC = () => {
     <StrictMode>
       <ProviderComposer
         // @ts-ignore
-        reduxProviderProps={{ store }}
-        routerProviderProps={{ router }}
+        reduxConfig={{ store }}
+        routerConfig={{ router }}
       />
     </StrictMode>
   )

@@ -1,6 +1,4 @@
-import type { Config } from 'jest'
-
-const config: Config = {
+const config = {
   rootDir: './',
   testMatch: ["<rootDir>/src/**/*.test.[jt]s?(x)"],
   moduleNameMapper: {

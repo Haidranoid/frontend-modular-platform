@@ -4,7 +4,7 @@ import { routes as authRoutes } from '@webapp/auth'
 //import { routes as usersRoutes } from '@webapp/users'
 
 export const routes: RouteObject[] = [
-    ...authRoutes,
-    //...globalRoutes,
-    //...usersRoutes
+  ...authRoutes,
+  //...globalRoutes,
+  //...usersRoutes
 ]

@@ -27,6 +27,7 @@
   ],
   "scripts": {
     "build": "buildx",
+   "lint": "linterx src/**/* --fix",
     "test": "jestx --detectOpenHandles",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"

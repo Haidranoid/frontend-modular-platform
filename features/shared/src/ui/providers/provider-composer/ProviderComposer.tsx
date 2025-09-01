@@ -1,19 +1,19 @@
-import { FC, ReactNode } from 'react'
-import { RouterProvider, RouterProviderProps } from 'react-router'
+import { FC } from 'react'
 import { Provider, ProviderProps } from 'react-redux'
+import { RouterProvider, RouterProviderProps } from 'react-router'
 import { ThemeProvider } from '@libraries/ui'
 
 interface ProviderComposerProps {
-  children?: ReactNode
-  reduxProviderProps: ProviderProps
-  routerProviderProps: RouterProviderProps
+  reduxConfig: ProviderProps
+  routerConfig: RouterProviderProps
 }
 
 export const ProviderComposer: FC<ProviderComposerProps> = (props) => {
+  const { reduxConfig, routerConfig } = props
   return (
-    <Provider {...props.reduxProviderProps}>
+    <Provider {...reduxConfig}>
       <ThemeProvider>
-        <RouterProvider {...props.routerProviderProps} />
+        <RouterProvider {...routerConfig} />
       </ThemeProvider>
     </Provider>
   )

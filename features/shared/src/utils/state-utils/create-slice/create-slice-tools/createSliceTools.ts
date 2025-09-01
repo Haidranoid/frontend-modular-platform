@@ -1,15 +1,18 @@
-import type {ActionReducerMapBuilder} from '@reduxjs/toolkit'
-import {getErrorMessage} from '@libraries/utils'
-import {ApiFromSchema, UnifiedState} from '#types'
-import {SliceNames, MatcherIdentifiers} from '#constants'
-import {createThunk} from './create-thunk'
-import {generateMatcher} from '../generate-matcher'
+import type { ActionReducerMapBuilder } from '@reduxjs/toolkit'
+import { getErrorMessage } from '@libraries/utils'
+import { ApiFromSchema, UnifiedState } from '#types'
+import { SliceNames, MatcherIdentifiers } from '#constants'
+import { createThunk } from './create-thunk'
+import { generateMatcher } from '../generate-matcher'
 
 export type Thunks<TState, TApi extends ApiFromSchema<TState>> = {
-    [K in keyof TApi]: ReturnType<typeof createThunk>
+  [K in keyof TApi]: ReturnType<typeof createThunk>
 }
 
-export function createSliceTools<TState, TApi extends ApiFromSchema<TState>>(slice: SliceNames, api: TApi) {
+export function createSliceTools<TState, TApi extends ApiFromSchema<TState>>(
+  slice: SliceNames,
+  api: TApi,
+) {
   const thunks = {} as Thunks<TState, TApi>
 
   for (const key in api) {
@@ -26,7 +29,6 @@ export function createSliceTools<TState, TApi extends ApiFromSchema<TState>>(sli
   )
 
   const extraReducers = (builder: ActionReducerMapBuilder<UnifiedState<TState>>) => {
-
     Object.keys(thunks).forEach((key) => {
       const thunk = thunks[key]
 
@@ -45,10 +47,13 @@ export function createSliceTools<TState, TApi extends ApiFromSchema<TState>>(sli
     })
 
     // general REJECTED matcher for every thunk
-    builder.addMatcher(generateMatcher(slice, MatcherIdentifiers.IS_REJECTED), (state, action) => {
-      state.isLoading = false
-      state.error = getErrorMessage(action)
-    })
+    builder.addMatcher(
+      generateMatcher(slice, MatcherIdentifiers.IS_REJECTED),
+      (state, action) => {
+        state.isLoading = false
+        state.error = getErrorMessage(action)
+      },
+    )
   }
 
   return {

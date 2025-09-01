@@ -1,16 +1,13 @@
-import { FC, ReactNode } from 'react'
+import { FC } from 'react'
 import { ButtonStyled } from './Button.styled'
 
 export interface ButtonProps {
-  children?: ReactNode
-  onClick?: () => void
-  backgroundColor?: string
+  label: string
+  size: 'small' | 'medium' | 'large'
   primary?: boolean
-  label?: string
-  size?: 'sm' | 'md' | 'lg'
+  onClick?: () => void
 }
 
 export const Button: FC<ButtonProps> = (props) => {
-  const { onClick } = props
-  return <ButtonStyled onClick={onClick}>{props.children}</ButtonStyled>
+  return <ButtonStyled {...props}>{props.label}</ButtonStyled>
 }

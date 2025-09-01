@@ -1,14 +1,10 @@
-import {ApiFromSchema, RawApiSchema} from "#types";
-import {MakeApiSchema, User} from "#types";
-import {httpClient} from "@libraries/utils";
+import { ApiFromSchema, RawApiSchema } from '#types'
 
 export function defineApi<S, T extends RawApiSchema>(
-    api: ApiFromSchema<S, T>
+  api: ApiFromSchema<S, T>,
 ): ApiFromSchema<S, T> {
-    return api
+  return api
 }
-
-
 
 /*
 export interface CrudApi<S, E extends EntityId> extends Api<S> {
