@@ -11,6 +11,18 @@
       "require": "./dist/index.cjs"
     }
   },
+  "imports": {
+    "#assets": "./src/assets/index.ts",
+    "#config": "./src/config/index.ts",
+    "#constants":  "./src/constants/index.ts",
+    "#experimental": "./src/experimental/index.ts",
+    "#router":"./src/router/index.ts",
+    "#state": "./src/state/index.ts",
+    "#testing-utils": "./src/testing-utils/index.ts",
+    "#types": "./src/types/index.d.ts",
+    "#ui": "./src/ui/index.ts",
+    "#utils": "./src/utils/index.ts"
+  },
   "files": [
     "dist"
   ],
@@ -31,6 +43,7 @@
     "@storybook/addon-essentials": "9.0.0-alpha.12",
     "@storybook/addon-interactions": "9.0.0-alpha.10",
     "@storybook/addon-jest": "9.1.2",
+    "@storybook/addon-themes": "9.1.2",
     "@storybook/addon-webpack5-compiler-swc": "3.0.0",
     "@storybook/test-runner": "0.23.0",
     "@storybook/react-webpack5": "9.1.2",

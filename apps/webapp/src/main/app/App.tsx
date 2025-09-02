@@ -7,11 +7,7 @@ import { store } from '../state'
 export const App: FC = () => {
   return (
     <StrictMode>
-      <ProviderComposer
-        // @ts-ignore
-        reduxConfig={{ store }}
-        routerConfig={{ router }}
-      />
+      <ProviderComposer storeConfig={store} routerConfig={{ router }}/>
     </StrictMode>
   )
 }

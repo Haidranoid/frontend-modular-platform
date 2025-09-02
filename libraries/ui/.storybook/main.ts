@@ -11,6 +11,7 @@ const config: StorybookConfig = {
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
     '@storybook/addon-jest',
+    '@storybook/addon-themes',
     '@storybook/addon-webpack5-compiler-swc',
   ],
   framework: {

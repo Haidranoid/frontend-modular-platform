@@ -184,6 +184,12 @@
       "safeForSimultaneousRushProcesses": true
     },
     {
+      "commandKind": "global",
+      "name": "stop",
+      "summary": "",
+      "shellCommand": "(pkill -f webpack && pkill -f node && pkill -f java) || (taskkill /IM node.exe /F & taskkill /IM java.exe /F)"
+    },
+    {
       "commandKind": "bulk",
       "name": "clean",
       "summary": "Removes the lib dir",

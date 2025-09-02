@@ -11,6 +11,18 @@
       "require": "./dist/index.cjs"
     }
   },
+  "imports": {
+    "#assets": "./src/assets/index.ts",
+    "#config": "./src/config/index.ts",
+    "#constants":  "./src/constants/index.ts",
+    "#experimental": "./src/experimental/index.ts",
+    "#router":"./src/router/index.ts",
+    "#state": "./src/state/index.ts",
+    "#testing-utils": "./src/testing-utils/index.ts",
+    "#types": "./src/types/index.d.ts",
+    "#ui": "./src/ui/index.ts",
+    "#utils": "./src/utils/index.ts"
+  },
   "files": [
     "dist"
   ],
