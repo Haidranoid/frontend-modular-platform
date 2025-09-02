@@ -1,4 +1,3 @@
-const path = require('path')
 const {defineConfig} = require('rollup')
 const resolve = require('@rollup/plugin-node-resolve')
 const commonjs = require('@rollup/plugin-commonjs')
@@ -7,14 +6,15 @@ const json = require('@rollup/plugin-json')
 const babel = require('@rollup/plugin-babel')
 const clear = require('rollup-plugin-clear')
 const {dts} = require('rollup-plugin-dts')
-const {getInputs, getImportsAliases, getExternalDependencies} = require('./rollupUtils');
+const {getInputs, getImportsAliases, getExternalDependencies} = require('./rollup-utils');
 
 
 const inputs = getInputs()
-const importsAliases = getImportsAliases()
+const { aliases, dtsAliases} = getImportsAliases()
 const externalDependencies = getExternalDependencies()
 const extensions = ['.js', '.ts', '.tsx'];
 
+console.log({ aliases, dtsAliases})
 const rollupConfig = defineConfig([
     {
         input: inputs,
@@ -42,12 +42,13 @@ const rollupConfig = defineConfig([
             'react-dom',
             'react-router',
             'react-router-dom',
+            'styled-components',
             'redux',
             'tslib',
         ],
         plugins: [
             clear({targets: ['dist'], watch: true}),
-            alias({entries: importsAliases}),
+            alias({entries: aliases}),
             resolve({extensions, browser: true}),
             commonjs(),
             json(),
@@ -73,24 +74,7 @@ const rollupConfig = defineConfig([
             }
         ],
         plugins: [
-            alias({
-                entries: [
-                    ...importsAliases,
-                    {
-                        find: '@libraries/ui',
-                        replacement: path.resolve(__dirname, '../../../../libraries/ui/src')
-                    },
-                    {
-                        find: '@libraries/utils',
-                        replacement: path.resolve(__dirname, '../../../../libraries/utils/src')
-                    },
-                    /*
-                    {
-                        find: '@webapp/shared',
-                        replacement: path.resolve(__dirname, '../../../../features/shared/src')
-                    },*/
-                ]
-            }),
+            alias({ entries: dtsAliases }),
             dts()
         ],
     },

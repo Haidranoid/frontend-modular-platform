@@ -1,18 +1,41 @@
-import fs from 'fs'
-import path from 'path'
-import glob from 'fast-glob'
+const fs = require('fs')
+const path = require('path')
+const glob = require('fast-glob')
 
-export function getImportsAliases() {
+function getImportsAliases() {
+    let aliases = []
+    let dtsAliases = []
+
     const pkg = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'package.json'), 'utf-8'));
 
-    if (!pkg.imports) return [];
-    return Object.entries(pkg.imports).map(([find, target]) => ({
+    if (!pkg.imports) return {aliases, dtsAliases};
+
+    aliases = Object.entries(pkg.imports).map(([find, target]) => ({
         find,
         replacement: path.resolve(process.cwd(), target),
     }));
+
+    dtsAliases = [
+        ...aliases,
+        {
+            find: '@libraries/ui',
+            replacement: path.resolve(__dirname, '../../../../libraries/ui/dist')
+        },
+        {
+            find: '@libraries/utils',
+            replacement: path.resolve(__dirname, '../../../../libraries/utils/dist')
+        },
+        /*
+        {
+            find: '@webapp/shared',
+            replacement: path.resolve(__dirname, '../../../../features/shared/src')
+        },*/
+    ]
+
+    return { aliases, dtsAliases }
 }
 
-export function getExternalDependencies() {
+function getExternalDependencies() {
     const pkg = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'package.json'), 'utf-8'));
 
     return [
@@ -22,7 +45,7 @@ export function getExternalDependencies() {
     ]
 }
 
-export function getInputs() {
+function getInputs() {
     let inputs = glob.sync([
         './src/index.ts',
     ]);
@@ -47,4 +70,10 @@ export function getInputs() {
     ]);
 
     return inputs
+}
+
+module.exports = {
+    getImportsAliases,
+    getExternalDependencies,
+    getInputs,
 }

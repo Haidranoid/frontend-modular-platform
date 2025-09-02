@@ -1,1 +1,2 @@
-export * from './theme-context'
+export * from './contexts'
+export * from './hooks'

@@ -18,6 +18,7 @@
     "#experimental": "./src/experimental/index.ts",
     "#router":"./src/router/index.ts",
     "#state": "./src/state/index.ts",
+    "#styles": "./src/styles/index.ts",
     "#testing-utils": "./src/testing-utils/index.ts",
     "#types": "./src/types/index.d.ts",
     "#ui": "./src/ui/index.ts",

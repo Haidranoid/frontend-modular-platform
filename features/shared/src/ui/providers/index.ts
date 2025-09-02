@@ -1,1 +1,1 @@
-export * from './provider-composer'
+export * from './render-app'
