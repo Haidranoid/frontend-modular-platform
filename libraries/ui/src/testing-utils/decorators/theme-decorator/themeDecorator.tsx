@@ -1,4 +1,4 @@
-import { ThemeProvider } from '#ui'
+import { ThemeProvider } from '#providers'
 import { DecoratorFunction } from 'storybook/internal/csf'
 
 export const themeDecorator: DecoratorFunction = (Story, _context) => {

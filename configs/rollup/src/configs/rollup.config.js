@@ -1,3 +1,5 @@
+const path = require("path");
+const fs = require("fs");
 const {defineConfig} = require('rollup')
 const resolve = require('@rollup/plugin-node-resolve')
 const commonjs = require('@rollup/plugin-commonjs')
@@ -6,16 +8,16 @@ const json = require('@rollup/plugin-json')
 const babel = require('@rollup/plugin-babel')
 const clear = require('rollup-plugin-clear')
 const {dts} = require('rollup-plugin-dts')
-const {getInputs, getImportsAliases, getExternalDependencies} = require('./rollup-utils');
-
+const {getInputs, getAliases, getExternalDependencies} = require('./rollup-utils');
 
 const inputs = getInputs()
-const { aliases, dtsAliases} = getImportsAliases()
+const { importAliases, dtsAliases} = getAliases()
 const externalDependencies = getExternalDependencies()
 const extensions = ['.js', '.ts', '.tsx'];
 
-console.log({ aliases, dtsAliases})
-const rollupConfig = defineConfig([
+console.log({externalDependencies})
+console.log({importAliases, dtsAliases})
+const baseConfig = defineConfig([
     {
         input: inputs,
         output: [
@@ -37,18 +39,10 @@ const rollupConfig = defineConfig([
                 entryFileNames: '[name].mjs',
             },
         ],
-        external: [
-            'react',
-            'react-dom',
-            'react-router',
-            'react-router-dom',
-            'styled-components',
-            'redux',
-            'tslib',
-        ],
+        external: externalDependencies,
         plugins: [
             clear({targets: ['dist'], watch: true}),
-            alias({entries: aliases}),
+            alias({entries: importAliases}),
             resolve({extensions, browser: true}),
             commonjs(),
             json(),
@@ -79,5 +73,25 @@ const rollupConfig = defineConfig([
         ],
     },
 ]);
+
+const loadRollupConfig = () => {
+    const tsConfigPath = path.join(process.cwd(), 'rollup.config.ts')
+    const jsConfigPath = path.join(process.cwd(), 'rollup.config.js')
+
+    let customRollupConfig = []
+
+    if (fs.existsSync(tsConfigPath)) {
+        customRollupConfig = require(tsConfigPath).default || require(tsConfigPath)
+    } else if (fs.existsSync(jsConfigPath)) {
+        customRollupConfig = require(jsConfigPath)
+    }
+
+    return [
+        ...baseConfig,
+        ...customRollupConfig,
+    ]
+}
+
+const rollupConfig = loadRollupConfig()
 
 module.exports = rollupConfig;

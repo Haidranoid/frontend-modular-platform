@@ -1,5 +1,5 @@
 export * from './constants'
-export * from './state'
+export * from './providers'
 export * from './styles'
 export * from './testing-utils'
 export * from './types'

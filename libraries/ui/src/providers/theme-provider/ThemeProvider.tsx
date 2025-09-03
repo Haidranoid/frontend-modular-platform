@@ -13,14 +13,12 @@ export const ThemeProvider: FC<ThemeProviderProps> = (props) => {
   const [mode, setMode] = useState<ThemeModes>(darkTheme)
 
   const toggle = () => {
-      console.log({mode})
-      console.log('custom toggle')
     setMode((prev) => (prev.name === 'light' ? darkTheme : lightTheme))
   }
 
-    console.log("ThemeProvider context ref:", ThemeContext);
+  //console.log("ThemeProvider context ref:", ThemeContext);
 
-    return (
+  return (
     <ThemeContext.Provider value={{ mode, toggle }}>
       <ThemeProviderStyled theme={mode}>
         <GlobalStyles />

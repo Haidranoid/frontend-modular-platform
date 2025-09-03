@@ -16,6 +16,7 @@
     "#config": "./src/config/index.ts",
     "#constants":  "./src/constants/index.ts",
     "#experimental": "./src/experimental/index.ts",
+    "#providers": "./src/providers/index.ts",
     "#router":"./src/router/index.ts",
     "#state": "./src/state/index.ts",
     "#styles": "./src/styles/index.ts",
@@ -35,10 +36,12 @@
     "test-storybook": "test-storybook",
     "storybook": "storybook dev -p 6006"
   },
+  "dependencies": {
+    "@libraries/ui": "workspace:*",
+    "@libraries/utils": "workspace:*"
+  },
   "devDependencies": {
     "@configs/typescript": "workspace:*",
-    "@libraries/ui": "workspace:*",
-    "@libraries/utils": "workspace:*",
     "@tools/jest-scripts": "workspace:*",
     "@tools/eslint-scripts": "workspace:*",
     "@tools/rollup-scripts": "workspace:*",

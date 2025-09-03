@@ -2,47 +2,63 @@ const fs = require('fs')
 const path = require('path')
 const glob = require('fast-glob')
 
-function getImportsAliases() {
-    let aliases = []
+function generateDtsAlias(importAliases, dependencies = []){
+    const rushProjectsMap = {
+        '@libraries/ui': path.resolve(__dirname, '../../../../libraries/ui/dist'),
+        '@libraries/utils': path.resolve(__dirname, '../../../../libraries/utils/dist'),
+        '@webapp/shared': path.resolve(__dirname, '../../../../features/shared/dist'),
+    }
+
+    const dependenciesMapped = dependencies.map((dep) => ({
+        find: dep,
+        replacement: rushProjectsMap[dep],
+    }))
+
+    return [
+        ...importAliases,
+        ...dependenciesMapped
+    ]
+}
+
+function getAliases() {
+    let importAliases = []
     let dtsAliases = []
 
     const pkg = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'package.json'), 'utf-8'));
 
-    if (!pkg.imports) return {aliases, dtsAliases};
+    //if (!pkg.imports) return {importAliases, dtsAliases};
 
-    aliases = Object.entries(pkg.imports).map(([find, target]) => ({
+    importAliases = Object.entries(pkg.imports || {}).map(([find, target]) => ({
         find,
         replacement: path.resolve(process.cwd(), target),
     }));
 
-    dtsAliases = [
-        ...aliases,
-        {
-            find: '@libraries/ui',
-            replacement: path.resolve(__dirname, '../../../../libraries/ui/dist')
-        },
-        {
-            find: '@libraries/utils',
-            replacement: path.resolve(__dirname, '../../../../libraries/utils/dist')
-        },
-        /*
-        {
-            find: '@webapp/shared',
-            replacement: path.resolve(__dirname, '../../../../features/shared/src')
-        },*/
-    ]
+    dtsAliases = generateDtsAlias(importAliases, Object.keys(pkg.dependencies || {}))
 
-    return { aliases, dtsAliases }
+    return { importAliases, dtsAliases }
 }
 
 function getExternalDependencies() {
+    let externalDependencies = [
+        'react',
+        'react-dom',
+        'react-router',
+        'react-router-dom',
+        'styled-components',
+        'redux',
+        'tslib',
+    ]
+
     const pkg = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'package.json'), 'utf-8'));
 
-    return [
-        ...Object.keys(pkg.dependencies || {}),
-        ...Object.keys(pkg.devDependencies || {}),
+    //if (!pkg.peerDependencies) return externalDependencies;
+
+    externalDependencies = [
+        ...externalDependencies,
         ...Object.keys(pkg.peerDependencies || {}),
     ]
+
+    return externalDependencies;
 }
 
 function getInputs() {
@@ -73,7 +89,7 @@ function getInputs() {
 }
 
 module.exports = {
-    getImportsAliases,
+    getAliases,
     getExternalDependencies,
     getInputs,
 }

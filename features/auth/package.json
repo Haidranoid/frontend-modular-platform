@@ -16,6 +16,7 @@
     "#config": "./src/config/index.ts",
     "#constants":  "./src/constants/index.ts",
     "#experimental": "./src/experimental/index.ts",
+    "#providers": "./src/providers/index.ts",
     "#router":"./src/router/index.ts",
     "#state": "./src/state/index.ts",
     "#types": "./src/types/index.d.ts",
@@ -27,10 +28,13 @@
   ],
   "scripts": {
     "build": "buildx",
-   "lint": "linterx src/**/* --fix",
+    "lint": "linterx src/**/* --fix",
     "test": "testx --detectOpenHandles",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
+  },
+  "peerDependencies": {
+    "@webapp/shared": "workspace:*"
   },
   "devDependencies": {
     "@webapp/shared": "workspace:*",

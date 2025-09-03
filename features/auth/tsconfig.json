@@ -11,8 +11,11 @@
       "#config": ["src/config/index.ts"],
       "#constants": ["src/constants/index.ts"],
       "#experimental": ["src/experimental/index.ts"],
+      "#providers": ["src/providers/index.ts"],
       "#router": ["src/router/index.ts"],
       "#state": ["src/state/index.ts"],
+      "#styles": ["src/styles/index.ts"],
+      "#testing-utils": ["src/testing-utils/index.ts"],
       "#types": ["src/types/index.ts"],
       "#ui": ["src/ui/index.ts"],
       "#utils": ["src/utils/index.ts"]

@@ -6,7 +6,7 @@ import { useThemeMode } from '@webapp/shared'
 export const Home: FC = () => {
   //const { me, fetchAll } = useActions()
   const useTheme = useThemeMode()
-    console.log({useTheme})
+  //console.log({ useTheme })
 
   useEffect(() => {
     //me()

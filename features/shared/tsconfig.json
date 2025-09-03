@@ -11,6 +11,7 @@
       "#config": ["src/config/index.ts"],
       "#constants": ["src/constants/index.ts"],
       "#experimental": ["src/experimental/index.ts"],
+      "#providers": ["src/providers/index.ts"],
       "#router": ["src/router/index.ts"],
       "#state": ["src/state/index.ts"],
       "#styles": ["src/styles/index.ts"],
