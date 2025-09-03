@@ -4,9 +4,9 @@ import { Provider } from 'react-redux'
 
 export interface ReduxProviderProps {
   children: ReactNode
-  storeConfig: Store
+  store: Store
 }
 
 export const ReduxProvider: FC<ReduxProviderProps> = (props) => {
-  return <Provider store={props.storeConfig}>{props.children}</Provider>
+  return <Provider store={props.store}>{props.children}</Provider>
 }

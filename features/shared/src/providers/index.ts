@@ -1,2 +1,3 @@
+export * from './app-provider'
 export * from './redux-provider'
-export * from './render-app'
+export * from './router-provider'

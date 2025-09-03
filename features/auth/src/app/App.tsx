@@ -1,9 +1,9 @@
 import { FC } from 'react'
-import { RenderApp } from '@webapp/shared'
+import { AppProvider } from '@webapp/shared'
 
 import { store } from '#state'
-import { router } from '#router'
+import { routes } from '#router'
 
 export const App: FC = () => {
-  return RenderApp({ storeConfig: store, routerConfig: { router } })
+  return <AppProvider store={store} routes={routes}/>
 }
