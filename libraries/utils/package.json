@@ -28,8 +28,8 @@
   ],
   "scripts": {
     "build": "buildx",
-   "lint": "linterx src/**/* --fix",
-    "test": "jestx --detectOpenHandles"
+    "lint": "linterx src/**/* --fix",
+    "test": "testx --detectOpenHandles"
   },
   "devDependencies": {
     "@configs/typescript": "workspace:*",

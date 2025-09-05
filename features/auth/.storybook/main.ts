@@ -1,27 +1,30 @@
-import type { StorybookConfig } from '@storybook/react-webpack5'
-import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
-import * as path from 'path';
+import type { StorybookConfig } from "@storybook/react-webpack5";
+import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
+import * as path from "path";
 
 const config: StorybookConfig = {
-  stories: [
-      '../src/**/*.mdx',
-      '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)',
-  ],
+  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
   addons: [
-    '@storybook/addon-webpack5-compiler-swc',
-    '@storybook/addon-onboarding',
-    '@storybook/addon-docs',
-    '@storybook/addon-links',
-    '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
+    {
+      name: "@storybook/addon-essentials",
+      options: {
+        backgrounds: false,
+        measure: false,
+        outline: false,
+      },
+    },
+    //'@storybook/addon-interactions',
+    "@storybook/addon-jest",
+    "@storybook/addon-themes",
+    "@storybook/addon-webpack5-compiler-swc",
   ],
   framework: {
-    name: '@storybook/react-webpack5',
+    name: "@storybook/react-webpack5",
     options: {
       fastRefresh: true,
     },
   },
-  staticDirs: ['../public'],
+  staticDirs: ["../public"],
   webpackFinal: async (config) => {
     // 🔹 Extensiones
     config.resolve.extensions = [
@@ -58,10 +61,10 @@ const config: StorybookConfig = {
             },
             transform: {
               react: {
-                runtime: 'automatic', // ✅ React 17+ JSX transform
-                refresh: false,        // Habilita Fast Refresh
-              }
-            }
+                runtime: "automatic", // ✅ React 17+ JSX transform
+                refresh: false, // Habilita Fast Refresh
+              },
+            },
           },
         },
       },
@@ -69,6 +72,6 @@ const config: StorybookConfig = {
 
     return config;
   },
-}
+};
 
-export default config
+export default config;

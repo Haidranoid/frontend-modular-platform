@@ -5,5 +5,5 @@ import { store } from '#state'
 import { routes } from '#router'
 
 export const App: FC = () => {
-  return <AppProvider store={store} routes={routes}/>
+  return <AppProvider store={store} routes={routes} />
 }

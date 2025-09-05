@@ -1,9 +1,9 @@
 import { ReduxProvider } from '#providers'
 import { DecoratorFunction } from 'storybook/internal/csf'
 
-export const withReduxProvider: DecoratorFunction = (Story, { parameters }) => {
+export const withRedux: DecoratorFunction = (Story, { parameters }) => {
   return (
-    <ReduxProvider storeConfig={parameters.storeConfig}>
+    <ReduxProvider store={parameters.storeConfig}>
       <Story />
     </ReduxProvider>
   )
