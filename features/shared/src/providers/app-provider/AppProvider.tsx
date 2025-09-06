@@ -1,13 +1,13 @@
 import { FC, StrictMode } from 'react'
 import { Store } from 'redux'
-import { RouteObject } from 'react-router'
+import { RouterProviderProps } from 'react-router'
 import { ThemeProvider } from '@libraries/ui'
 import { ReduxProvider } from '../redux-provider'
 import { RouterProvider } from '../router-provider'
 
 export interface AppProviderOptions {
   store: Store
-  routes: RouteObject[]
+  routerConfig: RouterProviderProps
 }
 
 export const AppProvider: FC<AppProviderOptions> = (options) => {
@@ -15,7 +15,7 @@ export const AppProvider: FC<AppProviderOptions> = (options) => {
     <StrictMode>
       <ReduxProvider store={options.store}>
         <ThemeProvider>
-          <RouterProvider routes={options.routes} />
+          <RouterProvider routerConfig={options.routerConfig}/>
         </ThemeProvider>
       </ReduxProvider>
     </StrictMode>

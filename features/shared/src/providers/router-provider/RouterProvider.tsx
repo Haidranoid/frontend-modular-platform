@@ -1,12 +1,10 @@
 import { FC } from 'react'
-import { RouterProvider as ReactRouterProvider, RouteObject } from 'react-router'
-import { configureRouter } from '#utils'
+import { RouterProvider as ReactRouterProvider, RouterProviderProps as ReactRouterProviderProps } from 'react-router'
 
 export interface RouterProviderOptions {
-  routes: RouteObject[]
+  routerConfig: ReactRouterProviderProps
 }
 
 export const RouterProvider: FC<RouterProviderOptions> = (options) => {
-  const router = configureRouter(options.routes)
-  return <ReactRouterProvider router={router} />
+  return <ReactRouterProvider {...options.routerConfig} />
 }

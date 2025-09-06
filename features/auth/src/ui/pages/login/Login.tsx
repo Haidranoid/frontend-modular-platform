@@ -1,23 +1,7 @@
 import React, { FC, useState } from 'react'
-import styled from 'styled-components'
 import { Link } from 'react-router'
 import { Input, Button } from '@webapp/shared'
-
-const LoginContainerStyled = styled.div`
-  display: flex;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`
-
-const LoginInputsContainerStyled = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: auto;
-`
+import { LoginContainerStyled, LoginInputsContainerStyled } from './Login.styled'
 
 export const Login: FC = () => {
   //const { login } = useActions()
@@ -42,7 +26,7 @@ export const Login: FC = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <Button onClick={handleLogin}>Continue</Button>
+        <Button label={"Continue"} onClick={handleLogin}/>
       </LoginInputsContainerStyled>
       <span>
         create an account in <Link to={'/auth/signup'}>sign up</Link>

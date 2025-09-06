@@ -1,1 +1,1 @@
-export const variable = 'variable'
+export const components = 'components'

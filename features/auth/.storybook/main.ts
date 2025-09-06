@@ -2,6 +2,9 @@ import type { StorybookConfig } from "@storybook/react-webpack5";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
 import * as path from "path";
 
+//@ts-ignore
+import webpack from "webpack";
+
 const config: StorybookConfig = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
   addons: [
@@ -69,6 +72,14 @@ const config: StorybookConfig = {
         },
       },
     });
+
+    config.plugins?.push(
+      new webpack.DefinePlugin({
+        "process.env": JSON.stringify({
+          NODE_ENV: "development",
+        }),
+      })
+    );
 
     return config;
   },
