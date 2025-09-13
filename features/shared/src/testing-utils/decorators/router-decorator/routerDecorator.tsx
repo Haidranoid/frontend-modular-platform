@@ -1,14 +1,18 @@
-import { RouterProviderProps } from "react-router";
 import { DecoratorFunction } from 'storybook/internal/csf'
-import { ReactRenderer } from "@storybook/react-webpack5";
-import { RouterProvider } from '#providers'
+import { ReactRenderer } from '@storybook/react-webpack5'
+import { MemoryRouterProvider } from '#providers'
 
 export interface WithRouterProps {
-  routerConfig: RouterProviderProps
+  initialPath?: string
 }
 
-export const withRouter: DecoratorFunction<ReactRenderer, WithRouterProps> = (Story, { args }) => {
+export const withRouter: DecoratorFunction<ReactRenderer, WithRouterProps> = (
+  Story,
+  { args },
+) => {
   return (
-    <RouterProvider routerConfig={args.routerConfig}/>
+    <MemoryRouterProvider initialPath={args.initialPath}>
+      <Story />
+    </MemoryRouterProvider>
   )
 }

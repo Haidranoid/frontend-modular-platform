@@ -2,28 +2,22 @@ import type { Preview } from "@storybook/react-webpack5";
 import { initialize, mswLoader } from "msw-storybook-addon";
 import { INITIAL_VIEWPORTS } from "storybook/viewport";
 // @ts-ignore
-import { withTheme } from "@webapp/shared";
+import { withApp, withTheme } from "@webapp/shared";
+
+import { authReducer, routes } from "../src"
 
 // Initialize MSW
 initialize();
 
 const preview: Preview = {
-  decorators: [withTheme],
+  decorators: [withTheme, withApp],
   parameters: {
-    initialGlobals: {
-      viewport: {
-        value: "ipad",
-        isRotated: false,
-      },
-    },
+    initialGlobals: {},
     viewport: {
       options: INITIAL_VIEWPORTS,
     },
-    controls: {
-      matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/i,
-      },
+    storeConfig: {
+      rootReducer: authReducer
     },
   },
   // Provide the MSW addon loader globally

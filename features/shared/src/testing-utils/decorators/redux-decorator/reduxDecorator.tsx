@@ -1,13 +1,16 @@
 import { Store } from 'redux'
 import { DecoratorFunction } from 'storybook/internal/csf'
-import { ReactRenderer } from "@storybook/react-webpack5";
+import { ReactRenderer } from '@storybook/react-webpack5'
 import { ReduxProvider } from '#providers'
 
 export interface WithReduxProps {
   store: Store
 }
 
-export const withRedux: DecoratorFunction<ReactRenderer, WithReduxProps> = (Story, { args }) => {
+export const withRedux: DecoratorFunction<ReactRenderer, WithReduxProps> = (
+  Story,
+  { args },
+) => {
   return (
     <ReduxProvider store={args.store}>
       <Story />

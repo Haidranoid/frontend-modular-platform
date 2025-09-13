@@ -17,7 +17,7 @@
     "#constants":  "./src/constants/index.ts",
     "#experimental": "./src/experimental/index.ts",
     "#providers": "./src/providers/index.ts",
-    "#router":"./src/router/index.ts",
+    "#routes":"./src/routes/index.ts",
     "#state": "./src/state/index.ts",
     "#types": "./src/types/index.d.ts",
     "#ui": "./src/ui/index.ts",

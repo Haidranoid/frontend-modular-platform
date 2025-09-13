@@ -1,16 +1,19 @@
 import React, { FC, useState } from 'react'
 import { Link } from 'react-router'
-import { Input, Button } from '@webapp/shared'
+import { Input, Button, useThemeMode } from '@webapp/shared'
 import { LoginContainerStyled, LoginInputsContainerStyled } from './Login.styled'
 
 export const Login: FC = () => {
   //const { login } = useActions()
+  const theme = useThemeMode()
+  console.log({ theme })
 
   const [username, setUser] = useState('')
   const [password, setPassword] = useState('')
 
   const handleLogin = () => {
     //login({ username, password })
+    theme.toggle()
   }
 
   return (
@@ -26,7 +29,7 @@ export const Login: FC = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <Button label={"Continue"} onClick={handleLogin}/>
+        <Button label={'Continue'} onClick={handleLogin} />
       </LoginInputsContainerStyled>
       <span>
         create an account in <Link to={'/auth/signup'}>sign up</Link>

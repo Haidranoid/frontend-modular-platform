@@ -12,7 +12,7 @@
       "#constants": ["src/constants/index.ts"],
       "#experimental": ["src/experimental/index.ts"],
       "#providers": ["src/providers/index.ts"],
-      "#router": ["src/router/index.ts"],
+      "#routes": ["src/routes/index.ts"],
       "#state": ["src/state/index.ts"],
       "#styles": ["src/styles/index.ts"],
       "#testing-utils": ["src/testing-utils/index.ts"],

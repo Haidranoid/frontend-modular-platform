@@ -1,16 +1,33 @@
-import { Store } from "redux";
-import { RouterProviderProps } from "react-router";
+import { Reducer } from '@reduxjs/toolkit'
 import { DecoratorFunction } from 'storybook/internal/csf'
-import { ReactRenderer } from "@storybook/react-webpack5";
-import { AppProvider } from '#providers'
+import { ReactRenderer } from '@storybook/react-webpack5'
+import { MemoryAppProvider } from '#providers'
+import { configureAppStore } from '#utils'
 
-export interface WithAppProps {
-  store: Store
-  routerConfig: RouterProviderProps
+interface StoreConfig<S, R extends Reducer<S>> {
+  rootReducer: R
+  initialState?: S
 }
 
-export const withApp: DecoratorFunction<ReactRenderer, WithAppProps> = (Story, { args }) => {
+export interface WithAppProps {
+  storeConfig: StoreConfig<any, any>
+  routerConfig: {
+    initialPath?: string
+  }
+}
+
+export const withApp: DecoratorFunction<ReactRenderer, WithAppProps> = (
+  Story,
+  { args, parameters },
+) => {
+  const store = configureAppStore({
+    initialState: parameters.storeConfig.initialState,
+    rootReducer: parameters.storeConfig.rootReducer,
+  })
+
   return (
-    <AppProvider store={args.store} routerConfig={args.routerConfig}/>
+    <MemoryAppProvider store={store} initialPath={args.routerConfig?.initialPath}>
+      <Story />
+    </MemoryAppProvider>
   )
 }

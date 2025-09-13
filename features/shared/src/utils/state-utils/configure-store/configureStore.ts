@@ -1,16 +1,16 @@
 import { configureStore, EnhancedStore, Reducer } from '@reduxjs/toolkit'
 import { reduxLogger } from '@libraries/utils'
 
-interface ConfigureStoreParams<S, R extends Reducer<S>> {
+interface ConfigureAppStoreParams<S, R extends Reducer<S>> {
   initialState: S
-  reducer: R
+  rootReducer: R
 }
 
 export function configureAppStore<S, R extends Reducer<S>>(
-  params: ConfigureStoreParams<S, R>,
+  params: ConfigureAppStoreParams<S, R>,
 ): EnhancedStore<S> {
   return configureStore({
-    reducer: params.reducer,
+    reducer: params.rootReducer,
     preloadedState: params.initialState,
     middleware: (gDM) => gDM().concat(reduxLogger),
     devTools: {
