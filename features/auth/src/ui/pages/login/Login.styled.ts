@@ -14,4 +14,12 @@ export const LoginInputsContainerStyled = styled.div`
   align-items: center;
   flex-direction: column;
   height: auto;
+  
+  input {
+    margin: 10px 0;
+  }
+  
+  button {
+    margin: 15px 0;
+  }
 `

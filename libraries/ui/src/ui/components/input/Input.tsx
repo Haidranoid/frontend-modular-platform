@@ -1,34 +1,25 @@
-import React, { FC } from 'react'
+import React, { FC, InputHTMLAttributes } from "react";
+import { InputStyled } from "./Input.styled";
 
-interface InputProps {
-  value?: string
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void
-  type?: string
-  disabled?: boolean
-  required?: boolean
-  children?: React.ReactNode
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  $primary?: boolean;
+  $size?: "small" | "medium" | "large";
 }
 
-export const Input: FC<InputProps> = (props) => {
-  const {
-    value = '',
-    onChange,
-    onKeyDown,
-    type = 'text',
-    disabled = false,
-    required = true,
-  } = props
-
+export const Input: FC<InputProps> = ({
+  type = "text",
+  required = false,
+  $size = "medium",
+  $primary = true,
+  ...rest
+}) => {
   return (
-    <input
+    <InputStyled
       type={type}
-      role="textbox"
-      disabled={disabled}
       required={required}
-      value={value}
-      onChange={onChange}
-      onKeyDown={onKeyDown}
+      $size={$size}
+      $primary={$primary}
+      {...rest}
     />
-  )
-}
+  );
+};

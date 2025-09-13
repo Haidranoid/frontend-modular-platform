@@ -16,7 +16,7 @@ type Story = StoryObj<typeof meta>
 export const Primary: Story = {
   args: {
     routerConfig: {
-      initialPath: '/auth/logi',
+      initialPath: '/auth/login',
     },
   },
 }

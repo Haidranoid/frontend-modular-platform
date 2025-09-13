@@ -20,7 +20,6 @@ export const Login: FC = () => {
     <LoginContainerStyled data-testid="login-page">
       <h1>Log In</h1>
       <LoginInputsContainerStyled>
-        <hr />
         <Input type="text" value={username} onChange={(e) => setUser(e.target.value)} />
 
         <Input
