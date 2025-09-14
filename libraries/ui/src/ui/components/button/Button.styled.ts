@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { ButtonProps } from './Button'
 
 export interface CommonProps {
   $primary?: boolean
@@ -30,7 +29,7 @@ export const ButtonStyled = styled.button<CommonProps>`
 
   &:hover {
     background-color: ${({ theme, $primary }) =>
-      $primary ? theme.colors["primaryHover"] : theme.colors["secondaryHover"]};
+      $primary ? theme.colors['primaryHover'] : theme.colors['secondaryHover']};
   }
 
   &:active {

@@ -1,1 +1,1 @@
-export * from './use-theme-mode'
+export * from './use-app-theme'

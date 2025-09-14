@@ -1,15 +1,15 @@
-import React, { FC, InputHTMLAttributes } from "react";
-import { InputStyled } from "./Input.styled";
+import React, { FC, InputHTMLAttributes } from 'react'
+import { InputStyled } from './Input.styled'
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  $primary?: boolean;
-  $size?: "small" | "medium" | "large";
+  $primary?: boolean
+  $size?: 'small' | 'medium' | 'large'
 }
 
 export const Input: FC<InputProps> = ({
-  type = "text",
+  type = 'text',
   required = false,
-  $size = "medium",
+  $size = 'medium',
   $primary = true,
   ...rest
 }) => {
@@ -21,5 +21,5 @@ export const Input: FC<InputProps> = ({
       $primary={$primary}
       {...rest}
     />
-  );
-};
+  )
+}

@@ -8,8 +8,25 @@ initialize();
 
 const preview: Preview = {
   decorators: [withTheme],
+  globalTypes: {
+    theme: {
+      name: "Theme",
+      description: "Global theme for components",
+      //defaultValue: "dark",
+      //table: { defaultValue: { summary: "dark" }, },
+      toolbar: {
+        icon: "circlehollow",
+        items: [
+          { value: "light", title: "Light" },
+          { value: "dark", title: "Dark" },
+        ],
+        dynamicTitle: true,
+      },
+    },
+  },
   parameters: {
     initialGlobals: {
+      theme: "light",
       viewport: {
         value: "ipad",
         isRotated: false,

@@ -8,7 +8,5 @@ export interface ThemeContextI {
 
 export const ThemeContext = createContext<ThemeContextI>({
   mode: darkTheme,
-  toggle: () => {
-    console.log('default toggle')
-  },
+  toggle: () => console.warn('ThemeContext: default toggle'),
 })
