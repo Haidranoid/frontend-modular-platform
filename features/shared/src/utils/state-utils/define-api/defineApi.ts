@@ -1,24 +1,16 @@
-import { ApiFromSchema, RawApiSchema } from '#types'
-
-export function defineApi<
-  T extends RawApiSchema,
-  S,
-  TApi extends ApiFromSchema<S, T> = ApiFromSchema<S, T>,
->(api: TApi): TApi {
-  return api
-}
+export const defineApi = 'defineApi'
 /*
-export type AuthApiSchema = MakeApiSchema<{
+export interface AuthOps extends ApiOperations {
   me: () => Promise<GetMeSuccess>
   login: (credentials: LoginPayload) => Promise<LoginSuccess>
   signup: (credentials: SignupPayload) => Promise<SignupSuccess>
   logout: () => Promise<void>
-}>
+}
 
-export const authApi = defineApi<AuthApiSchema, AuthState>({
+export const apiSchema: ApiSchema<AuthState, AuthOps> = {
   me: {
     operation: async () => {
-      return new Promise<GetMeSuccess>((resolve, reject) => {})
+      return {} as GetMeSuccess
     },
     onSuccess: (state, action) => {
       state.user = action.payload
@@ -26,7 +18,7 @@ export const authApi = defineApi<AuthApiSchema, AuthState>({
   },
   login: {
     operation: async (credentials) => {
-      return new Promise((resolve) => {})
+      return {} as LoginSuccess
     },
     onSuccess: (state, action) => {
       const { user, accessToken, refreshToken } = action.payload
@@ -54,7 +46,7 @@ export const authApi = defineApi<AuthApiSchema, AuthState>({
       state.user = null
     },
   },
-})
+}
 
 const initialState: AuthState = {
   isAuthenticated: false,

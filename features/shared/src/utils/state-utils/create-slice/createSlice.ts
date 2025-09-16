@@ -10,7 +10,7 @@ import {
 } from '@reduxjs/toolkit'
 import { generateMatcher } from './generate-matcher'
 import { SliceNames, MatcherIdentifiers } from '#constants'
-import { ApiFromSchema, BaseState, UnifiedState, CallablesFromThunks } from '#types'
+import { ApiSchema, BaseState, UnifiedState, CallablesFromThunks } from '#types'
 import { createSliceTools, Thunks } from './create-slice-tools'
 
 //R extends SliceCaseReducers<UnifiedState<S>>,
@@ -25,7 +25,7 @@ export function createSlice<
   R extends
     | ValidateSliceCaseReducers<TState, CR>
     | ((creators: ReducerCreators<TState>) => CR),
-  TApi extends ApiFromSchema<any, any>,
+  TApi extends ApiSchema<any, any>,
   TState extends BaseState = UnifiedState<S>,
   CR extends SliceCaseReducers<TState> = SliceCaseReducers<TState>,
 >(options: {

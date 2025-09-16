@@ -1,11 +1,11 @@
 import type { ActionReducerMapBuilder } from '@reduxjs/toolkit'
 import { getErrorMessage } from '@libraries/utils'
-import { ApiFromSchema, UnifiedState, BaseState } from '#types'
+import { UnifiedState, BaseState, ApiSchema } from "#types";
 import { SliceNames, MatcherIdentifiers } from '#constants'
 import { createThunk } from './create-thunk'
 import { generateMatcher } from '../generate-matcher'
 
-export type Thunks<TApi extends ApiFromSchema> = {
+export type Thunks<TApi extends ApiSchema> = {
   /*[K in keyof TApi]: ReturnType<
     typeof createThunk<
       ExtractReturnOfAsync<TApi[K]['operation']>,
@@ -17,7 +17,7 @@ export type Thunks<TApi extends ApiFromSchema> = {
 
 export function createSliceTools<
   TState extends BaseState = UnifiedState,
-  TApi extends ApiFromSchema = ApiFromSchema,
+  TApi extends ApiSchema = ApiSchema,
 >(api: TApi, slice: SliceNames) {
   const thunks = {} as Thunks<TApi>
 

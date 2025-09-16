@@ -1,5 +1,5 @@
-import { AuthenticationService, defineApi, httpClient } from '@webapp/shared'
-import { Endpoints, MakeApiSchema } from '@webapp/shared'
+import type { ApiOperations, ApiSchema } from '@webapp/shared'
+import { AuthenticationService, httpClient, Endpoints } from '@webapp/shared'
 import {
   LoginPayload,
   SignupPayload,
@@ -9,14 +9,14 @@ import {
 } from './request-types'
 import { AuthState } from '../slice'
 
-export type AuthApiSchema = MakeApiSchema<{
+export interface AuthOps extends ApiOperations {
   me: () => Promise<GetMeSuccess>
   login: (credentials: LoginPayload) => Promise<LoginSuccess>
   signup: (credentials: SignupPayload) => Promise<SignupSuccess>
   logout: () => Promise<void>
-}>
+}
 
-export const authApi = defineApi<AuthApiSchema, AuthState>({
+export const authApi: ApiSchema<AuthState, AuthOps> = {
   me: {
     operation: async () => {
       return await httpClient.get<GetMeSuccess>({
@@ -70,4 +70,4 @@ export const authApi = defineApi<AuthApiSchema, AuthState>({
       AuthenticationService.closeSession()
     },
   },
-})
+}
