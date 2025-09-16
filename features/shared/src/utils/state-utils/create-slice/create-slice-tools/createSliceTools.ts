@@ -1,6 +1,6 @@
 import type { ActionReducerMapBuilder } from '@reduxjs/toolkit'
 import { getErrorMessage } from '@libraries/utils'
-import { UnifiedState, BaseState, ApiSchema } from "#types";
+import { UnifiedState, BaseState, ApiSchema } from '#types'
 import { SliceNames, MatcherIdentifiers } from '#constants'
 import { createThunk } from './create-thunk'
 import { generateMatcher } from '../generate-matcher'

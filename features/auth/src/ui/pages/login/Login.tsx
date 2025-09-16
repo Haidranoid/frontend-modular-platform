@@ -1,12 +1,14 @@
 import React, { FC, useState } from 'react'
 import { Link } from 'react-router'
 import { Input, Button } from '@webapp/shared'
-import { actions } from '#state'
+import { actions, useAppSelector } from '#state'
 import { LoginContainerStyled, LoginInputsContainerStyled } from './Login.styled'
 
 export const Login: FC = () => {
   const { login } = actions
+  const { user } = useAppSelector((state) => state)
 
+  console.log({ user })
   const [username, setUser] = useState('')
   const [password, setPassword] = useState('')
 

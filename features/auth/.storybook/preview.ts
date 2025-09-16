@@ -16,6 +16,8 @@ const preview: Preview = {
     viewport: {
       options: INITIAL_VIEWPORTS,
     },
+  },
+  args:{
     storeConfig: {
       rootReducer: authReducer
     },

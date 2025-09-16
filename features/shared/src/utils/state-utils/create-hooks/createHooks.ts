@@ -1,9 +1,9 @@
-//import { createUseActions } from './create-use-actions'
 import { createUseAppSelector } from './create-use-app-selector'
 
-export function createHooks<TThunks extends Record<string, any>>(thunks: TThunks) {
+export function createHooks<RootState>() {
+  //const useAppSelector = createUseAppSelector<RootState>()
+
   return {
-    //  useActions: () => createUseActions<TThunks>(thunks),
-    useAppSelector: createUseAppSelector(),
+    useAppSelector: createUseAppSelector<RootState>(),
   }
 }

@@ -41,10 +41,14 @@ function getAliases() {
 function getExternalDependencies() {
     let externalDependencies = [
         'react',
-        'react-dom',
         'redux',
+        'react-dom',
+        'react-redux',
         'styled-components',
+        'react-router',
         'tslib',
+        '@testing-library/react',
+        /.*jest.*/i,
         /.*storybook.*/i,
     ]
 

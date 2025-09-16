@@ -1,6 +1,8 @@
-//import { authThunks } from '../thunks'
+import { createHooks } from '@webapp/shared'
+import { UseSelector } from 'react-redux'
+import { RootState } from '../store'
 
-//const { useActions, useAppSelector } = createHooks<typeof authThunks>(authThunks)
+export const useAppSelector = createHooks<RootState>()
+  .useAppSelector as UseSelector<RootState>
 
-//export { useActions, useAppSelector }
-export const hooks = 'hooks'
+//export const hooks = 'hooks'

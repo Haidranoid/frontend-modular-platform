@@ -1,4 +1,4 @@
-type NavigatorLike = {
+export type NavigatorLike = {
   language?: string
   platform?: string
   cookieEnabled?: boolean
@@ -7,7 +7,7 @@ type NavigatorLike = {
   cpuClass?: string
 }
 
-type ScreenLike = {
+export type ScreenLike = {
   width: number
   height: number
 }

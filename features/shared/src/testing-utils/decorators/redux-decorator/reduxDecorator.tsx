@@ -19,7 +19,7 @@ export const withRedux: DecoratorFunction<ReactRenderer, WithReduxProps> = (
 ) => {
   const store = configureAppStore({
     initialState: args.storeConfig?.initialState,
-    rootReducer: parameters.storeConfig?.rootReducer,
+    rootReducer: args.storeConfig?.rootReducer,
   })
 
   return (
