@@ -1,7 +1,0 @@
-// src/types.d.ts or similar
-import 'styled-components'
-import type { CustomTheme } from '@webapp/shared' // Your custom theme object type
-
-declare module 'styled-components' {
-  export interface DefaultTheme extends CustomTheme {}
-}

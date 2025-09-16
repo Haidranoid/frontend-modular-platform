@@ -1,5 +1,5 @@
 import type { Draft, PayloadAction } from '@reduxjs/toolkit'
-import type { UnifiedState } from './common.types'
+import type { UnifiedState } from "./common.types";
 
 export type Operation<Args = any, Return = any> = (args: Args) => Promise<Return>
 
@@ -19,7 +19,7 @@ export type RawApiSchema = Record<string, Operation>
 
 export type ApiFromSchema<
   S = unknown,
-  T extends RawApiSchema = Record<string, Operation>,
+  T extends RawApiSchema = RawApiSchema,
 > = {
   [K in keyof T]: ThunkValues<S, T[K]>
 }

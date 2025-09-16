@@ -10,13 +10,12 @@ const meta = {
   tags: ['autodocs'],
   args: {
     initialPath: '/auth/login',
-  }
+  },
 } satisfies Meta<typeof Login>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  args: {
-  },
+  args: {},
 }

@@ -14,5 +14,6 @@ const initialState: AuthState = {
 export const authSlice = createSlice({
   name: SliceNames.Auth,
   initialState,
+  reducers: {},
   api: authApi,
 })

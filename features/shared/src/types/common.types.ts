@@ -3,7 +3,7 @@ export interface BaseState {
   error: Error | object | string | null
 }
 
-export type UnifiedState<S> = S & BaseState
+export type UnifiedState<S = unknown> = S & BaseState
 
 export interface EntityId {
   id: number

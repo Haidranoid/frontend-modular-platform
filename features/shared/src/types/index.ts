@@ -1,5 +1,6 @@
 export * from './api.types'
 export * from './common.types'
+export * from './redux.types'
 export * from './users.types'
 
 // import type * as Types from './index'

@@ -61,6 +61,7 @@ const baseConfig = defineConfig([
     },
     {
         input: inputs,
+        external: externalDependencies,
         output: [
             {
                 dir: 'dist',
@@ -69,7 +70,9 @@ const baseConfig = defineConfig([
         ],
         plugins: [
             alias({ entries: dtsAliases }),
-            dts()
+            dts({
+              respectExternal: true
+            })
         ],
     },
 ]);

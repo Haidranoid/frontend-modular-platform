@@ -38,9 +38,9 @@ export const MemoryAppProvider: FC<MemoryAppProviderProps> = (props) => {
     <StrictMode>
       <ReduxProvider store={props.store}>
         <ThemeProvider>
-        <MemoryRouterProvider initialPath={props.initialPath}>
-          {props.children}
-        </MemoryRouterProvider>
+          <MemoryRouterProvider initialPath={props.initialPath}>
+            {props.children}
+          </MemoryRouterProvider>
         </ThemeProvider>
       </ReduxProvider>
     </StrictMode>

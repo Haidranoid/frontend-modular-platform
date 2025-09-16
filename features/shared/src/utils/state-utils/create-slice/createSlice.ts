@@ -1,5 +1,7 @@
 import {
   createSlice as cSlice,
+  ThunkDispatch,
+  Action,
   ReducerCreators,
   Slice,
   SliceCaseReducers,
@@ -8,55 +10,54 @@ import {
 } from '@reduxjs/toolkit'
 import { generateMatcher } from './generate-matcher'
 import { SliceNames, MatcherIdentifiers } from '#constants'
-import { ApiFromSchema, BaseState, UnifiedState } from '#types'
+import { ApiFromSchema, BaseState, UnifiedState, CallablesFromThunks } from '#types'
 import { createSliceTools, Thunks } from './create-slice-tools'
 
-export type { Reducer } from 'redux'
 
-export const initialBaseState: BaseState = {
-  isLoading: false,
-  error: null,
-}
+//R extends SliceCaseReducers<UnifiedState<S>>,
+//R extends
+//    | ValidateSliceCaseReducers<UnifiedState<S>, CR>
+//  | ((creators: ReducerCreators<UnifiedState<S>>) => CR),
+//CR extends ((creators: ReducerCreators<UnifiedState<S>>) => SliceCaseReducers<UnifiedState<S>>) | {},
 
-export type CreateSliceOptions<Name, S, R, TApi> = {
-  name: Name
-  initialState: S
-  reducers?: R
-  api: TApi
-}
-
-export type CreateSliceReturn<
-  Name extends string,
-  S,
-  CR extends SliceCaseReducers<UnifiedState<S>>,
-  TApi extends ApiFromSchema<S>,
-> = Slice<UnifiedState<S>, CR, Name, Name, SliceSelectors<UnifiedState<S>>> & {
-  thunks: Thunks<S, TApi>
-}
-
-export const createSlice = <
-  Name extends SliceNames,
-  S,
-  //CR extends ((creators: ReducerCreators<UnifiedState<S>>) => SliceCaseReducers<UnifiedState<S>>) | {},
+export function createSlice<
+  N extends SliceNames,
+  S extends object,
   R extends
-    | ValidateSliceCaseReducers<UnifiedState<S>, CR>
-    | ((creators: ReducerCreators<UnifiedState<S>>) => CR),
-  TApi extends ApiFromSchema<S>,
-  CR extends SliceCaseReducers<UnifiedState<S>> = SliceCaseReducers<UnifiedState<S>>,
->(
-  options: CreateSliceOptions<Name, S, R, TApi>,
-): CreateSliceReturn<Name, S, {}, TApi> => {
-  const baseInitialState: UnifiedState<S> = {
+    | ValidateSliceCaseReducers<TState, CR>
+    | ((creators: ReducerCreators<TState>) => CR),
+  TApi extends ApiFromSchema,
+  TState extends BaseState = UnifiedState<S>,
+  CR extends SliceCaseReducers<TState> = SliceCaseReducers<TState>,
+>(options: {
+  name: N
+  initialState: S
+  reducers: R
+  api: TApi
+}): Slice<TState, CR, N, N, SliceSelectors<TState>> & {
+  thunks: Thunks<TApi>
+  withDispatch: (
+    dispatch: ThunkDispatch<S, any, Action>,
+  ) => CallablesFromThunks<Thunks<TApi>>
+} {
+
+  const initialBaseState: BaseState = {
+    isLoading: false,
+    error: null,
+  }
+
+  // @ts-ignore
+  const baseInitialState: TState = {
     ...initialBaseState,
     ...options.initialState,
   }
 
-  const { thunks, extraReducers } = createSliceTools<S, TApi>(options.name, options.api)
+  const { thunks, extraReducers } = createSliceTools(options.api, options.name)
 
   const slice = cSlice({
     name: options.name,
     initialState: baseInitialState,
-    reducers: {},
+    reducers: options.reducers,
     extraReducers: (builder) => {
       extraReducers(builder)
 
@@ -73,53 +74,14 @@ export const createSlice = <
   return {
     ...slice,
     thunks,
+    withDispatch: (dispatch) => {
+      const mapped = {} as CallablesFromThunks<Thunks<TApi>>
+
+      for (const key in thunks) {
+        mapped[key] = ((args: any) => dispatch(thunks[key](args))) as any
+      }
+
+      return mapped
+    },
   }
 }
-/*
-interface AuthState {
-    isAuthenticated: boolean
-    user: User | null
-}
-
-const initialState: AuthState = {
-    isAuthenticated: false,
-    user: null,
-}
-
-export type AuthApiSchema = MakeApiSchema<{
-    me: () => Promise<User>
-    logout: () => Promise<void>
-}>
-
-
-const authApi = defineApi<AuthState, AuthApiSchema>({
-    me: {
-        operation: async () => {
-            return await httpClient.get<User>({
-                endpoint: Endpoints.ME,
-            })
-        },
-        onSuccess: (state, action) => {
-            state.user = action.payload
-        }
-    },
-    logout: {
-        operation: async () => {
-            return await httpClient.delete({
-                endpoint: Endpoints.LOGOUT,
-            })
-        },
-        onSuccess: (state, action) => {
-            state.user = null
-        }
-    },
-})
-
-const authSlice = createSlice({
-    name: SliceNames.Auth,
-    initialState,
-    reducers: {},
-    api: authApi
-})
-
- */

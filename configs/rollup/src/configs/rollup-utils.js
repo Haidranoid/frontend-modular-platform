@@ -42,11 +42,10 @@ function getExternalDependencies() {
     let externalDependencies = [
         'react',
         'react-dom',
-        'react-router',
-        'react-router-dom',
-        'styled-components',
         'redux',
+        'styled-components',
         'tslib',
+        /.*storybook.*/i,
     ]
 
     const pkg = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'package.json'), 'utf-8'));

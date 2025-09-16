@@ -1,8 +1,8 @@
 import { ApiFromSchema, RawApiSchema } from '#types'
 
-export function defineApi<S, T extends RawApiSchema>(
-  api: ApiFromSchema<S, T>,
-): ApiFromSchema<S, T> {
+export function defineApi<T extends RawApiSchema, S, TApi extends ApiFromSchema<S, T> = ApiFromSchema<S, T>>(
+  api: TApi,
+): TApi {
   return api
 }
 

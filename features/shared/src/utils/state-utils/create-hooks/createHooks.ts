@@ -1,12 +1,9 @@
-import { ActionCreatorsMapObject, Dispatch } from 'redux'
-import { createUseActions } from './create-use-actions'
+//import { createUseActions } from './create-use-actions'
 import { createUseAppSelector } from './create-use-app-selector'
 
-export const createHooks = <AppDispatch extends Dispatch, RootState = unknown>(
-  thunks: ActionCreatorsMapObject,
-) => {
+export function createHooks<TThunks extends Record<string, any>>(thunks: TThunks) {
   return {
-    useDispatch: createUseActions<AppDispatch>(thunks),
-    useAppSelector: createUseAppSelector<RootState>(),
+    //  useActions: () => createUseActions<TThunks>(thunks),
+    useAppSelector: createUseAppSelector(),
   }
 }

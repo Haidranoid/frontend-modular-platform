@@ -31,6 +31,8 @@
     "lint": "linterx src/**/* --fix",
     "test": "testx --detectOpenHandles"
   },
+  "peerDependencies": {
+  },
   "devDependencies": {
     "@configs/typescript": "workspace:*",
     "@tools/jest-scripts": "workspace:*",

@@ -1,20 +1,18 @@
 import React, { FC, useState } from 'react'
-import { Link, useLocation } from 'react-router'
-import { Input, Button, useAppTheme } from '@webapp/shared'
+import { Link } from 'react-router'
+import { Input, Button } from '@webapp/shared'
+import { actions } from '#state'
 import { LoginContainerStyled, LoginInputsContainerStyled } from './Login.styled'
 
 export const Login: FC = () => {
-  //const { login } = useActions()
-  const theme = useAppTheme()
-  const location = useLocation()
+  const { login } = actions
 
-  //console.log({location});
   const [username, setUser] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleLogin = () => {
-    //login({ username, password })
-    theme.toggle()
+  const handleLogin = async () => {
+    await login({ username, password })
+    //theme.toggle()
   }
 
   return (

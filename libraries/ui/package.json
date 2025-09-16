@@ -36,6 +36,8 @@
     "test-storybook": "test-storybook",
     "storybook": "storybook dev -p 6006"
   },
+  "peerDependencies": {
+  },
   "devDependencies": {
     "@configs/typescript": "workspace:*",
     "@tools/jest-scripts": "workspace:*",

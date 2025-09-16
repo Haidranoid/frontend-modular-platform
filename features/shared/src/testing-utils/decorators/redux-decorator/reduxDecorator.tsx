@@ -1,8 +1,8 @@
 import { DecoratorFunction } from 'storybook/internal/csf'
 import { ReactRenderer } from '@storybook/react-webpack5'
 import { ReduxProvider } from '#providers'
-import { configureAppStore } from "#utils";
-import { Reducer } from "@reduxjs/toolkit";
+import { configureAppStore } from '#utils'
+import { Reducer } from '@reduxjs/toolkit'
 
 interface StoreConfig<S, R extends Reducer<S>> {
   rootReducer: R
@@ -17,7 +17,6 @@ export const withRedux: DecoratorFunction<ReactRenderer, WithReduxProps> = (
   Story,
   { args, parameters },
 ) => {
-
   const store = configureAppStore({
     initialState: args.storeConfig?.initialState,
     rootReducer: parameters.storeConfig?.rootReducer,

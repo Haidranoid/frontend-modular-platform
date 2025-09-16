@@ -16,7 +16,7 @@ export type AuthApiSchema = MakeApiSchema<{
   logout: () => Promise<void>
 }>
 
-export const authApi = defineApi<AuthState, AuthApiSchema>({
+export const authApi = defineApi<AuthApiSchema, AuthState>({
   me: {
     operation: async () => {
       return await httpClient.get<GetMeSuccess>({
