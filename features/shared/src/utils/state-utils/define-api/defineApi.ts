@@ -1,12 +1,105 @@
 import { ApiFromSchema, RawApiSchema } from '#types'
 
-export function defineApi<T extends RawApiSchema, S, TApi extends ApiFromSchema<S, T> = ApiFromSchema<S, T>>(
-  api: TApi,
-): TApi {
+export function defineApi<
+  T extends RawApiSchema,
+  S,
+  TApi extends ApiFromSchema<S, T> = ApiFromSchema<S, T>,
+>(api: TApi): TApi {
   return api
 }
-
 /*
+export type AuthApiSchema = MakeApiSchema<{
+  me: () => Promise<GetMeSuccess>
+  login: (credentials: LoginPayload) => Promise<LoginSuccess>
+  signup: (credentials: SignupPayload) => Promise<SignupSuccess>
+  logout: () => Promise<void>
+}>
+
+export const authApi = defineApi<AuthApiSchema, AuthState>({
+  me: {
+    operation: async () => {
+      return new Promise<GetMeSuccess>((resolve, reject) => {})
+    },
+    onSuccess: (state, action) => {
+      state.user = action.payload
+    },
+  },
+  login: {
+    operation: async (credentials) => {
+      return new Promise((resolve) => {})
+    },
+    onSuccess: (state, action) => {
+      const { user, accessToken, refreshToken } = action.payload
+
+      state.isAuthenticated = true
+      state.user = user
+    },
+  },
+  signup: {
+    operation: async (credentials) => {
+      return new Promise<SignupSuccess>((resolve, reject) => {})
+    },
+    onSuccess: (state, action) => {
+      const { user, accessToken, refreshToken } = action.payload
+
+      state.isAuthenticated = true
+      state.user = user
+    },
+  },
+  logout: {
+    operation: async () => {
+      return new Promise(resolve => {})
+    },
+    onSuccess: (state, action) => {
+      state.user = null
+    },
+  },
+})
+
+const initialState: AuthState = {
+  isAuthenticated: false,
+  user: null,
+}
+
+export const authSlice = createSlice({
+  name: SliceNames.Auth,
+  initialState,
+  reducers: {},
+  api: authApi,
+})
+
+
+
+export interface AuthState {
+  isAuthenticated: boolean
+  user: User | null
+}
+
+export interface LoginPayload {
+  username: string
+  password: string
+}
+
+export interface SignupPayload {
+  username: string
+  password: string
+}
+
+export type GetMeSuccess = User
+
+export interface LoginSuccess {
+  accessToken: string
+  refreshToken: string
+  user: User
+}
+
+export interface SignupSuccess {
+  accessToken: string
+  refreshToken: string
+  user: User
+}
+
+
 export interface CrudApi<S, E extends EntityId> extends Api<S> {
     fetchAll: {
         operation: () => Promise<E[]>

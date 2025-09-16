@@ -13,7 +13,6 @@ import { SliceNames, MatcherIdentifiers } from '#constants'
 import { ApiFromSchema, BaseState, UnifiedState, CallablesFromThunks } from '#types'
 import { createSliceTools, Thunks } from './create-slice-tools'
 
-
 //R extends SliceCaseReducers<UnifiedState<S>>,
 //R extends
 //    | ValidateSliceCaseReducers<UnifiedState<S>, CR>
@@ -26,7 +25,7 @@ export function createSlice<
   R extends
     | ValidateSliceCaseReducers<TState, CR>
     | ((creators: ReducerCreators<TState>) => CR),
-  TApi extends ApiFromSchema,
+  TApi extends ApiFromSchema<any, any>,
   TState extends BaseState = UnifiedState<S>,
   CR extends SliceCaseReducers<TState> = SliceCaseReducers<TState>,
 >(options: {
@@ -40,7 +39,6 @@ export function createSlice<
     dispatch: ThunkDispatch<S, any, Action>,
   ) => CallablesFromThunks<Thunks<TApi>>
 } {
-
   const initialBaseState: BaseState = {
     isLoading: false,
     error: null,
