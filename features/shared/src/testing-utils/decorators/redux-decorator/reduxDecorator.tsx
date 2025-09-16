@@ -1,18 +1,30 @@
-import { Store } from 'redux'
 import { DecoratorFunction } from 'storybook/internal/csf'
 import { ReactRenderer } from '@storybook/react-webpack5'
 import { ReduxProvider } from '#providers'
+import { configureAppStore } from "#utils";
+import { Reducer } from "@reduxjs/toolkit";
+
+interface StoreConfig<S, R extends Reducer<S>> {
+  rootReducer: R
+  initialState?: S
+}
 
 export interface WithReduxProps {
-  store: Store
+  storeConfig?: StoreConfig<any, any>
 }
 
 export const withRedux: DecoratorFunction<ReactRenderer, WithReduxProps> = (
   Story,
-  { args },
+  { args, parameters },
 ) => {
+
+  const store = configureAppStore({
+    initialState: args.storeConfig?.initialState,
+    rootReducer: parameters.storeConfig?.rootReducer,
+  })
+
   return (
-    <ReduxProvider store={args.store}>
+    <ReduxProvider store={store}>
       <Story />
     </ReduxProvider>
   )

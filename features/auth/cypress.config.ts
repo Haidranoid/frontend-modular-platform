@@ -1,16 +1,16 @@
 import { defineConfig } from 'cypress'
-import * as webpackPreprocessor from '@cypress/webpack-preprocessor'
-import * as webpackConfig from './webpack.config'
+//import * as webpackPreprocessor from '@cypress/webpack-preprocessor'
+//import * as webpackConfig from './webpack.config'
 
 const webpackPreprocessorOptions = {
-  webpackOptions: webpackConfig({ mode: 'development' }),
+  //webpackOptions: webpackConfig({ mode: 'development' }),
   watchOptions: {},
 }
 
 export default defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
-      on('file:preprocessor', webpackPreprocessor(webpackPreprocessorOptions))
+    //  on('file:preprocessor', webpackPreprocessor(webpackPreprocessorOptions))
     },
     baseUrl: 'http://localhost:3000/',
     supportFile: 'cypress/support/e2e.ts',

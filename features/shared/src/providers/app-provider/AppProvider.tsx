@@ -37,11 +37,11 @@ export const MemoryAppProvider: FC<MemoryAppProviderProps> = (props) => {
   return (
     <StrictMode>
       <ReduxProvider store={props.store}>
-        {/*<ThemeProvider>*/}
+        <ThemeProvider>
         <MemoryRouterProvider initialPath={props.initialPath}>
           {props.children}
         </MemoryRouterProvider>
-        {/*</ThemeProvider>*/}
+        </ThemeProvider>
       </ReduxProvider>
     </StrictMode>
   )

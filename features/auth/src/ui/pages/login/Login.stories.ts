@@ -8,15 +8,15 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  args: {
+    initialPath: '/auth/login',
+  }
 } satisfies Meta<typeof Login>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Primary: Story = {
+export const Default: Story = {
   args: {
-    routerConfig: {
-      initialPath: '/auth/login',
-    },
   },
 }
