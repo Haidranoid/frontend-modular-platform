@@ -1,41 +1,24 @@
 import React, { FC, useState } from 'react'
-import styled from 'styled-components'
 import { Link } from 'react-router'
-//import { useActions } from '@webapp/shared'
 import { Input, Button } from '@webapp/shared'
-import { BasePaths } from '@webapp/shared'
-
-const SignUpContainerStyled = styled.div`
-  display: flex;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`
-
-const SignUpInputsContainerStyled = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: auto;
-`
+import { actions } from '#state'
+import { SignupContainerStyled, SignupInputsContainerStyled } from './Signup.styled'
 
 export const Signup: FC = () => {
-  //const { signup } = useActions()
+  const { signup } = actions
 
   const [username, setUser] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleSignUp = () => {
-    //signup({ username, password })
+  const handleSignup = async () => {
+    await signup({ username, password })
+    //theme.toggle()
   }
 
   return (
-    <SignUpContainerStyled data-testid="signup-page">
-      <h1>Sign Up</h1>
-      <SignUpInputsContainerStyled>
-        <hr />
+    <SignupContainerStyled data-testid="signup-page">
+      <h1>Signup</h1>
+      <SignupInputsContainerStyled>
         <Input type="text" value={username} onChange={(e) => setUser(e.target.value)} />
 
         <Input
@@ -44,12 +27,11 @@ export const Signup: FC = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <Button onClick={handleSignUp}>Submit</Button>
-      </SignUpInputsContainerStyled>
-
+        <Button label={'Continue'} onClick={handleSignup} />
+      </SignupInputsContainerStyled>
       <span>
-        access <Link to={BasePaths.AUTH_BASE}>here</Link> if you have an account
+        create an account in <Link to={'/auth/login'}>login</Link>
       </span>
-    </SignUpContainerStyled>
+    </SignupContainerStyled>
   )
 }

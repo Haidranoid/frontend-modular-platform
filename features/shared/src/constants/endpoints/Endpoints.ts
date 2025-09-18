@@ -1,6 +1,7 @@
-import { getBaseUrl } from '@libraries/utils'
+//import { getBaseUrl } from '@libraries/utils'
 
-const baseUrl = getBaseUrl()
+//const baseUrl = getBaseUrl()
+const baseUrl = 'http://localhost:8080'
 
 export const Endpoints = {
   ROOT: `${baseUrl}/`,

@@ -4,7 +4,7 @@ import { INITIAL_VIEWPORTS } from "storybook/viewport";
 //@ts-ignore
 import { withRedux, withTheme, withRouter } from "@webapp/shared";
 
-import { authReducer } from "../src"
+import { authRootReducer } from "../src"
 
 // Initialize MSW
 initialize();
@@ -16,11 +16,12 @@ const preview: Preview = {
     viewport: {
       options: INITIAL_VIEWPORTS,
     },
+    storeConfig: {
+      rootReducer: authRootReducer
+    },
+    initialPath: '/'
   },
   args:{
-    storeConfig: {
-      rootReducer: authReducer
-    },
   },
   // Provide the MSW addon loader globally
   loaders: [mswLoader],

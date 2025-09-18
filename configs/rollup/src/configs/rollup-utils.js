@@ -47,9 +47,9 @@ function getExternalDependencies() {
         'styled-components',
         'react-router',
         'tslib',
-        '@testing-library/react',
         /.*jest.*/i,
         /.*storybook.*/i,
+        /.*testing-library.*/i,
     ]
 
     const pkg = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'package.json'), 'utf-8'));

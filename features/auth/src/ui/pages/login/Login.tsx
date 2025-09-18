@@ -6,7 +6,7 @@ import { LoginContainerStyled, LoginInputsContainerStyled } from './Login.styled
 
 export const Login: FC = () => {
   const { login } = actions
-  const { user } = useAppSelector((state) => state)
+  const user = useAppSelector((state) => state.user)
 
   console.log({ user })
   const [username, setUser] = useState('')

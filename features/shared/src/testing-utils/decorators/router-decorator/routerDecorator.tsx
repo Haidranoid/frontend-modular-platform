@@ -1,18 +1,22 @@
+import { MemoryRouter, Routes, Route } from 'react-router'
 import { DecoratorFunction } from 'storybook/internal/csf'
 import { ReactRenderer } from '@storybook/react-webpack5'
-import { MemoryRouterProvider } from '#providers'
 
-export interface WithRouterProps {
+export interface WithRouterParameters {
   initialPath?: string
 }
 
-export const withRouter: DecoratorFunction<ReactRenderer, WithRouterProps> = (
+export const withRouter: DecoratorFunction<ReactRenderer> = (
   Story,
-  { args },
+  { parameters },
 ) => {
+  const initialPath = (parameters as WithRouterParameters).initialPath
+
   return (
-    <MemoryRouterProvider initialPath={args.initialPath}>
-      <Story />
-    </MemoryRouterProvider>
+    <MemoryRouter initialEntries={[initialPath || '/']}>
+      <Routes>
+        <Route path="*" element={<Story />} />
+      </Routes>
+    </MemoryRouter>
   )
 }

@@ -1,13 +1,13 @@
 import type { ApiOperations, ApiSchema } from '@webapp/shared'
 import { AuthenticationService, httpClient, Endpoints } from '@webapp/shared'
-import {
+import type { AuthState } from '../slice'
+import type {
   LoginPayload,
   SignupPayload,
   LoginSuccess,
   SignupSuccess,
   GetMeSuccess,
 } from './request-types'
-import { AuthState } from '../slice'
 
 export interface AuthOps extends ApiOperations {
   me: () => Promise<GetMeSuccess>
