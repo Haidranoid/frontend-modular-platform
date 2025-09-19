@@ -16,7 +16,7 @@
 import '@testing-library/cypress/add-commands'
 
 // Import cypress reporter (for adding test info to the report)
-import 'cypress-mochawesome-reporter/register'
+//import 'cypress-mochawesome-reporter/register'
 
 // now can use describe.each and it.each
 import 'cypress-each'

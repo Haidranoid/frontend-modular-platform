@@ -30,6 +30,9 @@
     "build": "buildx",
     "lint": "linterx src/**/* --fix",
     "test": "testx --detectOpenHandles",
+    "cy": "cypress open",
+    "cy:run": "cypress run --browser electron",
+    "cy:start": "rushx storybook & wait-on http://localhost:6006 && rushx cy:run",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },

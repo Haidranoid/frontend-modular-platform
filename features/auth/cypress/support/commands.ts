@@ -38,9 +38,6 @@
 //     }
 //   }
 // }
-import { loginSuccessfulStub } from '../stubs/login.stub'
-import { meStub } from '../stubs/me.stub'
-import { UserRoles } from '@constants'
 
 declare global {
   namespace Cypress {
@@ -48,7 +45,8 @@ declare global {
       setCredentialsAs(role: string): Chainable<void>
       goToLoginAndClearForm(): Chainable<void>
       login(email: string, password: string): Chainable<void>
-      goTo(url: string, as?: UserRoles): Chainable<void>
+      //goTo(url: string, as?: UserRoles): Chainable<void>
+      goTo(url: string): Chainable<void>
     }
   }
 }
@@ -76,27 +74,30 @@ Cypress.Commands.add('setCredentialsAs', (role) => {
 
 Cypress.Commands.add('login', (email: string, password: string) => {
   // First, set up stub and wait for intercept registration
-  loginSuccessfulStub(email).then(() => {
+  //loginSuccessfulStub(email).then(() => {
     cy.get('#email').type(email)
     cy.get('#password').type(password)
     cy.findByRole('button', { name: /iniciar sesión/i }).click()
 
     // Wait for the stubbed login request to complete
-    cy.wait('@loginResponse')
+    //cy.wait('@loginResponse')
 
     // Now you can assert url or other things
     //cy.url().should('eq', Cypress.config().baseUrl)
-  })
+  //})
 })
 
-Cypress.Commands.add('goTo', (url: string, as: UserRoles = UserRoles.ADMIN) => {
-  meStub(as).then(({ accessToken, refreshToken }) => {
+//Cypress.Commands.add('goTo', (url: string, as: UserRoles = UserRoles.ADMIN) => {
+Cypress.Commands.add('goTo', (url: string) => {
+  //meStub(as).then(({ accessToken, refreshToken }) => {
     cy.visit(url, {
       onBeforeLoad(win) {
-        win.localStorage.setItem('accessToken', accessToken)
-        win.localStorage.setItem('refreshToken', refreshToken)
+        //win.localStorage.setItem('accessToken', accessToken)
+        //win.localStorage.setItem('refreshToken', refreshToken)
       },
     })
-    cy.wait('@meResponse')
-  })
+    //cy.wait('@meResponse')
+  //})
 })
+
+export {}
