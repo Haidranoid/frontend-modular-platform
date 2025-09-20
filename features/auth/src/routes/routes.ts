@@ -1,9 +1,8 @@
 import { RouteObject } from 'react-router'
-import { BasePaths } from '@webapp/shared'
 
 export const routes: RouteObject[] = [
   {
-    path: BasePaths.AUTH_BASE,
+    path: '/',
     children: [
       {
         index: true,
@@ -13,21 +12,21 @@ export const routes: RouteObject[] = [
         },
       },
       {
-        path: BasePaths.AUTH_BASE,
+        path: '/',
         lazy: async () => {
           const { AuthLayout } = await import('#ui')
           return { Component: AuthLayout }
         },
         children: [
           {
-            path: BasePaths.AUTH_BASE + '/login',
+            path: '/login',
             lazy: async () => {
               const { Login } = await import('#ui')
               return { Component: Login }
             },
           },
           {
-            path: BasePaths.AUTH_BASE + '/signup',
+            path: '/signup',
             lazy: async () => {
               const { Signup } = await import('#ui')
               return { Component: Signup }

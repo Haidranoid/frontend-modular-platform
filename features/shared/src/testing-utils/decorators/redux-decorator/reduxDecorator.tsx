@@ -9,14 +9,14 @@ interface StoreConfig<S, R extends Reducer<S>> {
   initialState?: S
 }
 
-export interface WithReduxParameters  {
+export interface WithReduxParameters {
   storeConfig?: StoreConfig<any, any>
 }
 
-export const withRedux: DecoratorFunction<ReactRenderer> = (
-  Story,
-  { parameters },
-) => {
+export const withRedux: DecoratorFunction<ReactRenderer> = (Story, { parameters }) => {
+  if (parameters?.disableGlobalDecorators) return <Story />;
+  if (parameters?.withRedux?.disable) return <Story />;
+
   const storeConfig = (parameters as WithReduxParameters).storeConfig
 
   const store = configureAppStore({

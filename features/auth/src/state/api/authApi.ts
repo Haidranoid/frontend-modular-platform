@@ -1,6 +1,6 @@
 import { AuthenticationService, httpClient } from '@webapp/shared'
 import type { ApiOperations, ApiSchema } from '@webapp/shared'
-import { Endpoints } from "#constants";
+import { Endpoints } from '#constants'
 import type { AuthState } from '../slice'
 import type {
   LoginPayload,
@@ -34,7 +34,7 @@ export const authApi: ApiSchema<AuthState, AuthOps> = {
         endpoint: Endpoints.LOGIN,
         body: credentials,
         useAuthorization: false,
-      });
+      })
     },
     onSuccess: (state, action) => {
       const { user, accessToken, refreshToken } = action.payload
@@ -50,7 +50,7 @@ export const authApi: ApiSchema<AuthState, AuthOps> = {
         endpoint: Endpoints.SIGNUP,
         body: credentials,
         useAuthorization: false,
-      });
+      })
     },
     onSuccess: (state, action) => {
       const { user, accessToken, refreshToken } = action.payload

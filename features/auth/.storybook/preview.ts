@@ -5,7 +5,7 @@ import { INITIAL_VIEWPORTS } from "storybook/viewport";
 import { withRedux, withTheme, withRouter } from "@webapp/shared";
 
 import { mswHandlers } from "../msw-handlers"
-import { authRootReducer } from "../src";
+import { authRootReducer, routes } from "../src";
 
 // Initialize MSW
 initialize();
@@ -13,19 +13,21 @@ initialize();
 const preview: Preview = {
   decorators: [withRedux, withTheme, withRouter],
   parameters: {
-    msw: {
-      handlers: mswHandlers,
-    },
     initialGlobals: {},
     viewport: {
       options: INITIAL_VIEWPORTS,
     },
+    msw: {
+      handlers: mswHandlers,
+    },
     storeConfig: {
       rootReducer: authRootReducer
     },
-    initialPath: '/'
+    routerConfig: {
+      routes: routes,
+      initialPath: '/'
+    }
   },
-  // Provide the MSW addon loader globally
   loaders: [mswLoader],
 };
 

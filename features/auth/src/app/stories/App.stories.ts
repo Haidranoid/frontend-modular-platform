@@ -1,19 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5'
-import { Signup } from './Signup'
+import { App } from '../App'
 
 const meta = {
-  title: 'Pages/Signup',
-  component: Signup,
+  title: 'App/Auth',
+  component: App,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  args: {},
-} satisfies Meta<typeof Signup>
+} satisfies Meta<typeof App>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  args: {},
+  parameters: {
+    disableGlobalDecorators: true,
+  },
 }

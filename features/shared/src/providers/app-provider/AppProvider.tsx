@@ -10,6 +10,7 @@ import { configureAppRouter } from '#utils'
 export interface AppProviderProps {
   store: Store
   routes: RouteObject[]
+  initialPath?: string
 }
 
 export const AppProvider: FC<AppProviderProps> = (props) => {

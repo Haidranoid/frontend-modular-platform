@@ -1,22 +1,29 @@
-import { MemoryRouter, Routes, Route } from 'react-router'
+import { MemoryRouter, RouteObject, useRoutes } from 'react-router'
 import { DecoratorFunction } from 'storybook/internal/csf'
 import { ReactRenderer } from '@storybook/react-webpack5'
 
 export interface WithRouterParameters {
-  initialPath?: string
+  routerConfig: {
+    routes: RouteObject[]
+    initialPath?: string
+  }
 }
 
-export const withRouter: DecoratorFunction<ReactRenderer> = (
-  Story,
-  { parameters },
-) => {
-  const initialPath = (parameters as WithRouterParameters).initialPath
+function RoutesRenderer({ routes }: { routes: RouteObject[] }) {
+  return useRoutes(routes)
+}
+
+export const withRouter: DecoratorFunction<ReactRenderer> = (Story, { parameters }) => {
+  if (parameters?.disableGlobalDecorators) return <Story />;
+  if (parameters?.withRouter?.disable) return <Story />;
+
+  const routerConfig = (parameters as WithRouterParameters).routerConfig
 
   return (
-    <MemoryRouter initialEntries={[initialPath || '/']}>
-      <Routes>
-        <Route path="*" element={<Story />} />
-      </Routes>
+    <MemoryRouter initialEntries={[routerConfig.initialPath || '/']}>
+      <RoutesRenderer
+        routes={[/*...routerConfig.routes,*/ { path: '*', element: <Story /> }]}
+      />
     </MemoryRouter>
   )
 }
