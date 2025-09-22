@@ -8,29 +8,26 @@ import { ThemeProvider } from '#providers'
 import { useCallback, useEffect } from 'react'
 
 export const withTheme: DecoratorFunction = (Story, { parameters }) => {
-  if (parameters?.disableGlobalDecorators) return <Story />;
-  if (parameters?.withTheme?.disable) return <Story />;
+  if (parameters?.disableGlobalDecorators) return <Story />
+  if (parameters?.withTheme?.disable) return <Story />
 
-  const [globals, updateGlobals] = useGlobals();
+  const [globals, updateGlobals] = useGlobals()
 
   const storybookToggle = useCallback(() => {
-    const next = globals.theme === "light" ? "dark" : "light";
-    updateGlobals({ theme: next });
-  }, [globals.theme]);
+    const next = globals.theme === 'light' ? 'dark' : 'light'
+    updateGlobals({ theme: next })
+  }, [globals.theme])
 
   useEffect(() => {
     //console.log({globals});
-  }, [globals]);
+  }, [globals])
 
   return (
-    <ThemeProvider
-      initialTheme={globals.theme}
-      storybookToggle={storybookToggle}
-    >
+    <ThemeProvider initialTheme={globals.theme} storybookToggle={storybookToggle}>
       <Story />
     </ThemeProvider>
-  );
-};
+  )
+}
 
 export const withThemeV_0 = withThemeFromJSXProvider<ReactRenderer>({
   themes: {

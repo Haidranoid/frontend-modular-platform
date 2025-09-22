@@ -1,7 +1,5 @@
 import {
   createSlice as cSlice,
-  ThunkDispatch,
-  Action,
   ReducerCreators,
   Slice,
   SliceCaseReducers,
@@ -10,15 +8,19 @@ import {
 } from '@reduxjs/toolkit'
 import { generateMatcher } from './generate-matcher'
 import { SliceNames, MatcherIdentifiers } from '#constants'
-import { ApiSchema, BaseState, UnifiedState, CallablesFromThunks } from '#types'
+import { ApiSchema, BaseState, UnifiedState } from '#types'
 import { createSliceTools, Thunks } from './create-slice-tools'
 
-//R extends SliceCaseReducers<UnifiedState<S>>,
-//R extends
-//    | ValidateSliceCaseReducers<UnifiedState<S>, CR>
-//  | ((creators: ReducerCreators<UnifiedState<S>>) => CR),
-//CR extends ((creators: ReducerCreators<UnifiedState<S>>) => SliceCaseReducers<UnifiedState<S>>) | {},
-
+/*
+R extends SliceCaseReducers<UnifiedState<S>>,
+R extends
+    | ValidateSliceCaseReducers<UnifiedState<S>, CR>
+  | ((creators: ReducerCreators<UnifiedState<S>>) => CR),
+CR extends ((creators: ReducerCreators<UnifiedState<S>>) => SliceCaseReducers<UnifiedState<S>>) | {},
+  withDispatch: (
+    dispatch: ThunkDispatch<S, any, Action>,
+  ) => CallablesFromThunks<Thunks<TApi>>
+*/
 export function createSlice<
   N extends SliceNames,
   S extends object,
@@ -35,9 +37,6 @@ export function createSlice<
   api: TApi
 }): Slice<TState, CR, N, N, SliceSelectors<TState>> & {
   thunks: Thunks<TApi>
-  withDispatch: (
-    dispatch: ThunkDispatch<S, any, Action>,
-  ) => CallablesFromThunks<Thunks<TApi>>
 } {
   const initialBaseState: BaseState = {
     isLoading: false,
@@ -72,14 +71,5 @@ export function createSlice<
   return {
     ...slice,
     thunks,
-    withDispatch: (dispatch) => {
-      const mapped = {} as CallablesFromThunks<Thunks<TApi>>
-
-      for (const key in thunks) {
-        mapped[key] = ((args: any) => dispatch(thunks[key](args))) as any
-      }
-
-      return mapped
-    },
   }
 }

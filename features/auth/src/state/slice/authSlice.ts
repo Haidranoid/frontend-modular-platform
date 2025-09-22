@@ -1,6 +1,5 @@
 import type { Reducer } from 'redux'
 import type { EnhancedStore, Action } from '@reduxjs/toolkit'
-import { useSelector } from 'react-redux'
 import { configureAppStore, createSlice, SliceNames, User } from '@webapp/shared'
 import { authApi } from '../api'
 
@@ -42,7 +41,7 @@ export type RootState = ReturnType<typeof store.getState>
 //export type AppDispatch = typeof store.dispatch
 
 // ================= getting actions from store and slice ======================
-export const actions = authSlice.withDispatch(store.dispatch)
+//export const actions = authSlice.withDispatch(store.dispatch)
 
 // ===================== setting selector from store ===========================
-export const useAppSelector = useSelector.withTypes<RootState>()
+//export const useAppSelector = useSelector.withTypes<RootState>()

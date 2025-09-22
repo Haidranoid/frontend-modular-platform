@@ -1,17 +1,14 @@
 import React, { FC, useState } from 'react'
 import { Link } from 'react-router'
 import { Input, Button } from '@webapp/shared'
-import { actions } from '#state'
 import { SignupContainerStyled, SignupInputsContainerStyled } from './Signup.styled'
 
 export const Signup: FC = () => {
-  const { signup } = actions
-
   const [username, setUser] = useState('')
   const [password, setPassword] = useState('')
 
   const handleSignup = async () => {
-    await signup({ username, password })
+    //await signup({ username, password })
     //theme.toggle()
   }
 

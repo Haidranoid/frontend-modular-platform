@@ -3,17 +3,20 @@ import { CustomTheme } from '../themes.types'
 export const darkTheme: CustomTheme = {
   name: 'dark',
   colors: {
-    primary: '#104a79',
-    secondary: '#4dabf7', // azul más suave en dark mode
+    primary: '#60a5fa',
+    secondary: '#3b82f6',
   },
   background: {
-    primary: '#121212', // fondo general casi negro
+    primary: '#1f2937',
+    secondary: '#111827',
   },
   foreground: {
-    primary: '#1e1e1e', // gris oscuro para superficies elevadas
+    primary: '#374151',
+    secondary: '#4b5563',
   },
   text: {
-    primary: '#f1f3f5', // gris casi blanco para legibilidad
+    primary: '#f9fafb',
+    secondary: '#9ca3af',
   },
 }
 

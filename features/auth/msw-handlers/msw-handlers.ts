@@ -1,6 +1,3 @@
 import { loginHandlers, meHandlers } from './handlers'
 
-export const mswHandlers = [
-  ...loginHandlers,
-  ...meHandlers,
-]
+export const mswHandlers = [...loginHandlers, ...meHandlers]

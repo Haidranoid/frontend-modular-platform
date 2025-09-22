@@ -1,1 +1,2 @@
-export const components = 'components'
+export * from './draggable-box'
+export * from './floating-box'

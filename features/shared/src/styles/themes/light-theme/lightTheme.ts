@@ -3,17 +3,20 @@ import { CustomTheme } from '../themes.types'
 export const lightTheme: CustomTheme = {
   name: 'light',
   colors: {
-    primary: '#2ee4ea', // azul vibrante
-    secondary: '#1f91ab',
+    primary: '#2563eb',
+    secondary: '#3b82f6',
   },
   background: {
-    primary: '#ffffff', // fondo principal blanco
+    primary: '#ffffff',
+    secondary: '#f3f4f6',
   },
   foreground: {
-    primary: '#f8f9fa', // gris muy claro (cards, headers, etc.)
+    primary: '#e5e7eb',
+    secondary: '#d1d5db',
   },
   text: {
-    primary: '#212529', // negro/gris oscuro legible
+    primary: '#111827',
+    secondary: '#6b7280',
   },
 }
 

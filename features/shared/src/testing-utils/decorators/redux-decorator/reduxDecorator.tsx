@@ -14,14 +14,14 @@ export interface WithReduxParameters {
 }
 
 export const withRedux: DecoratorFunction<ReactRenderer> = (Story, { parameters }) => {
-  if (parameters?.disableGlobalDecorators) return <Story />;
-  if (parameters?.withRedux?.disable) return <Story />;
+  if (parameters?.disableGlobalDecorators) return <Story />
+  if (parameters?.withRedux?.disable) return <Story />
 
   const storeConfig = (parameters as WithReduxParameters).storeConfig
 
   const store = configureAppStore({
-    initialState: storeConfig?.initialState,
     rootReducer: storeConfig?.rootReducer,
+    initialState: storeConfig?.initialState,
   })
 
   return (

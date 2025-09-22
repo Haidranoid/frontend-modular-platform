@@ -14,8 +14,8 @@ function RoutesRenderer({ routes }: { routes: RouteObject[] }) {
 }
 
 export const withRouter: DecoratorFunction<ReactRenderer> = (Story, { parameters }) => {
-  if (parameters?.disableGlobalDecorators) return <Story />;
-  if (parameters?.withRouter?.disable) return <Story />;
+  if (parameters?.disableGlobalDecorators) return <Story />
+  if (parameters?.withRouter?.disable) return <Story />
 
   const routerConfig = (parameters as WithRouterParameters).routerConfig
 

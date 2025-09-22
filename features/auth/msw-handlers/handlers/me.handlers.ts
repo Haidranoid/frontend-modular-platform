@@ -1,10 +1,10 @@
 import { http, HttpResponse, RequestHandler } from 'msw'
-import { Endpoints } from "#constants";
+import { Endpoints } from '#constants'
+import { GetMeSuccess } from '#state'
+import { getMeSuccessFixture } from '../fixtures'
 
-const me: RequestHandler = http.get(Endpoints.ME, () => {
-  return HttpResponse.json({}, { status: 200 })
+const me_200: RequestHandler = http.get(Endpoints.ME, () => {
+  return HttpResponse.json<GetMeSuccess>(getMeSuccessFixture(), { status: 200 })
 })
 
-export const meHandlers = [
-  me,
-]
+export const meHandlers = [me_200]

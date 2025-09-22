@@ -1,8 +1,9 @@
 import { RouteObject } from 'react-router'
+import { BasePaths } from '@webapp/shared'
 
 export const routes: RouteObject[] = [
   {
-    path: '/',
+    path: BasePaths.AUTH_BASE + '/',
     children: [
       {
         index: true,
