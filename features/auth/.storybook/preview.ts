@@ -2,7 +2,7 @@ import type { Preview } from "@storybook/react-webpack5";
 import { initialize, mswLoader } from "msw-storybook-addon";
 import { INITIAL_VIEWPORTS } from "storybook/viewport";
 //@ts-ignore
-import { withRedux, withRouter, withTheme, withContextBox } from "@webapp/shared";
+import { withRedux, withRouter, withTheme, withStorybookContext } from "@webapp/shared";
 
 import { mswHandlers } from "../msw-handlers"
 import { authRootReducer, routes } from "../src";
@@ -10,7 +10,7 @@ import { authRootReducer, routes } from "../src";
 initialize();
 
 const preview: Preview = {
-  decorators: [withContextBox, withTheme, withRouter, withRedux],
+  decorators: [withStorybookContext, withTheme, withRouter, withRedux],
   parameters: {
     initialGlobals: {},
     viewport: {

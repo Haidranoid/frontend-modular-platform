@@ -1,5 +1,4 @@
-export * from './context-box-decorator'
-export * from './providers-decorator'
 export * from './redux-decorator'
 export * from './router-decorator'
 export * from './theme-decorator'
+export * from './storybook-context-decorator'

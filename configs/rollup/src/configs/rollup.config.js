@@ -7,6 +7,7 @@ const alias = require('@rollup/plugin-alias')
 const json = require('@rollup/plugin-json')
 const babel = require('@rollup/plugin-babel')
 const clear = require('rollup-plugin-clear')
+const nodePolyfills = require('rollup-plugin-polyfill-node')
 const {dts} = require('rollup-plugin-dts')
 const {getInputs, getAliases, getExternalDependencies} = require('./rollup-utils');
 
@@ -40,6 +41,7 @@ const baseConfig = defineConfig([
             },
         ],
         external: externalDependencies,
+        context: 'globalThis', // o 'window' si solo es para browser
         plugins: [
             clear({targets: ['dist'], watch: true}),
             alias({entries: importAliases}),
@@ -68,6 +70,7 @@ const baseConfig = defineConfig([
                 format: 'es',
             }
         ],
+        context: 'globalThis', // o 'window' si solo es para browser
         plugins: [
             alias({ entries: dtsAliases }),
             dts({

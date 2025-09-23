@@ -27,6 +27,7 @@
     "rollup-plugin-dts": "6.2.3",
     "fast-glob": "3.3.3",
     "rollup-plugin-clear": "2.0.7",
+    "rollup-plugin-polyfill-node": "0.13.0",
     "rollup": "4.48.1",
     "rimraf": "6.0.1"
   }

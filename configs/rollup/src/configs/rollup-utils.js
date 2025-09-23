@@ -46,10 +46,11 @@ function getExternalDependencies() {
         'react-redux',
         'styled-components',
         'react-router',
+        'jest',
         'tslib',
-        /.*jest.*/i,
-        /.*storybook.*/i,
-        /.*testing-library.*/i,
+        /storybook\/.*/i,
+        /.*@storybook\/.*/i,
+        /.*@testing-library.*/i,
     ]
 
     const pkg = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'package.json'), 'utf-8'));
@@ -61,7 +62,7 @@ function getExternalDependencies() {
         ...Object.keys(pkg.peerDependencies || {}),
     ]
 
-    return externalDependencies;
+    return [... new Set(externalDependencies)];
 }
 
 function getInputs() {

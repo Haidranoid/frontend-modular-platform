@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import { DecoratorFunction } from 'storybook/internal/csf'
 import { ReactRenderer } from '@storybook/react-webpack5'
-import { ContextBoxConfig, ComplexItem, ContextBox } from '#ui'
+import { ContextBoxConfig, ComplexItem, StorybookContextBox } from '#ui'
 
 export interface WithContextBoxParameters {
   contextBoxConfig: {
@@ -12,18 +12,18 @@ export interface WithContextBoxParameters {
   }
 }
 
-export const withContextBox: DecoratorFunction<ReactRenderer> = (
+export const withStorybookContext: DecoratorFunction<ReactRenderer> = (
   Story,
   { parameters },
 ) => {
   if (parameters?.disableGlobalDecorators) return <Story />
-  if (parameters?.withContextBox?.disable) return <Story />
+  if (parameters?.withStorybookContext?.disable) return <Story />
 
   const contextBoxConfig = (parameters as WithContextBoxParameters).contextBoxConfig
 
   return (
     <Fragment>
-      <ContextBox
+      <StorybookContextBox
         title={contextBoxConfig.title || 'App Context'}
         items={contextBoxConfig.items || []}
         config={contextBoxConfig.config}
