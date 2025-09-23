@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import {
   PrimitiveValue,
   NullValue,
@@ -7,7 +7,7 @@ import {
   Container,
 } from './ObjectExplored.styled'
 
-type ObjectExplorerProps = {
+export type ObjectExplorerProps = {
   data: any
   level?: number
 }

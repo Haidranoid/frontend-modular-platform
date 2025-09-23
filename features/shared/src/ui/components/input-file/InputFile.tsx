@@ -1,10 +1,10 @@
-import React, { FC } from 'react'
+import { FC, ChangeEvent } from 'react'
 
 interface InputFileProps {
   files: FileList | undefined
   accept: string
   label: string
-  handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  handleOnChange: (e: ChangeEvent<HTMLInputElement>) => void
   disabled?: boolean
   multiple?: boolean
   hidden?: boolean

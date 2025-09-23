@@ -1,4 +1,3 @@
-import React from 'react'
 import { EnhancedStore } from '@reduxjs/toolkit'
 import { render, RenderOptions, RenderResult } from '@testing-library/react'
 import { MemoryRouter, MemoryRouterProps } from 'react-router'

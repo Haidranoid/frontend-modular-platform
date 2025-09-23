@@ -1,35 +1,23 @@
 import React, { FC, useState } from 'react'
-import { Link, useLocation } from 'react-router'
-import { useSelector } from 'react-redux'
+import { Link } from 'react-router'
 import { Input, Button } from '@webapp/shared'
-import { actions } from '#state'
+import { useActions } from '#state'
 import { LoginContainerStyled, LoginInputsContainerStyled } from './Login.styled'
-import { DraggableBox } from '#ui'
 
 export const Login: FC = () => {
-  const { login } = actions
-  const state = useSelector((state) => state)
-  const location = useLocation()
+  const { login } = useActions()
 
   const [username, setUser] = useState('')
   const [password, setPassword] = useState('')
 
-  console.log({ state })
   const handleLogin = async () => {
-    login({ tipo: '', da: ''})
+    await login({ username, password })
     //theme.toggle()
   }
 
   return (
     <LoginContainerStyled data-testid="login-page">
-      <DraggableBox
-        title="Mi Caja Draggable"
-        items={[
-          { id: 'redux', label: 'Redux State', data: state },
-          { id: 'location', label: 'React Router Location', data: location },
-        ]}
-      />
-      <h1>Log In: {state?.user?.firstName}</h1>
+      <h1>Log In</h1>
       <LoginInputsContainerStyled>
         <Input type="text" value={username} onChange={(e) => setUser(e.target.value)} />
 

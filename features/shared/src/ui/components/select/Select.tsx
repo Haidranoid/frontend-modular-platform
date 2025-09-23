@@ -1,13 +1,13 @@
-import React, { FC } from 'react'
+import { FC, ReactNode, ChangeEvent } from 'react'
 
-interface SelectProps {
+export interface SelectProps {
   label: string
   value?: string
   optionValues: string[]
-  handleOnChange: (event: React.ChangeEvent<HTMLSelectElement>) => void
+  handleOnChange: (event: ChangeEvent<HTMLSelectElement>) => void
   disabled?: boolean
   required?: boolean
-  children?: React.ReactNode
+  children?: ReactNode
 }
 
 export const Select: FC<SelectProps> = (props) => {

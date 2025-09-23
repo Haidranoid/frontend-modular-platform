@@ -2,16 +2,15 @@ import type { Preview } from "@storybook/react-webpack5";
 import { initialize, mswLoader } from "msw-storybook-addon";
 import { INITIAL_VIEWPORTS } from "storybook/viewport";
 //@ts-ignore
-import { withRedux, withTheme, withRouter } from "@webapp/shared";
+import { withRedux, withRouter, withTheme, withContextBox } from "@webapp/shared";
 
 import { mswHandlers } from "../msw-handlers"
 import { authRootReducer, routes } from "../src";
-
 // Initialize MSW
 initialize();
 
 const preview: Preview = {
-  decorators: [withRedux, withTheme, withRouter],
+  decorators: [withContextBox, withTheme, withRouter, withRedux],
   parameters: {
     initialGlobals: {},
     viewport: {
@@ -26,6 +25,18 @@ const preview: Preview = {
     routerConfig: {
       routes: routes,
       initialPath: '/'
+    },
+    contextBoxConfig: {
+      config: {
+        location: {
+          x: 0,
+          y: 0,
+        },
+        size: {
+          width: 300,
+          height: 500,
+        }
+      }
     }
   },
   loaders: [mswLoader],

@@ -6,9 +6,11 @@ export type ExtractReturnOfAsync<T> = T extends (args: any) => Promise<infer R>
   ? R
   : never
 
-export type ExtractArgsOfThunk<T> = T extends AsyncThunk<any, infer A, any> ? A : never
+export type ExtractArgsOfThunk<T> =
+  T extends AsyncThunk<any, infer Arg, any> ? Arg : never
 
-export type ExtractReturnOfThunk<T> = T extends AsyncThunk<infer R, any, any> ? R : never
+export type ExtractReturnOfThunk<T> =
+  T extends AsyncThunk<infer Ret, any, any> ? Ret : never
 
 export type CallablesFromThunks<TThunks> = {
   [K in keyof TThunks]: (
