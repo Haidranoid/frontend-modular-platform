@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const SignupContainerStyled = styled.div`
+export const SignupStyled = styled.div`
   display: flex;
   height: 100vh;
   justify-content: center;
@@ -8,7 +8,7 @@ export const SignupContainerStyled = styled.div`
   flex-direction: column;
 `
 
-export const SignupInputsContainerStyled = styled.div`
+export const SignupInputsStyled = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5'
-import { StorybookApp } from '../App'
+import { StorybookApp } from '../StorybookApp'
 
 const meta = {
   title: 'App/Auth',

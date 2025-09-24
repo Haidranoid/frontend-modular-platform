@@ -1,18 +1,21 @@
-import { FC } from 'react'
+import { FC, ButtonHTMLAttributes } from 'react'
 import { ButtonStyled } from './Button.styled'
 
-export interface ButtonProps {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   label: string
-  onClick?: () => void
   $primary?: boolean
   $size?: 'small' | 'medium' | 'large'
 }
 
-export const Button: FC<ButtonProps> = (props) => {
-  const { $size = 'medium', $primary = true } = props
+export const Button: FC<ButtonProps> = ({
+  $size = 'medium',
+  $primary = true,
+  label,
+  ...rest
+}) => {
   return (
-    <ButtonStyled $size={$size} $primary={$primary} onClick={props.onClick}>
-      {props.label}
+    <ButtonStyled $size={$size} $primary={$primary} {...rest}>
+      {label}
     </ButtonStyled>
   )
 }
