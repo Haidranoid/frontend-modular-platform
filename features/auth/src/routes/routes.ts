@@ -13,21 +13,21 @@ export const routes: RouteObject[] = [
         },
       },
       {
-        path: '/',
+        path: BasePaths.AUTH_BASE + '/',
         lazy: async () => {
           const { AuthLayout } = await import('#ui')
           return { Component: AuthLayout }
         },
         children: [
           {
-            path: '/login',
+            path: BasePaths.AUTH_BASE + '/login',
             lazy: async () => {
               const { Login } = await import('#ui')
               return { Component: Login }
             },
           },
           {
-            path: '/signup',
+            path: BasePaths.AUTH_BASE + '/signup',
             lazy: async () => {
               const { Signup } = await import('#ui')
               return { Component: Signup }

@@ -1,6 +1,12 @@
 import { FC, useState } from 'react'
 import { Rnd } from 'react-rnd'
-import { Content, ItemWrapper, ItemButton, Box, Header } from './StorybookContextBox.styled'
+import {
+  Content,
+  ItemWrapper,
+  ItemButton,
+  Box,
+  Header,
+} from './StorybookContextBox.styled'
 import { ObjectExplorer } from './object-explorer'
 import { Portal } from '../portal'
 import { useLocation } from 'react-router'
@@ -34,11 +40,18 @@ export type ContextBoxProps = {
   config?: ContextBoxConfig
 }
 
-export const StorybookContextBox: FC<ContextBoxProps> = ({ title, items, domElement, config }) => {
-  const contextBoxConfig = config ? config : {
-    location: { x: 0, y: 0 },
-    size: { width: 300, height: 300 }
-  }
+export const StorybookContextBox: FC<ContextBoxProps> = ({
+  title,
+  items,
+  domElement,
+  config,
+}) => {
+  const contextBoxConfig = config
+    ? config
+    : {
+        location: { x: 0, y: 0 },
+        size: { width: 300, height: 300 },
+      }
   const location = useLocation()
   const state = useSelector((state) => state)
 
