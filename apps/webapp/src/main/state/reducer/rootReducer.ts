@@ -9,8 +9,6 @@ export const initialAppState = {
   // global: initialGlobalState,
 }
 
-export type InitialAppState = typeof initialAppState
-
 export const appReducer = combineReducers({
   auth: authRootReducer,
   //users: usersReducer,

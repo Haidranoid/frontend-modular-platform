@@ -26,9 +26,18 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
-  "devDependencies": {
+  "dependencies": {
     "@webapp/auth": "workspace:*",
     "@webapp/shared": "workspace:*",
+    "@reduxjs/toolkit": "2.8.2",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "react-redux": "9.2.0",
+    "react-router": "7.8.0",
+    "redux": "5.0.1",
+    "styled-components": "6.1.19"
+  },
+  "devDependencies": {
     "@configs/typescript": "workspace:*",
     "@tools/eslint-scripts": "workspace:*",
     "@babel/core": "7.28.3",
@@ -64,14 +73,5 @@
     "webpack-cli": "6.0.1",
     "webpack-dev-server": "5.2.2",
     "webpack-merge": "6.0.1"
-  },
-  "dependencies": {
-    "@reduxjs/toolkit": "2.8.2",
-    "react": "19.1.1",
-    "react-dom": "19.1.1",
-    "react-redux": "9.2.0",
-    "react-router": "7.8.0",
-    "redux": "5.0.1",
-    "styled-components": "6.1.19"
   }
 }
