@@ -3,19 +3,24 @@ import { DecoratorFunction } from 'storybook/internal/csf'
 import { ReactRenderer } from '@storybook/react-webpack5'
 import { ContextBoxConfig, ComplexItem, StorybookContextBox } from '#ui'
 
-export interface WithContextBoxParameters {
-  contextBoxConfig: {
+export interface WithContextBoxArgs {
+  contextBoxArgs: {
     title?: string
     items?: ComplexItem[]
+  }
+}
+
+export interface WithContextBoxParameters {
+  contextBoxConfig: {
     config?: ContextBoxConfig
     domElement?: HTMLElement
   }
 }
 
-export const withStorybookContext: DecoratorFunction<ReactRenderer> = (
-  Story,
-  { parameters },
-) => {
+export const withStorybookContext: DecoratorFunction<
+  ReactRenderer,
+  WithContextBoxArgs
+> = (Story, { args, parameters }) => {
   if (parameters?.disableGlobalDecorators) return <Story />
   if (parameters?.withStorybookContext?.disable) return <Story />
 
@@ -24,8 +29,8 @@ export const withStorybookContext: DecoratorFunction<ReactRenderer> = (
   return (
     <Fragment>
       <StorybookContextBox
-        title={contextBoxConfig.title || 'App Context'}
-        items={contextBoxConfig.items || []}
+        title={args?.contextBoxArgs?.title || 'App Context'}
+        items={args?.contextBoxArgs?.items || []}
         config={contextBoxConfig.config}
         domElement={
           contextBoxConfig.domElement || document.getElementsByTagName('body')[0]

@@ -30,6 +30,7 @@ export const authApi: ApiSchema<AuthState, AuthOps> = {
   },
   login: {
     operation: async (credentials) => {
+      //throw new Error('test')
       return await httpClient.post<LoginPayload, LoginSuccess>({
         endpoint: Endpoints.LOGIN,
         body: credentials,

@@ -62,7 +62,9 @@ export const StorybookContextBox: FC<ContextBoxProps> = ({
     ...items,
   ]
 
-  const [expandedItems, setExpandedItems] = useState<string[]>([])
+  const [expandedItems, setExpandedItems] = useState<string[]>(
+    defaultItems.map((item) => item.id),
+  )
 
   const toggleItem = (id: string) => {
     setExpandedItems((prev) =>

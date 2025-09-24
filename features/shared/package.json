@@ -11,6 +11,13 @@
       "require": "./dist/index.cjs"
     }
   },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/index.d.ts"
+      ]
+    }
+  },
   "imports": {
     "#assets": "./src/assets/index.ts",
     "#config": "./src/config/index.ts",

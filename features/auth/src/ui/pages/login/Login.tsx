@@ -1,22 +1,25 @@
 import React, { FC, useState } from 'react'
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import { Input, Button } from '@webapp/shared'
-import { useActions } from '#state'
+import { useActions, useAppSelector } from '#state'
 import { LoginContainerStyled, LoginInputsContainerStyled } from './Login.styled'
 
 export const Login: FC = () => {
   const { login } = useActions()
+  const error = useAppSelector((state) => state.error)
+  const navigate = useNavigate()
 
   const [username, setUser] = useState('')
   const [password, setPassword] = useState('')
 
   const handleLogin = async () => {
     await login({ username, password })
-    //theme.toggle()
+    navigate('/auth')
   }
 
   return (
     <LoginContainerStyled data-testid="login-page">
+      {error && <div style={{ color: 'red' }}>{String(error)}</div>}
       <h1>Log In</h1>
       <LoginInputsContainerStyled>
         <Input type="text" value={username} onChange={(e) => setUser(e.target.value)} />

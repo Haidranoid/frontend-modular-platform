@@ -4,12 +4,13 @@ import { RouteObject } from 'react-router'
 import { ReduxProvider } from '../redux-provider'
 import { ThemeProvider } from '../theme-provider'
 import { MemoryRouterProvider } from '../memory-router-provider'
-import { StorybookContextBox } from '#ui'
+import { StorybookContextBox, ContextBoxProps } from '#ui'
 
 export interface StorybookAppProviderProps {
   store: Store
   routes: RouteObject[]
   initialPath?: string
+  storybookContextConfig?: Partial<ContextBoxProps>
 }
 
 export const StorybookAppProvider: FC<StorybookAppProviderProps> = (props) => {
@@ -22,9 +23,13 @@ export const StorybookAppProvider: FC<StorybookAppProviderProps> = (props) => {
             routes={props.routes}
             wrapper={
               <StorybookContextBox
-                title="App Context"
-                items={[]}
-                domElement={document.getElementsByTagName('body')[0]}
+                title={props.storybookContextConfig?.title || 'App Context'}
+                items={props.storybookContextConfig?.items || []}
+                config={props.storybookContextConfig?.config}
+                domElement={
+                  props.storybookContextConfig?.domElement ||
+                  document.getElementsByTagName('body')[0]
+                }
               />
             }
           />
