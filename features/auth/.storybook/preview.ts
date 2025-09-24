@@ -10,7 +10,7 @@ import { authRootReducer } from "../src";
 initialize();
 
 const preview: Preview = {
-  decorators: [withStorybookContext, withTheme, withMemoryRouter, withRedux],
+  decorators: [withStorybookContext, withMemoryRouter, withTheme, withRedux],
   parameters: {
     initialGlobals: {},
     viewport: {
