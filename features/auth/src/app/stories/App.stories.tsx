@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5'
 import { StorybookApp } from '../App'
-import { Fragment } from 'react'
 
 const meta = {
   title: 'App/Auth',
@@ -17,5 +16,4 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  args: {},
 }

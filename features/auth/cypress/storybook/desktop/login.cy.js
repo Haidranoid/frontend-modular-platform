@@ -2,25 +2,13 @@ describe('login flow', () => {
   let loginRequestMock
   let loginResponseMock
 
-  beforeEach(() => {
-    //cy.goToLoginAndClearForm()
-  })
-
-  describe('login as admin', () => {
+  describe('auth app', () => {
     beforeEach(() => {
-      cy.visit("?path=/story/pages-login--default")
+      cy.visit("?path=/story/app-auth--default")
     })
 
-    it('should navigate to home page as admin', () => {
-      //cy.visit('/login')
-      cy.url().should('include', 'login')
-
-      //cy.get('#email').type(loginRequestMock.ADMIN.email)
-      //cy.get('#password').type(loginRequestMock.ADMIN.password)
-      //cy.findByRole('button', { name: /click para iniciar sesión/i }).click() // Requires @testing-library/cypress
-
-      //cy.wait('@loginResponse') // Wait for the mocked request to complete
-
+    it('should be visible', () => {
+      cy.url().should('include', 'app')
       cy.url().should('include', Cypress.config().baseUrl) // add baseUrl for accuracy
     })
   })
