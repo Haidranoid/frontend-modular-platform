@@ -8,7 +8,7 @@ export const SignupStyled = styled.div`
   flex-direction: column;
 `
 
-export const SignupInputsStyled = styled.div`
+export const SignupFormStyled = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;

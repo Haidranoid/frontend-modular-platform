@@ -8,7 +8,7 @@ export const LoginStyled = styled.div`
   flex-direction: column;
 `
 
-export const LoginInputsStyled = styled.div`
+export const LoginFormStyled = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;

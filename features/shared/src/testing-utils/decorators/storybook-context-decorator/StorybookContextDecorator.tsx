@@ -5,13 +5,13 @@ import { ContextBoxConfig, ComplexItem, StorybookContextBox } from '#ui'
 
 export interface WithContextBoxArgs {
   contextBoxArgs: {
-    title?: string
     items?: ComplexItem[]
   }
 }
 
 export interface WithContextBoxParameters {
   contextBoxConfig: {
+    title?: string
     config?: ContextBoxConfig
     domElement?: HTMLElement
   }
@@ -29,9 +29,9 @@ export const withStorybookContext: DecoratorFunction<
   return (
     <Fragment>
       <StorybookContextBox
-        title={args?.contextBoxArgs?.title || 'App Context'}
+        title={contextBoxConfig?.title || 'App Context'}
         items={args?.contextBoxArgs?.items || []}
-        config={contextBoxConfig.config}
+        config={contextBoxConfig?.config}
         domElement={
           contextBoxConfig.domElement || document.getElementsByTagName('body')[0]
         }

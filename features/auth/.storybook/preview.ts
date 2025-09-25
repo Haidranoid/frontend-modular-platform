@@ -12,9 +12,6 @@ initialize();
 const preview: Preview = {
   decorators: [withStorybookContext, withMemoryRouter, withTheme, withRedux],
   args: {
-    contextBoxArgs: {
-      //title: 'test preview',
-    }
   },
   parameters: {
     initialGlobals: {},
