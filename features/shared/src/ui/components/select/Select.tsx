@@ -2,9 +2,9 @@ import { FC, ReactNode, ChangeEvent } from 'react'
 
 export interface SelectProps {
   label: string
-  value?: string
   optionValues: string[]
   handleOnChange: (event: ChangeEvent<HTMLSelectElement>) => void
+  value?: string
   disabled?: boolean
   required?: boolean
   children?: ReactNode

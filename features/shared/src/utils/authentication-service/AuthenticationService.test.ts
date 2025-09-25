@@ -1,4 +1,4 @@
-import { AuthenticationService } from './AuthenticationService.js'
+import { AuthenticationService } from './AuthenticationService'
 
 describe('AuthenticationService', () => {
   const accessToken = 'dummy-access-token'

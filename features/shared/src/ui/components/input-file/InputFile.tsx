@@ -1,6 +1,6 @@
 import { FC, ChangeEvent } from 'react'
 
-interface InputFileProps {
+export interface InputFileProps {
   files: FileList | undefined
   accept: string
   label: string
@@ -10,7 +10,7 @@ interface InputFileProps {
   hidden?: boolean
 }
 
-const InputFile: FC<InputFileProps> = (props) => {
+export const InputFile: FC<InputFileProps> = (props) => {
   const {
     files,
     accept,
@@ -35,5 +35,3 @@ const InputFile: FC<InputFileProps> = (props) => {
     </button>
   )
 }
-
-export default InputFile

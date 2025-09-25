@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-interface LoadingProps {
+export interface LoadingProps {
   color: 'primary' | 'secondary'
 }
 

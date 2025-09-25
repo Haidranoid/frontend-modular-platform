@@ -1,7 +1,7 @@
 import { FC, ReactNode } from 'react'
 import ErrorStyled from './Error.styled'
 
-interface ErrorProps {
+export interface ErrorProps {
   children: ReactNode
 }
 
