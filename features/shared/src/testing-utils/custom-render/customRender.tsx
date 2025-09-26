@@ -1,8 +1,7 @@
 import { FC, ReactNode, JSX } from 'react'
 import { EnhancedStore } from '@reduxjs/toolkit'
 import { render as rtlRender, RenderOptions, RenderResult } from '@testing-library/react'
-import { MemoryRouter, MemoryRouterProps } from 'react-router'
-import { Provider } from 'react-redux'
+import { MemoryRouterProps } from 'react-router'
 import { ThemeProvider } from '#providers'
 
 export interface SelectiveProvidersProps {

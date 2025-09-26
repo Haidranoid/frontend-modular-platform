@@ -27,6 +27,7 @@ const baseConfig = defineConfig([
                 format: 'cjs',
                 sourcemap: true,
                 exports: 'named',
+                interop: 'auto',
                 preserveModules: true,
                 preserveModulesRoot: 'src',
                 entryFileNames: '[name].cjs',

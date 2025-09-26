@@ -24,9 +24,7 @@ export const Select: FC<SelectProps> = (props) => {
 
   return (
     <>
-      <input id={labelId} required={required}>
-        {label}
-      </input>
+      <label id={labelId}>{label}</label>
       <select
         id={selectId}
         value={value}
@@ -36,7 +34,7 @@ export const Select: FC<SelectProps> = (props) => {
         onChange={handleOnChange}
       >
         {optionValues.map((optionValue) => (
-          <span key={optionValue}>{optionValue}</span>
+          <option key={optionValue}>{optionValue}</option>
         ))}
       </select>
     </>

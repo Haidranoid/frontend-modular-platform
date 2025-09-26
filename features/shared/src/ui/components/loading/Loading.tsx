@@ -5,5 +5,5 @@ export interface LoadingProps {
 }
 
 export const Loading: FC<LoadingProps> = () => {
-  return <div>loading</div>
+  return <div role="status">loading</div>
 }

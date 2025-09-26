@@ -21,5 +21,5 @@
       "#utils": ["src/utils/index.ts"]
     }
   },
-  "include": ["src","msw-handlers"]
+  "include": ["src","msw-handlers", "jest.setup.ts"]
 }

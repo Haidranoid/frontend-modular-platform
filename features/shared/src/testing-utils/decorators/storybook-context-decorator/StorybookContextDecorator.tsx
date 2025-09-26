@@ -32,9 +32,7 @@ export const withStorybookContext: DecoratorFunction<
         title={contextBoxConfig?.title || 'App Context'}
         items={args?.contextBoxArgs?.items || []}
         config={contextBoxConfig?.config}
-        domElement={
-          contextBoxConfig.domElement || document.getElementsByTagName('body')[0]
-        }
+        domElement={contextBoxConfig?.domElement || document.body}
       />
       <Story />
     </Fragment>

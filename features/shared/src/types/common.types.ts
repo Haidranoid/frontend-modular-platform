@@ -1,4 +1,4 @@
-export type ErrorHandler = Error | object | string | null
+//export type ErrorHandler = Error | object | string | null
 
 export interface BaseState {
   isLoading: boolean

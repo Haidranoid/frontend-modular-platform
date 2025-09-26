@@ -2,26 +2,33 @@ const fs = require('fs')
 const path = require('path')
 const { pathsToModuleNameMapper } = require('ts-jest')
 
-const baseConfig = {
-  rootDir: path.resolve(process.cwd()),
-  verbose: true,
-  transform: {
-    '^.+\\.[jt]sx?$': [
-      'babel-jest', { configFile: path.resolve(__dirname, 'babel.config.js') }],
-  },
-  extensionsToTreatAsEsm: ['.ts', '.tsx'],
-  // 'jsdom' for browser environments
-  testEnvironment: 'jsdom',
-  // add global mocks (e.g., globalThis.global)
-  setupFiles: [path.join(__dirname, 'jest-global-mocks.js')],
-  // Setups for RTL, Jest matchers, etc.
-  setupFilesAfterEnv: [path.join(__dirname, 'jest.setup.js')],
-  testPathIgnorePatterns: [
-    '<rootDir>/lib/*',
-    '<rootDir>/dist/*',
-    '<rootDir>/coverage/*',
-    '<rootDir>/node_modules/*',
-  ],
+const rootDir = path.resolve(process.cwd())
+
+const loadBaseConfig = () => {
+  //console.log({rootDir});
+  const baseConfig = {
+    rootDir,
+    verbose: true,
+    transform: {
+      //'^.+\\.[jt]sx?$|\\.mjs$|\\.cjs$': [
+      '^.+\\.[jt]sx?$': [
+        'babel-jest', { configFile: path.resolve(__dirname, 'babel.config.js') }],
+    },
+    testMatch: [],
+    //extensionsToTreatAsEsm: ['.ts', '.tsx'],
+    // add global mocks (e.g., globalThis.global)
+    setupFiles: [path.join(__dirname, 'jest-global-mocks.js')],
+    // Setups for RTL, Jest matchers, etc.
+    setupFilesAfterEnv: [path.join(__dirname, 'jest.setup.js')],
+    testPathIgnorePatterns: [
+      `${rootDir}/lib/*`,
+      `${rootDir}/dist/*`,
+      `${rootDir}/coverage/*`,
+    ],
+    transformIgnorePatterns: [],
+    moduleNameMapper: {}
+  }
+  return baseConfig
 }
 
 function loadTSConfig() {
@@ -32,9 +39,21 @@ function loadTSConfig() {
 }
 
 function createModuleNameMapper() {
-  const compilerOptions = loadTSConfig()
-  if (!compilerOptions.paths) return {}
-  return pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/' })
+  const compilerOptions = loadTSConfig();
+  if (!compilerOptions.paths) return {};
+
+  const mapper = pathsToModuleNameMapper(compilerOptions.paths, { prefix: `${rootDir}/` });
+
+  const normalizedMapper = Object.fromEntries(
+    Object.entries(mapper).map(([key, value]) => {
+      const normalizedValue = Array.isArray(value)
+        ? value.map(v => v.replace(/\\/g, '/'))
+        : value.replace(/\\/g, '/');
+      return [key, normalizedValue];
+    })
+  );
+
+  return normalizedMapper;
 }
 
 function mergeConfigs(base, customConfig) {
@@ -43,15 +62,34 @@ function mergeConfigs(base, customConfig) {
   return {
     ...base,
     ...customConfig,
-    transform: { ...(base.transform || {}), ...(customConfig.transform || {}) },
-    moduleNameMapper: {
-      ...(base.moduleNameMapper || {}),
-      ...(customConfig.moduleNameMapper || {}),
+    transform: {
+      ...(base.transform || {}),
+      ...(customConfig.transform || {})
     },
+    testMatch: [
+      ...(base.testMatch || []),
+      ...(customConfig.testMatch || []),
+    ],
+    setupFiles: [
+      ...(base.setupFiles || []),
+      ...(customConfig.setupFiles || []),
+    ],
     setupFilesAfterEnv: [
       ...(base.setupFilesAfterEnv || []),
       ...(customConfig.setupFilesAfterEnv || []),
     ],
+    testPathIgnorePatterns: [
+      ...(base.testPathIgnorePatterns || []),
+      ...(customConfig.testPathIgnorePatterns || []),
+    ],
+    transformIgnorePatterns: [
+      ...(base.transformIgnorePatterns || []),
+      ...(customConfig.transformIgnorePatterns || []),
+    ],
+    moduleNameMapper: {
+      ...(base.moduleNameMapper || {}),
+      ...(customConfig.moduleNameMapper || {}),
+    },
   }
 }
 
@@ -70,6 +108,7 @@ function resolveCustomConfig() {
 }
 
 const loadJestConfig = () => {
+  const baseConfig = loadBaseConfig()
   const customConfig = normalizeConfig(resolveCustomConfig())
   const finalConfig = mergeConfigs(baseConfig, customConfig)
 

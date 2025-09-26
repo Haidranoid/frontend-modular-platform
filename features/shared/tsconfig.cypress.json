@@ -1,4 +1,0 @@
-{
-  "extends": "@configs/typescript/tsconfig.cypress.json",
-  "include": ["cypress"]
-}

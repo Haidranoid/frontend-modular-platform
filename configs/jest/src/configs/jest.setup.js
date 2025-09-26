@@ -1,8 +1,4 @@
-const { toHaveNoViolations } = require('jest-axe')
 const { TextEncoder, TextDecoder } = require('util')
-require('@testing-library/jest-dom')
-
-expect.extend(toHaveNoViolations)
 
 // solo para Jest/Node environment
 if (typeof global.TextEncoder === 'undefined') {
