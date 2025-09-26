@@ -41,6 +41,7 @@
     "build-storybook": "storybook build",
     "lint": "linterx src/**/* --fix",
     "test": "testx --detectOpenHandles",
+    "test:watch": "testx --detectOpenHandles --watch",
     "test-storybook": "test-storybook",
     "storybook": "storybook dev -p 6006"
   },

@@ -1,8 +1,9 @@
 const { jestConfig } = require('./configs')
-const { jestBinPath, jestConfigPath } = require('./paths')
+const { jestBinPath, jestConfigPath, babelConfigPath } = require('./paths')
 
 module.exports = {
     jestConfig,
     jestBinPath,
     jestConfigPath,
+    babelConfigPath
 }

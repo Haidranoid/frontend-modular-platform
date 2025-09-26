@@ -1,19 +1,18 @@
+import { FC, ReactNode, JSX } from 'react'
 import { EnhancedStore } from '@reduxjs/toolkit'
-import { render, RenderOptions, RenderResult } from '@testing-library/react'
+import { render as rtlRender, RenderOptions, RenderResult } from '@testing-library/react'
 import { MemoryRouter, MemoryRouterProps } from 'react-router'
 import { Provider } from 'react-redux'
 import { ThemeProvider } from '#providers'
-//import { initialAppState, InitialAppState } from '@features/reducer'
-//import { configureAppStore, RootState } from '@store'
 
-interface SelectiveProvidersProps {
+export interface SelectiveProvidersProps {
   stateProvider?: boolean
   routerProvider?: boolean
   themeProvider?: boolean
 }
 
 // Define the options for your custom render function
-interface CustomRenderOptions extends Omit<RenderOptions, 'queries'> {
+export interface CustomRenderOptions extends Omit<RenderOptions, 'queries'> {
   //initialState?: InitialAppState
   initialState?: object
   //storeOverride?: EnhancedStore<RootState>
@@ -22,12 +21,12 @@ interface CustomRenderOptions extends Omit<RenderOptions, 'queries'> {
   selectiveProviders?: SelectiveProvidersProps
 }
 
-type ExtendedRenderResult = RenderResult & {
+export type ExtendedRenderResult = RenderResult & {
   store: EnhancedStore<object>
 }
 
-type RenderWithProvidersType = (
-  ui: React.JSX.Element | React.JSX.Element[],
+export type RenderWithProvidersType = (
+  ui: JSX.Element | JSX.Element[],
   customRenderOptions?: CustomRenderOptions,
 ) => ExtendedRenderResult
 
@@ -37,7 +36,7 @@ const SelectiveProviders: SelectiveProvidersProps = {
   themeProvider: true,
 }
 
-const renderWithProviders: RenderWithProvidersType = (
+export const renderEnhanced: RenderWithProvidersType = (
   ui,
   customRenderOptions: CustomRenderOptions = {},
 ) => {
@@ -53,7 +52,7 @@ const renderWithProviders: RenderWithProvidersType = (
   //const store = storeOverride ?? configureAppStore(initialState)
   const store = {} as EnhancedStore<object>
 
-  const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const Wrapper: FC<{ children: ReactNode }> = ({ children }) => {
     const { stateProvider, routerProvider, themeProvider } = selectiveProviders
 
     let wrapped = children
@@ -67,26 +66,25 @@ const renderWithProviders: RenderWithProvidersType = (
       wrapped = <NavigationMenu>{wrapped}</NavigationMenu>
     }
 
-    */
-
     if (routerProvider) {
       wrapped = (
         <MemoryRouter initialEntries={routerProps.initialEntries}>{wrapped}</MemoryRouter>
       )
     }
 
-    if (themeProvider) {
-      wrapped = <ThemeProvider>{wrapped}</ThemeProvider>
-    }
-
     if (stateProvider) {
       wrapped = <Provider store={store}>{wrapped}</Provider>
+    }
+    */
+
+    if (themeProvider) {
+      wrapped = <ThemeProvider>{wrapped}</ThemeProvider>
     }
 
     return <>{wrapped}</>
   }
 
-  const view = render(ui, { wrapper: Wrapper, ...renderOptions })
+  const view = rtlRender(ui, { wrapper: Wrapper, ...renderOptions })
 
   return {
     ...view,
@@ -94,9 +92,5 @@ const renderWithProviders: RenderWithProvidersType = (
   }
 }
 
-// re-export everything
-//export * from '@testing-library/react'
-
-// override render method
-export { renderWithProviders }
-export type { SelectiveProvidersProps }
+// re-export from RTL
+export * from '@testing-library/react'

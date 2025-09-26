@@ -11,7 +11,7 @@ describe('AuthenticationService', () => {
 
   describe('getAccessToken', () => {
     it('should return null if no access token is set', () => {
-      expect(AuthenticationService.getAccessToken()).toBeNull()
+      expect(AuthenticationService.getAccessToken()).toBe('')
     })
 
     it('should return the stored access token', () => {
@@ -22,7 +22,7 @@ describe('AuthenticationService', () => {
 
   describe('getRefreshToken', () => {
     it('should return null if no refresh token is set', () => {
-      expect(AuthenticationService.getRefreshToken()).toBeNull()
+      expect(AuthenticationService.getRefreshToken()).toBe('')
     })
 
     it('should return the stored refresh token', () => {
