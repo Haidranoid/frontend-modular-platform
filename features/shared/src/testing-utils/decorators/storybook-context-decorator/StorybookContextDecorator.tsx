@@ -4,13 +4,13 @@ import { ReactRenderer } from '@storybook/react-webpack5'
 import { ContextBoxConfig, ComplexItem, StorybookContextBox } from '#ui'
 
 export interface WithContextBoxArgs {
-  contextBoxArgs: {
+  contextBoxArgs?: {
     items?: ComplexItem[]
   }
 }
 
 export interface WithContextBoxParameters {
-  contextBoxConfig: {
+  contextBoxConfig?: {
     title?: string
     config?: ContextBoxConfig
     domElement?: HTMLElement

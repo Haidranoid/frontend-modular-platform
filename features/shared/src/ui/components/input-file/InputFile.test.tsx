@@ -1,16 +1,12 @@
-import { renderEnhanced, screen } from '#testing-utils'
-import { InputFile } from './InputFile'
+import { render, screen } from '@testing-library/react'
+import { composeStories } from '@storybook/react'
+import * as stories from './InputFile.stories'
+
+const { Default } = composeStories(stories)
 
 describe('InputFile', () => {
   it('renders correctly', () => {
-    renderEnhanced(
-      <InputFile
-        files={undefined}
-        label={'inputFile test'}
-        accept={'.png'}
-        handleOnChange={jest.fn()}
-      />,
-    )
+    render(<Default />)
     const inputFile = screen.getByRole('button')
     expect(inputFile).toBeInTheDocument()
   })

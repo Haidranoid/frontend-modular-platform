@@ -1,9 +1,12 @@
-import { renderEnhanced, screen } from '#testing-utils'
-import { Input } from './Input'
+import { render, screen } from '@testing-library/react'
+import { composeStories } from '@storybook/react'
+import * as stories from './Input.stories'
+
+const { Primary } = composeStories(stories)
 
 describe('Input', () => {
   it('renders correctly', () => {
-    renderEnhanced(<Input />)
+    render(<Primary />)
     const input = screen.getByRole('textbox')
     expect(input).toBeInTheDocument()
   })

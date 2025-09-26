@@ -1,12 +1,12 @@
-import { FC } from 'react'
-import { renderEnhanced } from '#testing-utils'
-import { Portal } from './Portal'
+import { render } from '@testing-library/react'
+import { composeStories } from '@storybook/react'
+import * as stories from './Portal.stories'
 
-const Component: FC = () => <div>children in portal</div>
+const { Default } = composeStories(stories)
 
 describe('Portal', () => {
   it('renders correctly', () => {
-    renderEnhanced(<Portal children={<Component />} container={document.body} />)
+    render(<Default />)
     const children = document.body.querySelectorAll('div')
     expect(children.length).toBeGreaterThan(0)
   })

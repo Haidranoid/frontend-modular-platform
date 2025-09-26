@@ -1,8 +1,11 @@
-import { renderEnhanced } from '#testing-utils'
-import { Dialog } from './Dialog'
+import { render } from '@testing-library/react'
+import { composeStories } from '@storybook/react'
+import * as stories from './Dialog.stories'
+
+const { Default } = composeStories(stories)
 
 describe('Dialog', () => {
   it('renders correctly', () => {
-    renderEnhanced(<Dialog />)
+    render(<Default />)
   })
 })

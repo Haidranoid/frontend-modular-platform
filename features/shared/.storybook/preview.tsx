@@ -9,8 +9,6 @@ const preview = {
   decorators: [withStorybookContext, withMemoryRouter, withTheme, withRedux],
   parameters: {
     viewport: { options: INITIAL_VIEWPORTS },
-    storeConfig: { rootReducer: {} },
-    routerConfig: { initialPath: "/" },
   },
   loaders: [mswLoader],
 };

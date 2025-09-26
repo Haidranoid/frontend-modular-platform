@@ -1,9 +1,12 @@
-import { renderEnhanced, screen } from '#testing-utils'
-import { Loading } from './Loading'
+import { render, screen } from '@testing-library/react'
+import { composeStories } from '@storybook/react'
+import * as stories from './Loading.stories'
+
+const { Default } = composeStories(stories)
 
 describe('Loading', () => {
   it('renders correctly', () => {
-    renderEnhanced(<Loading color="primary" />)
+    render(<Default />)
     const loading = screen.getByRole('status')
     expect(loading).toBeInTheDocument()
   })

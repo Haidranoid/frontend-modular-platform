@@ -4,7 +4,7 @@ import { MemoryRouterProvider } from '#providers'
 import { RouteObject } from 'react-router'
 
 export interface WithMemoryRouterParameters {
-  routerConfig: {
+  routerConfig?: {
     initialPath?: string
   }
 }
@@ -20,5 +20,5 @@ export const withMemoryRouter: DecoratorFunction<ReactRenderer> = (
 
   const routes: RouteObject[] = [{ path: '*', element: <Story /> }]
 
-  return <MemoryRouterProvider initialPath={routerConfig.initialPath} routes={routes} />
+  return <MemoryRouterProvider initialPath={routerConfig?.initialPath} routes={routes} />
 }

@@ -19,7 +19,6 @@ const preview = {
     viewport: { options: INITIAL_VIEWPORTS },
     msw: { handlers: mswHandlers },
     storeConfig: { rootReducer: authRootReducer },
-    routerConfig: { initialPath: '/' },
   },
   loaders: [mswLoader],
 }

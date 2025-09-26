@@ -83,6 +83,7 @@ export const StorybookContextBox: FC<ContextBoxProps> = ({
         }}
         bounds="window"
         dragHandleClassName="drag-handle"
+        data-testid="storybook-context-box"
       >
         <Box>
           <Header className="drag-handle">{title}</Header>

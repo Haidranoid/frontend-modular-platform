@@ -38,13 +38,12 @@
   ],
   "scripts": {
     "build": "buildx",
-    "build-storybook": "storybook build",
     "lint": "linterx src/**/* --fix",
-    "test": "testx --detectOpenHandles",
-    "test:watch": "testx --detectOpenHandles --watch",
+    "test": "testx --detectOpenHandles --watch",
+    "test:ci": "testx --detectOpenHandles",
     "test:clean": "testx --clearCache",
-    "test-storybook": "test-storybook",
-    "storybook": "storybook dev -p 6006"
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
   },

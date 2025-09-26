@@ -1,15 +1,12 @@
-import { renderEnhanced, screen } from '#testing-utils'
-import { Select } from './Select'
+import { render, screen } from '@testing-library/react'
+import { composeStories } from '@storybook/react'
+import * as stories from './Select.stories'
+
+const { Default } = composeStories(stories)
 
 describe('Select', () => {
   it('renders correctly', () => {
-    renderEnhanced(
-      <Select
-        label="select test"
-        optionValues={['optionValue1', 'optionValue2']}
-        handleOnChange={jest.fn()}
-      />,
-    )
+    render(<Default />)
     //screen.debug()
     const select = screen.getByRole('combobox')
     expect(select).toBeInTheDocument()
