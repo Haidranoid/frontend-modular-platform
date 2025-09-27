@@ -3,7 +3,7 @@
 const path = require('path')
 const fs = require('fs')
 const { spawn } = require('child_process')
-const { rollupBinPath, rollupConfigPath } = require('@configs/rollup')
+const { rollupBinPath, rollupConfigPath, rollupConfig } = require('@configs/rollup')
 
 /**
  * Busca un archivo de config personalizado (.ts o .js) en el cwd
@@ -15,13 +15,14 @@ function resolveCustomConfig() {
 
   if (fs.existsSync(tsConfig)) return tsConfig
   if (fs.existsSync(jsConfig)) return jsConfig
-  return null
+  return ''
 }
 
 
 function runner() {
-  const customConfig = resolveCustomConfig()
-  const finalConfigPath = customConfig || rollupConfigPath
+  //console.log({rollupConfig, rollupConfigPath, rollupBinPath});
+  const customConfigPath = resolveCustomConfig() // string | undefined
+  const finalConfigPath = customConfigPath || rollupConfigPath; // string
 
   const args = process.argv.slice(2)
 

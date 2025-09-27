@@ -1,6 +1,23 @@
 const fs = require('fs')
 const path = require('path')
 const glob = require('fast-glob')
+const ts = require("typescript");
+
+function loadTSConfig() {
+  const tsConfigPath = path.join(process.cwd(), "tsconfig.json");
+  const configFile = ts.readConfigFile(tsConfigPath, ts.sys.readFile);
+  const parsed = ts.parseJsonConfigFileContent(
+    configFile.config,
+    ts.sys,
+    path.dirname(tsConfigPath),
+  );
+
+  const {
+    options: { paths, baseUrl },
+  } = parsed;
+
+  return { paths, baseUrl, tsConfigPath };
+}
 
 function generateDtsAlias(importAliases, dependencies = []){
     const rushProjectsMap = {
@@ -33,7 +50,8 @@ function getAliases() {
         replacement: path.resolve(process.cwd(), target),
     }));
 
-    dtsAliases = generateDtsAlias(importAliases, Object.keys(pkg.dependencies || {}))
+    //dtsAliases = generateDtsAlias(importAliases, Object.keys(pkg.dependencies || {}))
+    dtsAliases = importAliases
 
     return { importAliases, dtsAliases }
 }
@@ -93,6 +111,7 @@ function getInputs() {
 }
 
 module.exports = {
+    loadTSConfig,
     getAliases,
     getExternalDependencies,
     getInputs,

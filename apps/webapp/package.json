@@ -27,8 +27,8 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@webapp/auth": "workspace:*",
     "@webapp/shared": "workspace:*",
+    "@webapp/auth": "workspace:*",
     "@reduxjs/toolkit": "2.8.2",
     "react": "19.1.1",
     "react-dom": "19.1.1",

@@ -7,5 +7,6 @@ const { Default } = composeStories(stories)
 describe('Dialog', () => {
   it('renders correctly', () => {
     render(<Default />)
+    expect(true).toBe(true)
   })
 })

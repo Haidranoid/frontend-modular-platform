@@ -1,4 +1,4 @@
-import { User } from '@webapp/shared'
+import type { User } from '@webapp/shared'
 
 export type GetMeSuccess = User
 

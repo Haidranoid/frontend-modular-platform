@@ -39,7 +39,7 @@ export const withRedux: DecoratorFunction<ReactRenderer> = (Story, { parameters 
 
 function createDummyStore(initialState = {}) {
   return configureAppStore({
-    rootReducer: (state = initialState, action) => state,
+    rootReducer: (state = initialState, _action) => state,
     initialState: initialState,
   })
 }

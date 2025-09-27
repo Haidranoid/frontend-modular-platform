@@ -1,4 +1,3 @@
-const storybook = require('eslint-plugin-storybook')
 const tslint = require('typescript-eslint')
 const eslintPluginReact = require('eslint-plugin-react')
 const eslintPluginTestingLibrary = require('eslint-plugin-testing-library')
@@ -9,6 +8,7 @@ const eslintPluginPrettier = require('eslint-plugin-prettier')
 const eslintPluginJsxA11y = require('eslint-plugin-jsx-a11y')
 const eslintPluginUnusedImports = require('eslint-plugin-unused-imports')
 const eslintPluginImport = require('eslint-plugin-import')
+const eslintPluginStorybook = require('eslint-plugin-storybook')
 //import prettierConfig from './.prettierrc.json'
 const prettierConfig = require('./prettierrc')
 
@@ -55,7 +55,7 @@ const eslintConfig = [
   {
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
-      parser: tslint.parser, // o @typescript-eslint/parser si quieres TS moderno
+      parser: tslint.parser,
       parserOptions: {
         project: './tsconfig.json',
         ecmaFeatures: { jsx: true },
@@ -70,7 +70,7 @@ const eslintConfig = [
 
   // 3️⃣ Test files
   {
-    files: ['**/*.test.{ts,tsx,js,jsx}', '**/jest.config.ts'],
+    files: ['**/*.test.{ts,tsx,js,jsx}', 'jest.config.ts'],
     languageOptions: {
       parser: tslint.parser,
       parserOptions: { project: './tsconfig.json' },
@@ -87,7 +87,7 @@ const eslintConfig = [
 
   // 4️⃣ Cypress
   {
-    files: ['cypress/**/*.cy.{ts,js}', 'cypress/**/*.ts', 'cypress/**/*.js', 'cypress.config.ts'],
+    files: ['cypress/**/*.cy.{ts,js}', 'cypress.config.ts'],
     languageOptions: {
       parser: tslint.parser,
       parserOptions: { project: './tsconfig.cypress.json' },
@@ -103,14 +103,24 @@ const eslintConfig = [
   },
 
   // 5️⃣ Storybook
-  /*...storybook.configs['flat/recommended'].map((cfg) => ({
-    ...cfg,
+  {
+    files: ['.storybook/**/*.{ts,tsx,js}'],
+    languageOptions: {
+      parser: tslint.parser,
+      parserOptions: {
+        project: './.storybook/tsconfig.storybook.json',
+        ecmaFeatures: { jsx: true },
+      },
+    },
+    plugins: {
+      'storybook': eslintPluginStorybook,
+    },
     rules: {
-      ...cfg.rules,
+      ...eslintPluginStorybook.configs.recommended.rules,
       'prettier/prettier': ['error', prettierConfig],
     },
-  })),
-  */
+  },
+
   // 6️⃣ Ignorar build artifacts, coverage, node_modules, mocks
   {
     ignores: ['node_modules', 'dist', 'build', 'server', 'coverage', 'public', '.idea'],

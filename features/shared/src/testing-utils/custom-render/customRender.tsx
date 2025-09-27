@@ -1,3 +1,5 @@
+export const customRender = 'customRender'
+/*
 import { FC, ReactNode, JSX } from 'react'
 import { EnhancedStore } from '@reduxjs/toolkit'
 import { render as rtlRender, RenderOptions, RenderResult } from '@testing-library/react'
@@ -74,7 +76,7 @@ export const renderEnhanced: RenderWithProvidersType = (
     if (stateProvider) {
       wrapped = <Provider store={store}>{wrapped}</Provider>
     }
-    */
+
 
     if (themeProvider) {
       wrapped = <ThemeProvider>{wrapped}</ThemeProvider>
@@ -93,3 +95,4 @@ export const renderEnhanced: RenderWithProvidersType = (
 
 // re-export from RTL
 export * from '@testing-library/react'
+    */

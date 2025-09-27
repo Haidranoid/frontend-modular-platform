@@ -1,5 +1,4 @@
-import { AuthenticationService, httpClient } from '@webapp/shared'
-import type { ApiOperations, ApiSchema } from '@webapp/shared'
+import { AuthenticationService, httpClient, ApiOperations, ApiSchema } from '@webapp/shared'
 import { Endpoints } from '#constants'
 import type { AuthState } from '../slice'
 import type {
@@ -67,7 +66,7 @@ export const authApi: ApiSchema<AuthState, AuthOps> = {
         endpoint: Endpoints.LOGOUT,
       })
     },
-    onSuccess: (state, action) => {
+    onSuccess: (state) => {
       state.user = null
       AuthenticationService.closeSession()
     },

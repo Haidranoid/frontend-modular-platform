@@ -120,3 +120,5 @@ dist-storybook/
 # Heft temporary files
 .cache/
 .heft/
+
+.jest-test-results.json

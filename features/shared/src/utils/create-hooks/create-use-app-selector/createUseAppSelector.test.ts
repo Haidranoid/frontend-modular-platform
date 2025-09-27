@@ -7,7 +7,7 @@ jest.mock('react-redux', () => ({
 }))
 
 //import { globalSelectors } from '@selectors'
-const globalSelectors = {
+/*const globalSelectors = {
   base: {
     init: true,
     reboot: false,
@@ -15,7 +15,7 @@ const globalSelectors = {
     isLoading: false,
     error: null,
   },
-}
+}*/
 
 describe('useAppSelector hook', () => {
   it('binds all action creators with dispatch', () => {

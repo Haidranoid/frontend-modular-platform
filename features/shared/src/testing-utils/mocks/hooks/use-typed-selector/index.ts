@@ -3,7 +3,7 @@
 // For types (compile-time)
 //import { RootState } from '@store'
 
-export function mockUseTypedSelector<T>(value: T) {
+export function mockUseTypedSelector<T>(_value: T) {
   // For values (runtime)
   //const useTypedSelector = require('../../../../main/state/hooks/use-typed-selector')
   //  .default as jest.MockedFunction<TypedUseSelectorHook<object>>

@@ -1,9 +1,14 @@
 {
-  "extends": "@configs/typescript/tsconfig.bundler.json",
+  "extends": "@configs/typescript/tsconfig.base.json",
   "compilerOptions": {
     "target": "ES2022",
     "module": "ESNext",
-    "moduleResolution": "bundler"
+    "moduleResolution": "bundler",
+
+    "paths": {
+      "@webapp/auth": ["./../../features/auth/dist/index.d.ts"],
+      "@webapp/shared": ["./../../features/shared/dist/index.d.ts"],
+    }
   },
-  "include": ["src"]
+  "include": ["./src"]
 }

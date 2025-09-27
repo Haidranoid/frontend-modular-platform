@@ -7,13 +7,13 @@ let ts;
 if (typeof window === 'undefined') {
   ts = require('typescript');
 }
-*/
 
 interface AliasMappings {
   paths?: Record<string, string>
   webpackAlias: Record<string, string>
   moduleNameMapper: Record<string, string>
 }
+*/
 
 const ROOT_DIR = process.cwd()
 

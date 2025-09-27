@@ -4,6 +4,12 @@
   "author": "",
   "license": "ISC",
   "description": "",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -12,23 +18,21 @@
     }
   },
   "imports": {
-    "#assets":"./src/assets/index.ts",
+    "#assets": "./src/assets/index.ts",
     "#config": "./src/config/index.ts",
     "#constants":  "./src/constants/index.ts",
     "#experimental": "./src/experimental/index.ts",
     "#providers": "./src/providers/index.ts",
     "#routes":"./src/routes/index.ts",
     "#state": "./src/state/index.ts",
-    "#types": "./src/types/index.d.ts",
+    "#styles": "./src/styles/index.ts",
+    "#types": "./src/types/index.ts",
     "#ui": "./src/ui/index.ts",
     "#utils": "./src/utils/index.ts"
   },
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "build": "buildx",
-    "lint": "linterx src/ msw-handlers/ .storybook/ --fix",
+    "lint": "linterx src/**/* msw-handlers/**/* .storybook/** --fix",
     "test": "testx --detectOpenHandles --watch",
     "test:ci": "testx --detectOpenHandles",
     "test:clean": "testx --clearCache",
@@ -37,6 +41,8 @@
     "cy:start": "rushx storybook & wait-on http://localhost:6006 && rushx cy:run",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
+  },
+  "dependencies": {
   },
   "peerDependencies": {
     "@webapp/shared": "workspace:*",

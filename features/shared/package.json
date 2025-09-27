@@ -4,6 +4,12 @@
   "author": "",
   "license": "ISC",
   "description": "",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -11,49 +17,34 @@
       "require": "./dist/index.cjs"
     }
   },
-  "typesVersions": {
-    "*": {
-      "*": [
-        "./dist/index.d.ts"
-      ]
-    }
-  },
   "imports": {
-    "#assets": "./src/assets/index.ts",
-    "#config": "./src/config/index.ts",
     "#constants":  "./src/constants/index.ts",
     "#experimental": "./src/experimental/index.ts",
     "#libraries": "./src/libraries/index.ts",
     "#providers": "./src/providers/index.ts",
-    "#router":"./src/router/index.ts",
     "#state": "./src/state/index.ts",
     "#styles": "./src/styles/index.ts",
     "#testing-utils": "./src/testing-utils/index.ts",
-    "#types": "./src/types/index.d.ts",
+    "#types": "./src/types/index.ts",
     "#ui": "./src/ui/index.ts",
     "#utils": "./src/utils/index.ts"
   },
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "build": "buildx",
-    "lint": "linterx src/**/* --fix",
+    "build:watch": "buildx --watch",
+    "lint": "linterx src/**/* .storybook/** --fix",
     "test": "testx --detectOpenHandles --watch",
     "test:ci": "testx --detectOpenHandles",
+    "test:generate-output": "testx --json --outputFile=.jest-test-results.json || true",
+    "test:generate-output:watch": "rushx test:generate-output -- --watch",
     "test:clean": "testx --clearCache",
     "storybook": "storybook dev -p 6006",
+    "prebuild:storybook": "rushx test:generate-output",
     "build-storybook": "storybook build"
   },
   "dependencies": {
   },
   "peerDependencies": {
-    "react": "19.1.1",
-    "react-dom": "19.1.1",
-    "react-redux": "9.2.0",
-    "react-router": "7.8.0",
-    "redux": "5.0.1",
-    "styled-components": "6.1.19",
     "@reduxjs/toolkit": "2.8.2"
   },
   "devDependencies": {
@@ -89,6 +80,7 @@
     "jest-fixed-jsdom": "0.0.10",
     "msw": "2.10.5",
     "msw-storybook-addon": "2.0.5",
+    "path-browserify": "1.0.1",
     "react": "19.1.1",
     "react-dom": "19.1.1",
     "react-rnd": "10.5.2",

@@ -17,7 +17,7 @@ export const Signup: FC = () => {
   const {
     register,
     handleSubmit,
-    watch,
+    //watch,
     formState: { errors },
   } = useForm<SignupFormInputs>()
 

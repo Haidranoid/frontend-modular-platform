@@ -6,9 +6,9 @@ import {
   SliceSelectors,
   ValidateSliceCaseReducers,
 } from '@reduxjs/toolkit'
-import { generateMatcher } from './generate-matcher'
 import { SliceNames, MatcherIdentifiers } from '#constants'
 import { ApiSchema, BaseState, UnifiedState } from '#types'
+import { generateMatcher } from './generate-matcher'
 import { createSliceTools, Thunks } from './create-slice-tools'
 
 /*

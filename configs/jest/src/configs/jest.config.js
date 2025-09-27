@@ -26,6 +26,7 @@ const loadBaseConfig = () => {
       `${rootDir}/coverage/*`,
     ],
     transformIgnorePatterns: [],
+    modulePathIgnorePatterns: ['node_modules', '.jest-test-results.json'],
     moduleNameMapper: {}
   }
   return baseConfig
@@ -85,6 +86,10 @@ function mergeConfigs(base, customConfig) {
     transformIgnorePatterns: [
       ...(base.transformIgnorePatterns || []),
       ...(customConfig.transformIgnorePatterns || []),
+    ],
+    modulePathIgnorePatterns: [
+      ...(base.modulePathIgnorePatterns || []),
+      ...(customConfig.modulePathIgnorePatterns || []),
     ],
     moduleNameMapper: {
       ...(base.moduleNameMapper || {}),
