@@ -12,7 +12,6 @@ const eslintPluginStorybook = require('eslint-plugin-storybook')
 //import prettierConfig from './.prettierrc.json'
 const prettierConfig = require('./prettierrc')
 
-
 const eslintConfig = [
   // 1️⃣ Base config para JS/TS/React
   {
