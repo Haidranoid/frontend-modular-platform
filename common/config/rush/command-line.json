@@ -205,6 +205,14 @@
       "enableParallelism": true,
       "ignoreDependencyOrder": true,
       "safeForSimultaneousRushProcesses": true
+    },
+    {
+      "commandKind": "bulk",
+      "name": "test",
+      "summary": "",
+      "enableParallelism": true,
+      "ignoreDependencyOrder": true,
+      "safeForSimultaneousRushProcesses": true
     }
   ],
 

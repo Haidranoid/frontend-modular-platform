@@ -21,6 +21,9 @@ CR extends ((creators: ReducerCreators<UnifiedState<S>>) => SliceCaseReducers<Un
     dispatch: ThunkDispatch<S, any, Action>,
   ) => CallablesFromThunks<Thunks<TApi>>
 */
+
+export type CreateSliceReturn = ReturnType<typeof createSlice>
+
 export function createSlice<
   N extends SliceNames,
   S extends object,

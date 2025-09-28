@@ -5,7 +5,6 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
 
-    //"baseUrl": ".",
     "paths": {
       "#assets": ["./src/assets/index.ts"],
       "#config": ["./src/config/index.ts"],
@@ -19,7 +18,7 @@
       "#ui": ["./src/ui/index.ts"],
       "#utils": ["./src/utils/index.ts"],
 
-      "@webapp/shared": ["./../shared/dist/index.d.ts"]
+      //"@webapp/shared": ["./../shared/dist/index.d.ts"]
     }
   },
   "include": ["./src","./msw-handlers", "./jest.setup.ts"]

@@ -354,6 +354,10 @@ importers:
         version: 5.9.2
 
   ../../features/auth:
+    dependencies:
+      '@webapp/shared':
+        specifier: workspace:*
+        version: link:../shared
     devDependencies:
       '@configs/typescript':
         specifier: workspace:*
@@ -433,9 +437,6 @@ importers:
       '@types/react-dom':
         specifier: 19.1.9
         version: 19.1.9(@types/react@19.1.14)
-      '@webapp/shared':
-        specifier: workspace:*
-        version: link:../shared
       cypress:
         specifier: 15.3.0
         version: 15.3.0
@@ -6392,8 +6393,8 @@ packages:
     resolution: {integrity: sha512-UERzLsxzllchadvbPs5aolHh65ISpKpM+ccLbOJ8/vvpBKmAWf+la7dXFy7Mr0ySHbdHrFv5kGFCUHHe6GFEmw==}
     engines: {node: '>= 4.0.0'}
 
-  memfs@4.46.1:
-    resolution: {integrity: sha512-2wjHDg7IjP+ufAqqqSxjiNePFDrvWviA79ajUwG9lkHhk3HzZOLBzzoUG8cx9vCagj6VvBQD7oXuLuFz5LaAOQ==}
+  memfs@4.47.0:
+    resolution: {integrity: sha512-Xey8IZA57tfotV/TN4d6BmccQuhFP+CqRiI7TTNdipZdZBzF2WnzUcH//Cudw6X4zJiUbo/LTuU/HPA/iC/pNg==}
 
   memoizerific@1.11.3:
     resolution: {integrity: sha512-/EuHYwAPdLtXwAwSZkh/Gutery6pD2KYd44oQLhAvQp/50mpyduZh8Q7PYHXTCJ+wuXxt7oij2LXyIJOOYFPog==}
@@ -15998,7 +15999,7 @@ snapshots:
     dependencies:
       fs-monkey: 1.1.0
 
-  memfs@4.46.1:
+  memfs@4.47.0:
     dependencies:
       '@jsonjoy.com/json-pack': 1.14.0(tslib@2.8.1)
       '@jsonjoy.com/util': 1.9.0(tslib@2.8.1)
@@ -18211,7 +18212,7 @@ snapshots:
   webpack-dev-middleware@7.4.5(webpack@5.101.3):
     dependencies:
       colorette: 2.0.20
-      memfs: 4.46.1
+      memfs: 4.47.0
       mime-types: 3.0.1
       on-finished: 2.4.1
       range-parser: 1.2.1

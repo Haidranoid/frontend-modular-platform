@@ -7,26 +7,28 @@ const alias = require("@rollup/plugin-alias");
 const json = require("@rollup/plugin-json");
 const babel = require("@rollup/plugin-babel");
 const clear = require("rollup-plugin-clear");
-const nodePolyfills = require("rollup-plugin-polyfill-node");
 const { dts } = require("rollup-plugin-dts");
 const {
   loadTSConfig,
   getInputs,
   getAliases,
   getExternalDependencies,
+  getDependenciesToIncludeInTypes
 } = require("./rollup-utils");
 
 const extensions = [".js", ".ts", ".tsx"];
 const inputs = getInputs();
 const externalDependencies = getExternalDependencies();
-const { importAliases, dtsAliases } = getAliases();
-const { baseUrl, paths, tsConfigPath } = loadTSConfig();
+const aliases = getAliases();
+const { paths, tsConfigPath } = loadTSConfig();
+const dtsToInclude = getDependenciesToIncludeInTypes()
 
 
 console.log({ inputs });
 console.log({ externalDependencies });
-console.log({ importAliases, dtsAliases });
-console.log({ baseUrl, paths, tsConfigPath });
+console.log({ aliases });
+console.log({ paths, tsConfigPath });
+console.log({ dtsToInclude })
 
 const baseConfig = defineConfig([
   {
@@ -55,7 +57,7 @@ const baseConfig = defineConfig([
     context: "globalThis", // o 'window' si solo es para browser
     plugins: [
       clear({ targets: ["dist"], watch: true }),
-      alias({ entries: importAliases }),
+      alias({ entries: aliases }),
       resolve({ extensions, browser: true }),
       commonjs(),
       json(),
@@ -86,7 +88,7 @@ const baseConfig = defineConfig([
       //alias({ entries: dtsAliases }),
       dts({
         respectExternal: true,
-        includeExternal: ['@webapp/shared'],
+        includeExternal: dtsToInclude,
         tsconfig: tsConfigPath,
         compilerOptions: {
           paths,

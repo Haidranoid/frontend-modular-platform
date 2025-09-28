@@ -22,7 +22,7 @@ export type Thunks<TApi extends ApiSchema> = {
 }
 
 export function createSliceTools<
-  TState extends BaseState = UnifiedState,
+  TState extends BaseState = UnifiedState<any>,
   TApi extends ApiSchema = ApiSchema,
 >(api: TApi, slice: SliceNames) {
   const thunks = {} as Thunks<TApi>

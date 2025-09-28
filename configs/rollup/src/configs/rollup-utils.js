@@ -37,7 +37,7 @@ function generateDtsAlias(importAliases, dependencies = []){
     ]
 }
 
-function getAliases() {
+function getAliases_V0() {
     let importAliases = []
     let dtsAliases = []
 
@@ -54,6 +54,17 @@ function getAliases() {
     dtsAliases = importAliases
 
     return { importAliases, dtsAliases }
+}
+
+function getAliases() {
+    const { paths } = loadTSConfig()
+
+    const aliases = Object.entries(paths || {}).map(([find, target]) => ({
+        find,
+        replacement: path.resolve(process.cwd(), target[0]),
+    }));
+
+    return aliases
 }
 
 function getExternalDependencies() {
@@ -81,6 +92,16 @@ function getExternalDependencies() {
     ]
 
     return [... new Set(externalDependencies)];
+}
+
+function getDependenciesToIncludeInTypes() {
+    const pkg = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'package.json'), 'utf-8'));
+
+    const dtsToInclude = Object.keys(pkg.dependencies || {})
+      .reduce((accumulator, currentValue) => accumulator.concat(currentValue), [])
+
+    console.log(dtsToInclude);
+    return dtsToInclude
 }
 
 function getInputs() {
@@ -115,4 +136,5 @@ module.exports = {
     getAliases,
     getExternalDependencies,
     getInputs,
+    getDependenciesToIncludeInTypes
 }

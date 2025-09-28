@@ -33,8 +33,9 @@
   "scripts": {
     "build": "buildx",
     "lint": "linterx src/**/* msw-handlers/**/* .storybook/** --fix",
-    "test": "testx --detectOpenHandles --watch",
+    "test": "testx --detectOpenHandles",
     "test:ci": "testx --detectOpenHandles",
+    "test:watch": "testx --detectOpenHandles --watch",
     "test:clean": "testx --clearCache",
     "cy": "cypress open",
     "cy:run": "cypress run --browser electron",
@@ -42,12 +43,13 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
+  "dependencies": {
+    "@webapp/shared": "workspace:*"
+  },
   "peerDependencies": {
-    "@webapp/shared": "workspace:*",
     "@reduxjs/toolkit": "2.8.2"
   },
   "devDependencies": {
-    "@webapp/shared": "workspace:*",
     "@configs/typescript": "workspace:*",
     "@tools/jest-scripts": "workspace:*",
     "@tools/eslint-scripts": "workspace:*",

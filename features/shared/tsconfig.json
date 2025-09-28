@@ -5,7 +5,6 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
 
-    //"baseUrl": ".",
     "paths": {
       "#constants": ["./src/constants/index.ts"],
       "#experimental": ["./src/experimental/index.ts"],
