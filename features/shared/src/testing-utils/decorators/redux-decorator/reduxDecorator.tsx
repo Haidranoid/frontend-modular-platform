@@ -1,8 +1,8 @@
 import { DecoratorFunction } from 'storybook/internal/csf'
 import { ReactRenderer } from '@storybook/react-webpack5'
+import { Store, Reducer } from 'redux'
 import { ReduxProvider } from '#providers'
 import { configureAppStore } from '#utils'
-import { EnhancedStore, Reducer } from '@reduxjs/toolkit'
 
 interface StoreConfig<S, R extends Reducer<S>> {
   rootReducer?: R
@@ -19,7 +19,7 @@ export const withRedux: DecoratorFunction<ReactRenderer> = (Story, { parameters 
 
   const storeConfig = (parameters as WithReduxParameters).storeConfig
 
-  let store: EnhancedStore
+  let store: Store
 
   if (storeConfig && storeConfig.rootReducer) {
     store = configureAppStore({

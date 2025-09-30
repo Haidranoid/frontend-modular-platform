@@ -3,10 +3,8 @@
   these properties can be declared in .env file or assigned in
   webpack.env.ts
  */
-const DotenvPlugin = require('dotenv-webpack')
+import DotenvPlugin from 'dotenv-webpack'
 
-const dotEnvPlugin = new DotenvPlugin({
+export default new DotenvPlugin({
   systemvars: true,
 })
-
-module.exports = dotEnvPlugin

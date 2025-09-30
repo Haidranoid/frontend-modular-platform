@@ -1,5 +1,8 @@
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 
-const bundleAnalyzerPlugin = new BundleAnalyzerPlugin()
-
-module.exports = bundleAnalyzerPlugin
+export default new BundleAnalyzerPlugin({
+  //analyzerMode: process.env.ANALYZE ? 'server' : 'disabled',
+  analyzerMode: 'static',
+  openAnalyzer: !!process.env.ANALYZE,
+  reportFilename: 'report.html',
+})

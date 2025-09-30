@@ -1,7 +1,5 @@
-const webpack = require('webpack')
+import webpack from 'webpack'
 
-const bufferPlugin = new webpack.ProvidePlugin({
+export default new webpack.ProvidePlugin({
   Buffer: ['buffer', 'Buffer'],
 })
-
-module.exports = bufferPlugin

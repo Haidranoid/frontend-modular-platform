@@ -3,57 +3,22 @@ const path = require('path')
 const glob = require('fast-glob')
 const ts = require("typescript");
 
+const pkg = JSON.parse(fs.readFileSync('package.json'), 'utf-8');
+
 function loadTSConfig() {
-  const tsConfigPath = path.join(process.cwd(), "tsconfig.json");
-  const configFile = ts.readConfigFile(tsConfigPath, ts.sys.readFile);
+  //const tsConfigPath = path.join(process.cwd(), "tsconfig.json");
+  const configFile = ts.readConfigFile("tsconfig.json", ts.sys.readFile);
   const parsed = ts.parseJsonConfigFileContent(
     configFile.config,
     ts.sys,
-    path.dirname(tsConfigPath),
+    path.dirname("."),
   );
 
   const {
     options: { paths, baseUrl },
   } = parsed;
 
-  return { paths, baseUrl, tsConfigPath };
-}
-
-function generateDtsAlias(importAliases, dependencies = []){
-    const rushProjectsMap = {
-        '@libraries/ui': path.resolve(__dirname, '../../../../libraries/ui/dist'),
-        '@libraries/utils': path.resolve(__dirname, '../../../../libraries/utils/dist'),
-        '@webapp/shared': path.resolve(__dirname, '../../../../features/shared/dist'),
-    }
-
-    const dependenciesMapped = dependencies.map((dep) => ({
-        find: dep,
-        replacement: rushProjectsMap[dep],
-    }))
-
-    return [
-        ...importAliases,
-        ...dependenciesMapped
-    ]
-}
-
-function getAliases_V0() {
-    let importAliases = []
-    let dtsAliases = []
-
-    const pkg = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'package.json'), 'utf-8'));
-
-    //if (!pkg.imports) return {importAliases, dtsAliases};
-
-    importAliases = Object.entries(pkg.imports || {}).map(([find, target]) => ({
-        find,
-        replacement: path.resolve(process.cwd(), target),
-    }));
-
-    //dtsAliases = generateDtsAlias(importAliases, Object.keys(pkg.dependencies || {}))
-    dtsAliases = importAliases
-
-    return { importAliases, dtsAliases }
+  return { paths, baseUrl };
 }
 
 function getAliases() {
@@ -61,80 +26,80 @@ function getAliases() {
 
     const aliases = Object.entries(paths || {}).map(([find, target]) => ({
         find,
-        replacement: path.resolve(process.cwd(), target[0]),
+        replacement: path.resolve(target[0]),
     }));
 
     return aliases
 }
 
 function getExternalDependencies() {
-    let externalDependencies = [
+    let baseExternalDependencies = [
+        '@reduxjs/toolkit',
+        //'jest',
         'react',
-        'redux',
         'react-dom',
         'react-redux',
-        'styled-components',
         'react-router',
-        'jest',
-        'tslib',
-        /storybook\/.*/i,
-        /.*@storybook\/.*/i,
+        'redux',
+        'styled-components',
+        /^(?:@storybook\/|storybook\/).*/i,
         /.*@testing-library.*/i,
     ]
 
-    const pkg = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'package.json'), 'utf-8'));
+    const externalDependencies = new Set([
+        ...baseExternalDependencies,
+        //...Object.keys( pkg.peerDependencies || {}),
+        ...Object.keys({}),
+    ])
 
-    //if (!pkg.peerDependencies) return externalDependencies;
-
-    externalDependencies = [
-        ...externalDependencies,
-        ...Object.keys(pkg.peerDependencies || {}),
-    ]
-
-    return [... new Set(externalDependencies)];
+    return [...externalDependencies]
 }
 
-function getDependenciesToIncludeInTypes() {
-    const pkg = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'package.json'), 'utf-8'));
-
-    const dtsToInclude = Object.keys(pkg.dependencies || {})
+function getTypesToInclude() {
+    //const depsTypesToInclude = Object.keys(pkg.dependencies || {})
+    const depsTypesToInclude = Object.keys( {})
       .reduce((accumulator, currentValue) => accumulator.concat(currentValue), [])
 
-    console.log(dtsToInclude);
-    return dtsToInclude
+    return depsTypesToInclude
 }
 
-function getInputs() {
-    let inputs = glob.sync([
-        './src/index.ts',
-    ]);
+function getBundlerConfigs() {
+    const baseOutputDir = 'dist'
+    const commonjsOutputDir = baseOutputDir + '/commonjs'
+    const esmOutputDir = baseOutputDir + '/esm'
 
     const ignorePatterns = [
-        '!src/stories',
-        '!src/@types',
-        '!src/**/*.test.ts',
-        '!src/**/*.ignore.*',
-        '!src/**/*.stories.*',
-        '!src/**/*.{css,scss,sass}',
-        '!src/**/*.{mdx,avif,svg,png,jpg,jpeg,gif,webp}',
-    ]
+      "!src/stories",
+      "!src/@types",
+      "!src/**/*.test.{js,jsx,ts,tsx}",
+      "!src/**/*.ignore.*",
+      "!src/**/*.stories.*",
+      "!src/**/*.{css,scss,sass}",
+      "!src/**/*.{mdx,avif,svg,png,jpg,jpeg,gif,webp}",
+    ];
+
+  const srcBundlerConfig = {
+      entries: glob.sync([
+        './src/index.ts',
+        ...ignorePatterns,
+      ]),
+      outputDirs: {
+        cjs: commonjsOutputDir,
+        esm: esmOutputDir,
+      }
+    }
 
     //if (inputs.length === 0) {
     //    inputs = glob.sync(['./src/*/index.{ts,tsx,js}',]);
     //}
 
-    inputs = glob.sync([
-        ...inputs,
-        ...ignorePatterns,
-    ]);
-
-    return inputs
+    return srcBundlerConfig
 }
 
 module.exports = {
     loadTSConfig,
     getAliases,
     getExternalDependencies,
-    getInputs,
-    getDependenciesToIncludeInTypes
+    getBundlerConfigs,
+    getTypesToInclude
 }

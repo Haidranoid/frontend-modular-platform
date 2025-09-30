@@ -32,11 +32,16 @@ const config: StorybookConfig = {
     // 🔹 Extensiones
     config.resolve.extensions = [...(config.resolve.extensions || []), '.ts', '.tsx']
 
+    config.resolve.fallback = {
+      ...(config.resolve?.fallback || {}),
+      path: require.resolve('path-browserify'),
+    }
+
     // 🔹 Paths del monorepo
     config.resolve.plugins = [
       ...(config.resolve.plugins || []),
       new TsconfigPathsPlugin({
-        configFile: path.resolve(__dirname, '../tsconfig.json'),
+        configFile: path.resolve(__dirname, './tsconfig.storybook.json'),
       }),
     ]
 

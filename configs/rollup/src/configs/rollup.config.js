@@ -10,34 +10,35 @@ const clear = require("rollup-plugin-clear");
 const { dts } = require("rollup-plugin-dts");
 const {
   loadTSConfig,
-  getInputs,
+  getBundlerConfigs,
   getAliases,
   getExternalDependencies,
-  getDependenciesToIncludeInTypes
+  getTypesToInclude
 } = require("./rollup-utils");
 
 const extensions = [".js", ".ts", ".tsx"];
-const inputs = getInputs();
+const srcBundlerConfig = getBundlerConfigs();
 const externalDependencies = getExternalDependencies();
 const aliases = getAliases();
-const { paths, tsConfigPath } = loadTSConfig();
-const dtsToInclude = getDependenciesToIncludeInTypes()
+const { paths, tsConfigPath, baseUrl } = loadTSConfig();
+const depsTypesToInclude = getTypesToInclude()
 
 
-console.log({ inputs });
+console.log({ srcBundlerConfig });
 console.log({ externalDependencies });
 console.log({ aliases });
-console.log({ paths, tsConfigPath });
-console.log({ dtsToInclude })
+//console.log({ paths, tsConfigPath });
+console.log({ depsTypesToInclude })
 
+/** @type {import('rollup').RollupOptions[]} */
 const baseConfig = defineConfig([
   {
-    input: inputs,
+    input: srcBundlerConfig.entries,
     output: [
       {
-        dir: "dist",
-        format: "cjs",
-        sourcemap: true,
+        dir: srcBundlerConfig.outputDirs.cjs,
+        format: "commonjs",
+        sourcemap: false,
         exports: "named",
         interop: "auto",
         preserveModules: true,
@@ -45,9 +46,9 @@ const baseConfig = defineConfig([
         entryFileNames: "[name].cjs",
       },
       {
-        dir: "dist",
+        dir: srcBundlerConfig.outputDirs.esm,
         format: "esm",
-        sourcemap: true,
+        sourcemap: false,
         preserveModules: true,
         preserveModulesRoot: "src",
         entryFileNames: "[name].mjs",
@@ -75,29 +76,25 @@ const baseConfig = defineConfig([
     ],
   },
   {
-    input: inputs,
-    external: externalDependencies,
+    input: srcBundlerConfig.entries,
+    //external: externalDependencies,
     output: [
-      {
-        file: "dist/index.d.ts",
-        format: "es",
-      },
+      { file: srcBundlerConfig.outputDirs.cjs + "/index.d.cts" },
+      { file: srcBundlerConfig.outputDirs.esm + "/index.d.mts" },
     ],
-    context: "globalThis", // o 'window' si solo es para browser
     plugins: [
-      //alias({ entries: dtsAliases }),
       dts({
-        respectExternal: true,
-        includeExternal: dtsToInclude,
+        //respectExternal: true,
+        includeExternal: depsTypesToInclude,
         tsconfig: tsConfigPath,
         compilerOptions: {
+          baseUrl,
           paths,
         },
       }),
     ],
   },
 ]);
-console.log({baseConfig});
 
 const loadRollupConfig = () => {
   const tsConfigPath = path.join(process.cwd(), "rollup.config.ts");

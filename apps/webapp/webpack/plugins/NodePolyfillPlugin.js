@@ -1,7 +1,5 @@
-const NodePolyfillPlugin = require('node-polyfill-webpack-plugin')
+import NodePolyfillPlugin from 'node-polyfill-webpack-plugin'
 
-const nodePolyfillPlugin = new NodePolyfillPlugin({
+export default new NodePolyfillPlugin({
     additionalAliases: ['buffer', 'Buffer']
 })
-
-module.exports = nodePolyfillPlugin

@@ -1,9 +1,11 @@
-const TsConfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
-const path = require('path')
-const { ROOT_DIR } = require('../constants')
 
-const tsconfigPathsPlugin = new TsConfigPathsPlugin({
-  configFile: path.resolve(ROOT_DIR, 'tsconfig.cypress.json'),
-})
+/*
+import TsConfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 
-module.exports = tsconfigPathsPlugin
+export default new TsConfigPathsPlugin({
+  configFile: process.cwd() + '/tsconfig.cypress.json',
+})*/
+
+const TsConfigPathsPlugin = 'tsconfig-paths-webpack-plugin'
+
+export default TsConfigPathsPlugin

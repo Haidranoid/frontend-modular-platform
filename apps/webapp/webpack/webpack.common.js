@@ -1,21 +1,20 @@
-// webpack.common.ts
-//const { getAliasUtils } = require('@libraries/utils/node')
-const path = require('path')
-const dotEnvPlugin = require('./plugins/DotEnvPlugin')
-const htmlWebpackPlugin = require('./plugins/HtmlWebpackPlugin')
-const nodePolyfillPlugin = require('./plugins/NodePolyfillPlugin')
-const bufferPlugin = require('./plugins/BufferPlugin')
-const {
-  MiniCssExtractPlugin,
-  miniCssExtractPlugin,
-} = require('./plugins/MiniCssExtractPlugin')
-const { ROOT_DIR } = require('./constants')
+import { DotEnvPlugin, HtmlWebpackPlugin, MiniCssExtractPlugin } from './plugins/index.js'
+//import nodePolyfillPlugin from './plugins/NodePolyfillPlugin.js'
+//import bufferPlugin from './plugins/BufferPlugin.js'
 
-const commonConfig = {
+export const commonConfig = {
   target: 'web',
   entry: [
-    path.resolve(ROOT_DIR, 'src/main/index.tsx'),
+    process.cwd() + '/src/main/index.tsx'
   ],
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    fallback: {
+      buffer: false,
+      process: false,
+    },
+    fullySpecified: false,
+  },
   module: {
     rules: [
       {
@@ -26,41 +25,31 @@ const commonConfig = {
           options: {
             babelrc: true,
             cacheDirectory: true,
-            plugins: [],
+            cacheCompression: false,
+            compact: true,
           },
         },
       },
       {
-        test: /\.(sc|sa|c)ss$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        test: /\.(sc|sa|c)ss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          //'postcss-loader', // si tienes postcss.config.js
+          //'sass-loader',
+        ],
       },
       {
-        test: /\.(png|jpe?g|gif|ico)$/i,
+        test: /\.(png|jpe?g|gif|ico|svg)$/i,
         type: 'asset/resource',
+        generator: {
+          filename: 'assets/[hash][ext][query]',
+        },
       },
     ],
   },
-  resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
-    //plugins: [tsconfigPathsPlugin],
-    plugins: [],
-    fallback: {
-      buffer: require.resolve('buffer/'),
-      //process: require.resolve('process/browser.js'),
-    },
-    fullySpecified: false
-  },
-  //externals: {typescript: 'typescript'},
   plugins: [
-    dotEnvPlugin,
-    //processPlugin,
-    htmlWebpackPlugin,
-    nodePolyfillPlugin,
-    miniCssExtractPlugin,
-    bufferPlugin,
+    DotEnvPlugin,
+    HtmlWebpackPlugin,
   ],
-}
-
-module.exports = {
-    commonConfig,
 }

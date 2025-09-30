@@ -1,5 +1,9 @@
-export const defineApi = 'defineApi'
+export const defineApi = "defineApi"
 /*
+import { ApiOperations, ApiSchema, User } from '#types'
+import { SliceNames } from '#constants'
+import { createSlice } from '../create-slice'
+
 export interface AuthOps extends ApiOperations {
   me: () => Promise<GetMeSuccess>
   login: (credentials: LoginPayload) => Promise<LoginSuccess>
@@ -7,7 +11,7 @@ export interface AuthOps extends ApiOperations {
   logout: () => Promise<void>
 }
 
-export const apiSchema: ApiSchema<AuthState, AuthOps> = {
+export const authApi: ApiSchema<AuthState, AuthOps> = {
   me: {
     operation: async () => {
       return {} as GetMeSuccess
@@ -40,7 +44,7 @@ export const apiSchema: ApiSchema<AuthState, AuthOps> = {
   },
   logout: {
     operation: async () => {
-      return new Promise(resolve => {})
+      return new Promise((resolve) => {})
     },
     onSuccess: (state, action) => {
       state.user = null
@@ -48,24 +52,20 @@ export const apiSchema: ApiSchema<AuthState, AuthOps> = {
   },
 }
 
-const initialState: AuthState = {
-  isAuthenticated: false,
-  user: null,
-}
-
-export const authSlice = createSlice({
-  name: SliceNames.Auth,
-  initialState,
-  reducers: {},
-  api: authApi,
-})
-
-
-
 export interface AuthState {
   isAuthenticated: boolean
   user: User | null
 }
+
+export const authSlice = createSlice({
+  sliceId: SliceNames.Auth,
+  api: authApi,
+  reducers: {},
+  initialState: {
+    user: null,
+    isAuthenticated: false,
+  },
+})
 
 export interface LoginPayload {
   username: string
@@ -91,7 +91,7 @@ export interface SignupSuccess {
   user: User
 }
 
-
+/*
 export interface CrudApi<S, E extends EntityId> extends Api<S> {
     fetchAll: {
         operation: () => Promise<E[]>

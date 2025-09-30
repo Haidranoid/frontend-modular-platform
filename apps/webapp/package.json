@@ -1,20 +1,23 @@
 {
   "name": "@apps/webapp",
   "version": "0.0.0",
+  "engines": {
+    "node": ">=22",
+    "npm": ">=10"
+  },
   "private": true,
   "keywords": [],
   "author": "martinezlara_joseeduardo@hotmail.com",
   "description": "",
-  "engines": {
-    "node": ">=v22.18.0 <=v22.22.0",
-    "npm": "10.9.3"
-  },
+  "type": "module",
   "scripts": {
     "start": "webpack serve --env mode=development",
     "server": "java -Dspring.profiles.active=dev -Dserver.port=8080 -jar server/api.jar",
     "dev": "concurrently -k \"npm run server \" \"wait-on http://localhost:8080/api/actuator/health && npm start\"",
     "stop": "(pkill -f webpack && pkill -f node && pkill -f java) || (taskkill /IM node.exe /F & taskkill /IM java.exe /F)",
     "build": "webpack --env mode=production",
+    "see": " webpack --env mode=production --json > stats.json",
+    "analyze": "cross-env ANALYZE=true webpack --env mode=production",
     "test": "exit 0",
     "test:ci": "testx --ci --detectOpenHandles --forceExit",
     "test:clean": "testx --clearCache",
@@ -27,17 +30,14 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@webapp/shared": "workspace:*",
-    "@webapp/auth": "workspace:*",
-    "@reduxjs/toolkit": "2.9.0",
     "react": "19.1.1",
     "react-dom": "19.1.1",
-    "react-redux": "9.2.0",
     "react-router": "7.9.3",
-    "redux": "5.0.1",
-    "styled-components": "6.1.19"
+    "redux": "5.0.1"
   },
   "devDependencies": {
+    "@webapp/shared": "workspace:*",
+    "@webapp/auth": "workspace:*",
     "@configs/typescript": "workspace:*",
     "@tools/eslint-scripts": "workspace:*",
     "@babel/core": "7.28.4",
@@ -57,6 +57,7 @@
     "compression-webpack-plugin": "11.1.0",
     "concurrently": "9.2.1",
     "copy-webpack-plugin": "13.0.1",
+    "cross-env": "10.1.0",
     "css-loader": "7.1.2",
     "css-minimizer-webpack-plugin": "7.0.2",
     "dotenv-webpack": "8.1.1",
@@ -64,6 +65,7 @@
     "mini-css-extract-plugin": "2.9.4",
     "node-polyfill-webpack-plugin": "4.1.0",
     "rimraf": "6.0.1",
+    "styled-components": "6.1.19",
     "terser-webpack-plugin": "5.3.14",
     "tsconfig-paths-webpack-plugin": "4.2.0",
     "typescript": "5.9.2",

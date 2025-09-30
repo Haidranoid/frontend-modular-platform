@@ -16,10 +16,11 @@
       "#styles": ["./src/styles/index.ts"],
       "#types": ["./src/types/index.ts"],
       "#ui": ["./src/ui/index.ts"],
-      "#utils": ["./src/utils/index.ts"],
+      "#utils": ["./src/utils/index.ts"]
 
       //"@webapp/shared": ["./../shared/dist/index.d.ts"]
     }
   },
-  "include": ["./src","./msw-handlers", "./jest.setup.ts"]
+  "include": ["./src","./msw-handlers", "./jest.setup.ts"],
+  "exclude": ["node_modules"]
 }

@@ -11,14 +11,14 @@ import { mswHandlers } from '../msw-handlers'
 import { authRootReducer } from '../src'
 import { withTests } from '@storybook/addon-jest'
 // @ts-ignore
-import results from '../.jest-test-results.json'
+//import results from '../.jest-test-results.json'
 
 // MSW para Storybook (browser)
 initialize()
 
 const preview: Preview = {
   decorators: [
-    withTests({ results }),
+    withTests({ results: {} }),
     withStorybookContext,
     withMemoryRouter,
     withTheme,

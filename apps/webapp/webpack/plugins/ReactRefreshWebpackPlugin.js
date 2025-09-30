@@ -5,3 +5,7 @@ const reactRefreshWebpackPlugin = new ReactRefreshWebpackPlugin()
 
 export { reactRefreshWebpackPlugin, reactRefreshBabelPath }
 */
+
+const ReactRefreshWebpackPlugin = 'reactRefreshWebpackPlugin';
+
+export default ReactRefreshWebpackPlugin

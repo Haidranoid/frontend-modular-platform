@@ -1,8 +1,7 @@
-// webpack.config.ts
-const { merge } = require( 'webpack-merge')
-const { commonConfig } = require( './webpack/webpack.common')
-const { devConfig } = require( './webpack/webpack.dev')
-const { prodConfig } = require( './webpack/webpack.prod')
+import { merge } from'webpack-merge'
+import { commonConfig } from'./webpack/webpack.common.js'
+import { devConfig } from'./webpack/webpack.dev.js'
+import { prodConfig } from'./webpack/webpack.prod.js'
 
 const webpackConfig = (env) => {
   switch (env.mode) {
@@ -15,4 +14,4 @@ const webpackConfig = (env) => {
   }
 }
 
-module.exports = webpackConfig
+export default webpackConfig

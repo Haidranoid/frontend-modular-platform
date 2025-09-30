@@ -1,7 +1,7 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureAppStore } from '@webapp/shared'
 import { appReducer, initialAppState } from '../reducer'
 
-export const store = configureStore({
-  reducer: appReducer,
-  preloadedState: initialAppState,
+export const store = configureAppStore<ReturnType<typeof appReducer>>({
+  rootReducer: appReducer,
+  initialState: initialAppState,
 })

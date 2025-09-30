@@ -7,7 +7,7 @@ import {
   ExtractArgsOfAsync,
 } from '#types'
 import { SliceNames, MatcherIdentifiers } from '#constants'
-import { getErrorMessage } from '../../error-handlers'
+import { getErrorMessage } from './../../error-handlers'
 import { createThunk } from './create-thunk'
 import { generateMatcher } from '../generate-matcher'
 

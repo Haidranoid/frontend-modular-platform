@@ -2,7 +2,7 @@
 
 export * from './authentication-service'
 export * from './configure-router'
-export * from './configure-store'
+export * from './configure-app-store'
 export * from './create-hooks'
 export * from './create-slice'
 export * from './define-api'

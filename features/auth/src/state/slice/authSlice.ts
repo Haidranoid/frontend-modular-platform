@@ -1,35 +1,22 @@
-import type { Reducer, Store, Action } from 'redux'
-import type { CreateSliceReturn, User } from '@webapp/shared'
 import { configureAppStore, createSlice, SliceNames } from '@webapp/shared'
 import { authApi } from '../api'
-
-
-// ================== setting initial state for createSlice ====================
-export interface AuthState {
-  isAuthenticated: boolean
-  user: User | null
-}
-
-const initialState: AuthState = {
-  isAuthenticated: false,
-  user: null,
-}
 
 // ========================== getting slice ====================================
 export const authSlice = createSlice({
   sliceId: SliceNames.Auth,
-  initialState,
-  reducers: {},
   api: authApi,
-}) as CreateSliceReturn
-
+  reducers: {},
+  initialState: {
+    user: null,
+    isAuthenticated: false,
+  },
+})
 // ================== getting initialState from slice ==========================
-export const initialAuthState = authSlice.getInitialState()
-
+export const initialAuthState = authSlice.initialState
 export type InitialAuthState = typeof initialAuthState
 
 // ================== getting rootReducer from slice ===========================
-export const authRootReducer = authSlice.reducer as Reducer<InitialAuthState>
+export const authRootReducer = authSlice.reducer
 
 // ============ setting store from rootReducer and initialState ================
 export const store = configureAppStore({

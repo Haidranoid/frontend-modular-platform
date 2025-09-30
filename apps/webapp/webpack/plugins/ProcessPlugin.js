@@ -1,7 +1,5 @@
-const webpack = require('webpack')
+import webpack from 'webpack'
 
-const processPlugin = new webpack.ProvidePlugin({
+export default new webpack.ProvidePlugin({
   process: 'process/browser.js',
 })
-
-module.exports = processPlugin

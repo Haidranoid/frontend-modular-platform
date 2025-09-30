@@ -1,10 +1,6 @@
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 
-const miniCssExtractPlugin = new MiniCssExtractPlugin({
-  filename: '[name].[contenthash].css',
+export default new MiniCssExtractPlugin({
+  filename: "css/[name].[contenthash].css",
+  chunkFilename: "css/[id].[contenthash].css",
 })
-
-module.exports = {
-  miniCssExtractPlugin,
-  MiniCssExtractPlugin,
-}

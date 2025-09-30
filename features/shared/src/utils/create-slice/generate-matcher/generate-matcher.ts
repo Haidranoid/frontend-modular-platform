@@ -1,4 +1,4 @@
-import type { Action } from '@reduxjs/toolkit'
+import type { Action } from 'redux'
 import { isPending, isRejected, isFulfilled } from '@reduxjs/toolkit'
 import { SliceNames, MatcherIdentifiers } from '#constants'
 

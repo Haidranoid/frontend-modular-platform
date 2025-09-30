@@ -1,5 +1,3 @@
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
 
-const cssMinimizerPlugin = new CssMinimizerPlugin()
-
-module.exports = cssMinimizerPlugin
+export default new CssMinimizerPlugin()

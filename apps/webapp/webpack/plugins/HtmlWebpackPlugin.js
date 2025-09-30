@@ -1,15 +1,10 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+import HtmlWebpackPlugin from 'html-webpack-plugin'
 
-const htmlWebpackPlugin = new HtmlWebpackPlugin({
-  chunks: ['main'],
+export default new HtmlWebpackPlugin({
+  template: process.cwd() + '/public/index.html',
+  favicon: process.cwd() + '/public/favicon.ico',
   inject: 'body',
-  template: './public/index.html',
-  favicon: './public/favicon.ico',
   filename: 'index.html',
-  minify: {
-    collapseWhitespace: true,
-    removeComments: true,
-  },
+  minify: 'auto',
+  chunks: ['main'],
 })
-
-module.exports = htmlWebpackPlugin

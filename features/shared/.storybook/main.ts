@@ -2,6 +2,9 @@ import type { StorybookConfig } from '@storybook/react-webpack5'
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 import * as path from 'path'
 
+//@ts-ignore
+import webpack from 'webpack'
+
 const config: StorybookConfig = {
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: [
@@ -26,54 +29,58 @@ const config: StorybookConfig = {
   },
   staticDirs: ['../public'],
   webpackFinal: async (config) => {
-    if (config.resolve) {
-      // 🔹 Extensiones
-      config.resolve.fallback = {
-        ...(config.resolve?.fallback || {}),
-        path: require.resolve('path-browserify'),
-      }
+    // 🔹 Extensiones
+    config.resolve.extensions = [...(config.resolve.extensions || []), '.ts', '.tsx']
 
-      config.resolve.extensions = [...(config.resolve.extensions || []), '.ts', '.tsx']
-
-      // 🔹 Paths del monorepo
-      config.resolve.plugins = [
-        ...(config.resolve.plugins || []),
-        new TsconfigPathsPlugin({
-          configFile: path.resolve(__dirname, '../tsconfig.json'),
-        }),
-      ]
-
-      // 🔹 Aliases opcionales
-      config.resolve.alias = {
-        ...(config.resolve.alias || {}),
-        // "@app": path.resolve(__dirname, "../src/main/app"),
-      }
+    config.resolve.fallback = {
+      ...(config.resolve?.fallback || {}),
+      path: require.resolve('path-browserify'),
     }
 
-    if (config.module && config.module.rules) {
-      // 🔹 Soporte SWC para TS/TSX
-      config.module.rules.push({
-        test: /\.(ts|tsx)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: require.resolve('swc-loader'),
-          options: {
-            jsc: {
-              parser: {
-                syntax: 'typescript',
-                tsx: true,
-              },
-              transform: {
-                react: {
-                  runtime: 'automatic', // ✅ React 17+ JSX transform
-                  refresh: false, // Habilita Fast Refresh
-                },
+    // 🔹 Paths del monorepo
+    config.resolve.plugins = [
+      ...(config.resolve.plugins || []),
+      new TsconfigPathsPlugin({
+        configFile: path.resolve(__dirname, './tsconfig.storybook.json'),
+      }),
+    ]
+
+    // 🔹 Aliases opcionales
+    config.resolve.alias = {
+      ...(config.resolve.alias || {}),
+      // "@app": path.resolve(__dirname, "../src/main/app"),
+    }
+
+    // 🔹 Soporte SWC para TS/TSX
+    config.module.rules.push({
+      test: /\.(ts|tsx)$/,
+      exclude: /node_modules/,
+      use: {
+        loader: require.resolve('swc-loader'),
+        options: {
+          jsc: {
+            parser: {
+              syntax: 'typescript',
+              tsx: true,
+            },
+            transform: {
+              react: {
+                runtime: 'automatic', // ✅ React 17+ JSX transform
+                refresh: false, // Habilita Fast Refresh
               },
             },
           },
         },
-      })
-    }
+      },
+    })
+
+    config.plugins?.push(
+      new webpack.DefinePlugin({
+        'process.env': JSON.stringify({
+          NODE_ENV: 'development',
+        }),
+      }),
+    )
 
     return config
   },

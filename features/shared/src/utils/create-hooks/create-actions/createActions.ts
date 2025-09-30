@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { Action, ThunkDispatch } from '@reduxjs/toolkit'
+import { ThunkDispatch } from '@reduxjs/toolkit'
 import { ExtractArgsOfThunk, ExtractReturnOfThunk } from '#types'
 
 export type Actions<Thunks> = {
@@ -10,7 +10,7 @@ export type Actions<Thunks> = {
 
 export const createActions = <Thunks>(
   thunks: Thunks,
-  dispatch: ThunkDispatch<any, any, Action>,
+  dispatch: ThunkDispatch<any, any, any>,
 ) => {
   const actions: Actions<Thunks> = useMemo(() => {
     const mapped = {} as Actions<Thunks>

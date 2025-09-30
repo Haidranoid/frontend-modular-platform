@@ -1,14 +1,10 @@
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const path = require('path')
-const { ROOT_DIR } = require('../constants')
+import CopyWebpackPlugin from 'copy-webpack-plugin'
 
-const copyWebpackPlugin = new CopyWebpackPlugin({
+export default new CopyWebpackPlugin({
   patterns: [
     {
-      from: path.resolve(ROOT_DIR, 'public/coverage-report'),
-      to: path.resolve(ROOT_DIR, 'dist/coverage-report'),
+      from: process.cwd() + 'public/coverage-report',
+      to: process.cwd() + 'dist/coverage-report',
     },
   ],
 })
-
-module.exports = copyWebpackPlugin

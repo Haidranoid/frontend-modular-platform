@@ -1,4 +1,6 @@
-const devConfig = {
+//import bundleAnalyzerPlugin from './plugins/BundleAnalyzerPlugin.js'
+
+export const devConfig = {
   mode: 'development',
   devtool: 'inline-source-map',
   output: {
@@ -16,9 +18,5 @@ const devConfig = {
     allowedHosts: 'all',
     historyApiFallback: true,
   },
-  //plugins: [],
-}
-
-module.exports = {
-    devConfig,
+  plugins: [],
 }

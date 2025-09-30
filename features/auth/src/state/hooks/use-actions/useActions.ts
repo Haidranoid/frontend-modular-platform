@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch } from "react-redux";
 import { createActions } from '@webapp/shared'
 import { authSlice } from '../../slice'
 
