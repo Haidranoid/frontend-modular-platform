@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { RootState } from '../../slice'
+import { RootState } from '../../store'
 //export type { UseSelector } from 'react-redux'
 //import { RootState } from '@store'
 

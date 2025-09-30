@@ -1,7 +1,4 @@
-import {
-  AuthenticationService,
-  httpClient,
-} from '@webapp/shared'
+import { AuthenticationService, httpClient } from '@webapp/shared'
 import type { ApiSchema } from '@webapp/shared'
 import { Endpoints } from '#constants'
 import {
@@ -12,7 +9,7 @@ import {
   LoginSuccess,
   SignupPayload,
   SignupSuccess,
-} from "#types";
+} from '#types'
 
 export const authApi: ApiSchema<AuthState, AuthOps> = {
   me: {

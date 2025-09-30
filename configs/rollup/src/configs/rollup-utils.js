@@ -44,12 +44,17 @@ function getExternalDependencies() {
         'styled-components',
         /^(?:@storybook\/|storybook\/).*/i,
         /.*@testing-library.*/i,
+        /.*@babel\/.*/i,
     ]
 
     const externalDependencies = new Set([
-        ...baseExternalDependencies,
+        //...baseExternalDependencies,
         //...Object.keys( pkg.peerDependencies || {}),
-        ...Object.keys({}),
+        //...Object.keys({}),
+        ...baseExternalDependencies,
+        ...Object.keys(pkg.dependencies || {}),
+        ...Object.keys(pkg.peerDependencies || {}),
+        /^@webapp\/.*/, // 🔥 excluye todas las libs internas
     ])
 
     return [...externalDependencies]

@@ -16,7 +16,8 @@ const {
   getTypesToInclude
 } = require("./rollup-utils");
 
-const extensions = [".js", ".ts", ".tsx"];
+//const extensions = [".js", ".cjs", ".mjs", ".jsx", ".ts", ".tsx"];
+const extensions = [".js", ".jsx", ".ts", ".tsx"];
 const srcBundlerConfig = getBundlerConfigs();
 const externalDependencies = getExternalDependencies();
 const aliases = getAliases();
@@ -55,7 +56,7 @@ const baseConfig = defineConfig([
       },
     ],
     external: externalDependencies,
-    context: "globalThis", // o 'window' si solo es para browser
+    context: "window", // o 'window' si solo es para browser
     plugins: [
       clear({ targets: ["dist"], watch: true }),
       alias({ entries: aliases }),
@@ -64,28 +65,32 @@ const baseConfig = defineConfig([
       json(),
       babel({
         extensions,
-        babelHelpers: "bundled",
+        babelHelpers: "runtime", // 🔥
         include: ["src/**/*"],
+        //exclude: "node_modules/**",
         presets: [
-          "@babel/preset-env",
+          ["@babel/preset-env", { modules: false }],
           "@babel/preset-typescript",
           ["@babel/preset-react", { runtime: "automatic" }],
         ],
+        plugins: [
+          ["@babel/plugin-transform-runtime", { "useESModules": true }]
+        ]
       }),
       //terser(),
     ],
   },
   {
     input: srcBundlerConfig.entries,
-    //external: externalDependencies,
+    external: externalDependencies,
     output: [
       { file: srcBundlerConfig.outputDirs.cjs + "/index.d.cts" },
       { file: srcBundlerConfig.outputDirs.esm + "/index.d.mts" },
     ],
     plugins: [
       dts({
-        //respectExternal: true,
-        includeExternal: depsTypesToInclude,
+        respectExternal: true,
+        //includeExternal: depsTypesToInclude,
         tsconfig: tsConfigPath,
         compilerOptions: {
           baseUrl,

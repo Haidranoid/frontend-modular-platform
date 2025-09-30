@@ -1,4 +1,4 @@
-//import CleanWebpackPlugin from './plugins/CleanWebpackPlugin.js'
+import * as path from 'path'
 import { CssMinimizerPlugin, TerserPlugin, BundleAnalyzerPlugin, BrotliCompressionPlugin, GzipCompressionPlugin, MiniCssExtractPlugin } from './plugins/index.js'
 
 export const prodConfig = {
@@ -14,12 +14,20 @@ export const prodConfig = {
     chunkGroups: true,
   },
   output: {
-    //filename: 'webapp.main.[name].[chunkhash].js',
-    path: process.cwd() + '/dist',
-    filename: "js/webapp.[name].[contenthash].js",
-    chunkFilename: "js/webapp.[name].[contenthash].chunk.js",
-    publicPath: '/',
     clean: true,
+    path: path.resolve(process.cwd(), "dist"),
+    publicPath: '/',
+    //publicPath: path.resolve('dist'),
+
+    // Filename para los Entry Points (main, etc.)
+    filename: "[name]/[contenthash].js",
+
+    // ChunkFilename para los grupos (vendors y chunks dinámicos)
+    // El [name] será reemplazado por el 'name' definido en el cacheGroup (ej: 'js/vendors/react')
+    chunkFilename: "chunks/[name].[contenthash].chunk.js",
+
+    // Para los archivos cargados por Asset Modules (imágenes, etc.)
+    assetModuleFilename: "assets/[name].[contenthash][ext]",
   },
   optimization: {
     usedExports: true,
@@ -30,24 +38,63 @@ export const prodConfig = {
       chunks: 'all',
       maxInitialRequests: 10,
       maxAsyncRequests: 20,
-      minSize: 20000, // tamaño mínimo para dividir
-      maxSize: 244000, // fuerza a dividir si pasa de este tamaño (~244 KiB)
+      minSize: 20000,
+      maxSize: 500000, // (~500 KiB)
       //automaticNameDelimiter: '-',
       cacheGroups: {
-        vendors: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
+        // 1. REACT: Grupo para React y React-DOM
+        react: {
+          test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+          name: 'vendors/react', // Nombre del archivo: react.[hash].js
           chunks: 'all',
+          priority: 30, // Alta prioridad
+          enforce: true,
         },
-        commons: {
-          test: /[\\/]src[\\/]main[\\/]/,
-          name: 'commons',
-          minChunks: 2,
+
+        // 2. REDUX: Grupo para Redux (y podrías añadir otras librerías de estado aquí)
+        redux: {
+          test: /[\\/]node_modules[\\/](redux)[\\/]/,
+          name: 'vendors/redux', // Nombre del archivo: redux.[hash].js
+          chunks: 'all',
+          priority: 20,
+          enforce: true,
+        },
+
+        // 3. INTERNAL SHARED: Grupo para @webapp/shared
+        webappShared: {
+          // Asegúrate de que esta ruta sea la ABSOLUTA donde está tu código 'shared'
+          test: new RegExp(
+            path.resolve(process.cwd(), '../../features', 'shared').replace(/\\/g, '\\\\')
+          ),
+          name: 'features/webapp-shared', // Nombre: webapp-shared.[hash].js
+          chunks: 'all',
+          priority: 15, // Prioridad media
+          enforce: true,
+        },
+
+        // 4. INTERNAL AUTH: Grupo para @webapp/auth
+        webappAuth: {
+          // Asegúrate de que esta ruta sea la ABSOLUTA donde está tu código 'auth'
+          test: new RegExp(
+            path.resolve(process.cwd(), '../../features', 'auth').replace(/\\/g, '\\\\')
+          ),
+          name: 'features/webapp-auth', // Nombre: webapp-auth.[hash].js
+          chunks: 'all',
+          priority: 15,
+          enforce: true,
+        },
+
+        // 5. RESTO DE VENDORS: Grupo catch-all para el resto de node_modules (ej: react-router)
+        nodeVendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors/node-util', // Nombre: node-util.[hash].js
+          chunks: 'all',
+          priority: 10, // Menor prioridad para que los grupos específicos capturen primero
           reuseExistingChunk: true,
         },
       },
-      //runtimeChunk: "single", // runtime separado
     },
+    runtimeChunk: "single",
   },
   plugins: [MiniCssExtractPlugin, BrotliCompressionPlugin, GzipCompressionPlugin, BundleAnalyzerPlugin],
   performance: {

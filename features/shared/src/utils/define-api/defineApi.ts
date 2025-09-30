@@ -1,4 +1,4 @@
-export const defineApi = "defineApi"
+export const defineApi = 'defineApi'
 /*
 import { ApiOperations, ApiSchema, User } from '#types'
 import { SliceNames } from '#constants'

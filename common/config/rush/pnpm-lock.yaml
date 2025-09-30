@@ -31,9 +31,6 @@ importers:
       '@babel/core':
         specifier: 7.28.4
         version: 7.28.4
-      '@babel/plugin-transform-runtime':
-        specifier: 7.28.3
-        version: 7.28.3(@babel/core@7.28.4)
       '@babel/preset-env':
         specifier: 7.28.3
         version: 7.28.3(@babel/core@7.28.4)
@@ -292,6 +289,9 @@ importers:
       '@babel/core':
         specifier: 7.28.4
         version: 7.28.4
+      '@babel/plugin-transform-runtime':
+        specifier: 7.28.3
+        version: 7.28.3(@babel/core@7.28.4)
       '@babel/preset-env':
         specifier: 7.28.3
         version: 7.28.3(@babel/core@7.28.4)
@@ -316,6 +316,9 @@ importers:
       '@rollup/plugin-node-resolve':
         specifier: 16.0.1
         version: 16.0.1(rollup@4.52.3)
+      '@rollup/plugin-terser':
+        specifier: 0.4.4
+        version: 0.4.4(rollup@4.52.3)
       '@rollup/plugin-typescript':
         specifier: 12.1.4
         version: 12.1.4(rollup@4.52.3)(tslib@2.8.1)(typescript@5.9.2)
@@ -357,7 +360,14 @@ importers:
         version: 5.9.2
 
   ../../features/auth:
+    dependencies:
+      '@webapp/shared':
+        specifier: workspace:*
+        version: link:../shared
     devDependencies:
+      '@babel/runtime':
+        specifier: 7.28.4
+        version: 7.28.4
       '@configs/env':
         specifier: workspace:*
         version: link:../../configs/env
@@ -439,9 +449,6 @@ importers:
       '@types/react-dom':
         specifier: 19.1.9
         version: 19.1.9(@types/react@19.1.14)
-      '@webapp/shared':
-        specifier: workspace:*
-        version: link:../shared
       cypress:
         specifier: 15.3.0
         version: 15.3.0
@@ -616,6 +623,9 @@ importers:
 
   ../../features/shared:
     devDependencies:
+      '@babel/runtime':
+        specifier: 7.28.4
+        version: 7.28.4
       '@configs/env':
         specifier: workspace:*
         version: link:../../configs/env
@@ -724,9 +734,6 @@ importers:
       react-dom:
         specifier: 19.1.1
         version: 19.1.1(react@19.1.1)
-      react-hook-form:
-        specifier: 7.63.0
-        version: 7.63.0(react@19.1.1)
       react-redux:
         specifier: 9.2.0
         version: 9.2.0(@types/react@19.1.14)(react@19.1.1)(redux@5.0.1)
@@ -742,9 +749,6 @@ importers:
       redux-logger:
         specifier: 3.0.6
         version: 3.0.6
-      reselect:
-        specifier: 5.1.1
-        version: 5.1.1
       rimraf:
         specifier: 6.0.1
         version: 6.0.1
@@ -1672,8 +1676,8 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0-0
 
-  '@babel/runtime@7.28.3':
-    resolution: {integrity: sha512-9uIQ10o0WGdpP6GDhXcdOJPJuDgFtIDtN/9+ArJQ2NAfAmiuhTQdzkaTGR33v43GYS2UrSA0eX2pPPHoFVvpxA==}
+  '@babel/runtime@7.28.4':
+    resolution: {integrity: sha512-Q/N6JNWvIvPnLDvjlE1OUBLPQHH6l3CltCEsHIujp45zQUSSh8K+gHnaEX45yAT1nyngnINhvWtzN+Nb9D8RAQ==}
     engines: {node: '>=6.9.0'}
 
   '@babel/template@7.27.2':
@@ -2472,6 +2476,15 @@ packages:
     engines: {node: '>=14.0.0'}
     peerDependencies:
       rollup: ^2.78.0||^3.0.0||^4.0.0
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+
+  '@rollup/plugin-terser@0.4.4':
+    resolution: {integrity: sha512-XHeJC5Bgvs8LfukDwWZp7yeqin6ns8RTl2B9avbejt6tZqsqvVoWI7ZTQrcNsfKEDWBTnTxM8nMDkO2IFFbd0A==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^2.0.0||^3.0.0||^4.0.0
     peerDependenciesMeta:
       rollup:
         optional: true
@@ -7751,6 +7764,9 @@ packages:
     resolution: {integrity: sha512-qMCMfhY040cVHT43K9BFygqYbUPFZKHOg7K73mtTWJRb8pyP3fzf4Ixd5SzdEJQ6MRUg/WBnOLxghZtKKurENQ==}
     engines: {node: '>=10'}
 
+  smob@1.5.0:
+    resolution: {integrity: sha512-g6T+p7QO8npa+/hNx9ohv1E5pVCmWrVCUzUXJyLdMmftX6ER0oiWY/w9knEonLpnOp6b6FenKnMfR8gqwWdwig==}
+
   sockjs@0.3.24:
     resolution: {integrity: sha512-GJgLTZ7vYb/JtPSSZ10hsOYIvEYsjbNU+zPdIHcUaWVNUEPivzxku31865sSSud0Da0W4lEeOPlmw93zLQchuQ==}
 
@@ -9416,7 +9432,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@babel/runtime@7.28.3': {}
+  '@babel/runtime@7.28.4': {}
 
   '@babel/template@7.27.2':
     dependencies:
@@ -10477,6 +10493,14 @@ snapshots:
     optionalDependencies:
       rollup: 4.52.3
 
+  '@rollup/plugin-terser@0.4.4(rollup@4.52.3)':
+    dependencies:
+      serialize-javascript: 6.0.2
+      smob: 1.5.0
+      terser: 5.44.0
+    optionalDependencies:
+      rollup: 4.52.3
+
   '@rollup/plugin-typescript@12.1.4(rollup@4.52.3)(tslib@2.8.1)(typescript@5.9.2)':
     dependencies:
       '@rollup/pluginutils': 5.3.0(rollup@4.52.3)
@@ -11237,20 +11261,20 @@ snapshots:
 
   '@testing-library/cypress@10.0.3(cypress@14.5.4)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@testing-library/dom': 10.4.1
       cypress: 14.5.4
 
   '@testing-library/cypress@10.1.0(cypress@15.3.0)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@testing-library/dom': 10.4.1
       cypress: 15.3.0
 
   '@testing-library/dom@10.4.1':
     dependencies:
       '@babel/code-frame': 7.27.1
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@types/aria-query': 5.0.4
       aria-query: 5.3.0
       dom-accessibility-api: 0.5.16
@@ -11278,7 +11302,7 @@ snapshots:
 
   '@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react-dom@19.1.7(@types/react@19.1.10))(@types/react@19.1.10)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@testing-library/dom': 10.4.1
       react: 19.1.1
       react-dom: 19.1.1(react@19.1.1)
@@ -11288,7 +11312,7 @@ snapshots:
 
   '@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react-dom@19.1.9(@types/react@19.1.14))(@types/react@19.1.14)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       '@testing-library/dom': 10.4.1
       react: 19.1.1
       react-dom: 19.1.1(react@19.1.1)
@@ -13556,7 +13580,7 @@ snapshots:
 
   eslint-plugin-jest-dom@5.5.0(@testing-library/dom@10.4.1)(eslint@9.36.0):
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
       eslint: 9.36.0
       requireindex: 1.2.0
     optionalDependencies:
@@ -16788,7 +16812,7 @@ snapshots:
 
   polished@4.3.1:
     dependencies:
-      '@babel/runtime': 7.28.3
+      '@babel/runtime': 7.28.4
 
   possible-typed-array-names@1.1.0: {}
 
@@ -17641,6 +17665,8 @@ snapshots:
       ansi-styles: 4.3.0
       astral-regex: 2.0.0
       is-fullwidth-code-point: 3.0.0
+
+  smob@1.5.0: {}
 
   sockjs@0.3.24:
     dependencies:

@@ -1,13 +1,14 @@
 import {
   createSlice as cSlice,
+  Reducer,
   ReducerCreators,
   SliceCaseReducers,
   ValidateSliceCaseReducers,
-} from '@reduxjs/toolkit'
+} from "@reduxjs/toolkit";
 import { SliceNames, MatcherIdentifiers } from '#constants'
 import { ApiSchema, BaseState, UnifiedState } from '#types'
 import { generateMatcher } from './generate-matcher'
-import { createSliceTools } from './create-slice-tools'
+import { createSliceTools, Thunks } from "./create-slice-tools";
 
 export type Merge<T> = {
   [K in keyof T]: T[K]
@@ -57,9 +58,9 @@ export function createSlice<
   })
 
   return {
-    reducer: slice.reducer,
-    initialState: slice.getInitialState(),
-    thunks,
+    reducer: slice.reducer as Reducer<TState>,
+    initialState: slice.getInitialState() as UnifiedState<ExtractState<TApi>>,
+    thunks: thunks as Thunks<TApi>,
   }
 }
 

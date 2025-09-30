@@ -1,19 +1,18 @@
+import * as path from 'path'
 import { DotEnvPlugin, HtmlWebpackPlugin, MiniCssExtractPlugin } from './plugins/index.js'
 //import nodePolyfillPlugin from './plugins/NodePolyfillPlugin.js'
 //import bufferPlugin from './plugins/BufferPlugin.js'
 
 export const commonConfig = {
   target: 'web',
-  entry: [
-    process.cwd() + '/src/main/index.tsx'
-  ],
+  entry: [path.resolve(process.cwd(), "src/main/index.tsx")],
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    fullySpecified: false, // <- necesario para imports ESM sin extensión
     fallback: {
       buffer: false,
       process: false,
     },
-    fullySpecified: false,
   },
   module: {
     rules: [
@@ -23,7 +22,7 @@ export const commonConfig = {
         use: {
           loader: 'babel-loader',
           options: {
-            babelrc: true,
+            //babelrc: true,
             cacheDirectory: true,
             cacheCompression: false,
             compact: true,

@@ -1,11 +1,11 @@
-import type { ReactRenderer } from "@storybook/react-webpack5";
+import type { ReactRenderer } from '@storybook/react-webpack5'
 import type { DecoratorFunction } from 'storybook/internal/csf'
 import { useGlobals } from '@storybook/preview-api'
 import { ThemeProvider as ThemeProviderStyled } from 'styled-components'
-import { useCallback } from "react";
+import { useCallback } from 'react'
 import { GlobalStyles, lightTheme, darkTheme } from '#styles'
 import { ThemeProvider } from '#providers'
-import { withThemeFromJSXProvider } from "@storybook/addon-themes";
+import { withThemeFromJSXProvider } from '@storybook/addon-themes'
 
 export interface WithThemeParameters {
   themeConfig?: {
@@ -13,7 +13,7 @@ export interface WithThemeParameters {
   }
 }
 
-export const withTheme: DecoratorFunction<ReactRenderer> = (Story,  { parameters }) => {
+export const withTheme: DecoratorFunction<ReactRenderer> = (Story, { parameters }) => {
   if (parameters?.disableGlobalDecorators) return <Story />
   if (parameters?.withTheme?.disable) return <Story />
 

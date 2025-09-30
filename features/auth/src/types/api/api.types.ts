@@ -1,4 +1,4 @@
-import type { User, ApiOperations } from "@webapp/shared";
+import type { User, ApiOperations } from '@webapp/shared'
 import type {
   LoginPayload,
   SignupPayload,
