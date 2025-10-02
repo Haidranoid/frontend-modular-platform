@@ -41,7 +41,7 @@ const config: StorybookConfig = {
     config.resolve.plugins = [
       ...(config.resolve.plugins || []),
       new TsconfigPathsPlugin({
-        configFile: path.resolve(__dirname, './tsconfig.storybook.json'),
+        configFile: path.resolve(__dirname, '../tsconfig.json'),
       }),
     ]
 

@@ -7,7 +7,7 @@ import {
   Box,
   Header,
 } from './StorybookContextBox.styled'
-import { ObjectExplorer } from './object-explorer'
+import { ObjectExplorer } from '../object-explorer'
 import { Portal } from '../portal'
 import { useLocation } from 'react-router'
 import { useSelector } from 'react-redux'

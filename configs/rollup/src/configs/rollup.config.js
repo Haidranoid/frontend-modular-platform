@@ -10,7 +10,6 @@ const {
   getPathsAlias,
   getExternalDependencies,
   getTSConfigFile,
-  getExternalTypesDependencies
 } = require("./rollup-utils");
 
 const input = getInputs();
@@ -25,7 +24,8 @@ const esmOutDir = "dist/esm";
 
 console.log({ input });
 console.log({ externals });
-console.log({ pathAliases });
+//console.log({ tsConfigFile });
+//console.log({ pathAliases });
 
 /** @type {import('rollup').RollupOptions[]} */
 const rollupConfig = [
@@ -75,14 +75,12 @@ const rollupConfig = [
   },
   {
     input,
-    external: [/node_modules/i],
     output: [
       { file: "dist/commonjs/index.d.cts", format: "cjs" },
       { file: "dist/esm/index.d.mts", format: "es" },
     ],
     plugins: [
       dts({
-        respectExternal: true,
         tsconfig: tsConfigFile.tsConfigPath,
         compilerOptions: {
           baseUrl: tsConfigFile.baseUrl,

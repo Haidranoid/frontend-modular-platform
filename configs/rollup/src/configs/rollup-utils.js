@@ -7,22 +7,15 @@ const pkg = JSON.parse(fs.readFileSync("package.json"), "utf-8");
 
 function getTSConfigFile() {
   const tsConfigPath = path.join(process.cwd(), "tsconfig.json");
-  const configFile = ts.readConfigFile("tsconfig.json", ts.sys.readFile);
+  const configFile = ts.readConfigFile(path.resolve(tsConfigPath), ts.sys.readFile);
   const parsed = ts.parseJsonConfigFileContent(
     configFile.config,
     ts.sys,
-    path.dirname("."),
+    path.dirname(path.resolve(tsConfigPath, 'tsconfig.json')),
   );
 
-  return {...parsed.options, tsConfigPath }
-}
-
-function getExternalProjectsRegex() {
-  const externalProjectsRegex = [
-    ///^@webapp\/.*/i
-  ];
-
-  return externalProjectsRegex;
+  const { options: { baseUrl, paths } } = parsed;
+  return { baseUrl, paths, tsConfigPath }
 }
 
 function getPathsAlias() {
@@ -46,16 +39,14 @@ function getExternalDependencies() {
   ];
 
   const baseExternalDependenciesRegex = [
-    /^storybook\/.*/i,
-    /^@testing-library\/.*/i,
+    /^storybook\/?.*/i,
     /^@storybook\/.*/i,
-    /^@testing-library.*/i,
-    /^@babel\/.*/i,
+    /^@testing-library\/?.*/i,
+    ///^@babel\/?.*/i,
   ]
 
   const externalDependencies = new Set([
-    ...Object.keys(pkg.dependencies || {}),
-    ...Object.keys(pkg.devDependencies || {}),
+    ...baseExternalDependenciesRegex,
     ...Object.keys(pkg.peerDependencies || {}),
   ]);
 

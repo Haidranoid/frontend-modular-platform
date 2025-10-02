@@ -8,7 +8,7 @@ import {
   withStorybookContext,
 } from '@webapp/shared'
 import { mswHandlers } from '../msw-handlers'
-import { authRootReducer } from '../src'
+import { authReducer } from '../src'
 import { withTests } from '@storybook/addon-jest'
 // @ts-ignore
 //import results from '../.jest-test-results.json'
@@ -27,7 +27,7 @@ const preview: Preview = {
   parameters: {
     viewport: { options: INITIAL_VIEWPORTS },
     msw: { handlers: mswHandlers },
-    storeConfig: { rootReducer: authRootReducer },
+    storeConfig: { rootReducer: authReducer },
   },
   loaders: [mswLoader],
 }

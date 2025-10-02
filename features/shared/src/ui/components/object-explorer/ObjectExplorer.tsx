@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import {
   PrimitiveValue,
   NullValue,
@@ -12,7 +12,7 @@ export type ObjectExplorerProps = {
   level?: number
 }
 
-export function ObjectExplorer({ data, level = 0 }: ObjectExplorerProps) {
+export const ObjectExplorer: FC<ObjectExplorerProps> = ({ data, level = 0 }) => {
   const [expandedKeys, setExpandedKeys] = useState<string[]>([])
 
   if (data === null) return <NullValue>null</NullValue>

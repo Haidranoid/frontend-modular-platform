@@ -35,15 +35,15 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@webapp/shared": "workspace:*",
-    "@babel/runtime": "7.28.4",
     "react": "19.1.1",
     "react-dom": "19.1.1",
     "react-redux": "9.2.0",
     "react-router": "7.9.3",
     "react-hook-form": "7.63.0",
-    "redux": "5.0.1"
+    "redux": "5.0.1",
+    "styled-components": "6.1.19"
   },
   "devDependencies": {
     "@configs/env": "workspace:*",
@@ -53,7 +53,6 @@
     "@tools/rollup-scripts": "workspace:*",
     "@faker-js/faker": "10.0.0",
     "@jest/globals": "30.1.2",
-    "@reduxjs/toolkit": "2.9.0",
     "@storybook/addon-a11y": "9.1.8",
     "@storybook/addon-essentials": "9.0.0-alpha.12",
     "@storybook/addon-interactions": "9.0.0-alpha.10",
@@ -73,6 +72,15 @@
     "@types/node": "22.18.6",
     "@types/react": "19.1.14",
     "@types/react-dom": "19.1.9",
+    "@webapp/shared": "workspace:*",
+    "@babel/runtime": "7.28.4",
+    "@babel/plugin-transform-runtime": "7.28.3",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "react-redux": "9.2.0",
+    "react-router": "7.9.3",
+    "react-hook-form": "7.63.0",
+    "redux": "5.0.1",
     "cypress": "15.3.0",
     "cypress-each": "1.14.1",
     "cypress-localstorage-commands": "2.2.8",
