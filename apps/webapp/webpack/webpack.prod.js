@@ -42,13 +42,31 @@ export const prodConfig = {
       maxSize: 500000, // (~500 KiB)
       //automaticNameDelimiter: '-',
       cacheGroups: {
-        // 1. REACT: Grupo para React y React-DOM
+        // 1. REACT: Grupo para React
         react: {
-          test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+          test: /[\\/]node_modules[\\/](react)[\\/]/,
           name: 'vendors/react', // Nombre del archivo: react.[hash].js
+          chunks: 'all',
+          priority: 40, // Alta prioridad
+          enforce: true,
+        },
+
+        // 1. REACT DOM: Grupo para React-DOM
+        reactDom: {
+          test: /[\\/]node_modules[\\/](react-dom)[\\/]/,
+          name: 'vendors/react-dom', // Nombre del archivo: react-dom.[hash].js
           chunks: 'all',
           priority: 30, // Alta prioridad
           enforce: true,
+        },
+
+          // 1. REACT ROUTER: Grupo para React-Router
+        reactRouter: {
+            test: /[\\/]node_modules[\\/](react-router)[\\/]/,
+            name: 'vendors/react-router', // Nombre del archivo: react-router.[hash].js
+            chunks: 'all',
+            priority: 25, // Alta prioridad
+            enforce: true,
         },
 
         // 2. REDUX: Grupo para Redux (y podrías añadir otras librerías de estado aquí)

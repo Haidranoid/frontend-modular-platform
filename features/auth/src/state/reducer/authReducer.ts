@@ -1,4 +1,4 @@
-import { authSlice } from "../slice";
+import { authSlice } from '../slice'
 export type { AuthState } from '#types'
 
 // ================== getting rootReducer from slice ===========================

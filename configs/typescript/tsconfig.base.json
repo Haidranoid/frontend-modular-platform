@@ -34,9 +34,11 @@
     //"incremental": true,
     "importHelpers": true,
     "declaration": true,
-    "sourceMap": true,
-    "declarationMap": true,
-    "noEmit": true,
+    "sourceMap": false,
+    "declarationMap": false,
+    "emitDeclarationOnly": true,
+    "noEmit": false,
+    //"declarationDir": "dist/types",
     "jsx": "react-jsx"
   }
 }

@@ -1,7 +1,7 @@
 import { createBrowserRouter, DOMRouterOpts, RouteObject } from 'react-router'
 
 // ========================== app render ==============================
-interface ConfigureAppRouterParams {
+export interface ConfigureAppRouterParams {
   routes: RouteObject[]
   opts?: DOMRouterOpts
 }

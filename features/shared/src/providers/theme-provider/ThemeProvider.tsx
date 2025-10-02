@@ -3,7 +3,7 @@ import { ThemeProvider as ThemeProviderStyled } from 'styled-components'
 import { ThemeContext } from '#state'
 import { GlobalStyles, lightTheme, darkTheme, ThemeModes } from '#styles'
 
-interface ThemeProviderProps {
+export interface ThemeProviderProps {
   children: ReactNode
   initialTheme?: 'light' | 'dark'
   storybookToggle?: () => void

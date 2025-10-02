@@ -1,0 +1,46 @@
+'use strict';
+
+var taggedTemplateLiteral = require('../../../../common/temp/node_modules/.pnpm/@babel_runtime@7.28.4/node_modules/@babel/runtime/helpers/esm/taggedTemplateLiteral.cjs');
+var styled = require('styled-components');
+
+function _interopDefault (e) { return e && e.__esModule ? e : { default: e }; }
+
+var styled__default = /*#__PURE__*/_interopDefault(styled);
+
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5;
+var Container = styled__default.default.div(_templateObject || (_templateObject = taggedTemplateLiteral.default(["\n  margin-left: ", ";\n  border-left: ", ";\n  padding-left: ", ";\n  font-family: monospace;\n  color: ", ";\n"])), function (_ref) {
+  var level = _ref.level;
+  return level > 0 ? '1rem' : '0';
+}, function (_ref2) {
+  var level = _ref2.level,
+    theme = _ref2.theme;
+  return level > 0 ? "1px solid ".concat(theme.foreground.secondary || theme.foreground.primary) : 'none';
+}, function (_ref3) {
+  var level = _ref3.level;
+  return level > 0 ? '0.5rem' : '0';
+}, function (_ref4) {
+  var theme = _ref4.theme;
+  return theme.text.primary;
+});
+var ItemButton = styled__default.default.button(_templateObject2 || (_templateObject2 = taggedTemplateLiteral.default(["\n  display: flex;\n  align-items: center;\n  width: 100%;\n  background: none;\n  border: none;\n  text-align: left;\n  cursor: pointer;\n  padding: 2px 4px;\n  border-radius: 4px;\n  color: ", ";\n\n  &:hover {\n    background-color: ", ";\n  }\n"])), function (_ref5) {
+  var theme = _ref5.theme;
+  return theme.text.primary;
+}, function (_ref6) {
+  var theme = _ref6.theme;
+  return theme.background.secondary || theme.foreground.primary;
+});
+var KeyLabel = styled__default.default.span(_templateObject3 || (_templateObject3 = taggedTemplateLiteral.default(["\n  font-weight: 600;\n"])));
+var PrimitiveValue = styled__default.default.span(_templateObject4 || (_templateObject4 = taggedTemplateLiteral.default(["\n  margin-left: 0.25rem;\n  color: ", ";\n"])), function (_ref7) {
+  var theme = _ref7.theme;
+  return theme.colors.primary;
+});
+var NullValue = styled__default.default.span(_templateObject5 || (_templateObject5 = taggedTemplateLiteral.default(["\n  color: ", ";\n"])), function (_ref8) {
+  var theme = _ref8.theme;
+  return theme.text.secondary;
+});
+
+exports.Container = Container;
+exports.ItemButton = ItemButton;
+exports.KeyLabel = KeyLabel;
+exports.NullValue = NullValue;
+exports.PrimitiveValue = PrimitiveValue;

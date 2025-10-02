@@ -4,7 +4,7 @@ import { Store, Reducer } from 'redux'
 import { ReduxProvider } from '#providers'
 import { configureAppStore } from '#utils'
 
-interface StoreConfig<S, R extends Reducer<S>> {
+export interface StoreConfig<S, R extends Reducer<S>> {
   rootReducer?: R
   initialState?: S
 }
@@ -37,7 +37,7 @@ export const withRedux: DecoratorFunction<ReactRenderer> = (Story, { parameters 
   )
 }
 
-function createDummyStore(initialState = {}) {
+export function createDummyStore(initialState = {}) {
   return configureAppStore({
     rootReducer: (state = initialState, _action) => state,
     initialState: initialState,

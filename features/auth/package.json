@@ -9,32 +9,16 @@
   "license": "ISC",
   "description": "",
   "sideEffects": false,
+  "files": ["dist"],
   "type": "module",
-  "main": "./dist/commonjs/index.cjs",
-  "module": "./dist/esm/index.mjs",
-  "types": "./dist/esm/index.d.mts",
-  "files": [
-    "dist"
-  ],
-  "typesVersions": {
-    "*": {
-      ".": ["./dist/esm/index.d.mts"]
-    }
-  },
+  "types": "dist/esm/index.d.mts",
+  "main": "dist/commonjs/index.cjs",
+  "module": "dist/esm/index.mjs",
   "exports": {
     ".": {
-      "import": {
-        "types": "./dist/esm/index.d.mts",
-        "default": "./dist/esm/index.mjs"
-      },
-      "require": {
-        "types": "./dist/commonjs/index.d.cts",
-        "default": "./dist/commonjs/index.cjs"
-      },
-      "default": {
-        "types": "./dist/esm/index.d.mts",
-        "default": "./dist/esm/index.mjs"
-      }
+      "types": "./dist/esm/index.d.mts",
+      "import": "./dist/esm/index.mjs",
+      "require": "./dist/commonjs/index.cjs"
     },
     "./package.json": "./package.json"
   },
@@ -52,16 +36,21 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@webapp/shared": "workspace:*"
+    "@webapp/shared": "workspace:*",
+    "@babel/runtime": "7.28.4",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "react-redux": "9.2.0",
+    "react-router": "7.9.3",
+    "react-hook-form": "7.63.0",
+    "redux": "5.0.1"
   },
   "devDependencies": {
-    "@webapp/shared": "workspace:*",
     "@configs/env": "workspace:*",
     "@configs/typescript": "workspace:*",
     "@tools/jest-scripts": "workspace:*",
     "@tools/eslint-scripts": "workspace:*",
     "@tools/rollup-scripts": "workspace:*",
-    "@babel/runtime": "7.28.4",
     "@faker-js/faker": "10.0.0",
     "@jest/globals": "30.1.2",
     "@reduxjs/toolkit": "2.9.0",
@@ -91,12 +80,6 @@
     "msw": "2.11.3",
     "msw-storybook-addon": "2.0.5",
     "path-browserify": "1.0.1",
-    "react": "19.1.1",
-    "react-dom": "19.1.1",
-    "react-hook-form": "7.63.0",
-    "react-redux": "9.2.0",
-    "react-router": "7.9.3",
-    "redux": "5.0.1",
     "reselect": "5.1.1",
     "rimraf": "6.0.1",
     "storybook": "9.1.8",

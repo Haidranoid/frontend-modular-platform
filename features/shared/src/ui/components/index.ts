@@ -1,4 +1,5 @@
 export * from './button'
+export * from './dialog'
 export * from './error'
 export * from './image-with-skeleton-mui'
 export * from './input'

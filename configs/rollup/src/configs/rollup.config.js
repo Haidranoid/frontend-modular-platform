@@ -1,6 +1,3 @@
-const path = require("path");
-const fs = require("fs");
-const { defineConfig } = require("rollup");
 const resolve = require("@rollup/plugin-node-resolve");
 const commonjs = require("@rollup/plugin-commonjs");
 const alias = require("@rollup/plugin-alias");
@@ -9,37 +6,37 @@ const babel = require("@rollup/plugin-babel");
 const clear = require("rollup-plugin-clear");
 const { dts } = require("rollup-plugin-dts");
 const {
-  loadTSConfig,
-  getBundlerConfigs,
-  getAliases,
+  getInputs,
+  getPathsAlias,
   getExternalDependencies,
-  getTypesToInclude
+  getTSConfigFile,
+  getExternalTypesDependencies
 } = require("./rollup-utils");
 
-//const extensions = [".js", ".cjs", ".mjs", ".jsx", ".ts", ".tsx"];
+const input = getInputs();
+const externals = getExternalDependencies()
+const pathAliases = getPathsAlias();
+const tsConfigFile = getTSConfigFile();
+
 const extensions = [".js", ".jsx", ".ts", ".tsx"];
-const srcBundlerConfig = getBundlerConfigs();
-const externalDependencies = getExternalDependencies();
-const aliases = getAliases();
-const { paths, tsConfigPath, baseUrl } = loadTSConfig();
-const depsTypesToInclude = getTypesToInclude()
+const cjsOutDir = "dist/commonjs";
+const esmOutDir = "dist/esm";
 
 
-console.log({ srcBundlerConfig });
-console.log({ externalDependencies });
-console.log({ aliases });
-//console.log({ paths, tsConfigPath });
-console.log({ depsTypesToInclude })
+console.log({ input });
+console.log({ externals });
+console.log({ pathAliases });
 
 /** @type {import('rollup').RollupOptions[]} */
-const baseConfig = defineConfig([
+const rollupConfig = [
   {
-    input: srcBundlerConfig.entries,
+    input,
+    external: externals,
+    context: "window",
     output: [
       {
-        dir: srcBundlerConfig.outputDirs.cjs,
+        dir: cjsOutDir,
         format: "commonjs",
-        sourcemap: false,
         exports: "named",
         interop: "auto",
         preserveModules: true,
@@ -47,19 +44,16 @@ const baseConfig = defineConfig([
         entryFileNames: "[name].cjs",
       },
       {
-        dir: srcBundlerConfig.outputDirs.esm,
+        dir: esmOutDir,
         format: "esm",
-        sourcemap: false,
         preserveModules: true,
         preserveModulesRoot: "src",
         entryFileNames: "[name].mjs",
       },
     ],
-    external: externalDependencies,
-    context: "window", // o 'window' si solo es para browser
     plugins: [
       clear({ targets: ["dist"], watch: true }),
-      alias({ entries: aliases }),
+      alias({ entries: pathAliases }),
       resolve({ extensions, browser: true }),
       commonjs(),
       json(),
@@ -67,55 +61,36 @@ const baseConfig = defineConfig([
         extensions,
         babelHelpers: "runtime", // 🔥
         include: ["src/**/*"],
-        //exclude: "node_modules/**",
         presets: [
           ["@babel/preset-env", { modules: false }],
           "@babel/preset-typescript",
           ["@babel/preset-react", { runtime: "automatic" }],
         ],
         plugins: [
-          ["@babel/plugin-transform-runtime", { "useESModules": true }]
+          ["@babel/plugin-transform-runtime", { useESModules: true }]
         ]
       }),
       //terser(),
     ],
   },
   {
-    input: srcBundlerConfig.entries,
-    external: externalDependencies,
+    input,
+    external: [/node_modules/i],
     output: [
-      { file: srcBundlerConfig.outputDirs.cjs + "/index.d.cts" },
-      { file: srcBundlerConfig.outputDirs.esm + "/index.d.mts" },
+      { file: "dist/commonjs/index.d.cts", format: "cjs" },
+      { file: "dist/esm/index.d.mts", format: "es" },
     ],
     plugins: [
       dts({
         respectExternal: true,
-        //includeExternal: depsTypesToInclude,
-        tsconfig: tsConfigPath,
+        tsconfig: tsConfigFile.tsConfigPath,
         compilerOptions: {
-          baseUrl,
-          paths,
+          baseUrl: tsConfigFile.baseUrl,
+          paths: tsConfigFile.paths,
         },
       }),
     ],
   },
-]);
-
-const loadRollupConfig = () => {
-  const tsConfigPath = path.join(process.cwd(), "rollup.config.ts");
-  const jsConfigPath = path.join(process.cwd(), "rollup.config.js");
-
-  let customRollupConfig = [];
-
-  if (fs.existsSync(tsConfigPath)) {
-    customRollupConfig = require(tsConfigPath).default || require(tsConfigPath);
-  } else if (fs.existsSync(jsConfigPath)) {
-    customRollupConfig = require(jsConfigPath);
-  }
-
-  return [...baseConfig, ...customRollupConfig];
-};
-
-const rollupConfig = loadRollupConfig();
+];
 
 module.exports = rollupConfig;

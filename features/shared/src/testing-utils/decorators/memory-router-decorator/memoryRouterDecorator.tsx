@@ -1,5 +1,5 @@
-import { DecoratorFunction } from 'storybook/internal/csf'
-import { ReactRenderer } from '@storybook/react-webpack5'
+import type { DecoratorFunction } from 'storybook/internal/csf'
+import type { ReactRenderer } from '@storybook/react-webpack5'
 import { MemoryRouterProvider } from '#providers'
 import { RouteObject } from 'react-router'
 
