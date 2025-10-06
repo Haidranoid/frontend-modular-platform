@@ -1,5 +1,5 @@
 /** @type {import('jest').Config} */
-module.exports = {
+export default {
   testEnvironment: "jest-fixed-jsdom",
   testMatch: ["<rootDir>/src/**/*.test.[jt]s?(x)"],
   setupFilesAfterEnv: [
