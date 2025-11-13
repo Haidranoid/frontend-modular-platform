@@ -1,12 +1,12 @@
 import styled from 'styled-components'
 
-export const Container = styled.div<{ level: number }>`
-  margin-left: ${({ level }) => (level > 0 ? '1rem' : '0')};
-  border-left: ${({ level, theme }) =>
-    level > 0
+export const Container = styled.div<{ $level: number }>`
+  margin-left: ${({ $level }) => ($level > 0 ? '1rem' : '0')};
+  border-left: ${({ $level, theme }) =>
+    $level > 0
       ? `1px solid ${theme.foreground.secondary || theme.foreground.primary}`
       : 'none'};
-  padding-left: ${({ level }) => (level > 0 ? '0.5rem' : '0')};
+  padding-left: ${({ $level }) => ($level > 0 ? '0.5rem' : '0')};
   font-family: monospace;
   color: ${({ theme }) => theme.text.primary};
 `

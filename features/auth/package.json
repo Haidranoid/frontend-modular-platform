@@ -9,7 +9,9 @@
   "license": "ISC",
   "description": "",
   "sideEffects": false,
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "type": "module",
   "types": "dist/esm/index.d.mts",
   "main": "dist/commonjs/index.cjs",
@@ -37,11 +39,11 @@
   },
   "peerDependencies": {
     "@webapp/shared": "workspace:*",
-    "react": "19.1.1",
-    "react-dom": "19.1.1",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
     "react-redux": "9.2.0",
     "react-router": "7.9.3",
-    "react-hook-form": "7.63.0",
+    "react-hook-form": "7.64.0",
     "redux": "5.0.1",
     "styled-components": "6.1.19"
   },

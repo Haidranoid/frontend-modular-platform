@@ -16,7 +16,7 @@ export const Home: FC = () => {
       <h2>Home Auth Page</h2>
       <br />
       <span>
-        create an account in <Link to={'/auth/signup'}>sign up</Link>
+        create an account in <Link to={'/auth/signup'}>signup</Link>
       </span>
       <br />
       <span>

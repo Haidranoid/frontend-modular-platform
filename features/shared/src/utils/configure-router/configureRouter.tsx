@@ -1,17 +1,21 @@
+import { FC } from 'react'
 import {
   createBrowserRouter,
   createMemoryRouter,
-  Outlet,
+  useLocation,
   DOMRouterOpts,
   RouteObject,
-} from "react-router";
-import { StorybookContextBox } from "#ui";
+} from 'react-router'
 
-// ========================== app render ==============================
 export interface ConfigureAppRouterParams {
   routes: RouteObject[]
   initialPath?: string
   opts?: DOMRouterOpts
+}
+
+const LocationDebugger: FC = () => {
+  const location = useLocation()
+  return <div data-testid="current-path">{location.pathname}</div>
 }
 
 export const configureAppRouter = (params: ConfigureAppRouterParams) => {
@@ -24,6 +28,7 @@ export const configureAppRouter = (params: ConfigureAppRouterParams) => {
             items={[]}
             domElement={document.body}
           />
+          <LocationDebugger />
           <Outlet />
         </>
       ),
@@ -40,15 +45,3 @@ export const configureAppRouter = (params: ConfigureAppRouterParams) => {
 
   return createBrowserRouter(params.routes, params.opts)
 }
-
-// ========================== storybook render ==============================
-/*
-interface ConfigureAppMemoryRouterParams {
-  routes: RouteObject[]
-  initialPath?: string
-}
-
-export const configureAppMemoryRouter = (params: ConfigureAppMemoryRouterParams) => {
-  return createMemoryRouter(params.routes, {initialEntries: [params.initialPath || "/"]});
-}
-*/

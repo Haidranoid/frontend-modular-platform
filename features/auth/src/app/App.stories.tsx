@@ -7,6 +7,9 @@ const meta = {
   component: App,
   parameters: {
     layout: 'fullscreen',
+    withInitialPath: {
+      initialPath: '/auth'
+    }
   },
   tags: ['autodocs'],
   args: {},

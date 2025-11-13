@@ -1,10 +1,21 @@
-describe('login flow', () => {
+describe('auth app flow', () => {
   beforeEach(() => {
-    cy.visit("?path=/story/app-auth--default")
+    cy.visit('/iframe.html?id=app-auth--default')
   })
 
   it('should load app', () => {
     cy.url().should('include', 'app')
-    cy.url().should('include', Cypress.config().baseUrl) // add baseUrl for accuracy
+    cy.contains('Home Auth Page').should('exist')
   })
+
+  it('should navigate to login', () => {
+    cy.contains('login').click()
+    cy.contains('Log In').should('exist')
+  })
+
+  it('should navigate to signup', () => {
+    cy.contains('signup').click()
+    cy.contains('Signup').should('exist')
+  })
+
 })

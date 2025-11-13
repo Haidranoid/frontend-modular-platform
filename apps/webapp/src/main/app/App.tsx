@@ -7,5 +7,5 @@ import { store } from '../state'
 import { routes } from '../routes'
 
 export const App: FC = () => {
-  return renderApp({ store, routes})
+  return renderApp({ store, routes })
 }

@@ -5,5 +5,5 @@ import { store } from '#state'
 import { routes } from "#routes";
 
 export const App: FC = () => {
-  return renderApp({ store, routes, initialPath: '/auth/'})
+  return renderApp({ store, routes })
 }

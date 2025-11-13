@@ -9,10 +9,10 @@ import {
 
 export type ObjectExplorerProps = {
   data: any
-  level?: number
+  $level?: number
 }
 
-export const ObjectExplorer: FC<ObjectExplorerProps> = ({ data, level = 0 }) => {
+export const ObjectExplorer: FC<ObjectExplorerProps> = ({ data, $level = 0 }) => {
   const [expandedKeys, setExpandedKeys] = useState<string[]>([])
 
   if (data === null) return <NullValue>null</NullValue>
@@ -26,7 +26,7 @@ export const ObjectExplorer: FC<ObjectExplorerProps> = ({ data, level = 0 }) => 
   }
 
   return (
-    <Container level={level}>
+    <Container $level={$level}>
       {Object.entries(data).map(([key, value]) => {
         const isExpandable = typeof value === 'object' && value !== null
         const isExpanded = expandedKeys.includes(key)
@@ -40,7 +40,7 @@ export const ObjectExplorer: FC<ObjectExplorerProps> = ({ data, level = 0 }) => 
             </ItemButton>
 
             {isExpanded && isExpandable && (
-              <ObjectExplorer data={value} level={level + 1} />
+              <ObjectExplorer data={value} $level={$level + 1} />
             )}
           </div>
         )

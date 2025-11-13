@@ -2,7 +2,7 @@ import type { DecoratorFunction } from 'storybook/internal/csf'
 import type { ReactRenderer } from '@storybook/react-webpack5'
 import { RouterProvider } from '#providers'
 import { RouteObject } from 'react-router'
-import { configureAppRouter } from "#utils";
+import { configureAppRouter } from '#utils'
 
 export interface WithMemoryRouterParameters {
   withMemoryRouter?: {
@@ -22,7 +22,10 @@ export const withMemoryRouter: DecoratorFunction<ReactRenderer> = (
 
   const routes: RouteObject[] = [{ path: '*', element: <Story /> }]
 
-  const router = configureAppRouter({ routes: routes, initialPath: routerConfig?.initialPath || '/' })
+  const router = configureAppRouter({
+    routes: routes,
+    initialPath: routerConfig?.initialPath || '/',
+  })
 
   return <RouterProvider routerConfig={{ router }} />
 }
