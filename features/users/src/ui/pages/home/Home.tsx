@@ -1,23 +1,31 @@
-import { FC, useEffect } from 'react'
-//import { useActions } from '@webapp/shared/utils'
-import { Button } from '@webapp/shared/ui'
-import { useThemeMode } from '@webapp/shared/ui'
+import React, { FC, useEffect } from 'react'
+import { Button, useAppTheme } from '@webapp/shared'
+//import { Link } from 'react-router'
+//import { useActions } from '@webapp/shared'
 
 export const Home: FC = () => {
-  //const { me, fetchAll } = useActions()
-  const theme = useThemeMode()
+  const appTheme = useAppTheme()
 
   useEffect(() => {
-    //me()
-    //fetchAll()
   }, [])
 
   return (
     <div data-testid="home-page">
       <h2>Home Users Page</h2>
+      <br />
+
       <Button
-        onClick={theme.toggle}
-      >{`cambiar a ${theme.mode === 'light' ? 'dark' : 'light'}`}</Button>
+        label={`Cambiar a ${appTheme.mode.name === 'light' ? 'dark' : 'light'}`}
+        onClick={appTheme.toggle}
+      />
+
+      {/*<span>
+        create an account in <Link to={'/auth/signup'}>signup</Link>
+      </span>
+      <br />
+      <span>
+        create an account in <Link to={'/auth/login'}>login</Link>
+      </span>*/}
     </div>
   )
 }

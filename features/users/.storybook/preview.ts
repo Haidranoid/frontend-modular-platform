@@ -1,19 +1,23 @@
-import type { Preview } from '@storybook/react-webpack5'
-import { initialize, mswLoader } from "msw-storybook-addon";
+import type { Preview } from '@storybook/react'
+import { initialize, mswLoader } from 'msw-storybook-addon'
+import { INITIAL_VIEWPORTS } from 'storybook/viewport'
+import { usersReducer } from '../src'
+// @ts-ignore
+//import results from '../.jest-test-results.json'
 
-// Initialize MSW
+// MSW para Storybook (browser)
 initialize()
 
 const preview: Preview = {
+  decorators: [],
   parameters: {
-    controls: {
-      matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/i,
-      },
+    viewport: { options: INITIAL_VIEWPORTS },
+    withRedux: {
+      config: {
+        rootReducer: usersReducer
+      }
     },
   },
-  // Provide the MSW addon loader globally
   loaders: [mswLoader],
 }
 

@@ -1,7 +1,7 @@
 import { FC, StrictMode } from 'react'
 import { Store } from 'redux'
 import { DOMRouterOpts, RouteObject } from 'react-router'
-import { configureAppRouter } from '#utils'
+import { configureAppRouter } from '../configure-router'
 import { ReduxProvider, ThemeProvider, RouterProvider } from '#providers'
 
 // ========================== app render ==============================

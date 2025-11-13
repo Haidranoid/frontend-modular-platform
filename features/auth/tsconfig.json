@@ -11,15 +11,13 @@
       "#constants": ["./src/constants/index.ts"],
       "#experimental": ["./src/experimental/index.ts"],
       "#msw-handlers": ["./src/msw-handlers/index.ts"],
-      "#providers": ["./src/providers/index.ts"],
       "#routes": ["./src/routes/index.ts"],
       "#state": ["./src/state/index.ts"],
-      "#styles": ["./src/styles/index.ts"],
       "#types": ["./src/types/index.ts"],
       "#ui": ["./src/ui/index.ts"],
       "#utils": ["./src/utils/index.ts"]
     }
   },
-  "include": ["src/**/*", "msw-handlers/**/*", "./jest.setup.ts"],
+  "include": ["src/**/*", "./jest.setup.js"],
   "exclude": ["node_modules","dist"]
 }

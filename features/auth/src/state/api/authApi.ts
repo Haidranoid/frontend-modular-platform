@@ -1,5 +1,5 @@
-import { AuthenticationService, httpClient } from '@webapp/shared'
 import type { ApiSchema } from '@webapp/shared'
+import { AuthenticationService, httpClient } from '@webapp/shared'
 import { Endpoints } from '#constants'
 import {
   AuthOps,

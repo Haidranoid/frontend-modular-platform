@@ -1,18 +1,23 @@
 {
-  "extends": "@configs/typescript/tsconfig.react.json",
+  "extends": "@configs/typescript/tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": "src",
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+
     "paths": {
-      "#assets/*": ["assets/*"],
-      "#config/*": ["config/*"],
-      "#constants": ["constants/index.ts"],
-      "#experimental": ["experimental/index.ts"],
-      "#router": ["router/index.ts"],
-      "#state": ["state/index.ts"],
-      "#types": ["types/index.ts"],
-      "#ui": ["ui/index.ts"],
-      "#utils": ["utils/index.ts"]
+      "#assets": ["./src/assets/index.ts"],
+      "#config": ["./src/config/index.ts"],
+      "#constants": ["./src/constants/index.ts"],
+      "#experimental": ["./src/experimental/index.ts"],
+      "#msw-handlers": ["./src/msw-handlers/index.ts"],
+      "#routes": ["./src/routes/index.ts"],
+      "#state": ["./src/state/index.ts"],
+      "#types": ["./src/types/index.ts"],
+      "#ui": ["./src/ui/index.ts"],
+      "#utils": ["./src/utils/index.ts"]
     }
   },
-  "include": ["src"]
+  "include": ["src/**/*", "./jest.setup.js"],
+  "exclude": ["node_modules","dist"]
 }

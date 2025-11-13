@@ -1,4 +1,4 @@
-import { createUseAppSelector } from '@webapp/shared/utils'
+import { useSelector } from 'react-redux'
 import { RootState } from '../../store'
 
-export const useAppSelector = createUseAppSelector<RootState>()
+export const useAppSelector = useSelector.withTypes<RootState>()

@@ -1,17 +1,9 @@
-import { FC, StrictMode } from 'react'
-import { ProviderComposer } from '@webapp/shared/ui'
+import { FC } from 'react'
+import { renderApp } from "@webapp/shared";
 
-import { router } from '#router'
 import { store } from '#state'
+import { routes } from "#routes";
 
 export const App: FC = () => {
-  return (
-    <StrictMode>
-      <ProviderComposer
-        // @ts-ignore
-        reduxProviderProps={{ store }}
-        routerProviderProps={{ router }}
-      />
-    </StrictMode>
-  )
+  return renderApp({ store, routes })
 }

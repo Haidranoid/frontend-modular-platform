@@ -1,2 +1,2 @@
-export * from './router/routes'
+export * from './routes'
 export * from './state/reducer'
