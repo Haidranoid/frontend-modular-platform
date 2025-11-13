@@ -10,6 +10,7 @@
       "#config": ["./src/config/index.ts"],
       "#constants": ["./src/constants/index.ts"],
       "#experimental": ["./src/experimental/index.ts"],
+      "#msw-handlers": ["./src/msw-handlers/index.ts"],
       "#providers": ["./src/providers/index.ts"],
       "#routes": ["./src/routes/index.ts"],
       "#state": ["./src/state/index.ts"],

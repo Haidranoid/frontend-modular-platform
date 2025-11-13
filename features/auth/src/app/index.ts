@@ -1,1 +1,1 @@
-export * from './StorybookApp'
+export * from './App'

@@ -1,18 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5'
-import { StorybookApp } from '../StorybookApp'
+import { createAppStory } from '@webapp/shared'
+import { App } from './App'
 
 const meta = {
   title: 'App/Auth',
-  component: StorybookApp,
+  component: App,
   parameters: {
     layout: 'fullscreen',
-    disableGlobalDecorators: true,
   },
   tags: ['autodocs'],
   args: {},
-} satisfies Meta<typeof StorybookApp>
+} satisfies Meta<typeof App>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {}
+export const Default: Story = createAppStory({})
+

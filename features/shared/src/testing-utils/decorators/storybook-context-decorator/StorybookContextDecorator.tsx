@@ -10,7 +10,8 @@ export interface WithContextBoxArgs {
 }
 
 export interface WithContextBoxParameters {
-  contextBoxConfig?: {
+  withStorybookContext?: {
+    disable?: boolean
     title?: string
     config?: ContextBoxConfig
     domElement?: HTMLElement
@@ -24,7 +25,7 @@ export const withStorybookContext: DecoratorFunction<
   if (parameters?.disableGlobalDecorators) return <Story />
   if (parameters?.withStorybookContext?.disable) return <Story />
 
-  const contextBoxConfig = (parameters as WithContextBoxParameters).contextBoxConfig
+  const contextBoxConfig = (parameters as WithContextBoxParameters).withStorybookContext
 
   return (
     <Fragment>

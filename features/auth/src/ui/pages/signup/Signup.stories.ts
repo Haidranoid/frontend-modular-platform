@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5'
-import { Signup } from '../Signup'
+import { createStory } from '@webapp/shared'
+import { signup_200 } from "#msw-handlers";
+import { Signup } from './Signup'
 
 const meta = {
   title: 'Pages/Signup',
@@ -14,6 +16,11 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
-  args: {},
-}
+export const Default: Story = createStory({
+  parameters: {
+    withMemoryRouter: {
+      initialPath: '/auth/signup'
+    },
+    msw: { handlers: [signup_200] }
+  }
+})

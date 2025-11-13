@@ -8,7 +8,8 @@ import { ThemeProvider } from '#providers'
 import { withThemeFromJSXProvider } from '@storybook/addon-themes'
 
 export interface WithThemeParameters {
-  themeConfig?: {
+  withTheme?: {
+    disable?: boolean
     initialTheme?: 'light' | 'dark'
   }
 }
@@ -17,7 +18,7 @@ export const withTheme: DecoratorFunction<ReactRenderer> = (Story, { parameters 
   if (parameters?.disableGlobalDecorators) return <Story />
   if (parameters?.withTheme?.disable) return <Story />
 
-  const _themeConfig = (parameters as WithThemeParameters).themeConfig
+  const _themeConfig = (parameters as WithThemeParameters).withTheme
 
   const [globals, updateGlobals] = useGlobals()
 

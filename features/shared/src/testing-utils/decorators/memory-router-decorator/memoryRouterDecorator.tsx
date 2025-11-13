@@ -1,10 +1,12 @@
 import type { DecoratorFunction } from 'storybook/internal/csf'
 import type { ReactRenderer } from '@storybook/react-webpack5'
-import { MemoryRouterProvider } from '#providers'
+import { RouterProvider } from '#providers'
 import { RouteObject } from 'react-router'
+import { configureAppRouter } from "#utils";
 
 export interface WithMemoryRouterParameters {
-  routerConfig?: {
+  withMemoryRouter?: {
+    disable?: boolean
     initialPath?: string
   }
 }
@@ -16,9 +18,11 @@ export const withMemoryRouter: DecoratorFunction<ReactRenderer> = (
   if (parameters?.disableGlobalDecorators) return <Story />
   if (parameters?.withMemoryRouter?.disable) return <Story />
 
-  const routerConfig = (parameters as WithMemoryRouterParameters).routerConfig
+  const routerConfig = (parameters as WithMemoryRouterParameters).withMemoryRouter
 
   const routes: RouteObject[] = [{ path: '*', element: <Story /> }]
 
-  return <MemoryRouterProvider initialPath={routerConfig?.initialPath} routes={routes} />
+  const router = configureAppRouter({ routes: routes, initialPath: routerConfig?.initialPath || '/' })
+
+  return <RouterProvider routerConfig={{ router }} />
 }

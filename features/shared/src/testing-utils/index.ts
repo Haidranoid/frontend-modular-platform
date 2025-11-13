@@ -1,4 +1,5 @@
 //export * from './custom-render'
+export * from './create-stories'
 export * from './decorators'
 //export * from './hooks-setup'
 //export * from './mocks'

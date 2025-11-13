@@ -50,7 +50,7 @@ export const StorybookContextBox: FC<ContextBoxProps> = ({
     ? config
     : {
         location: { x: 0, y: 0 },
-        size: { width: 300, height: 300 },
+        size: { width: 300, height: 500 },
       }
   const location = useLocation()
   const state = useSelector((state) => state)

@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker'
 import { Roles } from '@webapp/shared'
-import type { GetMeSuccess } from '#state'
+import type { GetMeSuccess } from '#types'
 import type { Fixture } from './fixtures.types'
 
 export const getMeSuccessFixture: Fixture<GetMeSuccess> = () => {

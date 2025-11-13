@@ -1,6 +1,7 @@
 import { FC, ReactNode } from 'react'
 import { RouteObject, createMemoryRouter, Outlet } from 'react-router'
-import { RouterProvider } from '../router-provider'
+//import { RouterProvider } from '../router-provider'
+import { RouterProvider } from '#providers'
 
 export interface MemoryRouterProviderProps {
   routes: RouteObject[]

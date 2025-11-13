@@ -1,9 +1,9 @@
 import { faker } from '@faker-js/faker'
 import { Roles } from '@webapp/shared'
-import type { LoginPayload, LoginSuccess } from '#state'
+import type { SignupPayload, SignupSuccess } from '#types'
 import type { Fixture } from './fixtures.types'
 
-export const loginSuccessFixture: Fixture<LoginSuccess, LoginPayload> = (params) => {
+export const signupSuccessFixture: Fixture<SignupSuccess, SignupPayload> = (params) => {
   const { requestBody } = params
 
   const firstName = faker.person.firstName()
