@@ -29,4 +29,3 @@ export const login_500: RequestHandler = http.post<object, LoginPayload, object>
     return HttpResponse.json({}, { status: 500 })
   },
 )
-

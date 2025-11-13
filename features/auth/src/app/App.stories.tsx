@@ -8,8 +8,8 @@ const meta = {
   parameters: {
     layout: 'fullscreen',
     withInitialPath: {
-      initialPath: '/auth'
-    }
+      initialPath: '/auth',
+    },
   },
   tags: ['autodocs'],
   args: {},
@@ -19,4 +19,3 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = createAppStory({})
-

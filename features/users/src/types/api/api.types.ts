@@ -1,8 +1,5 @@
 import type { User, ApiOperations } from '@webapp/shared'
-import type {
-  CreateUserPayload,
-  CreateUserSuccess,
-} from './request-types'
+import type { CreateUserPayload, CreateUserSuccess } from './request-types'
 
 export interface UsersState {
   user: User | null

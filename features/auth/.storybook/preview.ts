@@ -14,8 +14,8 @@ const preview: Preview = {
     viewport: { options: INITIAL_VIEWPORTS },
     withRedux: {
       config: {
-        rootReducer: authReducer
-      }
+        rootReducer: authReducer,
+      },
     },
   },
   loaders: [mswLoader],

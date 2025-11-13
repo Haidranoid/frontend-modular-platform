@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
-import type { ReactRenderer } from "@storybook/react-webpack5";
-import { DecoratorFunction } from "storybook/internal/csf";
+import type { ReactRenderer } from '@storybook/react-webpack5'
+import { DecoratorFunction } from 'storybook/internal/csf'
 import { RequestHandler } from 'msw'
 
 export type CreateAppStoryParameters = Partial<{
@@ -16,9 +16,7 @@ export interface CreateAppStoryOptions {
 }
 
 export const createAppStory = ({ parameters, args = {} }: CreateAppStoryOptions) => {
-  let defaultDecorators: DecoratorFunction[] = [
-    withInitialPath
-  ]
+  let defaultDecorators: DecoratorFunction[] = [withInitialPath]
 
   return {
     decorators: defaultDecorators,
@@ -35,12 +33,16 @@ export interface WithInitialPathParameters {
   }
 }
 
-export const withInitialPath: DecoratorFunction<ReactRenderer> = (Story, { parameters }) => {
+export const withInitialPath: DecoratorFunction<ReactRenderer> = (
+  Story,
+  { parameters },
+) => {
   const config = (parameters as WithInitialPathParameters).withInitialPath
 
   window.history.pushState({}, '', config?.initialPath || '/')
-  return <Fragment>
-    <Story />
-  </Fragment>
+  return (
+    <Fragment>
+      <Story />
+    </Fragment>
+  )
 }
-

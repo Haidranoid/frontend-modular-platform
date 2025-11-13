@@ -6,11 +6,10 @@ import { Button, useAppTheme } from '@webapp/shared'
 export const Home: FC = () => {
   const appTheme = useAppTheme()
 
-  useEffect(() => {
-  }, [])
+  useEffect(() => {}, [])
 
   return (
-    <div data-testid="home-page">
+    <div data-testid="users-home-page">
       <h2>Home Users Page</h2>
       <br />
 

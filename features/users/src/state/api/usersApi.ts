@@ -1,12 +1,7 @@
 import type { ApiSchema } from '@webapp/shared'
 import { httpClient } from '@webapp/shared'
 import { Endpoints } from '#constants'
-import {
-  UsersOps,
-  UsersState,
-  CreateUserPayload,
-  CreateUserSuccess,
-} from '#types'
+import { UsersOps, UsersState, CreateUserPayload, CreateUserSuccess } from '#types'
 
 export const usersApi: ApiSchema<UsersState, UsersOps> = {
   createUser: {
@@ -23,5 +18,5 @@ export const usersApi: ApiSchema<UsersState, UsersOps> = {
 
       state.user = user
     },
-  }
+  },
 }
