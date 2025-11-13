@@ -12,6 +12,7 @@ export const commonConfig = {
     fallback: {
       buffer: false,
       process: false,
+      path: false,
     },
   },
   module: {
