@@ -38,6 +38,7 @@
   "devDependencies": {
     "@webapp/shared": "workspace:*",
     "@webapp/auth": "workspace:*",
+    "@webapp/users": "workspace:*",
     "@configs/typescript": "workspace:*",
     "@tools/eslint-scripts": "workspace:*",
     "@babel/core": "7.28.4",

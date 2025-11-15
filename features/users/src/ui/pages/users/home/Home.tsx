@@ -1,30 +1,54 @@
-import React, { FC, useEffect } from 'react'
-import { Button, useAppTheme } from '@webapp/shared'
-//import { Link } from 'react-router'
-//import { useActions } from '@webapp/shared'
+import { FC } from 'react'
+import { Link } from 'react-router'
+import { Button } from '@webapp/shared'
+import { useAppSelector } from '#state'
+import { HomeStyled, UsersTable } from './Home.styled'
 
 export const Home: FC = () => {
-  const appTheme = useAppTheme()
-
-  useEffect(() => {}, [])
+  const users = useAppSelector((s) => Object.values(s.users.entities))
 
   return (
-    <div data-testid="users-home-page">
-      <h2>Home Users Page</h2>
-      <br />
+    <HomeStyled>
+      <h2>Users</h2>
 
-      <Button
-        label={`Cambiar a ${appTheme.mode.name === 'light' ? 'dark' : 'light'}`}
-        onClick={appTheme.toggle}
-      />
+      <Link to="/users/create">
+        <Button label="Create New User" />
+      </Link>
 
-      {/*<span>
-        create an account in <Link to={'/auth/signup'}>signup</Link>
-      </span>
-      <br />
-      <span>
-        create an account in <Link to={'/auth/login'}>login</Link>
-      </span>*/}
-    </div>
+      <UsersTable>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {users.map((u) => (
+            <tr key={u.id}>
+              <td>{u.id}</td>
+              <td>{u.username}</td>
+              <td>{u.email}</td>
+              <td>
+                {u.firstName} {u.lastName}
+              </td>
+              <td>{u.role}</td>
+              <td>
+                <Link to={`/users/update/${u.id}`}>
+                  <Button label="Update" />
+                </Link>
+                <Link to={`/users/delete/${u.id}`}>
+                  <Button label="Delete" />
+                </Link>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </UsersTable>
+    </HomeStyled>
   )
 }

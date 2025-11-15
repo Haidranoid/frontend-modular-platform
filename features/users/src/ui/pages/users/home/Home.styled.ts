@@ -1,9 +1,24 @@
 import styled from 'styled-components'
 
 export const HomeStyled = styled.div`
-  display: flex;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+`
+
+export const UsersTable = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+
+  th,
+  td {
+    border-bottom: 1px solid #444;
+    padding: 10px;
+    text-align: left;
+  }
+
+  td a {
+    margin-right: 10px;
+  }
 `
