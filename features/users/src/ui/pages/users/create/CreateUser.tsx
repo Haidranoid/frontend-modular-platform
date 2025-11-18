@@ -51,7 +51,7 @@ export const CreateUser: FC = () => {
         <Input placeholder="First Name" {...register('firstName', { required: true })} />
         <Input placeholder="Last Name" {...register('lastName', { required: true })} />
 
-        <Select label="Role" {...register("role")}>
+        <Select label="Role" {...register('role')}>
           <option value={Roles.ADMIN}>ADMIN</option>
           <option value={Roles.EVERYONE}>EVERYONE</option>
         </Select>

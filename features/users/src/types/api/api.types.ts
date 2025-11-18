@@ -1,5 +1,15 @@
 import type { User, ApiOperations } from '@webapp/shared'
-import type { CreateUserPayload, CreateUserSuccess } from './request-types'
+import {
+  FetchUsersSuccess,
+  FetchUserByIdPayload,
+  FetchUserByIdSuccess,
+  CreateUserPayload,
+  CreateUserSuccess,
+  UpdateUserPayload,
+  UpdateUserSuccess,
+  DeleteUserPayload,
+  DeleteUserSuccess,
+} from './request-types'
 
 export interface UsersState {
   user: User | null
@@ -7,5 +17,9 @@ export interface UsersState {
 }
 
 export interface UsersOps extends ApiOperations {
-  createUser: (credentials: CreateUserPayload) => Promise<CreateUserSuccess>
+  fetchUsers: () => Promise<FetchUsersSuccess>
+  fetchUserById: (payload: FetchUserByIdPayload) => Promise<FetchUserByIdSuccess>
+  createUser: (payload: CreateUserPayload) => Promise<CreateUserSuccess>
+  updateUser: (payload: UpdateUserPayload) => Promise<UpdateUserSuccess>
+  deleteUser: (payload: DeleteUserPayload) => Promise<DeleteUserSuccess>
 }

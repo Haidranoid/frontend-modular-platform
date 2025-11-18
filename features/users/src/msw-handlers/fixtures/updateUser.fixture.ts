@@ -1,9 +1,9 @@
 import { faker } from '@faker-js/faker'
 import { Roles } from '@webapp/shared'
-import type { CreateUserPayload, CreateUserSuccess } from '#types'
+import type { UpdateUserPayload, UpdateUserSuccess } from '#types'
 import type { Fixture } from './fixtures.types'
 
-export const userCratedSuccessFixture: Fixture<CreateUserSuccess, CreateUserPayload> = (
+export const updateUserSuccessFixture: Fixture<UpdateUserSuccess, UpdateUserPayload> = (
   params,
 ) => {
   const { requestBody } = params
@@ -18,7 +18,7 @@ export const userCratedSuccessFixture: Fixture<CreateUserSuccess, CreateUserPayl
     user: {
       id: faker.number.int(),
       password: faker.internet.password(),
-      username: requestBody.username,
+      username: requestBody.user.username,
       role: Roles.ADMIN,
       email,
       firstName,

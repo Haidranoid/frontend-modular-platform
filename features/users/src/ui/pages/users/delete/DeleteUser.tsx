@@ -9,7 +9,7 @@ export const DeleteUser: FC = () => {
   const navigate = useNavigate()
   const { deleteUser } = useActions()
 
-  const user = useAppSelector((s) => s.users.entities[id!])
+  const user = useAppSelector((s) => s.users[id!])
 
   const handleDelete = async () => {
     const ok = window.confirm('Are you sure you want to delete this user?')

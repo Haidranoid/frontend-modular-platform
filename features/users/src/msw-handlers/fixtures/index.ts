@@ -1,1 +1,4 @@
-export * from './users.fixture'
+export * from './createUser.fixture'
+export * from './fetchUsers.fixture'
+export * from './fetchUserById.fixture'
+export * from './deleteUser.fixture'

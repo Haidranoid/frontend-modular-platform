@@ -5,7 +5,7 @@ import { useAppSelector } from '#state'
 import { HomeStyled, UsersTable } from './Home.styled'
 
 export const Home: FC = () => {
-  const users = useAppSelector((s) => Object.values(s.users.entities))
+  const users = useAppSelector((s) => s.users)
 
   return (
     <HomeStyled>

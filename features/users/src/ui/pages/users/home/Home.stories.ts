@@ -1,12 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5'
 import { createStory } from '@webapp/shared'
+import { fetchUsers_200 } from '#msw-handlers'
 import { Home } from './Home'
 
 const meta = {
   title: 'Pages/Home',
   component: Home,
   parameters: {
-    layout: 'centered',
+    layout: 'fullscreen',
     withMemoryRouter: {
       initialPath: '/users',
     },
@@ -18,4 +19,8 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = createStory({})
+export const Default: Story = createStory({
+  parameters: {
+    msw: { handlers: [fetchUsers_200] },
+  },
+})

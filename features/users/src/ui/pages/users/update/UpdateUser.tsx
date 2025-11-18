@@ -14,7 +14,7 @@ export const UpdateUser: FC = () => {
   const { updateUser } = useActions()
   const navigate = useNavigate()
 
-  const user = useAppSelector((s) => s.users.entities[id!])
+  const user = useAppSelector((s) => s.users[id!])
 
   const {
     register,
