@@ -3,7 +3,7 @@ import { Roles } from '@webapp/shared'
 import type { UpdateUserPayload, UpdateUserSuccess } from '#types'
 import type { Fixture } from './fixtures.types'
 
-export const updateUserSuccessFixture: Fixture<UpdateUserSuccess, UpdateUserPayload> = (
+export const updateUser_200_fixture: Fixture<UpdateUserSuccess, UpdateUserPayload> = (
   params,
 ) => {
   const { requestBody } = params

@@ -3,7 +3,7 @@ import { Roles } from '@webapp/shared'
 import { FetchUsersSuccess } from '#types'
 import type { Fixture } from './fixtures.types'
 
-export const fetchUsersSuccessFixture: Fixture<FetchUsersSuccess> = () => {
+export const fetchUsers_200_fixture: Fixture<FetchUsersSuccess> = () => {
   return {
     users: [
       {

@@ -17,6 +17,7 @@ const preview: Preview = {
         rootReducer: usersReducer,
       },
     },
+    //msw: { handlers: [fetchUsers_200] },
   },
   loaders: [mswLoader],
 }

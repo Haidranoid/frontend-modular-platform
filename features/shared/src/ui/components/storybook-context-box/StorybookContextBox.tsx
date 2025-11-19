@@ -6,6 +6,8 @@ import {
   ItemButton,
   Box,
   Header,
+  HeaderInner,
+  CollapseButton,
 } from './StorybookContextBox.styled'
 import { ObjectExplorer } from '../object-explorer'
 import { Portal } from '../portal'
@@ -46,12 +48,11 @@ export const StorybookContextBox: FC<ContextBoxProps> = ({
   domElement,
   config,
 }) => {
-  const contextBoxConfig = config
-    ? config
-    : {
-        location: { x: 0, y: 0 },
-        size: { width: 300, height: 500 },
-      }
+  const contextBoxConfig = config ?? {
+    location: { x: 0, y: 0 },
+    size: { width: 300, height: 500 },
+  }
+
   const location = useLocation()
   const state = useSelector((state) => state)
 
@@ -66,42 +67,85 @@ export const StorybookContextBox: FC<ContextBoxProps> = ({
     defaultItems.map((item) => item.id),
   )
 
+  const [collapsed, setCollapsed] = useState(true)
+  const [size, setSize] = useState(contextBoxConfig.size)
+
   const toggleItem = (id: string) => {
     setExpandedItems((prev) =>
       prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id],
     )
   }
 
+  const toggleCollapsed = () => {
+    setCollapsed((prev) => {
+      if (!prev) {
+        // colapsando → guardar tamaño actual
+        return true
+      } else {
+        // expandiendo → restaurar tamaño original
+        return false
+      }
+    })
+  }
+
   return (
     <Portal container={domElement}>
       <Rnd
+        size={{
+          width: size.width,
+          height: collapsed ? 42 : size.height, // <<< altura mínima cuando está colapsado
+        }}
+        onResizeStop={(e, dir, ref) => {
+          if (!collapsed) {
+            setSize({
+              width: ref.offsetWidth,
+              height: ref.offsetHeight,
+            })
+          }
+        }}
+        disableResizing={collapsed} // opcional
         default={{
           x: contextBoxConfig.location.x,
           y: contextBoxConfig.location.y,
-          width: contextBoxConfig.size.width,
-          height: contextBoxConfig.size.height,
+          width: size.width,
+          height: size.height,
         }}
-        bounds="window"
         dragHandleClassName="drag-handle"
-        data-testid="storybook-context-box"
+        bounds="window"
       >
-        <Box>
-          <Header className="drag-handle">{title}</Header>
-          <Content>
-            {defaultItems.map((item) => (
-              <ItemWrapper key={item.id}>
-                <ItemButton onClick={() => toggleItem(item.id)}>
-                  {expandedItems.includes(item.id) ? '▼' : '▶'} {item.label}
-                </ItemButton>
+        <Box collapsed={collapsed}>
+          <Header className="drag-handle">
+            <HeaderInner>
+              <span>{title}</span>
 
-                {expandedItems.includes(item.id) && (
-                  <div style={{ marginLeft: '1rem', marginTop: '0.25rem' }}>
-                    <ObjectExplorer data={item.data} />
-                  </div>
-                )}
-              </ItemWrapper>
-            ))}
-          </Content>
+              <CollapseButton
+                onClick={(e) => {
+                  e.stopPropagation()
+                  toggleCollapsed()
+                }}
+              >
+                {collapsed ? '▼' : '▶'}
+              </CollapseButton>
+            </HeaderInner>
+          </Header>
+
+          {!collapsed && (
+            <Content>
+              {defaultItems.map((item) => (
+                <ItemWrapper key={item.id}>
+                  <ItemButton onClick={() => toggleItem(item.id)}>
+                    {expandedItems.includes(item.id) ? '▼' : '▶'} {item.label}
+                  </ItemButton>
+
+                  {expandedItems.includes(item.id) && (
+                    <div style={{ marginLeft: '1rem', marginTop: '0.25rem' }}>
+                      <ObjectExplorer data={item.data} />
+                    </div>
+                  )}
+                </ItemWrapper>
+              ))}
+            </Content>
+          )}
         </Box>
       </Rnd>
     </Portal>

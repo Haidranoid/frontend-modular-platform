@@ -1,28 +1,21 @@
-import { http, HttpResponse, RequestHandler } from 'msw'
+import { http, HttpResponse } from 'msw'
 import { Endpoints } from '#constants'
 import { FetchUsersSuccess } from '#types'
-import { fetchUsersSuccessFixture } from '../fixtures'
+import { fetchUsers_200_fixture } from '../fixtures'
 
-export const fetchUsers_200: RequestHandler = http.post<
-  object,
-  object,
-  FetchUsersSuccess
->(Endpoints.USER_BY_ID, async () => {
-  return HttpResponse.json(fetchUsersSuccessFixture(), {
-    status: 200,
-  })
+export const fetchUsers_200_handler = http.get<{}, {}, FetchUsersSuccess>(
+  Endpoints.USERS,
+  () => {
+    return HttpResponse.json(fetchUsers_200_fixture(), {
+      status: 200,
+    })
+  },
+)
+
+export const fetchUsers_400_handler = http.get(Endpoints.USERS, () => {
+  return HttpResponse.json({}, { status: 400 })
 })
 
-export const fetchUsers_400: RequestHandler = http.post<object, object, object>(
-  Endpoints.USER_BY_ID,
-  async () => {
-    return HttpResponse.json({}, { status: 400 })
-  },
-)
-
-export const fetchUsers_500: RequestHandler = http.post<object, object, object>(
-  Endpoints.USER_BY_ID,
-  async () => {
-    return HttpResponse.json({}, { status: 500 })
-  },
-)
+export const fetchUsers_500_handler = http.get(Endpoints.USERS, () => {
+  return HttpResponse.json({}, { status: 500 })
+})

@@ -1,11 +1,16 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { Link } from 'react-router'
 import { Button } from '@webapp/shared'
-import { useAppSelector } from '#state'
+import { useActions, useAppSelector } from '#state'
 import { HomeStyled, UsersTable } from './Home.styled'
 
 export const Home: FC = () => {
+  const { fetchUsers } = useActions()
   const users = useAppSelector((s) => s.users)
+
+  useEffect(() => {
+    fetchUsers({ TEST: '123' })
+  }, [])
 
   return (
     <HomeStyled>

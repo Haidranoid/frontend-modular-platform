@@ -1,30 +1,24 @@
-import { http, HttpResponse, RequestHandler } from 'msw'
+import { http, HttpResponse } from 'msw'
 import { Endpoints } from '#constants'
 import { UpdateUserSuccess, UpdateUserPayload } from '#types'
-import { updateUserSuccessFixture } from '../fixtures'
+import { updateUser_200_fixture } from '../fixtures'
 
-export const updateUser_200: RequestHandler = http.post<
+export const updateUser_200_handler = http.post<
   object,
   UpdateUserPayload,
   UpdateUserSuccess
 >(Endpoints.USER_BY_ID, async ({ request }) => {
   const body = await request.json()
 
-  return HttpResponse.json(updateUserSuccessFixture({ requestBody: body }), {
+  return HttpResponse.json(updateUser_200_fixture({ requestBody: body }), {
     status: 200,
   })
 })
 
-export const updateUser_400: RequestHandler = http.post<object, object, object>(
-  Endpoints.USER_BY_ID,
-  async () => {
-    return HttpResponse.json({}, { status: 400 })
-  },
-)
+export const updateUser_400_handler = http.post(Endpoints.USER_BY_ID, () => {
+  return HttpResponse.json({}, { status: 400 })
+})
 
-export const updateUser_500: RequestHandler = http.post<object, object, object>(
-  Endpoints.USER_BY_ID,
-  async () => {
-    return HttpResponse.json({}, { status: 500 })
-  },
-)
+export const updateUser_500_handler = http.post(Endpoints.USER_BY_ID, () => {
+  return HttpResponse.json({}, { status: 500 })
+})
