@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5'
 import { createAppStory } from '@webapp/shared'
+import { fetchUsers_200_handler } from '#msw-handlers'
 import { App } from './App'
 
 const meta = {
@@ -9,6 +10,11 @@ const meta = {
     layout: 'fullscreen',
     withInitialPath: {
       initialPath: '/users',
+    },
+    msw: {
+      handlers: [
+        fetchUsers_200_handler,
+      ]
     },
   },
   tags: ['autodocs'],

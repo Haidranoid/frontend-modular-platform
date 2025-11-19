@@ -103,7 +103,7 @@ export const StorybookContextBox: FC<ContextBoxProps> = ({
             })
           }
         }}
-        disableResizing={collapsed} // opcional
+        //$disableResizing={collapsed}
         default={{
           x: contextBoxConfig.location.x,
           y: contextBoxConfig.location.y,
@@ -113,7 +113,7 @@ export const StorybookContextBox: FC<ContextBoxProps> = ({
         dragHandleClassName="drag-handle"
         bounds="window"
       >
-        <Box collapsed={collapsed}>
+        <Box $isCollapsed={collapsed}>
           <Header className="drag-handle">
             <HeaderInner>
               <span>{title}</span>

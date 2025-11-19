@@ -1,17 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5'
 import { createStory } from '@webapp/shared'
-import { createUser_200 } from '#msw-handlers'
+import { createUser_200_handler } from '#msw-handlers'
 import { DeleteUser } from './DeleteUser'
 
 const meta = {
   title: 'Pages/DeleteUser',
   component: DeleteUser,
   parameters: {
-    parameters: {
-      layout: 'fullscreen',
-      withMemoryRouter: {
-        initialPath: '/users/create',
-      },
+    layout: 'fullscreen',
+    withMemoryRouter: {
+      initialPath: '/users/delete',
     },
   },
   tags: ['autodocs'],
@@ -23,6 +21,6 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = createStory({
   parameters: {
-    msw: { handlers: [createUser_200] },
+    msw: { handlers: [createUser_200_handler] },
   },
 })

@@ -1,13 +1,13 @@
 import styled from 'styled-components'
 
-export const Box = styled.div<{ collapsed: boolean }>`
+export const Box = styled.div<{ $isCollapsed: boolean }>`
   background: ${({ theme }) => theme.background.primary};
   border: 1px solid ${({ theme }) => theme.foreground.primary};
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
-  height: ${({ collapsed }) => (collapsed ? 'auto' : '100%')};
+  height: ${({ $isCollapsed }) => ($isCollapsed ? 'auto' : '100%')};
   color: ${({ theme }) => theme.text.primary};
 `
 
