@@ -9,11 +9,11 @@ export const Home: FC = () => {
   const users = useAppSelector((s) => s.users)
 
   useEffect(() => {
-    fetchUsers({ TEST: '123' })
+    fetchUsers({})
   }, [])
 
   return (
-    <HomeStyled>
+    <HomeStyled data-testid="users-home-page">
       <h2>Users</h2>
 
       <Link to="/users/create">

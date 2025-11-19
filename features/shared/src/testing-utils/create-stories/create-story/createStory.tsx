@@ -1,5 +1,4 @@
 import { DecoratorFunction } from 'storybook/internal/csf'
-import { withTests } from '@storybook/addon-jest'
 import { RequestHandler } from 'msw'
 import {
   withRedux,
@@ -17,12 +16,7 @@ import type {
 export type CreateStoryParameters = Partial<
   {
     disableGlobalDecorators?: boolean
-    withTests?: {
-      disable?: boolean
-    }
-    msw?: {
-      handlers: RequestHandler[]
-    }
+    msw?: { handlers: RequestHandler[] }
   } & WithReduxParameters &
     WithThemeParameters &
     WithMemoryRouterParameters &
@@ -41,10 +35,6 @@ export const createStory = ({ parameters, args = {} }: CreateStoryOptions) => {
     withTheme,
     withRedux,
   ]
-
-  if (!parameters?.disableGlobalDecorators && !parameters?.withTests?.disable) {
-    defaultDecorators = [withTests({ results: {} }), ...defaultDecorators]
-  }
 
   return {
     decorators: defaultDecorators,

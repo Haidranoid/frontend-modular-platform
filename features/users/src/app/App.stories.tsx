@@ -12,9 +12,7 @@ const meta = {
       initialPath: '/users',
     },
     msw: {
-      handlers: [
-        fetchUsers_200_handler,
-      ]
+      handlers: [fetchUsers_200_handler],
     },
   },
   tags: ['autodocs'],

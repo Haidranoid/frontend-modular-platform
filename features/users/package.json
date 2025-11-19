@@ -30,6 +30,7 @@
     "test": "testx --detectOpenHandles",
     "test:ci": "testx --detectOpenHandles",
     "test:watch": "testx --detectOpenHandles --watch",
+    "test:generate-output": "testx --json --outputFile=.jest-test-results.json || true",
     "test:clean": "testx --clearCache",
     "cy": "cypress open",
     "cy:run": "cypress run --browser electron",

@@ -1,13 +1,11 @@
 import { Fragment } from 'react'
 import type { ReactRenderer } from '@storybook/react-webpack5'
-import { DecoratorFunction } from 'storybook/internal/csf'
+import type { DecoratorFunction } from 'storybook/internal/csf'
 import { RequestHandler } from 'msw'
 
 export type CreateAppStoryParameters = Partial<{
   disableGlobalDecorators?: boolean
-  msw?: {
-    handlers: RequestHandler[]
-  }
+  msw?: { handlers: RequestHandler[] }
 }>
 
 export interface CreateAppStoryOptions {
@@ -25,7 +23,7 @@ export const createAppStory = ({ parameters, args = {} }: CreateAppStoryOptions)
   }
 }
 
-//------------------------------------------------
+//-----------------------------------------------------------------------------
 export interface WithInitialPathParameters {
   withInitialPath?: {
     disable?: boolean
@@ -40,6 +38,29 @@ export const withInitialPath: DecoratorFunction<ReactRenderer> = (
   const config = (parameters as WithInitialPathParameters).withInitialPath
 
   window.history.pushState({}, '', config?.initialPath || '/')
+  return (
+    <Fragment>
+      <Story />
+    </Fragment>
+  )
+}
+
+export interface WithTestResultsParameters {
+  withTestResults?: {
+    disable?: boolean
+    results?: Record<string, unknown>
+  }
+}
+
+export const withTestResults: DecoratorFunction<ReactRenderer> = (
+  Story,
+  { parameters },
+) => {
+  const results = (parameters as WithTestResultsParameters).withTestResults?.results
+
+  if (results) {
+  }
+
   return (
     <Fragment>
       <Story />

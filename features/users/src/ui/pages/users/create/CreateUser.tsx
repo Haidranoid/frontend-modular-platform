@@ -30,7 +30,7 @@ export const CreateUser: FC = () => {
   }
 
   return (
-    <CreateUserStyled>
+    <CreateUserStyled data-testid="create-user-page">
       <h2>Create User</h2>
 
       <CreateUserFormStyled onSubmit={handleSubmit(onSubmit)}>
