@@ -13,8 +13,6 @@ export const createUser_200_fixture: Fixture<CreateUserSuccess, CreateUserPayloa
   const email = faker.internet.email({ firstName, lastName })
 
   return {
-    accessToken: faker.internet.jwt(),
-    refreshToken: faker.internet.jwt(),
     user: {
       id: faker.number.int(),
       password: faker.internet.password(),

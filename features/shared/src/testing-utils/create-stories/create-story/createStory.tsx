@@ -1,25 +1,21 @@
 import { DecoratorFunction } from 'storybook/internal/csf'
 import { RequestHandler } from 'msw'
-import {
-  withRedux,
-  withTheme,
-  withMemoryRouter,
-  withStorybookContext,
-} from '../../decorators'
+import { withRedux, withTheme, withRouter, withStorybookContext } from '../../decorators'
 import type {
   WithReduxParameters,
   WithThemeParameters,
-  WithMemoryRouterParameters,
+  WithRouterParameters,
   WithContextBoxParameters,
 } from '../../decorators'
 
 export type CreateStoryParameters = Partial<
   {
-    disableGlobalDecorators?: boolean
+    disableDecorators?: boolean
+    integrationStory?: boolean
     msw?: { handlers: RequestHandler[] }
-  } & WithReduxParameters &
+  } & WithReduxParameters<any, any> &
     WithThemeParameters &
-    WithMemoryRouterParameters &
+    WithRouterParameters &
     WithContextBoxParameters
 >
 
@@ -29,12 +25,11 @@ export interface CreateStoryOptions {
 }
 
 export const createStory = ({ parameters, args = {} }: CreateStoryOptions) => {
-  let defaultDecorators: DecoratorFunction[] = [
-    withStorybookContext,
-    withMemoryRouter,
-    withTheme,
-    withRedux,
-  ]
+  let defaultDecorators: DecoratorFunction[] = []
+
+  if (!parameters?.integrationStory) {
+    defaultDecorators = [withStorybookContext, withRouter, withTheme, withRedux]
+  }
 
   return {
     decorators: defaultDecorators,

@@ -9,8 +9,6 @@ export interface FetchUserByIdSuccess {
 }
 
 export interface CreateUserSuccess {
-  accessToken: string
-  refreshToken: string
   user: User
 }
 

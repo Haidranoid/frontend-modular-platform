@@ -1,28 +1,33 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router'
 import { Button } from '@webapp/shared'
 import { useActions, useAppSelector } from '#state'
 import { DeleteUserStyled } from './DeleteUser.styled'
 
 export const DeleteUser: FC = () => {
-  const { id } = useParams()
+  const params = useParams()
+  const { deleteUser, fetchUserById } = useActions()
   const navigate = useNavigate()
-  const { deleteUser } = useActions()
 
-  const user = useAppSelector((s) => s.users[id!])
+  const user = useAppSelector((s) => s.userById)
+
+  console.log({ params })
+  useEffect(() => {
+    fetchUserById({ id: Number(params.id) })
+  }, [])
 
   const handleDelete = async () => {
     const ok = window.confirm('Are you sure you want to delete this user?')
     if (!ok) return
 
-    await deleteUser(Number(id))
+    await deleteUser({ id: Number(params.id) })
     navigate('/users')
   }
 
   if (!user) return <span>User not found</span>
 
   return (
-    <DeleteUserStyled>
+    <DeleteUserStyled data-testid="delete-user-page">
       <h2>Delete User</h2>
       <p>
         Are you sure you want to delete <b>{user.username}</b>?

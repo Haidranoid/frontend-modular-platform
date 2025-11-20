@@ -8,8 +8,9 @@ const meta = {
   component: Home,
   parameters: {
     layout: 'fullscreen',
-    withMemoryRouter: {
+    withRouter: {
       initialPath: '/users',
+      routeId: 'usersHome',
     },
   },
   tags: ['autodocs'],

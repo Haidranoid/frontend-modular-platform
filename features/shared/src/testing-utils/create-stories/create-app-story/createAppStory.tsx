@@ -4,7 +4,6 @@ import type { DecoratorFunction } from 'storybook/internal/csf'
 import { RequestHandler } from 'msw'
 
 export type CreateAppStoryParameters = Partial<{
-  disableGlobalDecorators?: boolean
   msw?: { handlers: RequestHandler[] }
 }>
 

@@ -3,8 +3,8 @@ import { Endpoints } from '#constants'
 import { DeleteUserSuccess, DeleteUserPayload } from '#types'
 import { deleteUser_200_fixture } from '../fixtures'
 
-export const deleteUser_200_handler = http.post<
-  object,
+export const deleteUser_200_handler = http.delete<
+  {},
   DeleteUserPayload,
   DeleteUserSuccess
 >(Endpoints.USER_BY_ID, async ({ request }) => {
@@ -15,10 +15,10 @@ export const deleteUser_200_handler = http.post<
   })
 })
 
-export const deleteUser_400_handler = http.post(Endpoints.USER_BY_ID, () => {
+export const deleteUser_400_handler = http.delete(Endpoints.USER_BY_ID, () => {
   return HttpResponse.json({}, { status: 400 })
 })
 
-export const deleteUser_500_handler = http.post(Endpoints.USER_BY_ID, () => {
+export const deleteUser_500_handler = http.delete(Endpoints.USER_BY_ID, () => {
   return HttpResponse.json({}, { status: 500 })
 })

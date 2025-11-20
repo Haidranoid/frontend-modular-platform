@@ -4,15 +4,11 @@ import { Store, Reducer } from 'redux'
 import { ReduxProvider } from '#providers'
 import { configureAppStore } from '#utils'
 
-export interface StoreConfig<S, R extends Reducer<S>> {
-  rootReducer?: R
-  initialState?: S
-}
-
-export interface WithReduxParameters {
+export interface WithReduxParameters<S, R extends Reducer<S>> {
   withRedux: {
+    rootReducer: R
     disable?: boolean
-    config?: StoreConfig<any, any>
+    initialState?: S
   }
 }
 
@@ -20,14 +16,14 @@ export const withRedux: DecoratorFunction<ReactRenderer> = (Story, { parameters 
   if (parameters?.disableGlobalDecorators) return <Story />
   if (parameters?.withRedux?.disable) return <Story />
 
-  const storeConfig = (parameters as WithReduxParameters).withRedux.config
+  const config = (parameters as WithReduxParameters<any, any>).withRedux
 
   let store: Store
 
-  if (storeConfig && storeConfig.rootReducer) {
+  if (config && config.rootReducer) {
     store = configureAppStore({
-      rootReducer: storeConfig?.rootReducer,
-      initialState: storeConfig?.initialState,
+      rootReducer: config?.rootReducer,
+      initialState: config?.initialState,
     })
   } else {
     store = createDummyStore()

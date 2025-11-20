@@ -36,7 +36,7 @@ export const usersApi: ApiSchema<UsersState, UsersOps> = {
     onSuccess: (state, action) => {
       const { user } = action.payload
 
-      state.user = user
+      state.userById = user
     },
   },
   createUser: {
@@ -49,7 +49,7 @@ export const usersApi: ApiSchema<UsersState, UsersOps> = {
     onSuccess: (state, action) => {
       const { user } = action.payload
 
-      state.user = user
+      state.userById = user
     },
   },
   updateUser: {
@@ -63,7 +63,7 @@ export const usersApi: ApiSchema<UsersState, UsersOps> = {
     onSuccess: (state, action) => {
       const { user } = action.payload
 
-      state.user = user
+      state.userById = user
     },
   },
   deleteUser: {

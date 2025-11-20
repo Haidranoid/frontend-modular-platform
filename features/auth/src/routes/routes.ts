@@ -3,7 +3,7 @@ import { BasePaths } from '@webapp/shared'
 
 export const routes: RouteObject[] = [
   {
-    path: BasePaths.AUTH_BASE + '/',
+    path: BasePaths.AUTH_BASE,
     children: [
       {
         index: true,
@@ -13,7 +13,7 @@ export const routes: RouteObject[] = [
         },
       },
       {
-        path: BasePaths.AUTH_BASE + '/',
+        path: BasePaths.AUTH_BASE,
         lazy: async () => {
           const { AuthLayout } = await import('#ui')
           return { Component: AuthLayout }

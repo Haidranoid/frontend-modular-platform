@@ -12,7 +12,7 @@ import {
 } from './request-types'
 
 export interface UsersState {
-  user: User | null
+  userById: User | null
   users: User[]
 }
 
