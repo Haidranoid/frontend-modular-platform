@@ -23,7 +23,7 @@ export const routes: RouteObject[] = [
         },
         children: [
           {
-            id: 'createUser',
+            id: 'usersCreate',
             path: BasePaths.USERS_BASE + '/create',
             lazy: async () => {
               const { CreateUser } = await import('#ui')
@@ -31,16 +31,16 @@ export const routes: RouteObject[] = [
             },
           },
           {
-            id: 'updateUser',
-            path: BasePaths.USERS_BASE + '/:id/update',
+            id: 'usersUpdate',
+            path: BasePaths.USERS_BASE + '/:userId/update',
             lazy: async () => {
               const { UpdateUser } = await import('#ui')
               return { Component: UpdateUser }
             },
           },
           {
-            id: 'deleteUser',
-            path: BasePaths.USERS_BASE + '/:id/delete',
+            id: 'usersDelete',
+            path: BasePaths.USERS_BASE + '/:userId/delete',
             lazy: async () => {
               const { DeleteUser } = await import('#ui')
               return { Component: DeleteUser }

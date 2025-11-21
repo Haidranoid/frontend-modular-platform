@@ -11,16 +11,15 @@ export const DeleteUser: FC = () => {
 
   const user = useAppSelector((s) => s.userById)
 
-  console.log({ params })
   useEffect(() => {
-    fetchUserById({ id: Number(params.id) })
+    fetchUserById({ id: Number(params.userId) })
   }, [])
 
   const handleDelete = async () => {
     const ok = window.confirm('Are you sure you want to delete this user?')
     if (!ok) return
 
-    await deleteUser({ id: Number(params.id) })
+    await deleteUser({ id: Number(params.userId) })
     navigate('/users')
   }
 

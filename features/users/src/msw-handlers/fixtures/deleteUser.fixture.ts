@@ -1,12 +1,11 @@
+import { Fixture } from '@webapp/shared'
 import type { DeleteUserSuccess, DeleteUserPayload } from '#types'
-import type { Fixture } from './fixtures.types'
 
-export const deleteUser_200_fixture: Fixture<DeleteUserSuccess, DeleteUserPayload> = (
-  params,
+export const deleteUser_200_fixture: Fixture<DeleteUserSuccess, DeleteUserPayload, { id: string }> = (
+  { params },
 ) => {
-  const { requestBody } = params
 
   return {
-    id: requestBody.id,
+    id: Number(params!.id),
   }
 }

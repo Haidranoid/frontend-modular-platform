@@ -1,31 +1,23 @@
-import { http, HttpResponse, RequestHandler } from 'msw'
+import { http, HttpResponse } from 'msw'
 import { Endpoints } from '#constants'
 import { LoginSuccess, LoginPayload } from '#types'
-import { loginSuccessFixture } from '../fixtures'
+import { login_200_fixture } from '../fixtures'
 
-export const login_200: RequestHandler = http.post<object, LoginPayload, LoginSuccess>(
+export const login_200_handler = http.post<{}, LoginPayload, LoginSuccess>(
   Endpoints.LOGIN,
   async ({ request }) => {
     const body = await request.json()
 
-    return HttpResponse.json(loginSuccessFixture({ requestBody: body }), { status: 200 })
+    return HttpResponse.json(login_200_fixture({ requestBody: body }), {
+      status: 200,
+    })
   },
 )
 
-export const login_400: RequestHandler = http.post<object, LoginPayload, object>(
-  Endpoints.LOGIN,
-  async ({ request }) => {
-    const body = await request.json()
+export const login_400_handler = http.post(Endpoints.LOGIN, () => {
+  return HttpResponse.json({}, { status: 400 })
+})
 
-    return HttpResponse.json({}, { status: 400 })
-  },
-)
-
-export const login_500: RequestHandler = http.post<object, LoginPayload, object>(
-  Endpoints.LOGIN,
-  async ({ request }) => {
-    const body = await request.json()
-
-    return HttpResponse.json({}, { status: 500 })
-  },
-)
+export const login_500_handler = http.post(Endpoints.LOGIN, () => {
+  return HttpResponse.json({}, { status: 500 })
+})

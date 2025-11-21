@@ -1,29 +1,16 @@
-import { http, HttpResponse } from 'msw'
+import { createHandler } from '@webapp/shared'
 import { Endpoints } from '#constants'
-import { CreateUserSuccess, CreateUserPayload } from '#types'
+import { CreateUserPayload, CreateUserSuccess } from '#types'
 import { createUser_200_fixture } from '../fixtures'
 
-export const createUser_200_handler = http.post<{}, CreateUserPayload, CreateUserSuccess>(
-  Endpoints.USERS,
-  async ({ request }) => {
-    const body = await request.json()
+export const createUserHandlers = createHandler<CreateUserSuccess, CreateUserPayload>({
+  path: Endpoints.USERS,
+  method: 'post',
+  success: ({ body }) => createUser_200_fixture({ body }),
+  badRequest: () => ({ message: 'Invalid input' }),
+  serverError: () => ({ message: 'Internal server error' }),
+})
 
-    return HttpResponse.json(createUser_200_fixture({ requestBody: body }), {
-      status: 200,
-    })
-  },
-)
-
-export const createUser_400_handler = http.post<{}, CreateUserPayload>(
-  Endpoints.USERS,
-  () => {
-    return HttpResponse.json({}, { status: 400 })
-  },
-)
-
-export const createUser_500_handler = http.post<{}, CreateUserPayload>(
-  Endpoints.USERS,
-  () => {
-    return HttpResponse.json({}, { status: 500 })
-  },
-)
+export const createUser_200_handler = createUserHandlers.success
+export const createUser_400_handler = createUserHandlers.badRequest
+export const createUser_500_handler = createUserHandlers.serverError

@@ -1,7 +1,7 @@
 import type { Preview } from '@storybook/react'
 import { initialize, mswLoader } from 'msw-storybook-addon'
 import { INITIAL_VIEWPORTS } from 'storybook/viewport'
-import { authReducer } from '../src'
+import { authReducer, routes } from '../src'
 // @ts-ignore
 //import results from '../.jest-test-results.json'
 
@@ -10,13 +10,11 @@ initialize()
 
 const preview: Preview = {
   decorators: [],
+  //decorators: [withTests({ results: results || {} })],
   parameters: {
     viewport: { options: INITIAL_VIEWPORTS },
-    withRedux: {
-      config: {
-        rootReducer: authReducer,
-      },
-    },
+    withRedux: { rootReducer: authReducer },
+    withRouter: { routes },
   },
   loaders: [mswLoader],
 }

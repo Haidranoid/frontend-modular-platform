@@ -6,6 +6,7 @@
     "moduleResolution": "bundler",
 
     "paths": {
+      "#app": ["./src/app/index.ts"],
       "#assets": ["./src/assets/index.ts"],
       "#config": ["./src/config/index.ts"],
       "#constants": ["./src/constants/index.ts"],

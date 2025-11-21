@@ -1,24 +1,20 @@
-import { http, HttpResponse } from 'msw'
+import { createHandler } from '@webapp/shared'
 import { Endpoints } from '#constants'
 import { DeleteUserSuccess, DeleteUserPayload } from '#types'
 import { deleteUser_200_fixture } from '../fixtures'
 
-export const deleteUser_200_handler = http.delete<
-  {},
+export const deleteUserHandlers = createHandler<
+  DeleteUserSuccess,
   DeleteUserPayload,
-  DeleteUserSuccess
->(Endpoints.USER_BY_ID, async ({ request }) => {
-  const body = await request.json()
-
-  return HttpResponse.json(deleteUser_200_fixture({ requestBody: body }), {
-    status: 200,
-  })
+  { id: string }
+>({
+  path: Endpoints.USER_BY_ID,
+  method: 'delete',
+  success: deleteUser_200_fixture,
+  badRequest: () => ({}),
+  serverError: () => ({}),
 })
 
-export const deleteUser_400_handler = http.delete(Endpoints.USER_BY_ID, () => {
-  return HttpResponse.json({}, { status: 400 })
-})
-
-export const deleteUser_500_handler = http.delete(Endpoints.USER_BY_ID, () => {
-  return HttpResponse.json({}, { status: 500 })
-})
+export const deleteUser_200_handler = deleteUserHandlers.success
+export const deleteUser_400_handler = deleteUserHandlers.badRequest
+export const deleteUser_500_handler = deleteUserHandlers.serverError

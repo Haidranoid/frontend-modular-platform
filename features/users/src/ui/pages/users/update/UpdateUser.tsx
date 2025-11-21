@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router'
 import { Input, Button } from '@webapp/shared'
@@ -10,11 +10,15 @@ export interface UpdateUserInputs {
 }
 
 export const UpdateUser: FC = () => {
-  const { id } = useParams()
-  const { updateUser } = useActions()
+  const { userId } = useParams()
+  const { updateUser, fetchUserById } = useActions()
   const navigate = useNavigate()
 
-  const user = useAppSelector((s) => s.users[id!])
+  const user = useAppSelector((s) => s.userById)
+
+  useEffect(() => {
+    fetchUserById({ id: Number(userId) })
+  }, [])
 
   const {
     register,
@@ -23,14 +27,20 @@ export const UpdateUser: FC = () => {
   } = useForm<UpdateUserInputs>()
 
   const onSubmit: SubmitHandler<UpdateUserInputs> = async ({ password }) => {
-    await updateUser({ id: Number(id), password })
+    await updateUser({
+      id: Number(userId),
+      //@ts-ignore
+      user: {
+        password
+      }
+    })
     navigate('/users')
   }
 
   if (!user) return <span>User not found</span>
 
   return (
-    <UpdateUserStyled>
+    <UpdateUserStyled data-testid="update-user-page">
       <h2>Update User</h2>
       <p>
         Updating user: <b>{user.username}</b>

@@ -1,21 +1,16 @@
-import { http, HttpResponse } from 'msw'
+import { createHandler } from '@webapp/shared'
 import { Endpoints } from '#constants'
 import { FetchUserByIdSuccess } from '#types'
 import { fetchUserById_200_fixture } from '../fixtures'
 
-export const fetchUserById_200_handler = http.get<{}, {}, FetchUserByIdSuccess>(
-  Endpoints.USER_BY_ID,
-  () => {
-    return HttpResponse.json(fetchUserById_200_fixture(), {
-      status: 200,
-    })
-  },
-)
-
-export const fetchUserById_400_handler = http.get(Endpoints.USER_BY_ID, () => {
-  return HttpResponse.json({}, { status: 400 })
+export const fetchUserByIdHandlers = createHandler<FetchUserByIdSuccess>({
+  path: Endpoints.USER_BY_ID,
+  method: 'get',
+  success: () => fetchUserById_200_fixture({}),
+  badRequest: () => ({}),
+  serverError: () => ({}),
 })
 
-export const fetchUserById_500_handler = http.get(Endpoints.USER_BY_ID, () => {
-  return HttpResponse.json({}, { status: 500 })
-})
+export const fetchUserById_200_handler = fetchUserByIdHandlers.success
+export const fetchUserById_400_handler = fetchUserByIdHandlers.badRequest
+export const fetchUserById_500_handler = fetchUserByIdHandlers.serverError

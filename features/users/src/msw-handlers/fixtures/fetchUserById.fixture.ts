@@ -1,7 +1,6 @@
 import { faker } from '@faker-js/faker'
-import { Roles } from '@webapp/shared'
+import { Roles, Fixture } from '@webapp/shared'
 import { FetchUserByIdSuccess } from '#types'
-import type { Fixture } from './fixtures.types'
 
 export const fetchUserById_200_fixture: Fixture<FetchUserByIdSuccess> = () => {
   return {

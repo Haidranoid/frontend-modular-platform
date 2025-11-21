@@ -1,31 +1,21 @@
-import { http, HttpResponse, RequestHandler } from 'msw'
+import { http, HttpResponse } from 'msw'
 import { Endpoints } from '#constants'
 import { SignupPayload, SignupSuccess } from '#types'
-import { signupSuccessFixture } from '../fixtures'
+import { signup_200_fixture } from '../fixtures'
 
-export const signup_200: RequestHandler = http.post<object, SignupPayload, SignupSuccess>(
+export const signup_200_handler = http.post<{}, SignupPayload, SignupSuccess>(
   Endpoints.SIGNUP,
   async ({ request }) => {
     const body = await request.json()
 
-    return HttpResponse.json(signupSuccessFixture({ requestBody: body }), { status: 200 })
+    return HttpResponse.json(signup_200_fixture({ requestBody: body }), { status: 200 })
   },
 )
 
-export const signup_400: RequestHandler = http.post<object, SignupPayload, object>(
-  Endpoints.SIGNUP,
-  async ({ request }) => {
-    const body = await request.json()
+export const signup_400_handler = http.post(Endpoints.SIGNUP, () => {
+  return HttpResponse.json({}, { status: 400 })
+})
 
-    return HttpResponse.json({}, { status: 400 })
-  },
-)
-
-export const signup_500: RequestHandler = http.post<object, SignupPayload, object>(
-  Endpoints.SIGNUP,
-  async ({ request }) => {
-    const body = await request.json()
-
-    return HttpResponse.json({}, { status: 500 })
-  },
-)
+export const signup_500_handler = http.post(Endpoints.SIGNUP, () => {
+  return HttpResponse.json({}, { status: 500 })
+})

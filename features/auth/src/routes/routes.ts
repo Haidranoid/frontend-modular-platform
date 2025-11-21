@@ -3,9 +3,11 @@ import { BasePaths } from '@webapp/shared'
 
 export const routes: RouteObject[] = [
   {
+    id: 'authBase',
     path: BasePaths.AUTH_BASE,
     children: [
       {
+        id: 'authHome',
         index: true,
         lazy: async () => {
           const { Home } = await import('#ui')
@@ -13,6 +15,7 @@ export const routes: RouteObject[] = [
         },
       },
       {
+        id: 'authLayout',
         path: BasePaths.AUTH_BASE,
         lazy: async () => {
           const { AuthLayout } = await import('#ui')
@@ -20,6 +23,7 @@ export const routes: RouteObject[] = [
         },
         children: [
           {
+            id: 'authLogin',
             path: BasePaths.AUTH_BASE + '/login',
             lazy: async () => {
               const { Login } = await import('#ui')
@@ -27,6 +31,7 @@ export const routes: RouteObject[] = [
             },
           },
           {
+            id: 'authSignup',
             path: BasePaths.AUTH_BASE + '/signup',
             lazy: async () => {
               const { Signup } = await import('#ui')

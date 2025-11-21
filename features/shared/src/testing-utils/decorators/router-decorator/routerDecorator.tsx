@@ -31,7 +31,6 @@ export const withRouter: DecoratorFunction<ReactRenderer> = (Story, { parameters
 
   let finalPath = route.path
 
-  // 🟢 Si es una index route, usamos la ruta del padre
   if (route.index) {
     finalPath = parentPath
   }
@@ -57,16 +56,16 @@ export const withRouter: DecoratorFunction<ReactRenderer> = (Story, { parameters
 }
 
 //-----------------------------------------------------------------------------
-type FoundRoute = {
+export type FoundRoute = {
   route: RouteObject
   parentPath: string | undefined
 }
 
-function findRouteById(
+export const findRouteById = (
   routes: RouteObject[],
   id: string,
   parentPath?: string,
-): FoundRoute | null {
+): FoundRoute | null => {
   for (const r of routes) {
     if (r.id === id) return { route: r, parentPath }
 

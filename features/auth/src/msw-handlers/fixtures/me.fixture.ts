@@ -1,9 +1,8 @@
 import { faker } from '@faker-js/faker'
-import { Roles } from '@webapp/shared'
+import { Roles, Fixture } from '@webapp/shared'
 import type { GetMeSuccess } from '#types'
-import type { Fixture } from './fixtures.types'
 
-export const getMeSuccessFixture: Fixture<GetMeSuccess> = () => {
+export const getMe_200_fixture: Fixture<GetMeSuccess> = () => {
   const firstName = faker.person.firstName()
   const lastName = faker.person.lastName()
   const email = faker.internet.email({ firstName, lastName })

@@ -1,23 +1,16 @@
-import { http, HttpResponse } from 'msw'
+import { createHandler } from '@webapp/shared'
 import { Endpoints } from '#constants'
 import { UpdateUserSuccess, UpdateUserPayload } from '#types'
 import { updateUser_200_fixture } from '../fixtures'
 
-export const updateUser_200_handler = http.post<{}, UpdateUserPayload, UpdateUserSuccess>(
-  Endpoints.USER_BY_ID,
-  async ({ request }) => {
-    const body = await request.json()
-
-    return HttpResponse.json(updateUser_200_fixture({ requestBody: body }), {
-      status: 200,
-    })
-  },
-)
-
-export const updateUser_400_handler = http.post(Endpoints.USER_BY_ID, () => {
-  return HttpResponse.json({}, { status: 400 })
+export const updateUserHandlers = createHandler<UpdateUserSuccess, UpdateUserPayload>({
+  path: Endpoints.USER_BY_ID,
+  method: 'patch',
+  success: ({ body }) => updateUser_200_fixture({ body }),
+  badRequest: () => ({ message: 'Invalid input' }),
+  serverError: () => ({ message: 'Internal server error' }),
 })
 
-export const updateUser_500_handler = http.post(Endpoints.USER_BY_ID, () => {
-  return HttpResponse.json({}, { status: 500 })
-})
+export const updateUser_200_handler = updateUserHandlers.success
+export const updateUser_400_handler = updateUserHandlers.badRequest
+export const updateUser_500_handler = updateUserHandlers.serverError
