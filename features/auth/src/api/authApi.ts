@@ -1,15 +1,25 @@
-import type { ApiSchema } from '@webapp/shared'
+import type { ApiSchema, ApiOperations, User } from '@webapp/shared'
 import { AuthenticationService, httpClient } from '@webapp/shared'
 import { Endpoints } from '#constants'
 import {
-  AuthOps,
-  AuthState,
   GetMeSuccess,
   LoginPayload,
   LoginSuccess,
   SignupPayload,
   SignupSuccess,
 } from '#types'
+
+export interface AuthState {
+  isAuthenticated: boolean
+  user: User | null
+}
+
+export interface AuthOps extends ApiOperations {
+  me: () => Promise<GetMeSuccess>
+  login: (credentials: LoginPayload) => Promise<LoginSuccess>
+  signup: (credentials: SignupPayload) => Promise<SignupSuccess>
+  logout: () => Promise<void>
+}
 
 export const authApi: ApiSchema<AuthState, AuthOps> = {
   me: {

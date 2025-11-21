@@ -1,9 +1,7 @@
-import type { ApiSchema } from '@webapp/shared'
+import type { User, ApiOperations, ApiSchema } from '@webapp/shared'
 import { httpClient } from '@webapp/shared'
 import { Endpoints } from '#constants'
 import {
-  UsersOps,
-  UsersState,
   FetchUsersSuccess,
   CreateUserPayload,
   FetchUserByIdSuccess,
@@ -11,7 +9,22 @@ import {
   UpdateUserPayload,
   UpdateUserSuccess,
   DeleteUserSuccess,
-} from '#types'
+  FetchUserByIdPayload,
+  DeleteUserPayload,
+} from "#types";
+
+export interface UsersState {
+  userById: User | null
+  users: User[]
+}
+
+export interface UsersOps extends ApiOperations {
+  fetchUsers: () => Promise<FetchUsersSuccess>
+  fetchUserById: (payload: FetchUserByIdPayload) => Promise<FetchUserByIdSuccess>
+  createUser: (payload: CreateUserPayload) => Promise<CreateUserSuccess>
+  updateUser: (payload: UpdateUserPayload) => Promise<UpdateUserSuccess>
+  deleteUser: (payload: DeleteUserPayload) => Promise<DeleteUserSuccess>
+}
 
 export const usersApi: ApiSchema<UsersState, UsersOps> = {
   fetchUsers: {

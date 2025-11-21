@@ -1,27 +1,27 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5'
 import { createStory } from '@webapp/shared'
-import { login_200_handler } from '#msw-handlers'
-import { Login } from './Login'
+import { signup_200_handler } from '#msw-handlers'
+import { Signup } from '#ui'
 
 const meta = {
-  title: 'Pages/Login',
-  component: Login,
+  title: 'Pages/Signup',
+  component: Signup,
   parameters: {
     layout: 'fullscreen',
     withRouter: {
-      initialPath: '/auth/login',
-      routeId: 'authLogin',
+      initialPath: '/auth/signup',
+      routeId: 'authSignup',
     },
   },
   tags: ['autodocs'],
   args: {},
-} satisfies Meta<typeof Login>
+} satisfies Meta<typeof Signup>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = createStory({
   parameters: {
-    msw: { handlers: [login_200_handler] },
+    msw: { handlers: [signup_200_handler] },
   },
 })

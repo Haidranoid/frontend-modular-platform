@@ -1,12 +1,12 @@
 import { createSlice, SliceNames } from '@webapp/shared'
-import { usersApi } from '../api'
+import { usersApi } from '#api'
 
 export const usersSlice = createSlice({
   sliceId: SliceNames.Users,
   api: usersApi,
   reducers: {},
   initialState: {
-    user: null,
+    userById: null,
     users: [],
   },
 })
