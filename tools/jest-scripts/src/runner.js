@@ -11,7 +11,7 @@ function runner() {
     [jestBinPath, '--config', jestConfigPath, ...args],
     {
       stdio: 'inherit',
-      shell: true,
+      //shell: true,
     }
   )
 

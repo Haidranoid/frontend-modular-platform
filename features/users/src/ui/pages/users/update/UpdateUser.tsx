@@ -31,8 +31,8 @@ export const UpdateUser: FC = () => {
       id: Number(userId),
       //@ts-ignore
       user: {
-        password
-      }
+        password,
+      },
     })
     navigate('/users')
   }

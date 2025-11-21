@@ -11,7 +11,7 @@ import {
   DeleteUserSuccess,
   FetchUserByIdPayload,
   DeleteUserPayload,
-} from "#types";
+} from '#types'
 
 export interface UsersState {
   userById: User | null

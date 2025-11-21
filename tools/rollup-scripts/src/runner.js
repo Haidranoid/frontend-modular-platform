@@ -10,7 +10,7 @@ function runner() {
 
   const child = spawn('node', [rollupBinPath, '--config', rollupConfigPath, ...args], {
     stdio: 'inherit',
-    shell: true,
+    //shell: true,
   })
 
   child.on('exit', (code) => process.exit(code ?? 1))

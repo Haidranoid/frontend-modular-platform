@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react'
 import { composeStories } from '@storybook/react'
-import * as stories from './Home.stories'
+import { homeStories } from '#stories'
 
-const { Default } = composeStories(stories)
+const { Default } = composeStories(homeStories)
 
 describe('Home', () => {
   it('renders correctly', () => {

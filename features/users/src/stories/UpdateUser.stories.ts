@@ -23,7 +23,7 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = createStory({
   parameters: {
     msw: {
-      handlers: [updateUser_200_handler, fetchUserById_200_handler]
+      handlers: [updateUser_200_handler, fetchUserById_200_handler],
     },
   },
 })

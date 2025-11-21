@@ -21,6 +21,6 @@ spawn(
   ],
   {
     stdio: 'inherit', // que se vea la salida en la consola
-    shell: true, // necesario en Windows
+    //shell: true, // necesario en Windows
   },
 )

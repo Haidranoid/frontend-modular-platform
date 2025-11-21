@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react'
 import { composeStories } from '@storybook/react'
-import * as stories from './CreateUser.stories'
+import { createUserStories } from '#stories'
 
-const { Default } = composeStories(stories)
+const { Default } = composeStories(createUserStories)
 
 describe('CreateUser', () => {
   it('renders correctly', () => {
