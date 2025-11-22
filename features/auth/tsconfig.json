@@ -12,7 +12,7 @@
       "#config": ["./src/config/index.ts"],
       "#constants": ["./src/constants/index.ts"],
       "#experimental": ["./src/experimental/index.ts"],
-      "#msw-handlers": ["./src/msw-handlers/index.ts"],
+      "#msw-mocks": ["./src/msw-mocks/index.ts"],
       "#routes": ["./src/routes/index.ts"],
       "#state": ["./src/state/index.ts"],
       "#stories": ["./src/stories/index.ts"],

@@ -3,7 +3,7 @@ import { Endpoints } from '#constants'
 import { UpdateUserSuccess, UpdateUserPayload } from '#types'
 import { updateUser_200_fixture } from '../fixtures'
 
-export const updateUserHandlers = createHandler<UpdateUserSuccess, UpdateUserPayload>({
+const updateUserHandlers = createHandler<UpdateUserSuccess, UpdateUserPayload>({
   path: Endpoints.USER_BY_ID,
   method: 'patch',
   success: ({ body }) => updateUser_200_fixture({ body }),

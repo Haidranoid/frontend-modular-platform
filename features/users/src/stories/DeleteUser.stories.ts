@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5'
 import { createStory } from '@webapp/shared'
-import { deleteUser_200_handler, fetchUserById_200_handler } from '#msw-handlers'
+import { deleteUser_200_handler, fetchUserById_200_handler } from '#msw-mocks'
 import { DeleteUser } from '#ui'
 
 const meta = {

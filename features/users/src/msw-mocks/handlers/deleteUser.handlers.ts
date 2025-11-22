@@ -3,7 +3,7 @@ import { Endpoints } from '#constants'
 import { DeleteUserSuccess, DeleteUserPayload } from '#types'
 import { deleteUser_200_fixture } from '../fixtures'
 
-export const deleteUserHandlers = createHandler<
+const deleteUserHandlers = createHandler<
   DeleteUserSuccess,
   DeleteUserPayload,
   { id: string }

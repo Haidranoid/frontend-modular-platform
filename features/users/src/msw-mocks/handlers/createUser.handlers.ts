@@ -3,7 +3,7 @@ import { Endpoints } from '#constants'
 import { CreateUserPayload, CreateUserSuccess } from '#types'
 import { createUser_200_fixture } from '../fixtures'
 
-export const createUserHandlers = createHandler<CreateUserSuccess, CreateUserPayload>({
+const createUserHandlers = createHandler<CreateUserSuccess, CreateUserPayload>({
   path: Endpoints.USERS,
   method: 'post',
   success: ({ body }) => createUser_200_fixture({ body }),

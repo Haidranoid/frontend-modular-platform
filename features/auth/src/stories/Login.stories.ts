@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5'
 import { createStory } from '@webapp/shared'
-import { login_200_handler } from '#msw-handlers'
+import { login_200_handler } from '#msw-mocks'
 import { Login } from '#ui'
 
 const meta = {

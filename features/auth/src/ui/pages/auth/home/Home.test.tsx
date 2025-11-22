@@ -5,10 +5,10 @@ import { homeStories } from '#stories'
 const { Default } = composeStories(homeStories)
 
 describe('Home', () => {
-  it('renders correctly', async () => {
+  it('renders correctly', () => {
     render(<Default />)
 
-    const homePage = await screen.findByTestId('users-home-page')
+    const homePage = screen.getByTestId('auth-home-page')
     expect(homePage).toBeInTheDocument()
   })
 })

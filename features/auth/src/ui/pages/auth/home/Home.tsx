@@ -12,7 +12,7 @@ export const Home: FC = () => {
   }, [])
 
   return (
-    <div data-testid="home-page">
+    <div data-testid="auth-home-page">
       <h2>Home Auth Page</h2>
       <br />
       <span>

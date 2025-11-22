@@ -3,7 +3,7 @@ import { Endpoints } from '#constants'
 import { FetchUserByIdSuccess } from '#types'
 import { fetchUserById_200_fixture } from '../fixtures'
 
-export const fetchUserByIdHandlers = createHandler<FetchUserByIdSuccess>({
+const fetchUserByIdHandlers = createHandler<FetchUserByIdSuccess>({
   path: Endpoints.USER_BY_ID,
   method: 'get',
   success: () => fetchUserById_200_fixture({}),

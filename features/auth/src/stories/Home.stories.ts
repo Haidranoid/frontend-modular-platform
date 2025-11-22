@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5'
 import { createStory } from '@webapp/shared'
-import { fetchUsers_200_handler } from '#msw-mocks'
 import { Home } from '#ui'
 
 const meta = {
@@ -9,8 +8,8 @@ const meta = {
   parameters: {
     layout: 'fullscreen',
     withRouter: {
-      initialPath: '/users',
-      routeId: 'usersHome',
+      initialPath: '/auth',
+      routeId: 'authHome',
     },
   },
   tags: ['autodocs'],
@@ -20,8 +19,4 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = createStory({
-  parameters: {
-    msw: { handlers: [fetchUsers_200_handler] },
-  },
-})
+export const Default: Story = createStory({})
