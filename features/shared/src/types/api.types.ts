@@ -1,42 +1,32 @@
 import type { Draft, PayloadAction } from '@reduxjs/toolkit'
-import type { UnifiedState } from './common.types'
+import type { BaseState } from './common.types'
 
-export type Operation<Args = any, Return = any> = (args: Args) => Promise<Return>
+/*
+export type ApiOperation<Args = any, Return = any> = Args extends void
+  ? () => Promise<Return>
+  : (args: Args) => Promise<Return>
 
-export type ArgsOf<Op extends Operation> = Parameters<Op>[0]
+*/
+export type ApiHttpRequest = (args: any) => Promise<any>
 
-export type ReturnOf<Op extends Operation> = Awaited<ReturnType<Op>>
-
-export type ReducerArgs<S, Op extends Operation> = (
-  state: Draft<UnifiedState<S>>,
-  action: PayloadAction<Awaited<ReturnType<Op>>>,
-  //action: PayloadAction<ReturnOf<Op>, string, { args: ArgsOf<Op> }>
+export type ReducerArgs<S extends BaseState, Req extends ApiHttpRequest> = (
+  state: Draft<S>,
+  action: PayloadAction<Awaited<ReturnType<Req>>>,
 ) => void
 
-export type ThunkValues<S, Op extends Operation> = {
-  operation: Op
-  onSuccess: ReducerArgs<S, Op>
-  onError?: ReducerArgs<S, Op>
-  onLoading?: ReducerArgs<S, Op>
+export type ApiEntry<
+  S,
+  Req extends ApiHttpRequest,
+  ReducerState extends BaseState = S & BaseState,
+> = {
+  httpRequest: Req
+  onSuccess: ReducerArgs<ReducerState, Req>
+  onError?: ReducerArgs<ReducerState, Req>
+  onLoading?: ReducerArgs<ReducerState, Req>
 }
 
-export type RawApiSchema = Record<string, Operation>
+export type ApiOperations = Record<string, ApiHttpRequest>
 
-export type ApiFromSchema<S = unknown, T extends RawApiSchema = RawApiSchema> = {
-  [K in keyof T]: ThunkValues<S, T[K]>
-}
-
-export type MakeApiSchema<T extends RawApiSchema> = T
-
-export type ApiOperations = Record<string, Operation>
-
-export type ApiEntry<S, Op extends Operation> = {
-  operation: Op
-  onSuccess: ReducerArgs<S, Op>
-  onError?: ReducerArgs<S, Op>
-  onLoading?: ReducerArgs<S, Op>
-}
-
-export type ApiSchema<S = unknown, T extends ApiOperations = ApiOperations> = {
+export type ApiSchema<S extends object, T extends ApiOperations = ApiOperations> = {
   [K in keyof T]: ApiEntry<S, T[K]>
 }

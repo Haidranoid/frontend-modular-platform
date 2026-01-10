@@ -186,14 +186,14 @@
     {
       "commandKind": "global",
       "name": "stop",
-      "summary": "",
+      "summary": "Stops all the running processes",
       "shellCommand": "(pkill -f webpack && pkill -f node && pkill -f java) || (taskkill /IM node.exe /F & taskkill /IM java.exe /F)"
     },
     {
       "commandKind": "bulk",
       "name": "clean",
-      "summary": "Removes the lib dir",
-      "shellCommand": "rimraf lib dist",
+      "summary": "Removes the dist and lib directories",
+      "shellCommand": "rimraf lib dist build",
       "enableParallelism": true,
       "ignoreDependencyOrder": true,
       "safeForSimultaneousRushProcesses": true

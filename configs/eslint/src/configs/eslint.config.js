@@ -14,7 +14,7 @@ const prettierConfig = require('./prettierrc')
 
 /** @type {import('eslint').Linter.Config[]} */
 const eslintConfig = [
-  // 1️⃣ Base config para JS/TS/React
+  // 1️ Base config para JS/TS/React
   {
     files: ['**/*.{ts,tsx,js,jsx}'],
     languageOptions: {
@@ -51,7 +51,7 @@ const eslintConfig = [
     },
   },
 
-  // 2️⃣ TypeScript específico
+  // 2️ TypeScript específico
   {
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
@@ -68,7 +68,7 @@ const eslintConfig = [
     },
   },
 
-  // 3️⃣ Test files
+  // 3️ Test files
   {
     files: ['**/*.test.{ts,tsx,js,jsx}', 'jest.config.ts'],
     languageOptions: {
@@ -85,7 +85,7 @@ const eslintConfig = [
     },
   },
 
-  // 4️⃣ Cypress
+  // 4️ Cypress
   {
     files: ['cypress/**/*.cy.{ts,js}', 'cypress.config.ts'],
     languageOptions: {
@@ -102,7 +102,7 @@ const eslintConfig = [
     },
   },
 
-  // 5️⃣ Storybook
+  // 5️ Storybook
   {
     files: ['.storybook/**/*.{ts,tsx,js}'],
     languageOptions: {
@@ -121,7 +121,7 @@ const eslintConfig = [
     },
   },
 
-  // 6️⃣ Ignorar build artifacts, coverage, node_modules, mocks
+  // 6️ Ignore build artifacts, coverage, node_modules, mocks
   {
     ignores: ['node_modules', 'dist', 'build', 'server', 'coverage', 'public', '.idea'],
   },

@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "exit 0",
-    "lint": "exit 0",
+    "lint": "node bin/main.js src/**/* --fix",
     "test": "exit 0"
   },
   "devDependencies": {

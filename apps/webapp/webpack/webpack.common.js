@@ -8,7 +8,7 @@ export const commonConfig = {
   entry: [path.resolve(process.cwd(), "src/main/index.tsx")],
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
-    fullySpecified: false, // <- necesario para imports ESM sin extensión
+    fullySpecified: false,
     fallback: {
       buffer: false,
       process: false,
@@ -23,7 +23,7 @@ export const commonConfig = {
         use: {
           loader: 'babel-loader',
           options: {
-            //babelrc: true,
+            babelrc: true,
             cacheDirectory: true,
             cacheCompression: false,
             compact: true,
@@ -35,7 +35,7 @@ export const commonConfig = {
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
-          //'postcss-loader', // si tienes postcss.config.js
+          //'postcss-loader',
           //'sass-loader',
         ],
       },

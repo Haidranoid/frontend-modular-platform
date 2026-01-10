@@ -1,5 +1,6 @@
-import type { ApiSchema, ApiOperations, User } from '@webapp/shared'
+import type { ApiSchema, ApiOperations } from '@webapp/shared'
 import { AuthenticationService, httpClient } from '@webapp/shared'
+import type { AuthState } from '#state'
 import { Endpoints } from '#constants'
 import {
   GetMeSuccess,
@@ -9,32 +10,29 @@ import {
   SignupSuccess,
 } from '#types'
 
-export interface AuthState {
-  isAuthenticated: boolean
-  user: User | null
-}
-
-export interface AuthOps extends ApiOperations {
+export interface AuthApiOperations extends ApiOperations {
   me: () => Promise<GetMeSuccess>
   login: (credentials: LoginPayload) => Promise<LoginSuccess>
   signup: (credentials: SignupPayload) => Promise<SignupSuccess>
   logout: () => Promise<void>
 }
 
-export const authApi: ApiSchema<AuthState, AuthOps> = {
+export type AuthApi = ApiSchema<AuthState, AuthApiOperations>
+
+export const authApi: AuthApi = {
   me: {
-    operation: async () => {
+    httpRequest: async () => {
       return await httpClient.get<GetMeSuccess>({
         endpoint: Endpoints.ME,
       })
     },
     onSuccess: (state, action) => {
-      state.user = action.payload
+      state.session = action.payload
+      state.isAuthenticated = true
     },
   },
   login: {
-    operation: async (credentials) => {
-      //throw new Error('test')
+    httpRequest: async (credentials) => {
       return await httpClient.post<LoginPayload, LoginSuccess>({
         endpoint: Endpoints.LOGIN,
         body: credentials,
@@ -45,12 +43,12 @@ export const authApi: ApiSchema<AuthState, AuthOps> = {
       const { user, accessToken, refreshToken } = action.payload
 
       state.isAuthenticated = true
-      state.user = user
+      state.session = user
       AuthenticationService.startSession(accessToken, refreshToken)
     },
   },
   signup: {
-    operation: async (credentials) => {
+    httpRequest: async (credentials) => {
       return await httpClient.post<SignupPayload, SignupSuccess>({
         endpoint: Endpoints.SIGNUP,
         body: credentials,
@@ -61,18 +59,18 @@ export const authApi: ApiSchema<AuthState, AuthOps> = {
       const { user, accessToken, refreshToken } = action.payload
 
       state.isAuthenticated = true
-      state.user = user
+      state.session = user
       AuthenticationService.startSession(accessToken, refreshToken)
     },
   },
   logout: {
-    operation: async () => {
+    httpRequest: async () => {
       return await httpClient.delete({
         endpoint: Endpoints.LOGOUT,
       })
     },
     onSuccess: (state) => {
-      state.user = null
+      state.session = null
       AuthenticationService.closeSession()
     },
   },

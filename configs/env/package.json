@@ -9,10 +9,11 @@
   },
   "scripts": {
     "build": "exit 0",
-    "lint": "exit 0",
+    "lint": "linterx src/**/* --fix",
     "test": "exit 0"
   },
   "devDependencies": {
+    "@tools/eslint-scripts": "workspace:*",
     "@types/node": "24.6.2",
     "rimraf": "6.0.1",
     "zod": "4.1.11"

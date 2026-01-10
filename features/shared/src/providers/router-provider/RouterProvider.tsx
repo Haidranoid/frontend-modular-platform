@@ -4,11 +4,10 @@ import {
   RouterProviderProps as ReactRouterProviderProps,
 } from 'react-router'
 
-// ========================== app render ==============================
 export interface RouterProviderOptions {
-  routerConfig: ReactRouterProviderProps
+  config: ReactRouterProviderProps
 }
 
 export const RouterProvider: FC<RouterProviderOptions> = (options) => {
-  return <ReactRouterProvider {...options.routerConfig} />
+  return <ReactRouterProvider {...options.config} />
 }

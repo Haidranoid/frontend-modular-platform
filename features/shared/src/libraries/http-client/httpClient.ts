@@ -1,6 +1,7 @@
 import axios, { AxiosHeaders } from 'axios'
 import * as qs from 'query-string'
 import { AuthenticationService, getBrowserSecurityService } from '#utils'
+import { HttpMethods } from '#constants'
 import type {
   AxiosConfigurationBuilder,
   CustomHeaders,
@@ -10,14 +11,16 @@ import type {
   ReplaceEndpointVariables,
   RequestParams,
 } from './httpClient.types.js'
-import { HttpMethods } from './constants'
 
-// ========== Utility Functions ==========
-const generateQueryParams: GenerateQueryParams = (queryParams) => {
-  return queryParams ? `?${qs.stringify(queryParams)}` : ''
+export const generateQueryParams: GenerateQueryParams = (endpoint, queryParams) => {
+  if (!queryParams) return endpoint
+  return endpoint + `?${qs.stringify(queryParams)}`
 }
 
-const replaceEndpointVariables: ReplaceEndpointVariables = (endpoint, variables) => {
+export const replaceEndpointVariables: ReplaceEndpointVariables = (
+  endpoint,
+  variables,
+) => {
   if (!variables) return endpoint
 
   return Object.keys(variables).reduce(
@@ -28,8 +31,8 @@ const replaceEndpointVariables: ReplaceEndpointVariables = (endpoint, variables)
 
 const buildEndpoint: EndpointBuilder = (endpoint, queryParams, endpointVariables) => {
   const withVars = replaceEndpointVariables(endpoint, endpointVariables)
-  const query = generateQueryParams(queryParams)
-  return `${withVars}${query}`
+  const finalUrl = generateQueryParams(endpoint, queryParams)
+  return finalUrl
 }
 
 export const getDefaultHeaders = (): CustomHeaders => ({
@@ -37,7 +40,7 @@ export const getDefaultHeaders = (): CustomHeaders => ({
   'Content-Type': 'application/json',
 })
 
-const buildAxiosConfig: AxiosConfigurationBuilder = (
+export const buildAxiosConfig: AxiosConfigurationBuilder = (
   customHeaders,
   useDefaultHeaders = true,
   useAuthorization = true,
@@ -50,12 +53,6 @@ const buildAxiosConfig: AxiosConfigurationBuilder = (
     }
   }
 
-  if (customHeaders) {
-    for (const [key, value] of Object.entries(customHeaders)) {
-      headers.set(key, value)
-    }
-  }
-
   if (useAuthorization) {
     const token = AuthenticationService.getAccessToken()
     if (token) {
@@ -63,10 +60,15 @@ const buildAxiosConfig: AxiosConfigurationBuilder = (
     }
   }
 
+  if (customHeaders) {
+    for (const [key, value] of Object.entries(customHeaders)) {
+      headers.set(key, value)
+    }
+  }
+
   return { headers }
 }
 
-// ========== HTTP Client Core ==========
 const axiosInstance = axios.create()
 
 async function request<R, B>({
@@ -79,8 +81,9 @@ async function request<R, B>({
   useDefaultHeaders,
   customHeaders,
 }: RequestParams<B>) {
-  const finalUrl = buildEndpoint(endpoint, queryParams, endpointVariables)
   const config = buildAxiosConfig(customHeaders, useDefaultHeaders, useAuthorization)
+  const endpointExpanded = replaceEndpointVariables(endpoint, endpointVariables)
+  const finalUrl = generateQueryParams(endpointExpanded, queryParams)
 
   const axiosMethods = {
     [HttpMethods.GET]: () => axiosInstance.get<undefined, R>(finalUrl, config),
@@ -95,7 +98,6 @@ async function request<R, B>({
   return response['data']
 }
 
-// ========== Public API ==========
 export const httpClient: HttpClientType = {
   get: (params) => request({ ...params, method: HttpMethods.GET }),
   post: (params) => request({ ...params, method: HttpMethods.POST }),

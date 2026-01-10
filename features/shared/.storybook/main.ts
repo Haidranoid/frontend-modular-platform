@@ -16,7 +16,6 @@ const config: StorybookConfig = {
         outline: false,
       },
     },
-    //'@storybook/addon-interactions',
     '@storybook/addon-jest',
     '@storybook/addon-themes',
     '@storybook/addon-webpack5-compiler-swc',
@@ -29,7 +28,6 @@ const config: StorybookConfig = {
   },
   staticDirs: ['../public'],
   webpackFinal: async (config) => {
-    // 🔹 Extensiones
     config.resolve.extensions = [...(config.resolve.extensions || []), '.ts', '.tsx']
 
     config.resolve.fallback = {
@@ -37,7 +35,6 @@ const config: StorybookConfig = {
       path: require.resolve('path-browserify'),
     }
 
-    // 🔹 Paths del monorepo
     config.resolve.plugins = [
       ...(config.resolve.plugins || []),
       new TsconfigPathsPlugin({
@@ -45,13 +42,10 @@ const config: StorybookConfig = {
       }),
     ]
 
-    // 🔹 Aliases opcionales
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
-      // "@app": path.resolve(__dirname, "../src/main/app"),
     }
 
-    // 🔹 Soporte SWC para TS/TSX
     config.module.rules.push({
       test: /\.(ts|tsx)$/,
       exclude: /node_modules/,
@@ -65,8 +59,8 @@ const config: StorybookConfig = {
             },
             transform: {
               react: {
-                runtime: 'automatic', // ✅ React 17+ JSX transform
-                refresh: false, // Habilita Fast Refresh
+                runtime: 'automatic',
+                refresh: false,
               },
             },
           },

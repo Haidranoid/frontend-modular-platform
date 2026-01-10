@@ -1,5 +1,0 @@
-export * from './createUser.handlers'
-export * from './fetchUsers.handlers'
-export * from './fetchUserById.handlers'
-export * from './updateUser.handlers'
-export * from './deleteUser.handlers'

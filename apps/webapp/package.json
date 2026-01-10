@@ -12,6 +12,7 @@
   "type": "module",
   "scripts": {
     "start": "webpack serve --env mode=development",
+    "lint": "linterx src/**/* .storybook/** --fix",
     "server": "java -Dspring.profiles.active=dev -Dserver.port=8080 -jar server/api.jar",
     "dev": "concurrently -k \"npm run server \" \"wait-on http://localhost:8080/api/actuator/health && npm start\"",
     "stop": "(pkill -f webpack && pkill -f node && pkill -f java) || (taskkill /IM node.exe /F & taskkill /IM java.exe /F)",
@@ -20,20 +21,26 @@
     "analyze": "cross-env ANALYZE=true webpack --env mode=production",
     "test": "exit 0",
     "test:ci": "testx --ci --detectOpenHandles --forceExit",
+    "test:watch": "testx --detectOpenHandles --watch",
+    "test:generate-output": "testx --json --outputFile=.jest-test-results.json || true",
     "test:clean": "testx --clearCache",
-    "test:coverage": "testx --coverage --detectOpenHandles",
-    "cy:start": "npm start & wait-on http://localhost:8000 && npm run cy:run",
-    "cy": "cross-env NODE_ENV=cy cypress run --browser electron",
+    "cy": "cypress open",
+    "cy:run": "cross-env NODE_ENV=cy cypress run --browser electron",
+    "cy:start": "rushx storybook & wait-on http://localhost:6006 && rushx cy:run",
     "cy:open": "cypress open",
-    "lint": "linterx src/main/**/* --fix",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@babel/runtime": "7.28.4",
+    "@reduxjs/toolkit": "2.11.2",
     "react": "19.2.0",
     "react-dom": "19.2.0",
+    "react-redux": "9.2.0",
     "react-router": "7.9.3",
-    "redux": "5.0.1"
+    "react-hook-form": "7.64.0",
+    "redux": "5.0.1",
+    "styled-components": "6.1.19"
   },
   "devDependencies": {
     "@webapp/shared": "workspace:*",
@@ -41,6 +48,25 @@
     "@webapp/users": "workspace:*",
     "@configs/typescript": "workspace:*",
     "@tools/eslint-scripts": "workspace:*",
+    "@faker-js/faker": "10.0.0",
+    "@jest/globals": "30.2.0",
+    "@storybook/addon-a11y": "9.1.10",
+    "@storybook/addon-essentials": "9.0.0-alpha.12",
+    "@storybook/addon-interactions": "9.0.0-alpha.10",
+    "@storybook/addon-jest": "9.1.10",
+    "@storybook/addon-themes": "9.1.10",
+    "@storybook/addon-webpack5-compiler-swc": "4.0.1",
+    "@storybook/preview-api": "9.0.0-alpha.1",
+    "@storybook/react": "9.1.10",
+    "@storybook/react-webpack5": "9.1.10",
+    "@storybook/test-runner": "0.23.0",
+    "@testing-library/dom": "10.4.1",
+    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/react": "16.3.0",
+    "@testing-library/user-event": "14.6.1",
+    "msw": "2.11.3",
+    "msw-storybook-addon": "2.0.5",
+    "storybook": "9.1.10",
     "@babel/core": "7.28.4",
     "@babel/plugin-transform-runtime": "7.28.3",
     "@babel/preset-env": "7.28.3",
@@ -67,7 +93,6 @@
     "node-polyfill-webpack-plugin": "4.1.0",
     "path-browserify": "1.0.1",
     "rimraf": "6.0.1",
-    "styled-components": "6.1.19",
     "terser-webpack-plugin": "5.3.14",
     "tsconfig-paths-webpack-plugin": "4.2.0",
     "typescript": "5.9.3",
@@ -77,5 +102,10 @@
     "webpack-cli": "6.0.1",
     "webpack-dev-server": "5.2.2",
     "webpack-merge": "6.0.1"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

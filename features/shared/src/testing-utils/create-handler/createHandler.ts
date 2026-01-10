@@ -1,17 +1,8 @@
 import { http, HttpHandler, HttpResponse, DefaultBodyType } from 'msw'
 import { curlyToColon } from '../curly-to-colon'
-
-export type Method = 'get' | 'post' | 'put' | 'patch' | 'delete'
+import { HandlerArgs, HandlerOptions } from './createHandler.types'
 
 //-----------------------------------------------------------------------------
-interface HandlerArgs<
-  Req extends DefaultBodyType,
-  Params extends Record<string, string> = {},
-> {
-  body: Req
-  params: Params
-}
-
 export function makeHandler<
   Res extends DefaultBodyType,
   Req extends DefaultBodyType = {},
@@ -34,18 +25,6 @@ export function makeHandler<
 }
 
 //-----------------------------------------------------------------------------
-interface HandlerOptions<
-  Res extends DefaultBodyType,
-  Req extends DefaultBodyType,
-  Params extends Record<string, string>,
-> {
-  path: string
-  method: Method
-  success: (args: HandlerArgs<Req, Params>) => Res
-  badRequest?: (args: HandlerArgs<Req, Params>) => any
-  serverError?: (args: HandlerArgs<Req, Params>) => any
-}
-
 export function createHandler<
   Res extends DefaultBodyType,
   Req extends DefaultBodyType = {},

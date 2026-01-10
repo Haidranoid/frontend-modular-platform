@@ -1,11 +1,10 @@
-// Mock de react-redux
+// react-redux mock
 const mockDispatch = jest.fn()
 jest.mock('react-redux', () => ({
   useDispatch: {
     withTypes: () => () => mockDispatch,
   },
 }))
-// Mock de los thunks
 //jest.mock('@features/thunks', () => ({
 //  myThunk: jest.fn(() => ({ type: 'MY_ACTION' })),
 //}))

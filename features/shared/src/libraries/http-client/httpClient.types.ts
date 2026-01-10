@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from 'axios'
-import { HttpMethods } from './constants'
+import { HttpMethods } from '#constants'
 
 export type HttpClientType = {
   get: <R>(params: Omit<RequestParams<undefined>, 'method' | 'body'>) => Promise<R>
@@ -9,7 +9,10 @@ export type HttpClientType = {
   delete: <R>(params: Omit<RequestParams<undefined>, 'method' | 'body'>) => Promise<R>
 }
 
-export type GenerateQueryParams = (queryParams: object | undefined) => string
+export type GenerateQueryParams = (
+  endpoint: string,
+  queryParams: object | undefined,
+) => string
 
 export type ReplaceEndpointVariables = (
   endpoint: string,

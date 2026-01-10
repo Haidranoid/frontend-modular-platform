@@ -1,19 +1,19 @@
-import type { User } from '@webapp/shared'
+import type { Account } from '@webapp/shared'
 
-export interface FetchUserByIdPayload {
+export interface FetchAccountByIdPayload {
   id: number
 }
 
-export interface CreateUserPayload {
+export interface CreateAccountPayload {
   username: string
   password: string
 }
 
-export interface UpdateUserPayload {
+export interface UpdateAccountPayload {
   id: number
-  user: User
+  account: Account
 }
 
-export interface DeleteUserPayload {
+export interface DeleteAccountPayload {
   id: number
 }

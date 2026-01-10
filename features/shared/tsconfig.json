@@ -18,6 +18,5 @@
       "#utils": ["./src/utils/index.ts"]
     }
   },
-  "include": ["src/**/*", "./jest.setup.ts"],
-  "exclude": ["node_modules","dist"]
+  "include": ["src/**/*", "./jest.setup.ts"]
 }

@@ -1,5 +1,5 @@
-export enum SliceNames {
-  Auth = 'auth',
-  Users = 'users',
-  Global = 'global',
-}
+export const SliceNames = {
+  AUTH: 'auth',
+  ACCOUNTS: 'accounts',
+  GLOBAL: 'global',
+} as const

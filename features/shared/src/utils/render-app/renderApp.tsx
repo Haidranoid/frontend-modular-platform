@@ -1,31 +1,32 @@
-import { FC, StrictMode } from 'react'
-import { Store } from 'redux'
-import { DOMRouterOpts, RouteObject } from 'react-router'
-import { configureAppRouter } from '../configure-router'
+import { StrictMode, JSX } from 'react'
+import { configureAppStore, ConfigureAppStoreParams } from '../configure-app-store'
+import { configureAppRouter, ConfigureAppRouterParams } from '../configure-app-router'
 import { ReduxProvider, ThemeProvider, RouterProvider } from '#providers'
 
-// ========================== app render ==============================
 export interface RenderAppParams {
-  store: Store
-  routes: RouteObject[]
-  initialPath?: string
-  DOMRouterOpts?: DOMRouterOpts
+  storeConfig: ConfigureAppStoreParams<any>
+  routerConfig: ConfigureAppRouterParams
+  strictMode?: boolean
+  disableAuthGuard?: boolean
 }
 
-export const renderApp: FC<RenderAppParams> = (params) => {
-  const router = configureAppRouter({
-    routes: params.routes,
-    initialPath: params.initialPath,
-    opts: params.DOMRouterOpts,
-  })
+export const renderApp = ({
+  storeConfig,
+  routerConfig,
+  strictMode = true,
+}: RenderAppParams): JSX.Element => {
+  const store = configureAppStore(storeConfig)
+  const router = configureAppRouter(routerConfig)
 
-  return (
-    <StrictMode>
-      <ReduxProvider store={params.store}>
+  const app = (
+    <>
+      <ReduxProvider store={store}>
         <ThemeProvider>
-          <RouterProvider routerConfig={{ router }} />
+          <RouterProvider config={{ router }} />
         </ThemeProvider>
       </ReduxProvider>
-    </StrictMode>
+    </>
   )
+
+  return strictMode ? <StrictMode>{app}</StrictMode> : app
 }

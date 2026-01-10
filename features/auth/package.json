@@ -10,17 +10,17 @@
   "description": "",
   "sideEffects": false,
   "files": [
-    "dist"
+    "lib"
   ],
   "type": "module",
-  "types": "dist/esm/index.d.mts",
-  "main": "dist/commonjs/index.cjs",
-  "module": "dist/esm/index.mjs",
+  "types": "lib/types/index.d.ts",
+  "main": "lib/commonjs/index.cjs",
+  "module": "lib/esm/index.mjs",
   "exports": {
     ".": {
-      "types": "./dist/esm/index.d.mts",
-      "import": "./dist/esm/index.mjs",
-      "require": "./dist/commonjs/index.cjs"
+      "types": "./lib/types/index.d.ts",
+      "import": "./lib/esm/index.mjs",
+      "require": "./lib/commonjs/index.cjs"
     },
     "./package.json": "./package.json"
   },
@@ -30,6 +30,7 @@
     "test": "testx --detectOpenHandles",
     "test:ci": "testx --detectOpenHandles",
     "test:watch": "testx --detectOpenHandles --watch",
+    "test:generate-output": "testx --json --outputFile=.jest-test-results.json || true",
     "test:clean": "testx --clearCache",
     "cy": "cypress open",
     "cy:run": "cypress run --browser electron",
@@ -39,12 +40,34 @@
   },
   "peerDependencies": {
     "@webapp/shared": "workspace:*",
+    "@faker-js/faker": "10.0.0",
+    "@jest/globals": "30.2.0",
+    "@storybook/addon-a11y": "9.1.10",
+    "@storybook/addon-essentials": "9.0.0-alpha.12",
+    "@storybook/addon-interactions": "9.0.0-alpha.10",
+    "@storybook/addon-jest": "9.1.10",
+    "@storybook/addon-themes": "9.1.10",
+    "@storybook/addon-webpack5-compiler-swc": "4.0.1",
+    "@storybook/preview-api": "9.0.0-alpha.1",
+    "@storybook/react": "9.1.10",
+    "@storybook/react-webpack5": "9.1.10",
+    "@storybook/test-runner": "0.23.0",
+    "@testing-library/dom": "10.4.1",
+    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/react": "16.3.0",
+    "@testing-library/user-event": "14.6.1",
+    "@babel/runtime": "7.28.4",
+    "@reduxjs/toolkit": "2.11.2",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "react-redux": "9.2.0",
     "react-router": "7.9.3",
     "react-hook-form": "7.64.0",
     "redux": "5.0.1",
+    "msw": "2.11.3",
+    "msw-storybook-addon": "2.0.5",
+    "path-browserify": "1.0.1",
+    "storybook": "9.1.10",
     "styled-components": "6.1.19"
   },
   "devDependencies": {
@@ -76,7 +99,7 @@
     "@types/react": "19.2.0",
     "@types/react-dom": "19.2.0",
     "@babel/runtime": "7.28.4",
-    "@babel/plugin-transform-runtime": "7.28.3",
+    "@reduxjs/toolkit": "2.11.2",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "react-redux": "9.2.0",

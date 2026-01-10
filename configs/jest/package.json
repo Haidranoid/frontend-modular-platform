@@ -9,10 +9,11 @@
   },
   "scripts": {
     "build": "exit 0",
-    "lint": "exit 0",
+    "lint": "linterx src/**/* --fix",
     "test": "exit 0"
   },
   "devDependencies": {
+    "@tools/eslint-scripts": "workspace:*",
     "@babel/core": "7.28.4",
     "@babel/preset-env": "7.28.3",
     "@babel/preset-react": "7.27.1",
@@ -31,6 +32,7 @@
     "jest-environment-jsdom": "30.1.2",
     "jest-fixed-jsdom": "0.0.10",
     "rimraf": "6.0.1",
-    "ts-jest": "29.4.4"
+    "ts-jest": "29.4.4",
+    "typescript": "5.9.3"
   }
 }

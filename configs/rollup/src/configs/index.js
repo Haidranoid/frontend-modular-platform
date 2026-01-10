@@ -1,7 +1,5 @@
-const rollupConfig = require('./rollup.config');
-const rollupConfigTypes = require('./rollup.config.types');
+const rollupConfig = require('./rollup.config')
 
 module.exports = {
-    rollupConfig,
-    rollupConfigTypes
+  rollupConfig,
 }

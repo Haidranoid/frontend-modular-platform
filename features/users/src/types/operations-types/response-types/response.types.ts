@@ -1,22 +1,22 @@
-import type { User } from '@webapp/shared'
+import type { Account } from '@webapp/shared'
 
-export interface FetchUsersSuccess {
-  users: User[]
+export interface FetchAccountsSuccess {
+  accounts: Account[]
 }
 
-export interface FetchUserByIdSuccess {
-  user: User
+export interface FetchAccountByIdSuccess {
+  account: Account
 }
 
-export interface CreateUserSuccess {
-  user: User
+export interface CreateAccountSuccess {
+  account: Account
 }
 
-export interface UpdateUserSuccess {
-  user: User
+export interface UpdateAccountSuccess {
+  account: Account
 }
 
-export interface DeleteUserSuccess {
+export interface DeleteAccountSuccess {
   id: number
-  user?: User
+  account?: Account
 }

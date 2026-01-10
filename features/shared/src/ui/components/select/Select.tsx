@@ -3,6 +3,7 @@ import { SelectStyled, SelectWrapperStyled, LabelStyled } from './Select.styled'
 
 export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   label?: string
+  options: Array<{ value: any; displayValue: string }>
   $fullWidth?: boolean
   $size?: 'small' | 'medium' | 'large'
   error?: string
@@ -10,7 +11,7 @@ export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
 
 export const Select: FC<SelectProps> = ({
   label,
-  children,
+  options,
   error,
   $fullWidth = false,
   $size = 'medium',
@@ -21,7 +22,11 @@ export const Select: FC<SelectProps> = ({
       {label && <LabelStyled>{label}</LabelStyled>}
 
       <SelectStyled $fullWidth={$fullWidth} $size={$size} {...rest}>
-        {children}
+        {options.map((option, i) => (
+          <option key={i} value={option.value}>
+            {option.displayValue}
+          </option>
+        ))}
       </SelectStyled>
 
       {error && <span style={{ color: 'red', fontSize: '0.8rem' }}>{error}</span>}

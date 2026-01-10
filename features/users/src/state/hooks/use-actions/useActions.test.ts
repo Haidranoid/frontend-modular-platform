@@ -1,4 +1,4 @@
-// Mock de react-redux
+// react-redux mock
 const mockDispatch = jest.fn()
 jest.mock('react-redux', () => ({
   useDispatch: {
@@ -10,10 +10,8 @@ describe('useActions hook', () => {
   it('binds all action creators with dispatch', () => {
     //const { result } = renderHook(() => createUseActions())
 
-    // Debe devolver una función
     //expect(typeof result.current.me).toBe('function')
 
-    // Al llamarla, debe despachar la acción
     //result.current.me()
     //expect(mockDispatch).toHaveBeenCalledWith({ type: 'MY_ACTION' })
     //expect(mockDispatch).toHaveBeenCalled()

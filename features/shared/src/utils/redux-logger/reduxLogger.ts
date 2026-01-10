@@ -1,7 +1,7 @@
+import { ThunkMiddleware } from '@reduxjs/toolkit'
 import { createLogger } from 'redux-logger'
-import { Middleware } from 'redux'
 
-export const reduxLogger: Middleware = createLogger({
+export const reduxLogger: ThunkMiddleware = createLogger({
   collapsed: false,
   predicate: () => !!window['Cypress'], // only log in cypress
   stateTransformer: (state) => JSON.parse(JSON.stringify(state)),

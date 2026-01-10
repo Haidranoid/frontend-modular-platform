@@ -1,6 +1,7 @@
-import { createGlobalStyle } from 'styled-components'
+import type { ExoticComponent } from 'react'
+import { createGlobalStyle, ExecutionProps } from 'styled-components'
 
-export const GlobalStyles = createGlobalStyle`
+export const GlobalStyles: ExoticComponent<ExecutionProps> = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;

@@ -3,7 +3,7 @@ const { jestConfigPath } = require('./jest-config-path')
 const { babelConfigPath } = require('./babel-config-path')
 
 module.exports = {
-    jestBinPath,
-    jestConfigPath,
-    babelConfigPath,
+  jestBinPath,
+  jestConfigPath,
+  babelConfigPath,
 }

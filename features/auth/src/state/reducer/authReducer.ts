@@ -1,7 +1,5 @@
+import type { Reducer } from 'redux'
+import type { AuthState } from '../initial-state'
 import { authSlice } from '../slice'
 
-// ================== getting rootReducer from slice ===========================
-export const authReducer = authSlice.reducer
-
-// ================== getting initialState from slice ==========================
-export const initialAuthState = authSlice.initialState
+export const authReducer: Reducer<AuthState> = authSlice.reducer

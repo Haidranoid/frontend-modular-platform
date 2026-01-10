@@ -1,15 +1,15 @@
-import type { User } from '@webapp/shared'
+import type { Account } from '@webapp/shared'
 
-export type GetMeSuccess = User
+export type GetMeSuccess = Account
 
 export interface LoginSuccess {
   accessToken: string
   refreshToken: string
-  user: User
+  user: Account
 }
 
 export interface SignupSuccess {
   accessToken: string
   refreshToken: string
-  user: User
+  user: Account
 }

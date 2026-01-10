@@ -1,4 +1,4 @@
-import { createContext } from 'react'
+import { createContext, Context } from 'react'
 import { ThemeModes, darkTheme } from '#styles'
 
 export interface ThemeContextI {
@@ -6,7 +6,7 @@ export interface ThemeContextI {
   toggle: () => void
 }
 
-export const ThemeContext = createContext<ThemeContextI>({
+export const ThemeContext: Context<ThemeContextI> = createContext<ThemeContextI>({
   mode: darkTheme,
   toggle: () => console.warn('ThemeContext: default toggle'),
 })

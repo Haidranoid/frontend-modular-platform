@@ -9,14 +9,19 @@
   },
   "scripts": {
     "build": "exit 0",
-    "lint": "exit 0",
+    "lint": "linterx src/**/* --fix",
     "test": "exit 0"
   },
+  "peerDependencies": {
+    "@babel/runtime": "7.28.4"
+  },
   "devDependencies": {
+    "@tools/eslint-scripts": "workspace:*",
     "@babel/core": "7.28.4",
     "@babel/preset-env": "7.28.3",
     "@babel/preset-typescript": "7.27.1",
     "@babel/preset-react": "7.27.1",
+    "@babel/runtime": "7.28.4",
     "@babel/plugin-transform-runtime": "7.28.3",
     "@rollup/plugin-node-resolve": "16.0.1",
     "@rollup/plugin-commonjs": "28.0.6",

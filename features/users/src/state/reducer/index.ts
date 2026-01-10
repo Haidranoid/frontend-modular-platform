@@ -1,1 +1,1 @@
-export * from './usersReducer'
+export * from './accountsReducer'

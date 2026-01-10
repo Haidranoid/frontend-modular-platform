@@ -1,25 +1,29 @@
-import { createSelector } from 'reselect'
+import { createSelector } from '@reduxjs/toolkit'
 import { RootState } from '../store'
 
 // Base selector (raw slice from state)
-const baseSelector = (state: RootState) => state
+const authSelector = (state: RootState) => state.auth
 
 // Granular selectors
-const selectAuthUser = createSelector(baseSelector, (auth) => auth.user)
-const selectAuthIsLoading = createSelector(baseSelector, (auth) => auth.isLoading)
-const selectAuthError = createSelector(baseSelector, (auth) => auth.error)
+const memoizedSelectUserSession = createSelector([authSelector], (auth) => auth.session)
+const memoizedSelectIsAuthenticatedFlag = createSelector(
+  [authSelector],
+  (auth) => auth.isAuthenticated,
+)
+const memoizedSelectIsLoading = createSelector([authSelector], (auth) => auth.isLoading)
+const memoizedSelectError = createSelector([authSelector], (auth) => auth.error)
 
 // Composed selectors
-const selectIsAuthenticated = createSelector(selectAuthUser, (user) => user !== null)
-const selectAuthStatus = createSelector(
-  [selectAuthIsLoading, selectAuthError],
-  (isLoading, error) => ({ isLoading, error }),
+const memoizedIsAuthenticated = createSelector(
+  [memoizedSelectUserSession, memoizedSelectIsAuthenticatedFlag],
+  (userSession, isAuthenticatedFlag) => userSession && isAuthenticatedFlag,
 )
 
-// Organized export
-export const authSelectors = {
-  base: baseSelector,
-  user: selectAuthUser,
-  isAuthenticated: selectIsAuthenticated,
-  status: selectAuthStatus,
-}
+const memoizedSelectReadyToRender = createSelector(
+  [memoizedSelectIsLoading, memoizedSelectError],
+  (isLoading, error) => !isLoading && !error,
+)
+
+export const userSessionSelector = memoizedSelectUserSession
+export const isAuthenticatedSelector = memoizedIsAuthenticated
+export const readyToRenderSelector = memoizedSelectReadyToRender

@@ -1,10 +1,12 @@
 import { FC } from 'react'
-import { Outlet } from 'react-router'
+import { Link, Outlet } from 'react-router'
 
 export const MainLayout: FC = () => {
   return (
     <div>
-      <h3>Navbar</h3>
+      <Link to={`/auth`} style={{ textDecoration: 'none', color: 'cyan' }}>
+        <h3>Auth - PublicLayout</h3>
+      </Link>
       <Outlet />
     </div>
   )

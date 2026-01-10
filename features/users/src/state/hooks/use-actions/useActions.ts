@@ -1,10 +1,11 @@
+import { bindActionCreators } from 'redux'
 import { useDispatch } from 'react-redux'
-import { createActions } from '@webapp/shared'
-import { usersSlice } from '../../slice'
+import { actionCreators } from '../../actions-creators'
+import { accountsAsyncThunks } from '../../thunks'
+import { AppDispatch } from '../../store'
 
 export const useActions = () => {
-  const thunks = usersSlice.thunks
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
 
-  return createActions(thunks, dispatch)
+  return bindActionCreators({ ...accountsAsyncThunks, ...actionCreators }, dispatch)
 }

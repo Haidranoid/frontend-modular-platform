@@ -1,13 +1,13 @@
-import { createSlice, SliceNames } from '@webapp/shared'
-import { authApi } from '#api'
+import { createSlice } from '@reduxjs/toolkit'
+import { SliceNames } from '@webapp/shared'
+import { initialState } from '../initial-state'
+import { authSliceTools } from '../slice-tools'
 
-// ========================== getting slice ====================================
 export const authSlice = createSlice({
-  sliceId: SliceNames.Auth,
-  api: authApi,
+  name: SliceNames.AUTH,
+  initialState,
   reducers: {},
-  initialState: {
-    user: null,
-    isAuthenticated: false,
+  extraReducers: (builder) => {
+    authSliceTools.extraReducers(builder)
   },
 })

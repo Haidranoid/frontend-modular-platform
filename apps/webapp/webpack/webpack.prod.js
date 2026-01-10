@@ -51,7 +51,7 @@ export const prodConfig = {
           enforce: true,
         },
 
-        // 1. REACT DOM: Grupo para React-DOM
+        // 2. REACT DOM: Grupo para React-DOM
         reactDom: {
           test: /[\\/]node_modules[\\/](react-dom)[\\/]/,
           name: 'vendors/react-dom', // Nombre del archivo: react-dom.[hash].js
@@ -60,7 +60,7 @@ export const prodConfig = {
           enforce: true,
         },
 
-          // 1. REACT ROUTER: Grupo para React-Router
+        // 3. REACT ROUTER: Grupo para React-Router
         reactRouter: {
             test: /[\\/]node_modules[\\/](react-router)[\\/]/,
             name: 'vendors/react-router', // Nombre del archivo: react-router.[hash].js
@@ -69,7 +69,7 @@ export const prodConfig = {
             enforce: true,
         },
 
-        // 2. REDUX: Grupo para Redux (y podrías añadir otras librerías de estado aquí)
+        // 4. REDUX: Grupo para Redux (y podrías añadir otras librerías de estado aquí)
         redux: {
           test: /[\\/]node_modules[\\/](redux)[\\/]/,
           name: 'vendors/redux', // Nombre del archivo: redux.[hash].js
@@ -78,34 +78,45 @@ export const prodConfig = {
           enforce: true,
         },
 
-        // 3. INTERNAL SHARED: Grupo para @webapp/shared
+        // 4. INTERNAL SHARED: Grupo para @webapp/shared
         webappShared: {
-          // Asegúrate de que esta ruta sea la ABSOLUTA donde está tu código 'shared'
+          // Asegúrar de que esta ruta sea la ABSOLUTA donde está tu código 'shared'
           test: new RegExp(
             path.resolve(process.cwd(), '../../features', 'shared').replace(/\\/g, '\\\\')
           ),
-          name: 'features/webapp-shared', // Nombre: webapp-shared.[hash].js
-          chunks: 'all',
-          priority: 15, // Prioridad media
-          enforce: true,
-        },
-
-        // 4. INTERNAL AUTH: Grupo para @webapp/auth
-        webappAuth: {
-          // Asegúrate de que esta ruta sea la ABSOLUTA donde está tu código 'auth'
-          test: new RegExp(
-            path.resolve(process.cwd(), '../../features', 'auth').replace(/\\/g, '\\\\')
-          ),
-          name: 'features/webapp-auth', // Nombre: webapp-auth.[hash].js
+          name: 'features/webapp-shared', // webapp-shared.[hash].js
           chunks: 'all',
           priority: 15,
           enforce: true,
         },
 
-        // 5. RESTO DE VENDORS: Grupo catch-all para el resto de node_modules (ej: react-router)
+        // 5. INTERNAL AUTH: Grupo para @webapp/auth
+        webappAuth: {
+          // Asegúrar de que esta ruta sea la ABSOLUTA donde está tu código 'auth'
+          test: new RegExp(
+            path.resolve(process.cwd(), '../../features', 'auth').replace(/\\/g, '\\\\')
+          ),
+          name: 'features/webapp-auth', // webapp-auth.[hash].js
+          chunks: 'all',
+          priority: 15,
+          enforce: true,
+        },
+
+        // 6. INTERNAL ACCOUNTS: Grupo para @webapp/accounts
+        webappAccounts: {
+          test: new RegExp(
+            path.resolve(process.cwd(), '../../features', 'accounts').replace(/\\/g, '\\\\')
+          ),
+          name: 'features/webapp-accounts', // webapp-accounts.[hash].js
+          chunks: 'all',
+          priority: 15,
+          enforce: true,
+        },
+
+        // 6. RESTO DE VENDORS: Grupo catch-all para el resto de node_modules (ej: react-router)
         nodeVendors: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'vendors/node-util', // Nombre: node-util.[hash].js
+          name: 'vendors/node-util', // node-util.[hash].js
           chunks: 'all',
           priority: 10, // Menor prioridad para que los grupos específicos capturen primero
           reuseExistingChunk: true,
