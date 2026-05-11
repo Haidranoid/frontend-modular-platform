@@ -1,225 +1,204 @@
-# React Base Project – Enterprise-grade Frontend Architecture
+# React Base Project
 
-> **A production-ready React + TypeScript monorepo focused on scalability, correctness, and developer experience.**
+Frontend monorepo focused on modular architecture, feature isolation, shared contracts, and scalable development workflows using React and TypeScript.
 
-This repository is not a demo or tutorial project. It represents a **deliberate architectural effort** to model how modern frontend platforms are designed, scaled, and maintained in real-world environments.
-
-The intent is for this README to communicate the *what*, *why*, and *how* of the system **before** any code is explored.
+The project explores how medium-to-large frontend applications can be structured in a maintainable way without relying on tightly coupled application code.
 
 ---
 
-## 🎯 Purpose of This Project
+# Project Goals
 
-The primary goal of this project is to demonstrate **frontend architecture at scale**, not just feature implementation.
+This repository focuses on a few core architectural objectives:
 
-It addresses questions commonly faced in medium-to-large engineering organizations:
+- Isolate features as independent development units
+- Share common infrastructure through centralized contracts
+- Maintain strict TypeScript boundaries across packages
+- Support isolated development and testing workflows
+- Keep application composition predictable and explicit
 
-- How do multiple teams work on the same frontend without stepping on each other?
-- How do you scale UI development while preserving consistency and quality?
-- How do you enforce contracts, conventions, and correctness across packages?
-- How do you test features in isolation without losing confidence at integration time?
-
-This repository is intentionally designed as a **platform**, not an app.
-
----
-
-## 🧠 Core Architectural Principles
-
-- **Component-driven development** over page-driven development
-- **Feature isolation** as a default, not an exception
-- **Strict separation between libraries and applications**
-- **Type safety as an architectural constraint**, not a convenience
-- **Explicit contracts over implicit coupling**
-- **Tooling that reflects production reality**
-
-Every decision in this repository optimizes for **long-term maintainability and team scalability**.
+The goal is not to showcase UI complexity, but to explore frontend architecture and engineering practices commonly required in larger codebases.
 
 ---
 
-## 🏗️ Monorepo Architecture (Microsoft Rush)
+# Repository Structure
 
-This project is implemented as a **multi-package monorepo** managed with **Microsoft Rush**.
+The repository is organized as a multi-package monorepo managed with Rush.
 
-Rush provides deterministic installs, strict dependency boundaries, and predictable builds — all critical properties for large-scale frontend systems.
+Example structure:
 
-### Why a Monorepo?
+```txt
+apps/
+  webapp/
 
-- Shared UI and logic without duplication
-- Centralized tooling and configuration
-- Consistent dependency versions
-- Clear ownership boundaries between packages
+features/
+  accounts/
+  auth/
+  shared/
 
-Each package is treated as a **first-class npm library**, even when consumed internally.
+tools/
+  eslint-scripts/
+  jest-scripts/
+  rollup-scripts/
 
----
+configs/
+  eslint/
+  jest/
+  rollup/
+  typescript/
+```
 
-## 🧩 Feature-Based Architecture (Microfrontend-inspired)
+The monorepo structure allows:
 
-The `webapp` is not implemented as a single, tightly coupled application. Instead, it is composed of **independent, feature-oriented modules** (e.g. `auth`, `users`) that can operate **standalone**.
+- Shared tooling and configuration
+- Reusable internal libraries
+- Consistent dependency management
+- Clear package ownership boundaries
 
-Each feature:
-
-- Can be developed, tested, and executed in isolation
-- Does not require knowledge of other features
-- Can be owned and evolved by an independent team
-- Integrates through explicit, type-safe contracts
-
-This approach closely resembles **microfrontend architectures**, but is implemented using **monorepo engineering** rather than runtime federation. The result is lower complexity with many of the same organizational benefits.
-
----
-
-## 🔍 Isolated Development & Testing
-
-Because features are standalone by design:
-
-- A team working on `webapp/users` does not need to understand or build `webapp/auth`
-- Features can be run independently with their own dev environments
-- CI pipelines can validate features without requiring the full application
-
-Each feature supports:
-
-- Unit testing
-- Integration testing
-- End-to-end testing (Cypress / Playwright)
-
-This dramatically reduces feedback loops and cognitive load for teams.
+Each package is treated as an independent library, even when consumed internally by other packages.
 
 ---
 
-## 🎨 Storybook as an Integration Surface
+# Feature-Based Architecture
 
-Storybook is used as more than a component showcase — it acts as an **integration and validation surface**.
+The application is organized around isolated feature modules instead of a single centralized frontend.
 
-Each feature exposes an isolated Storybook instance capable of rendering:
+Each feature is designed to:
 
-- Individual components
-- Full pages
-- Complete feature flows
+- Be developed independently
+- Expose explicit integration contracts
+- Support isolated testing and Storybook rendering
 
-This enables developers to:
+Features are generally isolated and communicate through shared contracts.
 
-- Mount entire application sections without running the full app
-- Validate UI and behavior early
-- Detect breaking changes before integration
+Some foundational features, such as `auth`, expose shared infrastructure consumed across the platform. This includes authentication fixtures, MSW handlers, and standardized state contracts used by other features during development and testing.
 
----
-
-## 🧪 Testing Against Real UI States
-
-Storybook is integrated with **Cypress** and **MSW (Mock Service Worker)**.
-
-This enables a powerful testing model:
-
-- Cypress executes tests **directly against stories**
-- MSW provides realistic API mocks at the network level
-- The same story serves as:
-  - Documentation
-  - Visual reference
-  - Automated test target
-
-Tests are executed against **real, rendered UI states**, increasing confidence while reducing test brittleness.
+This approach helps maintain consistency across features while reducing duplicated integration logic.
 
 ---
 
-## 🔒 Shared Contracts via a Single Source of Truth
+# Shared Package (`shared`)
 
-Feature independence is possible because all features depend on a shared internal package.
+The `shared` package acts as a central integration layer for common platform infrastructure.
 
-### `shared` – Single Source of Truth (SSOT)
+It contains resources such as:
 
-The `shared` package defines **everything that must remain consistent** across the platform:
-
-- Store configuration and providers
-- Routing conventions and nomenclature
-- Theme providers and design tokens
-- Global constants
-- Shared utilities
-- HTTP client abstractions
+- Application providers
+- Shared UI components
+- Theme configuration
+- Routing contracts
+- HTTP abstractions
 - Testing utilities
 - Storybook decorators
-- Reusable UI components
-- Domain-level TypeScript types (e.g. `User`)
+- Shared TypeScript types
+- Common utilities and constants
 
-Features consume `shared`, **never each other**.
+Most features consume `shared` as their primary shared dependency.
 
-This guarantees uniformity, enforces contracts, and prevents accidental coupling.
-
----
-
-## 🏗️ Composition at Build Time
-
-The final `apps/webapp` is intentionally lightweight.
-
-It:
-
-- Consumes the **build output** of each feature
-- Consumes the `shared` package
-- Contains no feature-specific business logic
-
-This ensures that:
-
-- Features cannot break each other implicitly
-- Integration occurs through well-defined boundaries
-- The final application is assembled predictably and safely
+This helps reduce implicit coupling and keeps integration boundaries predictable.
 
 ---
 
-## ⚛️ Frontend Stack Overview
+# Shared Tooling Infrastructure
 
-- **React (Hooks)** – Functional, composable UI architecture
-- **Redux Toolkit** – Predictable and type-safe state management
-- **TypeScript** – Enforced correctness across package boundaries
+The repository centralizes build and development tooling through dedicated internal packages.
 
----
+`configs/` contains the shared configuration and base dependencies for each tool.
 
-## 🧪 Advanced Testing Ecosystem
+`tools/` consumes those configurations and exposes reusable command-line wrappers used by features and applications.
 
-- **Jest** & **React Testing Library** for unit and integration tests
-- **MSW** for realistic API mocking
-- **Cypress / Playwright** for full end-to-end validation
+This approach helps:
 
-Testing is treated as a **core architectural concern**, not a secondary task.
+- Avoid duplicated tooling configuration
+- Keep dependency versions consistent
+- Standardize development workflows across packages
+- Simplify package setup for new features
 
----
+Examples include:
 
-## 📦 Module Bundling & Tooling
-
-- **Rollup** for library bundling
-- **Webpack** for application bundling
-- Dual ESM / CJS outputs
-- Clean `package.json` exports
-- Proper `.d.ts` generation
-
-Explicitly addresses real-world problems such as ESM/CJS compatibility, tree-shaking, and dependency duplication.
+- Shared ESLint configuration
+- Shared Jest configuration
+- Shared Rollup configuration
+- Shared TypeScript configuration
+- Reusable CLI wrappers for linting, testing, and bundling
 
 ---
 
-## 🚀 Architectural Outcome
+# Isolated Development Workflow
 
-The resulting system is:
+Features can be executed and validated independently from the full application.
 
-- **Scalable** across teams and features
-- **Uniform** through shared conventions
-- **Type-safe** by design
-- **Testable** at every level
-- **Microfrontend-inspired** without runtime complexity
+This allows teams to:
 
----
+- Develop features in isolation
+- Reduce local setup complexity
+- Validate UI behavior without running the entire platform
+- Shorten testing feedback loops
 
-## 👨‍💻 Intended Audience
-
-This repository is aimed at:
-
-- Senior Frontend Engineers
-- Staff / Principal Engineers
-- Frontend Architects
-- Recruiters evaluating real-world engineering skill
-
-It demonstrates **how architectural decisions are made**, not just how features are implemented.
+The final application composes the build output of each feature package.
 
 ---
 
-> **Correctness, clarity, and long-term maintainability were prioritized over shortcuts.**
+# Storybook Integration
 
-If you understand this repository, you understand how modern frontend platforms are built.
+Storybook is used as an isolated rendering and validation environment.
 
+Stories are used for:
+
+- Component development
+- Page-level rendering
+- Feature flow validation
+- UI testing targets
+
+The project integrates Storybook with:
+
+- Cypress
+- Mock Service Worker (MSW)
+
+This enables tests to run against realistic UI states using mocked network behavior.
+
+---
+
+# Testing Strategy
+
+The repository includes multiple testing layers:
+
+- Jest for unit testing
+- React Testing Library for component and integration testing
+- Cypress for end-to-end validation
+- Mock Service Worker (MSW) for API simulation
+
+Testing is designed to validate features both in isolation and during integration.
+
+---
+
+# Tooling
+
+Main technologies used in the repository:
+
+- React
+- TypeScript
+- Redux Toolkit
+- Webpack
+- Rollup
+- Rush
+
+The repository also includes:
+
+- Dual ESM/CJS package outputs
+- Shared linting and formatting rules
+- Centralized TypeScript configuration
+- Storybook-based development environments
+
+---
+
+# Architectural Notes
+
+A few architectural constraints intentionally shape the repository design:
+
+- Features should remain as isolated as reasonably possible
+- Shared contracts are preferred over implicit integration
+- Type safety is enforced across package boundaries
+- Libraries and applications have separate responsibilities
+- The final application should remain lightweight and compositional
+
+The architecture evolved iteratively as new integration and testing requirements appeared during development.
