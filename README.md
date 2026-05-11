@@ -1,4 +1,4 @@
-# React Base Project
+# Frontend Modular Platform
 
 Frontend monorepo focused on modular architecture, feature isolation, shared contracts, and scalable development workflows using React and TypeScript.
 
