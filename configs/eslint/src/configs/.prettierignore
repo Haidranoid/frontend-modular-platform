@@ -2,3 +2,5 @@
 lib
 build
 coverage
+node_modules
+dist

@@ -7,11 +7,12 @@ export const RouterSearchBar: FC = () => {
 
   return (
     <Bar data-testid="router-debug-bar">
-      <NavButton />
-      <NavButton />
+      <NavButton>{'<'}</NavButton>
+      <NavButton>{'>'}</NavButton>
 
       <AddressBar>
-        http://app.local{location.pathname}
+        http://app.local
+        <div data-testid="location-pathname">{location.pathname}</div>
         {location.search}
       </AddressBar>
     </Bar>

@@ -1,7 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5'
+import type { Meta } from '@storybook/react-webpack5'
 import { createComponentStory } from '#testing-utils'
-import { Button } from '#ui'
+import { Button } from '#ui/components/button'
 
+type ButtonType = typeof Button
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
   title: 'Components/Button',
@@ -18,54 +19,101 @@ const meta = {
     //backgroundColor: { control: 'color' },
   },
   // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
-  //args: { onClick: fn() },
-} satisfies Meta<typeof Button>
+  args: {
+    //placeholder: 'placeholder',
+    //onClick: fn(),
+    //onChange: fn(),
+    label: 'Submit',
+  },
+} as Meta<ButtonType>
 
 export default meta
-type Story = StoryObj<typeof meta>
+//type Story = StoryObj<typeof meta>
+
+const createButtonStory = createComponentStory<ButtonType>
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const Primary: Story = createComponentStory<Story>({
+
+export const Default = createButtonStory({
+  args: {},
+})
+
+export const Dark_Default = createButtonStory({
+  args: {},
+  parameters: {
+    withTheme: {
+      initialTheme: 'dark',
+    },
+  },
+})
+
+export const Dark_Primary = createButtonStory({
   args: {
-    label: 'Primary',
+    $variant: 'primary',
   },
   parameters: {
-    withTheme: {},
+    withTheme: {
+      initialTheme: 'dark',
+    },
   },
 })
 
-export const TEST: Story = {
+export const Dark_Secondary = createButtonStory({
   args: {
-    label: 'TEST',
+    $variant: 'secondary',
   },
-  parameters: {},
-}
-
-export const Secondary: Story = createComponentStory<Story>({
-  args: {
-    $primary: false,
-    label: 'Secondary',
+  parameters: {
+    withTheme: {
+      initialTheme: 'dark',
+    },
   },
 })
 
-export const Small: Story = createComponentStory<Story>({
+export const Light_Default = createButtonStory({
+  args: {},
+  parameters: {
+    withTheme: {
+      initialTheme: 'light',
+    },
+  },
+})
+
+export const Light_Primary = createButtonStory({
   args: {
-    $primary: false,
+    $variant: 'primary',
+  },
+  parameters: {
+    withTheme: {
+      initialTheme: 'light',
+    },
+  },
+})
+
+export const Light_Secondary = createButtonStory({
+  args: {
+    $variant: 'secondary',
+  },
+  parameters: {
+    withTheme: {
+      initialTheme: 'light',
+    },
+  },
+})
+
+export const Size_Small = createButtonStory({
+  args: {
     $size: 'small',
-    label: 'Button',
   },
 })
 
-export const Medium: Story = createComponentStory<Story>({
+export const Size_Medium = createButtonStory({
   args: {
     $size: 'medium',
-    label: 'Button',
   },
 })
 
-export const Large: Story = createComponentStory<Story>({
+export const Size_Large = createButtonStory({
   args: {
     $size: 'large',
-    label: 'Button',
   },
 })

@@ -5,8 +5,8 @@ export const GlobalStyles: ExoticComponent<ExecutionProps> = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
-    background-color: ${({ theme }) => theme.background.primary};
-    color: ${({ theme }) => theme.text.primary};
+    background-color: ${({ theme }) => theme.colors.background.app};
+    color: ${({ theme }) => theme.colors.text.primary};
     //transition: all 0.3s ease;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',

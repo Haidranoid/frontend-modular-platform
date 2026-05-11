@@ -17,10 +17,7 @@ const preview: Preview = {
     layout: 'centered',
     viewport: { options: INITIAL_VIEWPORTS },
 
-    withContextBox: { disabled: true },
-    withRouter: { disabled: true },
-    withTheme: { disabled: false },
-    withRedux: { disabled: true },
+    withTheme: {},
   },
   loaders: [mswLoader],
 }

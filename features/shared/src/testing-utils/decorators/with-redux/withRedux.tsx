@@ -1,11 +1,14 @@
 import type { Decorator } from '@storybook/react'
+import type { EnhancedStore } from '@reduxjs/toolkit'
 import type { BaseDecoratorParameters } from '#types'
+import type { ConfigureAppStoreParams } from '#utils'
 import { ReduxProvider } from '#providers'
-import { configureAppStore, ConfigureAppStoreParams } from '#utils'
 
 export interface WithReduxParameters
   extends ConfigureAppStoreParams<any>,
-    BaseDecoratorParameters {}
+    BaseDecoratorParameters {
+  store: EnhancedStore
+}
 
 export interface WithReduxDecoratorParameters {
   withRedux: Partial<WithReduxParameters>
@@ -19,28 +22,23 @@ export const withRedux: Decorator = (Story, { parameters }) => {
     return <Story />
   }
 
-  if (!config.reducers) {
-    console.warn(`reducers parameter is required`)
+  if (!config.store) {
+    console.warn('store parameter is required')
     return <Story />
   }
 
-  const store = configureAppStore({
-    reducers: config.reducers,
-    initialState: config.initialState,
-  })
+  //const store = configureAppStore({
+  //  reducers: config.reducers,
+  //  initialState: config.initialState,
+  //})
+
+  //if (config.initializerAction) {
+  //  config.initializerAction(config.store.dispatch, config.store.getState)
+  //}
 
   return (
-    <ReduxProvider store={store}>
+    <ReduxProvider store={config.store}>
       <Story />
     </ReduxProvider>
   )
 }
-
-/*
-export function createDummyStore(initialState = {}) {
-  return configureAppStore({
-    rootReducer: (state = initialState, _action) => state,
-    initialState: initialState,
-  })
-}
-*/

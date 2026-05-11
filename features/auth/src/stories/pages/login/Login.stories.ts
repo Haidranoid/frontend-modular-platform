@@ -1,24 +1,33 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5'
+import type { Meta } from '@storybook/react-webpack5'
 import { createIntegrationStory } from '@webapp/shared'
-import { me_200_handler } from '#msw-handlers'
+import { authMswHandlers } from '#msw'
+import { authStore } from '#app'
 import { Login } from '#ui'
+
+type LoginType = typeof Login
+
+const { login_200_handler } = authMswHandlers
 
 const meta = {
   title: 'Pages/Login',
   component: Login,
   parameters: {
+    withRedux: {
+      store: authStore,
+    },
     withRouter: {
       routePath: '/auth/login',
       initialPath: '/auth/login',
     },
   },
-} satisfies Meta<typeof Login>
+} as Meta<LoginType>
 
 export default meta
-type Story = StoryObj<typeof meta>
 
-export const Default: Story = createIntegrationStory<Story>({
+const createLoginStory = createIntegrationStory<LoginType>
+
+export const Default = createLoginStory({
   parameters: {
-    msw: { handlers: [me_200_handler] },
+    msw: { handlers: [login_200_handler] },
   },
 })

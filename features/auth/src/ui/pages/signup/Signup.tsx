@@ -22,8 +22,8 @@ export const Signup: FC = () => {
   } = useForm<SignupFormInputs>()
 
   const onSubmit: SubmitHandler<SignupFormInputs> = async ({ username, password }) => {
-    console.log({ username, password })
-    await signup({ username, password })
+    //console.log({ username, password })
+    signup({ username, password })
 
     navigate('/auth')
   }
@@ -33,8 +33,13 @@ export const Signup: FC = () => {
       <h2>Signup</h2>
       <SignupFormStyled onSubmit={handleSubmit(onSubmit)}>
         <Input
+          required
+          label="username"
+          labelId="username"
           placeholder="username"
           type="text"
+          message={errors.username ? 'username field is required' : undefined}
+          $status={errors.username ? 'error' : undefined}
           {...register('username', {
             required: true,
             minLength: 4,
@@ -42,19 +47,18 @@ export const Signup: FC = () => {
         />
 
         <Input
+          required
+          label="password"
+          labelId="password"
           placeholder="password"
           type="password"
+          message={errors.password ? 'password field is required' : undefined}
+          $status={errors.password ? 'error' : undefined}
           {...register('password', {
             required: true,
             minLength: 4,
           })}
         />
-        {errors.username && (
-          <span style={{ color: 'red' }}>username field is required</span>
-        )}
-        {errors.password && (
-          <span style={{ color: 'red' }}>password field is required</span>
-        )}
         <Button label="Continue" type="submit" />
       </SignupFormStyled>
       <span>

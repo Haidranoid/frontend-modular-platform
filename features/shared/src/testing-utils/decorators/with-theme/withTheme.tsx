@@ -3,7 +3,7 @@ import type { BaseDecoratorParameters } from '#types'
 import { withThemeFromJSXProvider } from '@storybook/addon-themes'
 import { useGlobals } from '@storybook/preview-api'
 import { ThemeProvider as ThemeProviderStyled } from 'styled-components'
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
 import { GlobalStyles, lightTheme, darkTheme } from '#styles'
 import { ThemeProvider, ThemeProviderProps } from '#providers'
 
@@ -25,13 +25,25 @@ export const withTheme: Decorator = (Story, { parameters }) => {
 
   const [globals, updateGlobals] = useGlobals()
 
+  const theme = globals?.theme ?? config?.initialTheme ?? 'dark'
+
+  useEffect(() => {
+    if (config.initialTheme) {
+      updateGlobals({ theme: config.initialTheme })
+    }
+  }, [config.initialTheme])
+
   const storybookToggle = useCallback(() => {
     const next = globals.theme === 'light' ? 'dark' : 'light'
     updateGlobals({ theme: next })
   }, [globals.theme])
 
+  //console.log({configTheme: config.initialTheme})
+  //console.log({globalTheme: globals.theme})
+  //console.log({ finalTheme: theme })
+
   return (
-    <ThemeProvider initialTheme={globals.theme} storybookToggle={storybookToggle}>
+    <ThemeProvider initialTheme={theme} storybookToggle={storybookToggle}>
       <Story />
     </ThemeProvider>
   )

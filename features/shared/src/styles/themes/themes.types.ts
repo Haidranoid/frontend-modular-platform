@@ -1,19 +1,32 @@
 export interface CustomTheme {
   name: string
   colors: {
-    primary: string
-    secondary?: string
-  }
-  background: {
-    primary: string
-    secondary?: string
-  }
-  foreground: {
-    primary: string
-    secondary?: string
-  }
-  text: {
-    primary: string
-    secondary?: string
+    feedback: {
+      error: string
+      success: string
+      warning: string
+    }
+    brand: {
+      primary: string
+      secondary: string
+    }
+    background: {
+      app: string
+      surface: string
+    }
+    text: {
+      primary: string
+      secondary: string
+      error: string
+      success: string
+      warning: string
+    }
+    border: {
+      default: string
+      focus: string
+      error: string
+      success: string
+      warning: string
+    }
   }
 }

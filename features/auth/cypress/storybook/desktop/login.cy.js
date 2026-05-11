@@ -17,5 +17,4 @@ describe('auth app flow', () => {
     cy.contains('signup').click()
     cy.contains('Signup').should('exist')
   })
-
 })

@@ -3,18 +3,18 @@ import { ButtonStyled } from './Button.styled'
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   label: string
-  $primary?: boolean
+  $variant?: 'default' | 'primary' | 'secondary'
   $size?: 'small' | 'medium' | 'large'
 }
 
 export const Button: FC<ButtonProps> = ({
-  $size = 'medium',
-  $primary = true,
+  $size = 'small',
+  $variant = 'default',
   label,
   ...rest
 }) => {
   return (
-    <ButtonStyled $size={$size} $primary={$primary} {...rest}>
+    <ButtonStyled $size={$size} $variant={$variant} {...rest}>
       {label}
     </ButtonStyled>
   )

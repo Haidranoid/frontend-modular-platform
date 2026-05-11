@@ -1,4 +1,5 @@
-import { HttpMethods, HttpStatusKey } from '#constants'
+import type { HttpStatusKey } from '#types'
+import { HttpMethods } from '#constants'
 
 export type SuccessStatus = Extract<HttpStatusKey, `2${string}`>
 export type RedirectionStatus = Extract<HttpStatusKey, `3${string}`>

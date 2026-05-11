@@ -1,27 +1,28 @@
 import { FC, ReactNode } from 'react'
-import { useSelector } from 'react-redux'
-import { Navigate, useLocation, useMatches } from 'react-router'
-import { isAuthenticatedSelector, WebappRootState } from '#state'
+import { Navigate, useLocation } from 'react-router'
 import { RouteRestrictionLevels } from '#constants'
 
 export interface AuthGuardProviderProps {
-  onAuthRequired?: {
+  restrictionLevel: RouteRestrictionLevels
+  onAuthRequired: {
     redirectTo: string
   }
-  onAuthAndRoleRequired?: {
+  onAuthAndRoleRequired: {
     redirectTo: string
   }
-  onAuthWillBlock?: {
+  onAuthWillBlock: {
     redirectTo: string
   }
+  isAuthenticated?: boolean
   disabled?: boolean
   children?: ReactNode
 }
 
 export const AuthGuardProvider: FC<AuthGuardProviderProps> = ({
   children,
+  restrictionLevel,
+  isAuthenticated,
   onAuthRequired,
-  onAuthAndRoleRequired,
   onAuthWillBlock,
   disabled = false,
 }) => {
@@ -30,41 +31,38 @@ export const AuthGuardProvider: FC<AuthGuardProviderProps> = ({
     return <>{children}</>
   }
 
-  const { AUTH_REQUIRED, AUTH_WILL_BLOCK } = RouteRestrictionLevels
+  const { AUTH_REQUIRED, GUEST_ONLY } = RouteRestrictionLevels
   const location = useLocation()
-  const matches = useMatches()
-
-  const isAuthenticated = useSelector.withTypes<WebappRootState>()(
-    isAuthenticatedSelector,
-  )
-
-  const currentMatch = matches[matches.length - 1]
-  // @ts-ignore
-  const restrictionLevel = currentMatch?.handle?.restrictionLevel
 
   console.log({
     location,
-    matches,
     isAuthenticated,
-    currentMatch,
     restrictionLevel,
   })
 
-  if (restrictionLevel) {
-    if (restrictionLevel === AUTH_REQUIRED && !isAuthenticated) {
-      const redirectTo = onAuthRequired?.redirectTo || '/auth-required'
-      console.log('forbidden, redirecting to: ', redirectTo)
+  switch (restrictionLevel) {
+    case AUTH_REQUIRED:
+      if (!isAuthenticated) {
+        const redirectTo = onAuthRequired.redirectTo
+        console.log('forbidden, auth required, redirecting to:', redirectTo)
 
-      return <Navigate to={redirectTo} state={{ from: location }} replace />
-    }
-    if (restrictionLevel === AUTH_WILL_BLOCK && isAuthenticated) {
-      const redirectTo = onAuthWillBlock?.redirectTo || '/auth-is-blocking'
-      console.log('forbidden, already logged in, redirecting to: ', redirectTo)
+        return <Navigate to={redirectTo} state={{ from: location }} replace />
+      }
+      break
 
-      return <Navigate to={redirectTo} state={{ from: location }} replace />
-    }
+    case GUEST_ONLY:
+      if (isAuthenticated) {
+        const redirectTo = onAuthWillBlock.redirectTo
+        console.log('forbidden, guest only, redirecting to:', redirectTo)
+
+        return <Navigate to={redirectTo} state={{ from: location }} replace />
+      }
+      break
+
+    default:
+      break
   }
 
-  console.log('allowed, rendering: ', location.pathname)
+  console.log('allowed, rendering:', location.pathname)
   return <>{children}</>
 }

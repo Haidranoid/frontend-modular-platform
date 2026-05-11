@@ -25,27 +25,32 @@ const eslintConfig = [
       },
     },
     plugins: {
-      'tslint': tslint.plugin,
-      'react': eslintPluginReact,
-      'prettier': eslintPluginPrettier,
-      'jest': eslintPluginJest,
-      'cypress': eslintPluginCypress,
+      tslint: tslint.plugin,
+      react: eslintPluginReact,
+      prettier: eslintPluginPrettier,
+      jest: eslintPluginJest,
+      cypress: eslintPluginCypress,
       'testing-library': eslintPluginTestingLibrary,
       'jest-dom': eslintPluginJestDom,
       'jsx-a11y': eslintPluginJsxA11y,
       'unused-imports': eslintPluginUnusedImports,
-      'import': eslintPluginImport,
+      import: eslintPluginImport,
     },
     rules: {
       // Reglas generales
+      quotes: ['error', 'single', { avoidEscape: true }],
       'jsx-a11y/no-autofocus': 'warn',
       'unused-imports/no-unused-imports': 'warn',
+      'unused-imports/no-unused-vars': 'off',
       'tslint/no-unused-vars': [
         'warn',
-        { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' },
+        {
+          vars: 'all',
+          varsIgnorePattern: '^_',
+          args: 'after-used',
+          argsIgnorePattern: '^_',
+        },
       ],
-      'unused-imports/no-unused-vars': 'off',
-
       // Prettier aplicado a todos los archivos base
       'prettier/prettier': ['error', prettierConfig],
     },
@@ -62,35 +67,69 @@ const eslintConfig = [
       },
     },
     rules: {
-      'prettier/prettier': ['error', prettierConfig],
+      //'prettier/prettier': ['error', prettierConfig],
       'react/react-in-jsx-scope': 'off',
       'tslint/no-var-requires': 'off',
     },
   },
 
   // 3️ Test files
+  // Infra de tests (Jest + jest-dom + testing-library base)
   {
-    files: ['**/*.test.{ts,tsx,js,jsx}', 'jest.config.ts'],
-    languageOptions: {
-      parser: tslint.parser,
-      parserOptions: { project: './tsconfig.json' },
-    },
+    files: ['**/*.test.{ts,tsx,js,jsx}', '**/*.spec.{ts,tsx,js,jsx}'],
     rules: {
       ...eslintPluginJest.configs.recommended.rules,
       ...eslintPluginJestDom.configs.recommended.rules,
       ...eslintPluginTestingLibrary.configs.react.rules,
       'jest/no-disabled-tests': 'off',
       'react/react-in-jsx-scope': 'off',
-      'prettier/prettier': ['error', prettierConfig],
+    },
+  },
+  // RTL estrictos SOLO para TS/TSX
+  {
+    files: ['**/*.test.{ts,tsx}'],
+    rules: {
+      // RTL best practices
+      'testing-library/no-node-access': 'error',
+      'testing-library/no-container': 'error',
+      'testing-library/prefer-find-by': 'error',
+      'testing-library/prefer-screen-queries': 'error',
+
+      // Jest discipline
+      'jest/valid-title': [
+        'error',
+        {
+          mustMatch:
+            '^(when|with|and|runs|should|checks|verifies|shows|renders|transitions|preloaded|does not)|^[A-Z][a-zA-Z]+$',
+          disallowedWords: ['test', 'works', 'correctly'],
+        },
+      ],
+
+      'jest/no-conditional-expect': 'error',
+      'jest/no-standalone-expect': 'error',
+    },
+  },
+  {
+    files: ['jest.config.{js,ts}', 'eslint.config.{js,ts}'],
+    rules: {
+      quotes: ['error', 'single'],
+      //'prettier/prettier': ['error', prettierConfig],
     },
   },
 
   // 4️ Cypress
   {
-    files: ['cypress/**/*.cy.{ts,js}', 'cypress.config.ts'],
+    files: [
+      'cypress/**/*.cy.{ts,js}',
+      'cypress/support/**/*.{ts,js}',
+      'cypress.config.ts',
+    ],
     languageOptions: {
       parser: tslint.parser,
-      parserOptions: { project: './tsconfig.cypress.json' },
+      parserOptions: {
+        project: './tsconfig.cypress.json',
+        //tsconfigRootDir: __dirname,
+      },
     },
     rules: {
       ...eslintPluginCypress.configs.recommended.rules,
@@ -98,7 +137,7 @@ const eslintConfig = [
       'cypress/no-unnecessary-waiting': 'warn',
       'cypress/assertion-before-screenshot': 'error',
       'import/no-extraneous-dependencies': 'off',
-      'prettier/prettier': ['error', prettierConfig],
+      //'prettier/prettier': ['error', prettierConfig],
     },
   },
 
@@ -108,22 +147,40 @@ const eslintConfig = [
     languageOptions: {
       parser: tslint.parser,
       parserOptions: {
-        project: './.storybook/tsconfig.storybook.json',
+        project: './.storybook/tsconfig.json',
         ecmaFeatures: { jsx: true },
       },
     },
     plugins: {
-      'storybook': eslintPluginStorybook,
+      storybook: eslintPluginStorybook,
     },
     rules: {
       ...eslintPluginStorybook.configs.recommended.rules,
-      'prettier/prettier': ['error', prettierConfig],
+      //'prettier/prettier': ['error', prettierConfig],
     },
   },
 
   // 6️ Ignore build artifacts, coverage, node_modules, mocks
   {
-    ignores: ['node_modules', 'dist', 'build', 'server', 'coverage', 'public', '.idea'],
+    ignores: [
+      'node_modules',
+      'dist',
+      'lib',
+      'build',
+      'server',
+      'coverage',
+      'public',
+      'temp',
+      'src/experimental',
+      'src/legacy',
+      'src/assets',
+      'cypress/examples',
+      'cypress/stubs',
+      '.idea',
+      '.rush',
+      'rush-logs',
+      'tsconfig.json',
+    ],
   },
 ]
 

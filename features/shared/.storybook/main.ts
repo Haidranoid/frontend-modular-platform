@@ -1,9 +1,13 @@
 import type { StorybookConfig } from '@storybook/react-webpack5'
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 import * as path from 'path'
+import { createRequire } from 'node:module'
+import { dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
 
-//@ts-ignore
-import webpack from 'webpack'
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+const _require = createRequire(import.meta.url)
 
 const config: StorybookConfig = {
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
@@ -28,51 +32,13 @@ const config: StorybookConfig = {
   },
   staticDirs: ['../public'],
   webpackFinal: async (config) => {
-    config.resolve.extensions = [...(config.resolve.extensions || []), '.ts', '.tsx']
+    config.resolve ??= {}
+    config.resolve.extensions ??= ['.ts', '.tsx']
+    config.resolve.plugins ??= []
 
-    config.resolve.fallback = {
-      ...(config.resolve?.fallback || {}),
-      path: require.resolve('path-browserify'),
-    }
-
-    config.resolve.plugins = [
-      ...(config.resolve.plugins || []),
+    config.resolve.plugins.push(
       new TsconfigPathsPlugin({
         configFile: path.resolve(__dirname, '../tsconfig.json'),
-      }),
-    ]
-
-    config.resolve.alias = {
-      ...(config.resolve.alias || {}),
-    }
-
-    config.module.rules.push({
-      test: /\.(ts|tsx)$/,
-      exclude: /node_modules/,
-      use: {
-        loader: require.resolve('swc-loader'),
-        options: {
-          jsc: {
-            parser: {
-              syntax: 'typescript',
-              tsx: true,
-            },
-            transform: {
-              react: {
-                runtime: 'automatic',
-                refresh: false,
-              },
-            },
-          },
-        },
-      },
-    })
-
-    config.plugins?.push(
-      new webpack.DefinePlugin({
-        'process.env': JSON.stringify({
-          NODE_ENV: 'development',
-        }),
       }),
     )
 

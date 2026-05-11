@@ -1,16 +1,19 @@
-import type { StoryObj } from '@storybook/react-webpack5'
-import type { Decorator } from '@storybook/react'
-import type { InferStoryMeta, CreateBaseStoryParameters } from '#types'
-import { withTheme, WithThemeDecoratorsParameters } from '../../decorators'
+import type { ComponentType } from 'react'
+import type { StoryLike, PropsOf } from '#types'
+import {
+  withTheme,
+  WithThemeDecoratorsParameters,
+  WithMswDecoratorParameters,
+} from '../../decorators'
 
-export type CreateComponentStoryParameters = WithThemeDecoratorsParameters
+export type CreateComponentStoryParameters = WithThemeDecoratorsParameters &
+  WithMswDecoratorParameters
 
-export function createComponentStory<
-  Story,
-  TStoryObj extends StoryObj = StoryObj<InferStoryMeta<Story>>,
-  TSParameters extends object = CreateBaseStoryParameters<CreateComponentStoryParameters>,
->(story: Story & TStoryObj & TSParameters) {
-  const decorators: Decorator[] = [withTheme]
-
-  return { ...story, decorators }
+export function createComponentStory<C extends ComponentType<any>>(
+  story: StoryLike<PropsOf<C>, CreateComponentStoryParameters>,
+): StoryLike<PropsOf<C>, CreateComponentStoryParameters> {
+  return {
+    ...story,
+    decorators: [withTheme],
+  }
 }

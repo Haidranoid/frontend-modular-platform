@@ -9,8 +9,8 @@ jest.mock('react-redux', () => ({
 //  myThunk: jest.fn(() => ({ type: 'MY_ACTION' })),
 //}))
 
-describe('useActions hook', () => {
-  it('binds all action creators with dispatch', () => {
+describe('UseActions', () => {
+  it('should binds all action creators with dispatch', () => {
     //const { result } = renderHook(() => createUseActions())
 
     // Debe devolver una función

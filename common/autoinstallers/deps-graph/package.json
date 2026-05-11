@@ -2,8 +2,8 @@
   "name": "deps-graph",
   "version": "1.0.0",
   "private": true,
-  "devDependencies": {
-    "elkjs": "^0.10.0",
-    "graphviz-builder": "^0.1.1"
+  "dependencies": {
+    "elkjs": "0.10.0",
+    "graphviz-builder": "0.1.1"
   }
 }

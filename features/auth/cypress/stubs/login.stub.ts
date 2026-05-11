@@ -1,3 +1,5 @@
+console.log('login.stub')
+/*
 import { LoginRequestResponse } from '@actions/authentication/AuthenticationActions.responses'
 
 // return cy.wrap() to chain stub setup
@@ -17,3 +19,4 @@ export const loginSuccessfulStub = (email: string) => {
       }).as('loginResponse')
     })
 }
+*/

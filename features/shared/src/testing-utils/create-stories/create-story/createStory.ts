@@ -6,19 +6,16 @@ import {
   WithReduxDecoratorParameters,
   WithThemeDecoratorsParameters,
   WithRouterDecoratorParameters,
-  WithContextBoxDecoratorParameters,
   WithMswDecoratorParameters,
   withRedux,
   withTheme,
   withRouter,
-  withContextBox,
 } from '../../decorators'
 
 export interface DecoratorsParameters
   extends WithReduxDecoratorParameters,
     WithThemeDecoratorsParameters,
     WithRouterDecoratorParameters,
-    WithContextBoxDecoratorParameters,
     WithMswDecoratorParameters {}
 
 export interface CreateStoryOptions<S, StoryTyped = S & StoryObj<ComponentType>>
@@ -44,7 +41,8 @@ export function createStory<Story>(
   if (integrationStory) {
     window.history.pushState({}, '', integrationStory.initialPath)
   } else {
-    decorators = [withContextBox, withRouter, withTheme, withRedux]
+    //decorators = [withContextBox, withRouter, withTheme, withRedux]
+    decorators = [withRouter, withTheme, withRedux]
   }
 
   return {

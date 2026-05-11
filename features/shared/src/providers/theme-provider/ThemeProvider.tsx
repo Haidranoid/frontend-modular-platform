@@ -1,7 +1,6 @@
 import { FC, ReactNode, useState, useEffect } from 'react'
 import { ThemeProvider as ThemeProviderStyled } from 'styled-components'
-import { ThemeContext } from '#state'
-import { GlobalStyles, lightTheme, darkTheme, ThemeModes } from '#styles'
+import { ThemeContext, GlobalStyles, lightTheme, darkTheme, ThemeModes } from '#styles'
 
 export interface ThemeProviderProps {
   children: ReactNode

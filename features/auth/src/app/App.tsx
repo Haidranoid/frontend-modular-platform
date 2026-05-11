@@ -1,24 +1,23 @@
-import { FC } from 'react'
+import type { FC } from 'react'
 import { renderApp } from '@webapp/shared'
+import { authStore, authReducer, type AuthState } from '#state'
+import { authRouter, authRoutes } from '#router'
+import { authInitializerAction } from './initializer-action'
 
-import { authReducer } from '#state'
-import { authRoutes } from '#routes'
-import { AuthInitializer } from '#app-initializer'
-
-export const App: FC = () => {
+const App: FC = () => {
   return renderApp({
-    strictMode: false,
-    storeConfig: {
-      reducers: {
-        auth: authReducer,
-      },
-      initialState: {
-        //auth: {}
-      },
+    config: {
+      store: authStore,
+      router: authRouter,
+      initializerAction: authInitializerAction,
     },
-    routerConfig: {
-      routes: authRoutes,
-      initializer: <AuthInitializer />,
+    options: {
+      strictMode: false,
     },
   })
 }
+
+export { authRoutes, authReducer, authInitializerAction, type AuthState }
+
+export { authStore, authRouter }
+export { App }

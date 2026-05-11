@@ -1,15 +1,20 @@
 import { FC, useEffect } from 'react'
 import { Link } from 'react-router'
+import { useActions, useAppSelector } from '#state'
 
 export const Home: FC = () => {
-  //const userSession = useAppSelector((state) => state.auth.session)
-  //console.log({ userSession })
+  const { me } = useActions()
+  const isLoading = useAppSelector((state) => state.auth.isLoading)
 
   //console.log({ userSession })
   useEffect(() => {
-    //me()
+    me()
     //foo('')
   }, [])
+
+  if (isLoading) {
+    return <div data-testid="loading-component">loading...</div>
+  }
 
   return (
     <div data-testid="auth-home-page">
@@ -20,7 +25,7 @@ export const Home: FC = () => {
       </span>
       <br />
       <span>
-        create an account in <Link to={'/auth/login'}>login</Link>
+        access in <Link to={'/auth/login'}>login</Link>
       </span>
     </div>
   )

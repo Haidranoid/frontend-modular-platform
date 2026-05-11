@@ -1,7 +1,0 @@
-export * from './button'
-export * from './error'
-export * from './image-with-skeleton-mui'
-export * from './input'
-export * from './input-file'
-export * from './loading'
-export * from './select'

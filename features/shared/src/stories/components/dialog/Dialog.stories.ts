@@ -1,15 +1,18 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5'
+import type { Meta } from '@storybook/react-webpack5'
 import { createComponentStory } from '#testing-utils'
-import { Dialog } from '#ui'
+import { Dialog } from '#ui/components/dialog'
+
+type DialogType = typeof Dialog
 
 const meta = {
   title: 'Components/Dialog',
   component: Dialog,
   argTypes: {},
   args: {},
-} satisfies Meta<typeof Dialog>
+} as Meta<DialogType>
 
 export default meta
-type Story = StoryObj<typeof meta>
 
-export const Default: Story = createComponentStory<Story>({})
+const createDialogStory = createComponentStory<DialogType>
+
+export const Default = createDialogStory({})

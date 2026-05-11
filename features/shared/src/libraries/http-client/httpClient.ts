@@ -29,8 +29,8 @@ export const replaceEndpointVariables: ReplaceEndpointVariables = (
   )
 }
 
-const buildEndpoint: EndpointBuilder = (endpoint, queryParams, endpointVariables) => {
-  const withVars = replaceEndpointVariables(endpoint, endpointVariables)
+const _buildEndpoint: EndpointBuilder = (endpoint, queryParams, endpointVariables) => {
+  const _withVars = replaceEndpointVariables(endpoint, endpointVariables)
   const finalUrl = generateQueryParams(endpoint, queryParams)
   return finalUrl
 }

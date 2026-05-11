@@ -22,6 +22,7 @@ export const Bar = styled.div`
 `
 
 export const NavButton = styled.div`
+  text-align: center;
   width: 14px;
   height: 14px;
   border-radius: 3px;

@@ -1,24 +1,27 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5'
+import type { Meta } from '@storybook/react-webpack5'
 import { createComponentStory } from '#testing-utils'
-import { Loading } from '#ui'
+import { Loading } from '#ui/components/loading'
+
+type LoadingType = typeof Loading
 
 const meta = {
   title: 'Components/Loading',
   component: Loading,
   argTypes: {},
   args: {},
-} satisfies Meta<typeof Loading>
+} as Meta<LoadingType>
 
 export default meta
-type Story = StoryObj<typeof meta>
 
-export const Primary: Story = createComponentStory<Story>({
+const createLoadingStory = createComponentStory<LoadingType>
+
+export const Primary = createLoadingStory({
   args: {
     color: 'primary',
   },
 })
 
-export const Secondary: Story = createComponentStory<Story>({
+export const Secondary = createLoadingStory({
   args: {
     color: 'secondary',
   },

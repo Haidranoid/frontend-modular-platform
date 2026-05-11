@@ -1,18 +1,21 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5'
+import type { Meta } from '@storybook/react-webpack5'
 import { createComponentStory } from '#testing-utils'
-import { Portal } from '#ui'
+import { Portal } from '#ui/components/portal'
+
+type PortalType = typeof Portal
 
 const meta = {
   title: 'Components/Portal',
   component: Portal,
   argTypes: {},
   args: {},
-} satisfies Meta<typeof Portal>
+} as Meta<PortalType>
 
 export default meta
-type Story = StoryObj<typeof meta>
 
-export const Default: Story = createComponentStory<Story>({
+const createPortalStory = createComponentStory<PortalType>
+
+export const Default = createPortalStory({
   args: {
     children: 'portal test',
     container: document.body,

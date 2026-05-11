@@ -14,9 +14,10 @@
       "#styles": ["./src/styles/index.ts"],
       "#testing-utils": ["./src/testing-utils/index.ts"],
       "#types": ["./src/types/index.ts"],
+      "#ui/*": ["./src/ui/*"],
       "#ui": ["./src/ui/index.ts"],
       "#utils": ["./src/utils/index.ts"]
     }
   },
-  "include": ["src/**/*", "./jest.setup.ts"]
+  "include": ["src/**/*", "./jest.setup.ts"],
 }

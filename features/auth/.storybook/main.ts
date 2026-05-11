@@ -1,9 +1,11 @@
 import type { StorybookConfig } from '@storybook/react-webpack5'
+import { WebpackDefinePlugin } from '@storybook/builder-webpack5'
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
+import { fileURLToPath } from 'url'
 import * as path from 'path'
 
-//@ts-ignore
-import webpack from 'webpack'
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const config: StorybookConfig = {
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
@@ -28,51 +30,30 @@ const config: StorybookConfig = {
   },
   staticDirs: ['../public'],
   webpackFinal: async (config) => {
-    config.resolve.extensions = [...(config.resolve.extensions || []), '.ts', '.tsx']
+    config.resolve ??= {}
 
-    config.resolve.fallback = {
-      ...(config.resolve?.fallback || {}),
-      path: require.resolve('path-browserify'),
-    }
+    config.resolve.alias ??= {}
+    /*
+    config.resolve.alias["@webapp/shared"] = path.resolve(
+      __dirname,
+      "../../shared/src",
+    );
+    */
 
-    config.resolve.plugins = [
-      ...(config.resolve.plugins || []),
+    config.resolve.extensions ??= []
+    config.resolve.extensions.push('.ts', '.tsx')
+
+    config.resolve.plugins ??= []
+    config.resolve.plugins.push(
       new TsconfigPathsPlugin({
         configFile: path.resolve(__dirname, '../tsconfig.json'),
       }),
-    ]
+    )
 
-    config.resolve.alias = {
-      ...(config.resolve.alias || {}),
-    }
-
-    config.module.rules.push({
-      test: /\.(ts|tsx)$/,
-      exclude: /node_modules/,
-      use: {
-        loader: require.resolve('swc-loader'),
-        options: {
-          jsc: {
-            parser: {
-              syntax: 'typescript',
-              tsx: true,
-            },
-            transform: {
-              react: {
-                runtime: 'automatic',
-                refresh: false,
-              },
-            },
-          },
-        },
-      },
-    })
-
-    config.plugins?.push(
-      new webpack.DefinePlugin({
-        'process.env': JSON.stringify({
-          NODE_ENV: 'development',
-        }),
+    config.plugins ??= []
+    config.plugins.push(
+      new WebpackDefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify('development'),
       }),
     )
 

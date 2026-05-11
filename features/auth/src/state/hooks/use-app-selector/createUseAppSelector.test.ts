@@ -17,8 +17,8 @@ jest.mock('react-redux', () => ({
   },
 }*/
 
-describe('useAppSelector hook', () => {
-  it('binds all action creators with dispatch', () => {
+describe('UseAppSelector', () => {
+  it('should binds all action creators with dispatch', () => {
     //TODO: declare types for each reducer
     const fakeState = {
       global: {

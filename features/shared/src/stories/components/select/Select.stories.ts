@@ -1,23 +1,44 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5'
+import type { Meta } from '@storybook/react-webpack5'
 import { createComponentStory } from '#testing-utils'
-import { Select } from '#ui'
+import { Select } from '#ui/components/select'
+
+type SelectType = typeof Select
 
 const meta = {
   title: 'Components/Select',
   component: Select,
   argTypes: {},
-  args: {},
-} satisfies Meta<typeof Select>
+  args: {
+    label: 'select role',
+    options: [
+      { value: 'ADMIN', displayValue: 'Administrator' },
+      { value: 'USER', displayValue: 'User' },
+    ],
+  },
+} as Meta<SelectType>
 
 export default meta
-type Story = StoryObj<typeof meta>
 
-export const Default: Story = createComponentStory<Story>({
+const createSelectStory = createComponentStory<SelectType>
+
+export const Default = createSelectStory({
+  args: {},
+})
+
+export const Size_Small = createSelectStory({
   args: {
-    label: 'Select',
-    options: [
-      { value: 'value1', displayValue: 'displayValue1' },
-      { value: 'value2', displayValue: 'displayValue2' },
-    ],
+    $size: 'small',
+  },
+})
+
+export const Size_Medium = createSelectStory({
+  args: {
+    $size: 'medium',
+  },
+})
+
+export const Size_Large = createSelectStory({
+  args: {
+    $size: 'large',
   },
 })

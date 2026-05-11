@@ -1,7 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5'
+import type { Meta } from '@storybook/react-webpack5'
 import { fn } from 'storybook/test'
 import { createComponentStory } from '#testing-utils'
-import { InputFile } from '#ui'
+import { InputFile } from '#ui/components/input-file'
+
+type InputFileType = typeof InputFile
 
 const meta = {
   title: 'Components/InputFile',
@@ -13,11 +15,12 @@ const meta = {
     label: 'inputFile test',
     handleOnChange: fn(),
   },
-} satisfies Meta<typeof InputFile>
+} as Meta<InputFileType>
 
 export default meta
-type Story = StoryObj<typeof meta>
 
-export const Default: Story = createComponentStory<Story>({
+const createInputFileStory = createComponentStory<InputFileType>
+
+export const Default = createInputFileStory({
   args: {},
 })

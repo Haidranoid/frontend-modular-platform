@@ -1,9 +1,14 @@
 import styled from 'styled-components'
 
+const sizes = {
+  small: { h: '30px', fs: '0.85rem' },
+  medium: { h: '32px', fs: '0.9rem' },
+  large: { h: '36px', fs: '1rem' },
+}
+
 export const SelectWrapperStyled = styled.div<{ $fullWidth: boolean }>`
   display: flex;
   flex-direction: column;
-  width: ${({ $fullWidth }) => ($fullWidth ? '100%' : 'auto')};
   gap: 4px;
 `
 
@@ -17,14 +22,15 @@ export const SelectStyled = styled.select<{
   $fullWidth: boolean
   $size: 'small' | 'medium' | 'large'
 }>`
-  width: ${({ $fullWidth }) => ($fullWidth ? '100%' : 'auto')};
-  padding: ${({ $size }) =>
-    $size === 'small' ? '6px 8px' : $size === 'large' ? '12px 14px' : '8px 12px'};
+  width: 100%;
 
+  height: ${({ $size = 'medium' }) => sizes[$size].h};
+  font-size: ${({ $size = 'medium' }) => sizes[$size].fs};
+
+  padding: 0 10px;
   border-radius: 6px;
   border: 1px solid #aaa;
   background: #fff;
-  font-size: 1rem;
 
   &:focus {
     outline: none;

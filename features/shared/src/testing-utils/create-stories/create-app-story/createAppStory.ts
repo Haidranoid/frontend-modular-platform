@@ -1,15 +1,14 @@
-import type { StoryObj } from '@storybook/react-webpack5'
-import type { CreateBaseStoryParameters, InferStoryMeta } from '#types'
+import type { ComponentType } from 'react'
+import type { StoryLike, PropsOf } from '#types'
+import { WithMswDecoratorParameters } from '../../decorators'
 
-export interface CreateAppStoryParameters {
+export type CreateAppStoryParameters = {
   initialPath?: string
-}
+} & WithMswDecoratorParameters
 
-export function createAppStory<
-  Story,
-  TStory extends StoryObj = StoryObj<InferStoryMeta<Story>>,
-  TSParameters extends object = CreateBaseStoryParameters<CreateAppStoryParameters>,
->(story: Story & TStory & TSParameters) {
+export function createAppStory<C extends ComponentType<any>>(
+  story: StoryLike<PropsOf<C>, CreateAppStoryParameters>,
+): StoryLike<PropsOf<C>, CreateAppStoryParameters> {
   const parameters = story.parameters
 
   if (parameters && parameters.initialPath) {

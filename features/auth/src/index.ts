@@ -1,6 +1,4 @@
-export * as authMswHandlers from './msw/msw-handlers'
+export * from './msw/handlers'
+export * from './types'
 
-export { AuthInitializer } from './app-initializer'
-export { authRoutes } from './routes'
-export { authReducer } from './state/reducer'
-export type { AuthState } from './state/initial-state'
+export { authRoutes, authReducer, authInitializerAction, type AuthState } from './app'

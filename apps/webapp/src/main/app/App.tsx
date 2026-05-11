@@ -1,23 +1,20 @@
 import type { FC } from 'react'
 import { renderApp } from '@webapp/shared'
-import { authReducer } from '@webapp/auth'
-import { accountsReducer } from '@webapp/users'
+import { webappStore } from '../state'
+import { webappRouter } from '../router'
+import { webappInitializerAction } from './initializer-action'
 
-import { appRoutes } from '../routes'
-import { AppInitializer } from '../app-initializer'
-
-export const App: FC = () => {
+const App: FC = () => {
   return renderApp({
-    strictMode: false,
-    storeConfig: {
-      reducers: {
-        auth: authReducer,
-        accounts: accountsReducer,
-      },
+    config: {
+      store: webappStore,
+      router: webappRouter,
+      initializerAction: webappInitializerAction,
     },
-    routerConfig: {
-      routes: appRoutes,
-      initializer: <AppInitializer />,
+    options: {
+      strictMode: false,
     },
   })
 }
+
+export { App }

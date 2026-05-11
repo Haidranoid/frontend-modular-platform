@@ -23,10 +23,24 @@ function getTSConfigFile() {
 }
 
 function generateFullPathsAlias(tsPathsAlias) {
-  return Object.entries(tsPathsAlias || {}).map(([find, target]) => ({
-    find,
-    replacement: path.resolve(target[0]),
-  }))
+  return Object.entries(tsPathsAlias || {}).map(([find, target]) => {
+    const isWildcard = find.endsWith('/*')
+
+    if (isWildcard) {
+      const findPattern = new RegExp(`^${find.replace('/*', '')}/(.*)$`)
+      const replacement = path.resolve(target[0].replace('/*', '/$1'))
+
+      return {
+        find: findPattern,
+        replacement,
+      }
+    }
+
+    return {
+      find,
+      replacement: path.resolve(target[0]),
+    }
+  })
 }
 
 function escapeRegex(peerDependencie) {

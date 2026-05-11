@@ -29,7 +29,7 @@ export const withRouter: Decorator = (Story, { parameters }) => {
   }
 
   if (!config.routePath || !config.initialPath) {
-    console.warn(`routePath and initialPath parameters are required`)
+    console.warn('routePath and initialPath parameters are required')
     return <Story />
   }
 
