@@ -1,0 +1,78 @@
+
+  <svg xmlns="http://www.w3.org/2000/svg" width="978" height="1624">
+    <defs>
+      <marker id="arrow" markerWidth="10" markerHeight="10" refX="10" refY="5" orient="auto" markerUnits="strokeWidth">
+        <path d="M0,0 L10,5 L0,10 z" fill="#444" />
+      </marker>
+    </defs>
+    <rect x="399" y="12" width="180" height="60" rx="10" ry="10" fill="#6c9bd2" stroke="#333"/>
+             <text x='489' y='42' font-family="Arial" font-size="14" fill="white"
+             text-anchor='middle' dominant-baseline='middle'>@apps/webapp</text>
+<rect x="224" y="922" width="180" height="60" rx="10" ry="10" fill="#6c9bd2" stroke="#333"/>
+             <text x='314' y='952' font-family="Arial" font-size="14" fill="white"
+             text-anchor='middle' dominant-baseline='middle'>@configs/env</text>
+<rect x="399" y="1552" width="180" height="60" rx="10" ry="10" fill="#6c9bd2" stroke="#333"/>
+             <text x='489' y='1582' font-family="Arial" font-size="14" fill="white"
+             text-anchor='middle' dominant-baseline='middle'>@configs/eslint</text>
+<rect x="499.5" y="1132" width="180" height="60" rx="10" ry="10" fill="#6c9bd2" stroke="#333"/>
+             <text x='589.5' y='1162' font-family="Arial" font-size="14" fill="white"
+             text-anchor='middle' dominant-baseline='middle'>@configs/jest</text>
+<rect x="298.5" y="1132" width="180" height="60" rx="10" ry="10" fill="#6c9bd2" stroke="#333"/>
+             <text x='388.5' y='1162' font-family="Arial" font-size="14" fill="white"
+             text-anchor='middle' dominant-baseline='middle'>@configs/rollup</text>
+<rect x="23" y="922" width="180" height="60" rx="10" ry="10" fill="#6c9bd2" stroke="#333"/>
+             <text x='113' y='952' font-family="Arial" font-size="14" fill="white"
+             text-anchor='middle' dominant-baseline='middle'>@configs/typescript</text>
+<rect x="399" y="1342" width="180" height="60" rx="10" ry="10" fill="#6c9bd2" stroke="#333"/>
+             <text x='489' y='1372' font-family="Arial" font-size="14" fill="white"
+             text-anchor='middle' dominant-baseline='middle'>@tools/eslint-scripts</text>
+<rect x="744" y="922" width="180" height="60" rx="10" ry="10" fill="#6c9bd2" stroke="#333"/>
+             <text x='834' y='952' font-family="Arial" font-size="14" fill="white"
+             text-anchor='middle' dominant-baseline='middle'>@tools/jest-scripts</text>
+<rect x="484" y="922" width="180" height="60" rx="10" ry="10" fill="#6c9bd2" stroke="#333"/>
+             <text x='574' y='952' font-family="Arial" font-size="14" fill="white"
+             text-anchor='middle' dominant-baseline='middle'>@tools/rollup-scripts</text>
+<rect x="430" y="222" width="180" height="60" rx="10" ry="10" fill="#6c9bd2" stroke="#333"/>
+             <text x='520' y='252' font-family="Arial" font-size="14" fill="white"
+             text-anchor='middle' dominant-baseline='middle'>@webapp/accounts</text>
+<rect x="445.5" y="442" width="180" height="60" rx="10" ry="10" fill="#6c9bd2" stroke="#333"/>
+             <text x='535.5' y='472' font-family="Arial" font-size="14" fill="white"
+             text-anchor='middle' dominant-baseline='middle'>@webapp/auth</text>
+<rect x="337" y="652" width="180" height="60" rx="10" ry="10" fill="#6c9bd2" stroke="#333"/>
+             <text x='427' y='682' font-family="Arial" font-size="14" fill="white"
+             text-anchor='middle' dominant-baseline='middle'>@webapp/shared</text>
+    <polyline points="466.5,72 466.5,142 388,142 388,352 341.5,352 341.5,592 326,592 326,822 260,822 260,922" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="444,72 444,132 357,132 357,342 279.5,342 279.5,562 233,562 233,772 59,772 59,922" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="556.5,72 556.5,122 651,122 651,342 697.5,342 697.5,572 713,572 713,782 888,782 888,922" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="421.5,72 421.5,122 326,122 326,332 248.5,332 248.5,552 202,552 202,762 12,762 12,1042 225.5,1042 225.5,1272 417,1272 417,1342" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="534,72 534,132 620,132 620,362 565.5,362 565.5,442" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="511.5,72 511.5,122 520,122 520,222" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="489,72 489,152 419,152 419,372 372.5,372 372.5,592 382,592 382,652" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="314,982 314,1032 287.5,1032 287.5,1252 453,1252 453,1342" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="589.5,1192 589.5,1242 507,1242 507,1342" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="388.5,1192 388.5,1242 471,1242 471,1342" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="489,1402 489,1552" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="864,982 864,1062 689.5,1062 689.5,1252 525,1252 525,1342" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="804,982 804,1052 589.5,1052 589.5,1132" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="604,982 604,1042 488.5,1042 488.5,1242 489,1242 489,1342" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="544,982 544,1032 388.5,1032 388.5,1132" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="497.5,282 497.5,392 434.5,392 434.5,602 527,602 527,842 332,842 332,922" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="452.5,282 452.5,362 310.5,362 310.5,572 264,572 264,782 95,782 95,922" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="565,282 565,352 666.5,352 666.5,582 651,582 651,802 816,802 816,922" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="587.5,282 587.5,332 728.5,332 728.5,552 775,552 775,762 965,762 965,1082 751.5,1082 751.5,1272 561,1272 561,1342" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="542.5,282 542.5,372 635.5,372 635.5,592 589,592 589,862 574,862 574,922" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="520,282 520,332 505.5,332 505.5,442" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="475,282 475,382 403.5,382 403.5,592 427,592 427,652" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="522.6428571428571,502 522.6428571428571,592 558,592 558,862 368,862 368,922" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="471.2142857142857,502 471.2142857142857,582 295,582 295,792 131,792 131,922" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="574.0714285714286,502 574.0714285714286,572 682,572 682,792 852,792 852,922" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="599.7857142857143,502 599.7857142857143,562 744,562 744,772 934,772 934,1072 720.5,1072 720.5,1262 543,1262 543,1342" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="548.3571428571429,502 548.3571428571429,582 620,582 620,862 619,862 619,922" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="496.92857142857144,502 496.92857142857144,592 472,592 472,652" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="427,712 427,832 296,832 296,922" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="367,712 367,802 167,802 167,922" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="487,712 487,852 780,852 780,922" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="397,712 397,812 213,812 213,1032 256.5,1032 256.5,1262 435,1262 435,1342" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="457,712 457,872 529,872 529,922" fill="none" stroke="#444" stroke-width="2" marker-end="url(#arrow)"/>
+  </svg>
+  

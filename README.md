@@ -47,6 +47,19 @@ configs/
   typescript/
 ```
 
+## Package Dependency Graph
+
+The repository includes a generated dependency graph to visualize package relationships and architectural boundaries across the monorepo.
+
+This helps illustrate:
+
+- Feature isolation boundaries
+- Shared infrastructure dependencies
+- Tooling relationships
+- Internal package composition
+
+![Dependency Graph](./docs/deps-graph.svg)
+
 The monorepo structure allows:
 
 - Shared tooling and configuration
