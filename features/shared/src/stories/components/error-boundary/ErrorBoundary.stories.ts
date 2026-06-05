@@ -1,44 +1,20 @@
 import type { Meta } from '@storybook/react-webpack5'
 import { createComponentStory } from '#testing-utils'
-import { Select } from '#ui/components/select'
+import { ErrorBoundary } from '#ui/components/error-boundary'
 
-type SelectType = typeof Select
+type ErrorBoundaryType = typeof ErrorBoundary
 
 const meta = {
-  title: 'Components/Select',
-  component: Select,
+  title: 'Components/ErrorBoundary',
+  component: ErrorBoundary,
   argTypes: {},
-  args: {
-    label: 'select role',
-    options: [
-      { value: 'ADMIN', displayValue: 'Administrator' },
-      { value: 'USER', displayValue: 'User' },
-    ],
-  },
-} as Meta<SelectType>
+  args: {},
+} as Meta<ErrorBoundaryType>
 
 export default meta
 
-const createSelectStory = createComponentStory<SelectType>
+const createErrorBoundaryStory = createComponentStory<ErrorBoundaryType>
 
-export const Default = createSelectStory({
+export const Default = createErrorBoundaryStory({
   args: {},
-})
-
-export const Size_Small = createSelectStory({
-  args: {
-    $size: 'small',
-  },
-})
-
-export const Size_Medium = createSelectStory({
-  args: {
-    $size: 'medium',
-  },
-})
-
-export const Size_Large = createSelectStory({
-  args: {
-    $size: 'large',
-  },
 })

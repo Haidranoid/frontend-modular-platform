@@ -1,18 +1,17 @@
-// ErrorBoundary.tsx
-import React, { Component, ErrorInfo, ReactNode } from 'react'
-import ErrorFallback from './ErrorFallback'
+import { Component, ErrorInfo, ReactNode } from 'react'
+import { ErrorFallback } from './error-fallback'
 
-interface ErrorBoundaryProps {
+export interface ErrorBoundaryProps {
   children: ReactNode
-  onReset: Callback
+  onReset: CallableFunction
 }
 
-interface ErrorBoundaryState {
+export interface ErrorBoundaryState {
   hasError: boolean
   error: Error | null
 }
 
-class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props)
     this.state = { hasError: false, error: null }
@@ -48,5 +47,3 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     return this.props.children
   }
 }
-
-export default ErrorBoundary

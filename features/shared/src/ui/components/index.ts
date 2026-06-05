@@ -1,5 +1,6 @@
 export * from './button'
 export * from './dialog'
+export * from './error-boundary'
 export * from './error-message'
 export * from './image-with-skeleton-mui'
 export * from './input'

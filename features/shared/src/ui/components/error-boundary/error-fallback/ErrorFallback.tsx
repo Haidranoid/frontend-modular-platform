@@ -1,14 +1,12 @@
-// ErrorFallback.tsx
-import React from 'react'
-import { Paths } from '@routes'
+import { FC } from 'react'
 
-interface ErrorFallbackProps {
+export interface ErrorFallbackProps {
   error: Error
-  resetErrors: Callback
-  resetState: Callback
+  resetErrors: CallableFunction
+  resetState: CallableFunction
 }
 
-const ErrorFallback: React.FC<ErrorFallbackProps> = ({
+export const ErrorFallback: FC<ErrorFallbackProps> = ({
   error,
   resetErrors,
   resetState,
@@ -16,7 +14,7 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({
   const handleReset = () => {
     resetErrors()
     resetState()
-    window.location.replace(Paths.LOGIN)
+    //window.location.replace(Paths.LOGIN)
   }
 
   return (
@@ -27,5 +25,3 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({
     </div>
   )
 }
-
-export default ErrorFallback

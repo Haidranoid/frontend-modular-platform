@@ -1,13 +1,17 @@
-import React, { useState } from 'react'
-import { render, screen } from '@test/utils/testing-library'
-import userEvent from '@testing-library/user-event'
-import ErrorBoundary from './ErrorBoundary'
+import { FC, useState } from 'react'
+import { render, screen } from '@testing-library/react'
+import { userEvent } from '@testing-library/user-event'
+import { composeStories } from '@storybook/react'
+
+import * as stories from './ErrorBoundary.stories'
+
+const ErrorBoundaryStories = composeStories(stories)
 
 interface Props {
   onCrash: () => void
 }
 
-const AppContent: React.FC<Props> = ({ onCrash }) => {
+const AppContent: FC<Props> = ({ onCrash }) => {
   return (
     <div>
       <p>All good</p>
@@ -24,9 +28,9 @@ const TestWrapper = () => {
   const [shouldCrash, setShouldCrash] = useState(false)
 
   return (
-    <ErrorBoundary onReset={() => setShouldCrash(false)}>
+    <ErrorBoundaryStories.Default onReset={() => setShouldCrash(false)}>
       {shouldCrash ? <Bomb /> : <AppContent onCrash={() => setShouldCrash(true)} />}
-    </ErrorBoundary>
+    </ErrorBoundaryStories.Default>
   )
 }
 
