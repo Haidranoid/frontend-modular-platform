@@ -27,6 +27,7 @@ The repository is organized as a multi-package monorepo managed with Rush.
 Example structure:
 
 ```txt
+
 apps/
   webapp/
 
@@ -45,6 +46,7 @@ configs/
   jest/
   rollup/
   typescript/
+  
 ```
 
 ## Package Dependency Graph
