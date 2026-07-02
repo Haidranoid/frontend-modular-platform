@@ -44,7 +44,7 @@ configs/
   eslint/
   jest/
   rollup/
-  typescript/
+  typescript/ 
 ```
 
 ## Package Dependency Graph
